@@ -1,0 +1,1263 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="QCP Lab, Laboratory of Quantitative and Computational Pharmacokinetics, Kangwon National University College of Pharmacy">
+  <meta name="theme-color" content="#244f92">
+  <title>QCP Lab | Kangwon National University</title>
+  <style>
+    :root {
+      --ink: #102033;
+      --muted: #667487;
+      --line: #d8e2ee;
+      --soft: #f4f8fb;
+      --paper: #ffffff;
+      --blue: #244f92;
+      --blue-deep: #102033;
+      --teal: #16a89b;
+      --cyan: #55c4df;
+      --gold: #e4b45b;
+      --red: #cf5d50;
+      --shadow: 0 18px 44px rgba(16, 32, 51, 0.14);
+      --radius: 8px;
+      --max: 1520px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--paper);
+      font-family: "Segoe UI", Arial, sans-serif;
+      line-height: 1.6;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+    button { font: inherit; }
+    .skip-link {
+      position: absolute;
+      left: 16px;
+      top: -50px;
+      z-index: 80;
+      padding: 10px 14px;
+      color: #fff;
+      background: var(--blue-deep);
+      border-radius: 6px;
+    }
+    .skip-link:focus { top: 16px; }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      border-bottom: 1px solid rgba(216, 226, 238, 0.94);
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(16px);
+    }
+    .nav {
+      width: min(100% - 32px, var(--max));
+      min-height: 76px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+    .brand {
+      min-width: 460px;
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .lab-logo {
+      width: 96px;
+      height: 70px;
+      object-fit: contain;
+      flex: 0 0 auto;
+    }
+    .brand-name {
+      display: grid;
+      line-height: 1.08;
+    }
+    .brand-name strong {
+      color: var(--blue);
+      font-size: 1.12rem;
+      letter-spacing: 0;
+    }
+    .brand-name span {
+      margin-top: 3px;
+      color: var(--muted);
+      max-width: 340px;
+      font-size: 0.68rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      overflow-wrap: anywhere;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 4px;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      font-size: 0.92rem;
+      font-weight: 850;
+    }
+    .nav-links a {
+      min-height: 42px;
+      display: inline-flex;
+      align-items: center;
+      padding: 0 11px;
+      border-radius: 6px;
+      color: #2b4057;
+    }
+    .nav-links a:hover { color: var(--blue); background: var(--soft); }
+    .nav-links .external { margin-left: 6px; color: #fff; background: var(--blue); }
+    .nav-links .external:hover { color: #fff; background: #163866; }
+    .menu-toggle {
+      display: none;
+      width: 44px;
+      height: 44px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      color: var(--blue);
+      background: #fff;
+      cursor: pointer;
+    }
+    .menu-toggle span {
+      display: block;
+      width: 20px;
+      height: 2px;
+      margin: 5px auto;
+      background: currentColor;
+    }
+
+    .hero {
+      position: relative;
+      min-height: calc(100svh - 76px);
+      overflow: hidden;
+      display: grid;
+      align-items: center;
+      border-bottom: 1px solid var(--line);
+      background:
+        linear-gradient(120deg, rgba(255,255,255,0.98), rgba(241,247,251,0.95) 52%, rgba(230,246,246,0.9)),
+        #f4f8fb;
+    }
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(36,79,146,0.055) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(36,79,146,0.055) 1px, transparent 1px);
+      background-size: 44px 44px;
+      mask-image: linear-gradient(90deg, transparent 0%, #000 10%, #000 76%, transparent 100%);
+      pointer-events: none;
+    }
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+      width: min(100% - 32px, var(--max));
+      margin: 0 auto;
+      padding: 70px 0 86px;
+      display: grid;
+      grid-template-columns: minmax(420px, 0.58fr) minmax(760px, 1.28fr);
+      gap: clamp(34px, 4vw, 64px);
+      align-items: center;
+    }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin: 0 0 18px;
+      color: var(--teal);
+      font-size: 0.82rem;
+      font-weight: 900;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    .eyebrow::before { content: ""; width: 32px; height: 2px; background: var(--teal); }
+    h1, h2, h3, p { margin-top: 0; }
+    h1 {
+      max-width: 920px;
+      margin-bottom: 22px;
+      font-size: clamp(3.5rem, 8vw, 7rem);
+      line-height: 0.95;
+      letter-spacing: 0;
+    }
+    .subtitle {
+      color: var(--blue);
+      font-size: clamp(1.14rem, 2vw, 1.55rem);
+      font-weight: 900;
+      line-height: 1.3;
+    }
+    .hero-copy {
+      max-width: 760px;
+      color: #314760;
+      font-size: clamp(1.02rem, 1.35vw, 1.23rem);
+    }
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 32px;
+    }
+    .button {
+      min-height: 48px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 18px;
+      border: 1px solid var(--blue);
+      border-radius: 6px;
+      font-weight: 900;
+      white-space: nowrap;
+      cursor: pointer;
+      transition: transform .18s ease, box-shadow .18s ease;
+    }
+    .button.primary { color: #fff; background: var(--blue); }
+    .button.secondary { color: var(--blue); background: rgba(255,255,255,0.82); }
+    .button:hover { transform: translateY(-1px); box-shadow: 0 12px 24px rgba(36,79,146,0.18); }
+
+    .hero-visual {
+      min-height: 740px;
+      padding: 22px;
+      border: 1px solid rgba(36,79,146,0.18);
+      border-radius: var(--radius);
+      background: rgba(255,255,255,0.72);
+      box-shadow: var(--shadow);
+    }
+    .hero-visual svg {
+      width: 100%;
+      height: 100%;
+      min-height: 696px;
+      display: block;
+    }
+
+    .section {
+      padding: clamp(72px, 9vw, 118px) 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .section.soft { background: var(--soft); }
+    .section.dark { color: #fff; background: var(--blue-deep); }
+    .container { width: min(100% - 32px, var(--max)); margin: 0 auto; }
+    .section-head { max-width: 900px; margin-bottom: 40px; }
+    .section-head.wide { max-width: 1120px; }
+    .section-head h2 {
+      margin-bottom: 12px;
+      font-size: clamp(2.25rem, 5vw, 4.35rem);
+      line-height: 1.04;
+      letter-spacing: 0;
+    }
+    .section-head p { color: var(--muted); font-size: 1.06rem; }
+    .dark .section-head p { color: rgba(255,255,255,0.72); }
+    .label {
+      display: inline-flex;
+      margin-bottom: 12px;
+      color: var(--teal);
+      font-size: 0.76rem;
+      font-weight: 900;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .research-stage {
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(360px, 0.95fr);
+      gap: 22px;
+      align-items: stretch;
+    }
+    .research-diagram {
+      min-height: 760px;
+      padding: 18px;
+      border: 1px solid rgba(255,255,255,0.16);
+      border-radius: var(--radius);
+      background:
+        linear-gradient(135deg, rgba(36,79,146,0.34), rgba(22,168,155,0.16)),
+        #13263d;
+      overflow: hidden;
+    }
+    .research-diagram svg {
+      width: 100%;
+      height: 100%;
+      min-height: 724px;
+      display: block;
+    }
+    .research-points {
+      display: grid;
+      gap: 12px;
+      align-content: stretch;
+    }
+    .flow-item {
+      display: grid;
+      grid-template-columns: 44px minmax(0,1fr);
+      gap: 14px;
+      align-items: start;
+      padding: 18px;
+      border: 1px solid rgba(255,255,255,0.14);
+      border-radius: var(--radius);
+      background: rgba(255,255,255,0.06);
+    }
+    .flow-index {
+      width: 44px;
+      height: 44px;
+      display: grid;
+      place-items: center;
+      border-radius: 6px;
+      color: #102033;
+      background: #fff;
+      font-weight: 900;
+    }
+    .flow-item h3 { margin: 0 0 5px; font-size: 1.03rem; }
+    .flow-item p { margin: 0; color: rgba(255,255,255,0.74); font-size: 0.94rem; }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap: 18px;
+    }
+    .cards.research-cards {
+      grid-template-columns: repeat(2, minmax(0,1fr));
+      gap: 22px;
+    }
+    .card {
+      padding: 24px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fff;
+      transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+    }
+    .card h3 { margin-bottom: 10px; font-size: 1.18rem; line-height: 1.3; }
+    .card p, .card li { color: #4b5b70; }
+    .card ul { margin: 0; padding-left: 18px; }
+    .mini-visual {
+      width: 100%;
+      height: 160px;
+      margin-bottom: 20px;
+      border-radius: var(--radius);
+      background: #edf5f8;
+    }
+    .research-card {
+      min-height: 560px;
+      overflow: hidden;
+    }
+    .research-card .mini-visual {
+      height: 330px;
+      background: #0f2239;
+    }
+    .research-card:hover {
+      border-color: rgba(36,79,146,.38);
+      box-shadow: 0 18px 38px rgba(16,32,51,.12);
+      transform: translateY(-2px);
+    }
+
+    .research-list { display: grid; gap: 12px; }
+    .research-row {
+      display: grid;
+      grid-template-columns: minmax(190px, .34fr) minmax(0,1fr);
+      gap: 22px;
+      padding: 22px 0;
+      border-top: 1px solid var(--line);
+    }
+    .research-row:first-child { border-top: 0; padding-top: 0; }
+    .research-row strong { color: var(--blue); font-size: 1.05rem; }
+    .research-row p { margin-bottom: 0; color: #4b5b70; }
+
+    .people-layout {
+      display: grid;
+      grid-template-columns: .82fr 1.18fr;
+      gap: 20px;
+      align-items: start;
+    }
+    .pi-card {
+      display: grid;
+      gap: 18px;
+      padding: 26px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fff;
+      box-shadow: 0 12px 32px rgba(16,32,51,0.08);
+    }
+    .pi-photo {
+      width: 180px;
+      height: 220px;
+      object-fit: cover;
+      border-radius: 8px;
+      border: 1px solid var(--line);
+      box-shadow: 0 14px 26px rgba(16,32,51,.12);
+    }
+    .pi-card h3 { margin-bottom: 4px; font-size: 1.55rem; }
+    .pi-card p { margin-bottom: 0; color: var(--muted); }
+    .contact-lines {
+      display: grid;
+      gap: 8px;
+      margin-top: 12px;
+      color: #314760;
+      font-size: 0.94rem;
+      font-weight: 700;
+    }
+    .contact-lines a { color: var(--blue); text-decoration: underline; text-underline-offset: 3px; }
+    .member-group { display: grid; gap: 12px; }
+    .member-group h3 {
+      margin: 0;
+      color: var(--blue);
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+    }
+    .member-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0,1fr));
+      gap: 10px;
+    }
+    .member {
+      min-height: 70px;
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fff;
+    }
+    .member strong { display: block; font-size: .98rem; line-height: 1.25; }
+    .member a, .member span {
+      display: block;
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: .84rem;
+      overflow-wrap: anywhere;
+    }
+    .member a { color: var(--blue); text-decoration: underline; text-underline-offset: 3px; }
+
+    .publication-tools {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+      margin-bottom: 18px;
+    }
+    .publication-count {
+      color: var(--muted);
+      font-weight: 800;
+    }
+    .publication-list {
+      display: grid;
+      gap: 10px;
+      counter-reset: pub;
+    }
+    .publication {
+      display: grid;
+      grid-template-columns: 72px minmax(0,1fr) auto;
+      gap: 16px;
+      align-items: center;
+      padding: 16px 18px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fff;
+    }
+    .publication::before {
+      counter-increment: pub;
+      content: counter(pub, decimal-leading-zero);
+      color: var(--teal);
+      font-weight: 900;
+      letter-spacing: .08em;
+    }
+    .publication h3 {
+      margin-bottom: 5px;
+      font-size: 1rem;
+      line-height: 1.35;
+    }
+    .publication p { margin-bottom: 0; color: var(--muted); font-size: .9rem; }
+    .doi {
+      min-height: 38px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 12px;
+      border: 1px solid var(--blue);
+      border-radius: 6px;
+      color: var(--blue);
+      font-size: .84rem;
+      font-weight: 900;
+      white-space: nowrap;
+    }
+    .doi:hover { color: #fff; background: var(--blue); }
+
+    .programs {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0,1fr));
+      gap: 14px;
+    }
+    .program {
+      min-height: 168px;
+      display: grid;
+      gap: 12px;
+      align-content: space-between;
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fff;
+      transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+    }
+    .program:hover {
+      transform: translateY(-2px);
+      border-color: rgba(36,79,146,.38);
+      box-shadow: 0 14px 30px rgba(16,32,51,.12);
+    }
+    .logo-box {
+      min-height: 78px;
+      display: grid;
+      place-items: center;
+      padding: 10px;
+      border-radius: 6px;
+      background: #f7fafc;
+    }
+    .logo-box svg { max-width: 100%; height: 62px; }
+    .program strong { color: var(--ink); font-size: 1rem; line-height: 1.25; }
+    .program p { margin: 0; color: var(--muted); font-size: .88rem; font-weight: 700; }
+
+    .contact-band {
+      display: grid;
+      grid-template-columns: minmax(0,1fr) minmax(320px,.8fr);
+      gap: 20px;
+      align-items: stretch;
+    }
+    .address-card {
+      padding: 26px;
+      border-radius: var(--radius);
+      color: #fff;
+      background:
+        linear-gradient(135deg, rgba(36,79,146,.82), rgba(22,168,155,.26)),
+        #14283f;
+    }
+    .address-card h3 { margin-bottom: 12px; font-size: 1.35rem; }
+    .address-card p { color: rgba(255,255,255,.78); }
+    .address-card a { color: #fff; text-decoration: underline; text-underline-offset: 3px; }
+    .source-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+    .source-links a {
+      min-height: 38px;
+      display: inline-flex;
+      align-items: center;
+      padding: 0 12px;
+      border: 1px solid rgba(255,255,255,.28);
+      border-radius: 6px;
+      color: #fff;
+      font-weight: 900;
+      font-size: .86rem;
+    }
+
+    .site-footer {
+      padding: 32px 0;
+      color: rgba(255,255,255,.78);
+      background: #102033;
+    }
+    .footer-inner {
+      width: min(100% - 32px, var(--max));
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 22px;
+    }
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .footer-brand .lab-logo {
+      width: 72px;
+      height: 58px;
+      padding: 3px;
+      border-radius: 6px;
+      background: #fff;
+    }
+    .footer-brand strong { display: block; color: #fff; font-size: 1.05rem; }
+    .footer-logos {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 10px;
+    }
+    .footer-logo {
+      min-height: 42px;
+      display: inline-flex;
+      align-items: center;
+      padding: 8px 12px;
+      border: 1px solid rgba(255,255,255,.2);
+      border-radius: 6px;
+      background: rgba(255,255,255,.08);
+    }
+    .footer-logo svg { height: 28px; width: auto; }
+
+    .drug-dot { animation: travel 7s linear infinite; }
+    .drug-dot.delay1 { animation-delay: -1.4s; }
+    .drug-dot.delay2 { animation-delay: -2.8s; }
+    .drug-dot.delay3 { animation-delay: -4.2s; }
+    .path-dash { stroke-dasharray: 14 10; animation: dash 8s linear infinite; }
+    .spin { transform-origin: center; animation: spin 9s linear infinite; }
+    .pulse { transform-origin: center; animation: pulse 2.6s ease-in-out infinite; }
+    .scan { animation: scan 3s ease-in-out infinite; }
+    .bar1 { animation: bar 2.2s ease-in-out infinite; }
+    .bar2 { animation: bar 2.2s ease-in-out infinite .4s; }
+    .bar3 { animation: bar 2.2s ease-in-out infinite .8s; }
+    .binding-glow { transform-origin: center; animation: bindingGlow 2.6s ease-in-out infinite; }
+    .curve-draw { stroke-dasharray: 620; stroke-dashoffset: 620; animation: drawCurve 5.5s ease-in-out infinite; }
+    .node-pulse { animation: nodePulse 2.4s ease-in-out infinite; }
+    .flow-particle { animation: flowPulse 2.8s ease-in-out infinite; }
+    @keyframes dash { to { stroke-dashoffset: -140; } }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    @keyframes pulse {
+      0%, 100% { opacity: .72; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.04); }
+    }
+    @keyframes scan {
+      0%, 100% { transform: translateY(-18px); opacity: .35; }
+      50% { transform: translateY(18px); opacity: 1; }
+    }
+    @keyframes bar {
+      0%, 100% { transform: scaleY(.35); }
+      50% { transform: scaleY(1); }
+    }
+    @keyframes bindingGlow {
+      0%, 100% { opacity: .22; transform: scale(.88); }
+      50% { opacity: .9; transform: scale(1.12); }
+    }
+    @keyframes drawCurve {
+      0% { stroke-dashoffset: 620; opacity: .35; }
+      45%, 72% { stroke-dashoffset: 0; opacity: 1; }
+      100% { stroke-dashoffset: -620; opacity: .35; }
+    }
+    @keyframes nodePulse {
+      0%, 100% { opacity: .55; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.18); }
+    }
+    @keyframes flowPulse {
+      0%, 100% { opacity: .35; }
+      50% { opacity: 1; }
+    }
+    @keyframes travel {
+      0% { offset-distance: 0%; opacity: 0; }
+      10%, 88% { opacity: 1; }
+      100% { offset-distance: 100%; opacity: 0; }
+    }
+    .hero-drug {
+      offset-path: path("M90 92 C155 24 230 48 274 112 C334 202 430 172 488 108 C548 42 636 80 660 142");
+    }
+    .adme-drug {
+      offset-path: path("M118 405 C185 344 255 350 310 398 C374 454 458 444 522 390 C586 336 660 356 708 418");
+    }
+    .research-drug {
+      offset-path: path("M70 92 C180 24 318 84 358 184 C410 314 548 262 625 164 C695 78 802 118 848 204");
+    }
+
+    @media (max-width: 1050px) {
+      .hero-inner,
+      .research-stage,
+      .people-layout,
+      .contact-band,
+      .cards,
+      .cards.research-cards {
+        grid-template-columns: 1fr;
+      }
+      .programs { grid-template-columns: repeat(2, minmax(0,1fr)); }
+      .nav-links {
+        position: absolute;
+        left: 16px;
+        right: 16px;
+        top: 76px;
+        display: none;
+        padding: 12px;
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        background: #fff;
+        box-shadow: var(--shadow);
+      }
+      .nav-links.open { display: grid; }
+      .nav-links a, .nav-links .external { justify-content: flex-start; margin-left: 0; }
+      .menu-toggle { display: inline-block; }
+    }
+    @media (max-width: 680px) {
+      .nav, .container, .hero-inner, .footer-inner { width: min(100% - 24px, var(--max)); }
+      .hero { min-height: auto; }
+      .hero-inner { padding-top: 54px; padding-bottom: 72px; }
+      .brand { min-width: 0; }
+      .lab-logo { width: 72px; height: 56px; }
+      .brand-name span { display: none; }
+      .hero-visual, .research-diagram { min-height: auto; padding: 8px; }
+      .hero-visual svg, .research-diagram svg { min-height: 520px; }
+      .research-card .mini-visual { height: 260px; }
+      .hero-actions, .programs, .member-grid { display: grid; grid-template-columns: 1fr; }
+      .button { width: 100%; }
+      .research-row, .publication { grid-template-columns: 1fr; gap: 8px; }
+      .publication .doi { justify-self: start; }
+      .footer-inner { display: grid; }
+      .footer-logos { justify-content: flex-start; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav" aria-label="Primary navigation">
+      <a class="brand" href="#top" aria-label="QCP Lab home">
+        <img class="lab-logo" src="assets/qcp-pk-mark.png" alt="KNU PK Lab logo">
+        <span class="brand-name">
+          <strong>QCP Lab</strong>
+          <span>Laboratory of Quantitative and Computational Pharmacokinetics</span>
+        </span>
+      </a>
+      <button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#about">About</a></li>
+        <li><a href="#platform">Platform</a></li>
+        <li><a href="#research">Research</a></li>
+        <li><a href="#people">People</a></li>
+        <li><a href="#publications">Publications</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a class="external" href="https://github.com/tiredpiryo/tiredpiryo.github.io" target="_blank" rel="noopener">GitHub</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="hero" id="top" aria-labelledby="hero-title">
+      <div class="hero-inner">
+        <div>
+          <p class="eyebrow">Kangwon National University College of Pharmacy</p>
+          <h1 id="hero-title">QCP Lab</h1>
+          <p class="subtitle">Laboratory of Quantitative and Computational Pharmacokinetics</p>
+          <p class="hero-copy">
+            Bridging wet-lab pharmacokinetics and dry-lab prediction, we investigate how drugs move through the body by connecting molecular docking,
+            in vitro and in vivo pharmacokinetic experiments, LC-MS/MS bioanalysis,
+            PBPK and population PK modeling, and machine-learning-driven prediction.
+          </p>
+          <div class="hero-actions">
+            <a class="button primary" href="#platform">Explore the research platform</a>
+            <a class="button secondary" href="#publications">View full publication list</a>
+          </div>
+        </div>
+        <div class="hero-visual" aria-label="Animated QCP Lab research workflow">
+          <svg viewBox="0 0 760 640" role="img" aria-labelledby="heroVizTitle heroVizDesc">
+            <title id="heroVizTitle">Docking, ADME, LC-MS/MS, and PBPK simulation workflow</title>
+            <desc id="heroVizDesc">A drug molecule moves from protein docking through organs, LC-MS/MS analysis, and virtual clinical simulation.</desc>
+            <defs>
+              <linearGradient id="hbg" x1="0" x2="1"><stop offset="0" stop-color="#102033"/><stop offset="1" stop-color="#244f92"/></linearGradient>
+              <linearGradient id="tealBlue" x1="0" x2="1"><stop offset="0" stop-color="#55c4df"/><stop offset="1" stop-color="#16a89b"/></linearGradient>
+            </defs>
+            <rect x="0" y="0" width="760" height="640" rx="14" fill="url(#hbg)"/>
+            <g opacity=".16" stroke="#fff"><path d="M60 90H700M60 230H700M60 370H700M60 510H700M150 48V590M310 48V590M470 48V590M630 48V590"/></g>
+            <path class="path-dash" d="M90 92 C155 24 230 48 274 112 C334 202 430 172 488 108 C548 42 636 80 660 142" fill="none" stroke="url(#tealBlue)" stroke-width="8" stroke-linecap="round"/>
+            <path class="path-dash" d="M118 405 C185 344 255 350 310 398 C374 454 458 444 522 390 C586 336 660 356 708 418" fill="none" stroke="#e4b45b" stroke-width="8" stroke-linecap="round"/>
+            <circle class="drug-dot hero-drug" r="9" fill="#fff"/>
+            <circle class="drug-dot hero-drug delay1" r="7" fill="#e4b45b"/>
+            <circle class="drug-dot adme-drug delay2" r="8" fill="#16a89b"/>
+            <circle class="drug-dot adme-drug delay3" r="6" fill="#fff"/>
+
+            <g transform="translate(56 54)">
+              <text x="0" y="-14" fill="#fff" font-size="20" font-weight="900">Docking</text>
+              <g class="pulse">
+                <path d="M58 38 C30 18 18 62 44 82 C18 102 48 136 77 112 C111 147 143 105 116 80 C150 48 108 13 84 42 C76 23 67 25 58 38Z" fill="#203a5a" stroke="#55c4df" stroke-width="3"/>
+                <path d="M42 62 C62 34 88 40 104 66 C120 94 95 118 68 106 C42 94 30 78 42 62Z" fill="none" stroke="#8de6dc" stroke-width="4"/>
+                <g class="spin">
+                  <circle cx="79" cy="78" r="7" fill="#e4b45b"/>
+                  <circle cx="101" cy="92" r="6" fill="#fff"/>
+                  <circle cx="61" cy="94" r="5" fill="#16a89b"/>
+                  <path d="M79 78L101 92M79 78L61 94" stroke="#fff" stroke-width="2"/>
+                </g>
+              </g>
+              <text x="0" y="158" fill="rgba(255,255,255,.72)" font-size="13">protein binding site + ligand pose</text>
+            </g>
+
+            <g transform="translate(398 54)">
+              <text x="0" y="-14" fill="#fff" font-size="20" font-weight="900">LC-MS/MS</text>
+              <rect x="0" y="28" width="210" height="110" rx="10" fill="rgba(255,255,255,.12)" stroke="#fff" opacity=".95"/>
+              <rect x="18" y="50" width="70" height="50" rx="5" fill="#55c4df"/>
+              <rect x="112" y="50" width="74" height="50" rx="5" fill="#162c46" stroke="#fff"/>
+              <path d="M88 75H112" stroke="#e4b45b" stroke-width="5" stroke-linecap="round"/>
+              <line class="scan" x1="128" y1="52" x2="172" y2="98" stroke="#16a89b" stroke-width="4"/>
+              <circle cx="102" cy="75" r="7" fill="#e4b45b"/>
+              <text x="16" y="130" fill="rgba(255,255,255,.72)" font-size="13">sample injection, separation, detection</text>
+            </g>
+
+            <g transform="translate(58 330)">
+              <text x="0" y="-14" fill="#fff" font-size="20" font-weight="900">ADME</text>
+              <g stroke="#fff" stroke-width="2" fill="rgba(255,255,255,.12)">
+                <path d="M35 40 C18 58 21 98 50 104 C82 111 92 74 72 54 C60 41 47 30 35 40Z" fill="#cf5d50"/>
+                <path d="M132 42 C97 48 94 91 120 102 C150 115 189 92 180 58 C166 64 144 61 132 42Z" fill="#e4b45b"/>
+                <path d="M242 48 C214 64 213 104 242 112 C270 104 270 64 242 48Z" fill="#55c4df"/>
+                <path d="M322 54 C300 44 278 55 276 78 C275 106 306 118 327 96 C342 80 340 62 322 54Z" fill="#16a89b"/>
+              </g>
+              <text x="26" y="136" fill="rgba(255,255,255,.78)" font-size="13">gut</text>
+              <text x="128" y="136" fill="rgba(255,255,255,.78)" font-size="13">liver</text>
+              <text x="224" y="136" fill="rgba(255,255,255,.78)" font-size="13">kidney</text>
+              <text x="294" y="136" fill="rgba(255,255,255,.78)" font-size="13">tissue</text>
+            </g>
+
+              <g transform="translate(438 326)">
+                <text x="0" y="-14" fill="#fff" font-size="20" font-weight="900">PBPK / virtual trial</text>
+              <rect x="0" y="26" width="235" height="142" rx="10" fill="rgba(255,255,255,.12)" stroke="#fff"/>
+              <rect x="18" y="46" width="148" height="86" rx="6" fill="#102033" stroke="#55c4df"/>
+              <path d="M33 112 C55 74 79 90 96 66 C115 39 140 72 153 58" fill="none" stroke="#16a89b" stroke-width="4"/>
+              <path d="M33 118 C62 94 83 106 102 86 C124 62 140 108 153 86" fill="none" stroke="#e4b45b" stroke-width="4"/>
+              <g transform="translate(178 49)" fill="#fff">
+                <circle cx="18" cy="14" r="10"/><path d="M0 44 C3 21 33 21 36 44Z"/>
+                <circle cx="45" cy="18" r="8"/><path d="M31 49 C33 31 57 31 59 49Z"/>
+                <circle cx="14" cy="68" r="8"/><path d="M1 97 C3 78 28 78 30 97Z"/>
+              </g>
+              <g transform="translate(38 142)" fill="#55c4df">
+                <rect class="bar1" x="0" y="-26" width="10" height="26" transform-origin="bottom"/>
+                <rect class="bar2" x="20" y="-36" width="10" height="36" transform-origin="bottom"/>
+                <rect class="bar3" x="40" y="-46" width="10" height="46" transform-origin="bottom"/>
+              </g>
+                <text x="18" y="190" fill="rgba(255,255,255,.72)" font-size="13">DDI simulation and virtual population</text>
+              </g>
+              <g transform="translate(54 560)">
+                <rect x="0" y="0" width="648" height="56" rx="10" fill="rgba(255,255,255,.08)" stroke="rgba(255,255,255,.2)"/>
+                <g fill="#fff" font-size="13" font-weight="800">
+                  <text x="22" y="24">Targets</text>
+                  <text x="22" y="43" fill="rgba(255,255,255,.68)">CYP3A4, UGT, P-gp, OATP1B1</text>
+                  <text x="210" y="24">PK outputs</text>
+                  <text x="210" y="43" fill="rgba(255,255,255,.68)">AUC, Cmax, t1/2, CL, Vd, F</text>
+                  <text x="430" y="24">Prediction</text>
+                  <text x="430" y="43" fill="rgba(255,255,255,.68)">PBPK, PopPK, ML/DL, virtual DDI</text>
+                </g>
+              </g>
+            </svg>
+          </div>
+      </div>
+    </section>
+
+    <section class="section" id="about" aria-labelledby="about-title">
+      <div class="container">
+        <div class="section-head">
+          <span class="label">About</span>
+          <h2 id="about-title">A translational pharmacokinetics laboratory built around quantitative evidence.</h2>
+          <p>QCP Lab studies drug behavior across biological scales, from molecular recognition and in vitro ADME systems to animal pharmacokinetics, LC-MS/MS quantification, mechanistic modeling, and data-driven prediction.</p>
+        </div>
+        <div class="cards research-cards">
+          <article class="card research-card">
+            <svg class="mini-visual" viewBox="0 0 620 330" role="img" aria-label="Protein ligand docking with pharmacophore features">
+              <rect width="620" height="330" rx="8" fill="#0f2239"/>
+              <g opacity=".16" stroke="#fff"><path d="M40 62H580M40 160H580M40 258H580M150 30V300M310 30V300M470 30V300"/></g>
+              <text x="32" y="38" fill="#fff" font-size="21" font-weight="900">Molecular docking</text>
+              <text x="32" y="304" fill="rgba(255,255,255,.68)" font-size="14">binding pocket, pharmacophore, CYP/transporter interaction</text>
+              <g transform="translate(92 80)">
+                <path d="M98 72 C52 28 18 90 58 126 C23 160 80 207 124 171 C157 210 230 162 193 116 C238 70 176 19 142 63 C133 24 103 36 98 72Z" fill="#244f92" opacity=".92" stroke="#55c4df" stroke-width="4"/>
+                <path d="M66 116 C96 72 145 74 168 112 C191 153 145 180 109 159 C77 142 52 135 66 116Z" fill="none" stroke="#8de6dc" stroke-width="5"/>
+                <circle class="binding-glow" cx="130" cy="124" r="50" fill="#16a89b"/>
+                <g class="spin" transform-origin="130 124">
+                  <circle cx="130" cy="124" r="11" fill="#e4b45b"/>
+                  <circle cx="168" cy="145" r="8" fill="#fff"/>
+                  <circle cx="94" cy="148" r="7" fill="#cf5d50"/>
+                  <circle cx="150" cy="92" r="7" fill="#16a89b"/>
+                  <path d="M130 124L168 145M130 124L94 148M130 124L150 92" stroke="#fff" stroke-width="3"/>
+                </g>
+              </g>
+              <g transform="translate(382 78)">
+                <circle class="node-pulse" cx="16" cy="35" r="10" fill="#e4b45b"/>
+                <text x="36" y="40" fill="#fff" font-size="15" font-weight="800">H-bond donor</text>
+                <circle class="node-pulse" cx="16" cy="82" r="10" fill="#55c4df" style="animation-delay:.35s"/>
+                <text x="36" y="87" fill="#fff" font-size="15" font-weight="800">H-bond acceptor</text>
+                <circle class="node-pulse" cx="16" cy="129" r="10" fill="#16a89b" style="animation-delay:.7s"/>
+                <text x="36" y="134" fill="#fff" font-size="15" font-weight="800">hydrophobic pocket</text>
+                <circle class="node-pulse" cx="16" cy="176" r="10" fill="#cf5d50" style="animation-delay:1s"/>
+                <text x="36" y="181" fill="#fff" font-size="15" font-weight="800">CYP / transporter site</text>
+              </g>
+            </svg>
+            <span class="label">Molecular</span>
+            <h3>Docking and molecular interaction modeling</h3>
+            <p>Protein-ligand binding, pharmacophore interpretation, and transporter/enzyme interaction hypotheses for ADME mechanisms.</p>
+          </article>
+
+          <article class="card research-card">
+            <svg class="mini-visual" viewBox="0 0 620 330" role="img" aria-label="ADME pathway through gut liver blood kidney and tissue">
+              <rect width="620" height="330" rx="8" fill="#0f2239"/>
+              <g opacity=".15" stroke="#fff"><path d="M42 85H578M42 180H578M42 275H578M140 38V295M300 38V295M460 38V295"/></g>
+              <text x="32" y="38" fill="#fff" font-size="21" font-weight="900">ADME and toxicity</text>
+              <path class="path-dash" d="M88 195 C150 120 208 132 262 168 C326 210 388 104 450 146 C508 184 526 220 564 175" fill="none" stroke="#e4b45b" stroke-width="7" stroke-linecap="round"/>
+              <circle class="drug-dot adme-drug delay1" r="8" fill="#fff"/>
+              <g stroke="#fff" stroke-width="2">
+                <path d="M82 126 C43 157 61 220 118 224 C167 205 143 151 105 121Z" fill="#cf5d50"/>
+                <path d="M224 120 C165 132 162 206 213 229 C275 249 339 205 316 144 C284 156 250 143 224 120Z" fill="#e4b45b"/>
+                <path d="M406 132 C360 162 364 232 410 246 C454 225 454 161 406 132Z" fill="#55c4df"/>
+                <path d="M516 138 C477 118 431 143 432 185 C431 239 493 260 532 216 C561 183 553 150 516 138Z" fill="#16a89b"/>
+              </g>
+              <g fill="#fff" font-size="14" font-weight="800">
+                <text x="70" y="258">Gut absorption</text>
+                <text x="210" y="258">Liver CYP3A4 / UGT</text>
+                <text x="372" y="278">Kidney CLr</text>
+                <text x="492" y="258">Tissue Vd</text>
+              </g>
+              <g fill="rgba(255,255,255,.72)" font-size="13">
+                <text x="48" y="304">P-gp</text><text x="178" y="304">OATP1B1</text><text x="286" y="304">bile acid</text><text x="390" y="304">toxicity signal</text>
+              </g>
+            </svg>
+            <span class="label">ADME/Tox</span>
+            <h3>In vitro ADME and drug-like property testing</h3>
+            <p>Physicochemical profiling, permeability, metabolism, transporter assays, and toxicity-relevant exposure interpretation.</p>
+          </article>
+
+          <article class="card research-card">
+            <svg class="mini-visual" viewBox="0 0 620 330" role="img" aria-label="LC-MS/MS instrument and chromatogram">
+              <rect width="620" height="330" rx="8" fill="#0f2239"/>
+              <text x="32" y="38" fill="#fff" font-size="21" font-weight="900">LC-MS/MS bioanalysis</text>
+              <path class="path-dash" d="M54 162 H128 C160 162 168 96 212 96 H278" fill="none" stroke="#55c4df" stroke-width="7" stroke-linecap="round"/>
+              <circle class="flow-particle" cx="86" cy="162" r="8" fill="#e4b45b"/>
+              <rect x="52" y="122" width="74" height="80" rx="8" fill="rgba(255,255,255,.12)" stroke="#fff"/>
+              <text x="61" y="218" fill="rgba(255,255,255,.72)" font-size="13">plasma</text>
+              <rect x="166" y="60" width="92" height="72" rx="8" fill="#55c4df"/>
+              <rect x="296" y="82" width="120" height="116" rx="10" fill="rgba(255,255,255,.12)" stroke="#fff"/>
+              <rect x="326" y="112" width="64" height="48" rx="5" fill="#102033" stroke="#fff"/>
+              <line class="scan" x1="344" y1="110" x2="388" y2="162" stroke="#16a89b" stroke-width="5"/>
+              <rect x="450" y="82" width="132" height="116" rx="10" fill="#102033" stroke="#55c4df"/>
+              <path class="curve-draw" d="M466 176 C482 175 492 168 500 138 C512 84 526 175 536 176 C548 176 552 122 562 104 C572 84 580 166 588 176" fill="none" stroke="#e4b45b" stroke-width="4"/>
+              <g fill="#fff" font-size="14" font-weight="800">
+                <text x="162" y="154">LC column</text>
+                <text x="310" y="222">MS/MS</text>
+                <text x="462" y="222">chromatogram</text>
+              </g>
+              <text x="32" y="304" fill="rgba(255,255,255,.68)" font-size="14">sample preparation, separation, ion transition, peak quantification</text>
+            </svg>
+            <span class="label">Bioanalysis</span>
+            <h3>LC-MS/MS and metabolomics</h3>
+            <p>Drug quantification, metabolite identification, bile acid profiling, endogenous compound analysis, and kinetic interpretation.</p>
+          </article>
+
+          <article class="card research-card">
+            <svg class="mini-visual" viewBox="0 0 620 330" role="img" aria-label="PBPK PopPK virtual trial and machine learning dashboard">
+              <rect width="620" height="330" rx="8" fill="#0f2239"/>
+              <text x="32" y="38" fill="#fff" font-size="21" font-weight="900">PBPK, PopPK, ML and virtual trials</text>
+              <rect x="40" y="64" width="245" height="198" rx="12" fill="rgba(255,255,255,.11)" stroke="#fff"/>
+              <rect x="62" y="90" width="178" height="102" rx="7" fill="#102033" stroke="#55c4df"/>
+              <path class="curve-draw" d="M78 170 C108 88 144 144 172 96 C203 43 226 136 236 80" fill="none" stroke="#16a89b" stroke-width="5"/>
+              <path class="curve-draw" d="M78 182 C116 132 150 166 186 120 C210 90 225 166 238 135" fill="none" stroke="#e4b45b" stroke-width="5" style="animation-delay:.8s"/>
+              <g fill="#fff" transform="translate(64 208)">
+                <circle cx="12" cy="10" r="9"/><path d="M0 38C4 18 28 18 32 38Z"/>
+                <circle cx="55" cy="10" r="9"/><path d="M43 38C47 18 71 18 75 38Z"/>
+                <circle cx="98" cy="10" r="9"/><path d="M86 38C90 18 114 18 118 38Z"/>
+                <circle cx="141" cy="10" r="9"/><path d="M129 38C133 18 157 18 161 38Z"/>
+              </g>
+              <g transform="translate(350 76)" stroke="#55c4df" stroke-width="3">
+                <circle class="node-pulse" cx="0" cy="30" r="10" fill="#244f92"/>
+                <circle class="node-pulse" cx="0" cy="92" r="10" fill="#244f92" style="animation-delay:.3s"/>
+                <circle class="node-pulse" cx="85" cy="60" r="10" fill="#16a89b" style="animation-delay:.6s"/>
+                <circle class="node-pulse" cx="170" cy="28" r="10" fill="#e4b45b" style="animation-delay:.9s"/>
+                <circle class="node-pulse" cx="170" cy="92" r="10" fill="#e4b45b" style="animation-delay:1.2s"/>
+                <path d="M10 30L75 60M10 92L75 60M95 60L160 28M95 60L160 92"/>
+              </g>
+              <g fill="rgba(255,255,255,.76)" font-size="13" font-weight="800">
+                <text x="66" y="286">AUC, Cmax, t1/2, CL, Vd</text>
+                <text x="338" y="198">neural network</text>
+                <text x="338" y="222">DDI simulation</text>
+                <text x="338" y="246">virtual population</text>
+              </g>
+            </svg>
+            <span class="label">Computational PK</span>
+            <h3>PBPK, PopPK, machine learning, and deep learning</h3>
+            <p>Model-based translation, population variability, DDI simulation, virtual clinical trials, and data-driven ADME/PK prediction.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section dark" id="platform" aria-labelledby="platform-title">
+      <div class="container">
+        <div class="section-head wide">
+          <span class="label">Platform</span>
+          <h2 id="platform-title">A large-scale platform for drug movement, exposure, and prediction.</h2>
+          <p>The laboratory combines molecular modeling, ADME biology, LC-MS/MS bioanalysis, PBPK, PopPK, machine learning, and virtual clinical simulation in one quantitative workflow.</p>
+        </div>
+        <div class="research-stage">
+          <div class="research-diagram">
+            <svg viewBox="0 0 900 760" role="img" aria-label="Large research platform diagram">
+              <rect width="900" height="760" rx="14" fill="#13263d"/>
+              <g opacity=".13" stroke="#fff"><path d="M70 120H830M70 300H830M70 480H830M70 660H830M180 60V710M360 60V710M540 60V710M720 60V710"/></g>
+              <path class="path-dash" d="M70 92 C180 24 318 84 358 184 C410 314 548 262 625 164 C695 78 802 118 848 204" fill="none" stroke="#55c4df" stroke-width="9" stroke-linecap="round"/>
+              <circle class="drug-dot research-drug" r="10" fill="#fff"/><circle class="drug-dot research-drug delay1" r="8" fill="#e4b45b"/><circle class="drug-dot research-drug delay2" r="7" fill="#16a89b"/>
+              <g transform="translate(54 58)"><text x="0" y="0" fill="#fff" font-size="25" font-weight="900">01 Molecular Docking</text><path d="M95 90 C50 56 32 125 78 151 C55 188 137 192 148 150 C208 179 230 92 174 81 C170 21 105 35 95 90Z" fill="#244f92" stroke="#55c4df" stroke-width="4"/><path d="M76 115 C103 72 141 82 160 116 C181 151 144 176 109 157 C78 140 63 128 76 115Z" fill="none" stroke="#8de6dc" stroke-width="5"/><g class="spin"><circle cx="132" cy="125" r="10" fill="#e4b45b"/><circle cx="165" cy="143" r="8" fill="#fff"/><circle cx="103" cy="151" r="7" fill="#16a89b"/><path d="M132 125L165 143M132 125L103 151" stroke="#fff" stroke-width="3"/></g></g>
+              <g transform="translate(490 68)"><text x="0" y="0" fill="#fff" font-size="25" font-weight="900">02 ADME</text><path d="M48 70C20 96 31 147 76 153C120 137 101 89 73 65Z" fill="#cf5d50" stroke="#fff" stroke-width="2"/><path d="M170 72C124 80 121 137 160 154C207 171 257 137 239 89C214 98 190 88 170 72Z" fill="#e4b45b" stroke="#fff" stroke-width="2"/><path d="M322 78C281 103 282 161 322 174C362 160 363 103 322 78Z" fill="#55c4df" stroke="#fff" stroke-width="2"/><path d="M410 86C380 72 347 90 347 125C346 167 391 183 421 150C444 125 438 95 410 86Z" fill="#16a89b" stroke="#fff" stroke-width="2"/><text x="45" y="195" fill="rgba(255,255,255,.76)" font-size="15">absorption</text><text x="160" y="195" fill="rgba(255,255,255,.76)" font-size="15">metabolism</text><text x="294" y="195" fill="rgba(255,255,255,.76)" font-size="15">excretion</text><text x="397" y="195" fill="rgba(255,255,255,.76)" font-size="15">tissue</text></g>
+              <g transform="translate(78 435)"><text x="0" y="0" fill="#fff" font-size="25" font-weight="900">03 LC-MS/MS Bioanalysis</text><rect x="0" y="45" width="310" height="150" rx="12" fill="rgba(255,255,255,.12)" stroke="#fff"/><rect x="26" y="75" width="100" height="70" rx="6" fill="#55c4df"/><rect x="166" y="75" width="104" height="70" rx="6" fill="#102033" stroke="#fff"/><path d="M126 110H166" stroke="#e4b45b" stroke-width="8" stroke-linecap="round"/><circle cx="145" cy="110" r="9" fill="#e4b45b"/><line class="scan" x1="190" y1="78" x2="248" y2="142" stroke="#16a89b" stroke-width="6"/></g>
+              <g transform="translate(500 420)"><text x="0" y="0" fill="#fff" font-size="25" font-weight="900">04 PBPK / PopPK / AI</text><rect x="0" y="45" width="330" height="185" rx="12" fill="rgba(255,255,255,.12)" stroke="#fff"/><rect x="25" y="70" width="178" height="100" rx="7" fill="#102033" stroke="#55c4df"/><path d="M43 145 C72 88 99 128 125 88 C152 48 182 109 192 72" fill="none" stroke="#16a89b" stroke-width="5"/><path d="M43 156 C82 125 115 153 146 118 C170 91 184 143 194 116" fill="none" stroke="#e4b45b" stroke-width="5"/><g transform="translate(225 74)" fill="#fff"><circle cx="21" cy="15" r="11"/><path d="M0 50C5 24 38 24 43 50Z"/><circle cx="58" cy="24" r="9"/><path d="M43 57C47 35 70 35 75 57Z"/><circle cx="29" cy="72" r="9"/><path d="M13 108C17 85 42 85 47 108Z"/></g><text x="28" y="214" fill="rgba(255,255,255,.72)" font-size="15">DDI simulation, virtual clinical trial, exposure prediction</text></g>
+            </svg>
+          </div>
+          <div class="research-points">
+            <article class="flow-item"><span class="flow-index">01</span><div><h3>Molecular docking and dynamics</h3><p>Protein structures, transporter/enzyme interaction, ligand binding, and molecular-level ADME hypotheses.</p></div></article>
+            <article class="flow-item"><span class="flow-index">02</span><div><h3>In vitro ADME and drug-like property testing</h3><p>PhysChem, permeability, metabolism, transporter assays, and hit-to-lead optimization support.</p></div></article>
+            <article class="flow-item"><span class="flow-index">03</span><div><h3>In vivo PK/PD and disease models</h3><p>Exposure-response analysis in animal models, disease-state PK changes, and mechanism-driven interpretation.</p></div></article>
+            <article class="flow-item"><span class="flow-index">04</span><div><h3>LC-MS/MS and metabolomics</h3><p>Drug quantification, metabolite identification, bile acid and endogenous compound profiling.</p></div></article>
+            <article class="flow-item"><span class="flow-index">05</span><div><h3>PBPK, PopPK, ML, DL, and virtual trials</h3><p>Virtual populations, DDI simulation, population variability, and machine-learning ADME/PK prediction.</p></div></article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section soft" id="research" aria-labelledby="research-title">
+      <div class="container">
+        <div class="section-head">
+          <span class="label">Research</span>
+          <h2 id="research-title">Research interests</h2>
+          <p>QCP Lab focuses on drug discovery pharmacokinetics, drug-like property evaluation, metabolism and transport, disease-model PK/PD, drug interaction, and LC-MS/MS-based drug and metabolomics analysis.</p>
+        </div>
+        <div class="card">
+          <div class="research-list">
+            <div class="research-row"><strong>Drug discovery PK</strong><p>In vivo and in vitro pharmacokinetic studies for new drug discovery and candidate selection.</p></div>
+            <div class="research-row"><strong>PhysChem and ADME/Tox</strong><p>Evaluation of drug-like properties for hit-to-lead optimization and early development decisions.</p></div>
+            <div class="research-row"><strong>Metabolism and transport</strong><p>Mechanistic studies of drugs, bile acids, endogenous hormones, enzymes, and transporters.</p></div>
+            <div class="research-row"><strong>Disease-model PK/PD</strong><p>Pharmacokinetic and pharmacodynamic studies in disease animal models and altered physiology.</p></div>
+            <div class="research-row"><strong>Drug interaction</strong><p>Drug-drug interaction and drug-endogenous compound interaction studies.</p></div>
+            <div class="research-row"><strong>Metabolite profiling</strong><p>Drug metabolite identification, profiling, and mechanistic interpretation of metabolic pathways.</p></div>
+            <div class="research-row"><strong>LC-MS/MS bioanalysis</strong><p>Drug analysis and metabolomics in biological matrices using liquid chromatography-tandem mass spectrometry.</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="people" aria-labelledby="people-title">
+      <div class="container">
+        <div class="section-head">
+          <span class="label">People</span>
+          <h2 id="people-title">Members</h2>
+          <p>Principal investigator, doctoral students, and master's students in the QCP Lab.</p>
+        </div>
+        <div class="people-layout">
+          <article class="pi-card">
+            <img class="pi-photo" src="assets/prof-ahn-sunghoon-thumb.jpg" alt="Sung-Hoon Ahn official profile photo">
+            <div>
+              <span class="label">Principal Investigator</span>
+              <h3>Sung-Hoon Ahn, Ph.D.</h3>
+              <p>Professor, College of Pharmacy, Kangwon National University</p>
+              <div class="contact-lines">
+                <a href="mailto:ahnsh@kangwon.ac.kr">ahnsh@kangwon.ac.kr</a>
+                <span>Office: Innovation Pharmaceutical Clinical Research Building 210</span>
+                <span>Tel: +82-33-250-6912</span>
+              </div>
+            </div>
+          </article>
+          <div class="member-group">
+            <h3>Doctoral students</h3>
+            <div class="member-grid">
+              <div class="member"><strong>Kyung-Sun Moon</strong><a href="mailto:moonks97@kangwon.ac.kr">moonks97@kangwon.ac.kr</a></div>
+              <div class="member"><strong>Jong-Min Song</strong><a href="mailto:nayasjm@kangwon.ac.kr">nayasjm@kangwon.ac.kr</a></div>
+              <div class="member"><strong>Juhyun Park</strong><span>Ph.D. student</span></div>
+              <div class="member"><strong>Hui-Wook Kim</strong><span>Ph.D. student</span></div>
+              <div class="member"><strong>Eun-Dong Shin</strong><span>Ph.D. student</span></div>
+              <div class="member"><strong>Jong-Bae Kim</strong><span>Ph.D. student</span></div>
+              <div class="member"><strong>Young-Hyun Nam</strong><span>Ph.D. student</span></div>
+              <div class="member"><strong>Jun-Hak Bae</strong><span>Ph.D. student</span></div>
+              <div class="member"><strong>Hyun-Chan Lim</strong><span>Ph.D. student</span></div>
+              <div class="member"><strong>Ki-Ok Ahn</strong><span>Ph.D. student</span></div>
+              <div class="member"><strong>Jun-Hee Lee</strong><span>Ph.D. student</span></div>
+            </div>
+            <h3>Master's students</h3>
+            <div class="member-grid">
+              <div class="member"><strong>Chae-I Shin</strong><span>M.S. student</span></div>
+              <div class="member"><strong>Min-Kyung Jeong</strong><span>M.S. student</span></div>
+              <div class="member"><strong>Su-A Choi</strong><span>M.S. student</span></div>
+              <div class="member"><strong>Min Lee</strong><span>M.S. student</span></div>
+              <div class="member"><strong>Mariam Khaled</strong><span>M.S. student</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section soft" id="publications" aria-labelledby="publications-title">
+      <div class="container">
+        <div class="section-head">
+          <span class="label">Publications</span>
+          <h2 id="publications-title">Publications</h2>
+          <p>Click the button to expand the complete publication list provided for the laboratory website.</p>
+        </div>
+        <div class="publication-tools">
+          <button class="button primary" type="button" id="togglePublications">Show full publication list</button>
+          <span class="publication-count" id="publicationCount"></span>
+        </div>
+        <div class="publication-list" id="publicationList"></div>
+      </div>
+    </section>
+
+    <section class="section" id="programs" aria-labelledby="programs-title">
+      <div class="container">
+        <div class="section-head">
+          <span class="label">Programs</span>
+          <h2 id="programs-title">Ongoing programs and partners</h2>
+          <p>Current funded programs connected to regional innovation and pharmaceutical development.</p>
+        </div>
+        <div class="programs">
+          <a class="program" href="https://www.gwrise.or.kr/" target="_blank" rel="noopener">
+            <div class="logo-box"><svg viewBox="0 0 260 64" role="img" aria-label="Gangwon RISE Center"><text x="5" y="40" fill="#ba5e9d" font-size="28" font-weight="900" font-family="Segoe UI, Arial">Gangwon RISE</text></svg></div>
+            <strong>Gangwon RISE Center</strong><p>Regional innovation and university-city ecosystem program.</p>
+          </a>
+          <a class="program" href="https://kiit.kr/lang_kr_new.php?pid=RLRC" target="_blank" rel="noopener">
+            <div class="logo-box"><svg viewBox="0 0 260 64" role="img" aria-label="GIB-RLRC"><text x="5" y="41" fill="#244f92" font-size="32" font-weight="900" font-family="Segoe UI, Arial">GIB-RLRC</text><path d="M8 52H212" stroke="#16a89b" stroke-width="5"/></svg></div>
+            <strong>Gangwon RLRC / GIB-RLRC</strong><p>Regional leading research center for bio-pharmaceutical innovation materials.</p>
+          </a>
+          <a class="program" href="https://www.mafra.go.kr/sites/home/index.do" target="_blank" rel="noopener">
+            <div class="logo-box"><svg viewBox="0 0 260 64" role="img" aria-label="MAFRA"><circle cx="26" cy="32" r="18" fill="#fff" stroke="#244f92" stroke-width="8"/><path d="M16 20C28 6 46 16 44 32" fill="none" stroke="#e6424c" stroke-width="7"/><text x="58" y="41" fill="#273747" font-size="25" font-weight="900" font-family="Segoe UI, Arial">MAFRA</text></svg></div>
+            <strong>MAFRA</strong><p>Ministry-linked project for domestic localization of pharmaceutical APIs.</p>
+          </a>
+          <a class="program" href="https://pharmacy.kangwon.ac.kr/pharmacy/index.do" target="_blank" rel="noopener">
+            <div class="logo-box"><svg viewBox="0 0 260 64" role="img" aria-label="KNU"><circle cx="33" cy="32" r="25" fill="none" stroke="#244f92" stroke-width="3"/><text x="68" y="42" fill="#244f92" font-size="31" font-weight="900" font-family="Segoe UI, Arial">KNU</text></svg></div>
+            <strong>KNU College of Pharmacy</strong><p>Academic home of the Laboratory of Quantitative and Computational Pharmacokinetics.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section dark" id="contact" aria-labelledby="contact-title">
+      <div class="container">
+        <div class="section-head">
+          <span class="label">Contact</span>
+          <h2 id="contact-title">Find QCP Lab at Kangwon National University.</h2>
+          <p>College of Pharmacy, Kangwon National University, Chuncheon, Republic of Korea.</p>
+        </div>
+        <div class="contact-band">
+          <div class="address-card">
+            <h3>Laboratory</h3>
+            <p>Innovation Pharmaceutical Clinical Research Building 208-210<br>College of Pharmacy, Kangwon National University<br>1 Kangwondaehak-gil, Chuncheon, Gangwon State 24341, Republic of Korea</p>
+            <p>PI: <a href="mailto:ahnsh@kangwon.ac.kr">ahnsh@kangwon.ac.kr</a><br>Lab contacts: <a href="mailto:moonks97@kangwon.ac.kr">moonks97@kangwon.ac.kr</a>, <a href="mailto:nayasjm@kangwon.ac.kr">nayasjm@kangwon.ac.kr</a></p>
+          </div>
+          <div class="address-card">
+            <h3>External links</h3>
+            <p>Official university and repository links for the laboratory website.</p>
+            <div class="source-links">
+              <a href="https://pharmacy.kangwon.ac.kr/pharmacy/lab/laboratory-of-pharmaceutical-sciences.do" target="_blank" rel="noopener">KNU Pharmaceutics Lab</a>
+              <a href="https://pharmacy.kangwon.ac.kr/pharmacy/professor/professor.do" target="_blank" rel="noopener">KNU Faculty</a>
+              <a href="https://github.com/tiredpiryo/tiredpiryo.github.io" target="_blank" rel="noopener">GitHub Repository</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img class="lab-logo" src="assets/qcp-pk-mark.png" alt="KNU PK Lab logo">
+        <div><strong>QCP Lab</strong><span>Laboratory of Quantitative and Computational Pharmacokinetics</span></div>
+      </div>
+      <div class="footer-logos" aria-label="Program logos">
+        <a class="footer-logo" href="https://www.gwrise.or.kr/" target="_blank" rel="noopener"><svg viewBox="0 0 190 36" aria-label="Gangwon RISE"><text x="0" y="25" fill="#fff" font-size="20" font-weight="900">Gangwon RISE</text></svg></a>
+        <a class="footer-logo" href="https://kiit.kr/lang_kr_new.php?pid=RLRC" target="_blank" rel="noopener"><svg viewBox="0 0 150 36" aria-label="GIB-RLRC"><text x="0" y="25" fill="#fff" font-size="22" font-weight="900">GIB-RLRC</text></svg></a>
+        <a class="footer-logo" href="https://www.mafra.go.kr/sites/home/index.do" target="_blank" rel="noopener"><svg viewBox="0 0 130 36" aria-label="MAFRA"><circle cx="17" cy="18" r="11" fill="none" stroke="#fff" stroke-width="5"/><text x="38" y="25" fill="#fff" font-size="19" font-weight="900">MAFRA</text></svg></a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const menuToggle = document.querySelector(".menu-toggle");
+    const navLinks = document.querySelector("#navLinks");
+    menuToggle.addEventListener("click", () => {
+      const isOpen = navLinks.classList.toggle("open");
+      menuToggle.setAttribute("aria-expanded", String(isOpen));
+      menuToggle.setAttribute("aria-label", isOpen ? "Close menu" : "Open menu");
+    });
+    navLinks.addEventListener("click", (event) => {
+      if (event.target.tagName === "A") {
+        navLinks.classList.remove("open");
+        menuToggle.setAttribute("aria-expanded", "false");
+        menuToggle.setAttribute("aria-label", "Open menu");
+      }
+    });
+
+    const publications = [
+      ["Accurate quantification of human miRNA isoforms using the PROMER technology", "2025.11.", "Biochemical and Biophysical Research Communications", "https://doi.org/10.1016/j.bbrc.2025.152882"],
+      ["Understanding the crossing of blood-brain barrier using nanocarriers: current trends and the role of physiologically based pharmacokinetic modeling", "2025.10.", "IEEE Transactions on Nanobioscience", "https://doi.org/10.1109/TNB.2025.3580172"],
+      ["Recent trends in pharmacokinetic considerations in chronic kidney disease", "2025.02.", "Yakhak Hoeji", "https://doi.org/10.17480/psk.2025.69.1.22"],
+      ["Design, synthesis, and evaluation of N1,N3-dialkyldioxonaphthoimidazoliums as antibacterial agents against methicillin-resistant Staphylococcus aureus", "2024.06.", "European Journal of Medicinal Chemistry", "https://doi.org/10.1016/j.ejmech.2024.116454"],
+      ["Determination of mitomycin C in rat plasma by liquid chromatography-tandem mass spectrometry and its application for determining pharmacokinetics in rat", "2024.06.", "Heliyon", "https://doi.org/10.1016/j.heliyon.2024.e32927"],
+      ["Macrocyclization strategy for improving candidate profiles in medicinal chemistry", "2024.06.", "European Journal of Medicinal Chemistry", "https://doi.org/10.1016/j.ejmech.2024.116501"],
+      ["Development and evaluation of self-microemulsifying drug delivery system for improving oral absorption of poorly water-soluble olaparib", "2023.06.", "Pharmaceutics", "https://doi.org/10.3390/pharmaceutics15061669"],
+      ["The risk of gastrointestinal cancer on daily intake of low-dose BaP in C57BL/6 for 60 days", "2022.08.", "Journal of Korean Medical Science", "https://doi.org/10.3346/jkms.2022.37.e235"],
+      ["Fast dissolving nanofiber mat for the local antimicrobial application of roxithromycin in oral cavity", "2021.12.", "Materials Science and Engineering: C", "https://doi.org/10.1016/j.msec.2021.112537"],
+      ["KRCA-0008 suppresses ALK-positive anaplastic large-cell lymphoma growth", "2020.10.", "Investigational New Drugs", "https://doi.org/10.1007/s10637-020-00896-4"],
+      ["Potential Moracin M prodrugs strongly attenuate airway inflammation in vivo", "2020.07.", "Biomolecules & Therapeutics", "https://doi.org/10.4062/biomolther.2019.212"],
+      ["In vitro and in vivo pharmacokinetic characterization of LMT-28 as a novel small molecular interleukin-6 inhibitor", "2020.04.", "Asian-Australasian Journal of Animal Sciences", "https://doi.org/10.5713/ajas.19.0463"],
+      ["Recent trends in metabolism-based drug-drug interaction studies", "2020.02.", "", ""],
+      ["A rapid and sensitive liquid chromatography/tandem mass spectrometry assay for simultaneous quantitation of disopyramide and its major metabolite, mono-isopropyl-disopyramide, in rat plasma and its application to a pharmacokinetic study", "2018.10.", "", ""],
+      ["Validation and profiling of physicochemical screening methods for optimization of new drug candidates in early drug development", "2018.08.", "", ""],
+      ["Cyp7a1 is continuously increased with disrupted Fxr-mediated feedback inhibition in hypercholesterolemic TALLYHO/Jng mice", "2018.01.", "", ""],
+      ["Metabolic and pharmacokinetic characterization of a new synthetic cannabinoid APINAC in rats", "2018.01.", "", ""],
+      ["Deletion of liver-specific STAT5 gene alters the expression of bile acid metabolism genes and reduces liver damage in lithogenic diet-fed mice", "2017.01.", "", ""],
+      ["Gut commensal Bacteroides acidifaciens prevents obesity and improves insulin sensitivity in mice", "2017.01.", "", ""],
+      ["Gut microbiota-associated bile acid deconjugation accelerates hepatic steatosis in ob/ob mice", "2016.09.", "", ""],
+      ["Quantification of mequitazine in human plasma by gas chromatography-quadrupole mass spectrometry and its application to a human pharmacokinetic study", "2016.04.", "", ""],
+      ["Pharmacokinetics of enzalutamide, an anti-prostate cancer drug, in rats", "2015.11.", "", ""],
+      ["The identification of lobeglitazone metabolites in rat liver microsomes and the kinetics of the in vivo formation of the major metabolite M1 in rats", "2015.11.", "", ""],
+      ["Gender differences in the hepatic elimination and pharmacokinetics of lobeglitazone in rats", "2015.09.", "", ""],
+      ["Kinetics of the absorption, distribution, metabolism, and excretion of lobeglitazone, a novel activator of peroxisome proliferator-activated receptor gamma in rats", "2015.09.", "", ""],
+      ["A novel small-molecule inhibitor targeting the IL-6 receptor beta subunit, glycoprotein 130", "2015.07.", "", ""],
+      ["In vitro permeability, pharmacokinetics and brain uptake of WAY-100635 and FCWAY in rats using liquid chromatography electrospray ionization tandem mass spectrometry", "2015.06.", "", ""],
+      ["Pharmacokinetics of KR-67500, a new 11 beta-HSD1 inhibitor", "2015.04.", "", ""],
+      ["HS-133, a novel fluorescent phosphatidylinositol 3-kinase inhibitor as a potential imaging and anticancer agent for targeted therapy", "2014.10.", "", ""],
+      ["Quantitative determination of enzalutamide, an anti-prostate cancer drug, in rat plasma using liquid chromatography-tandem mass spectrometry, and its application to a pharmacokinetic study", "2014.08.", "", ""],
+      ["Determination of 2-(3-benzoyl)-4-hydroxy-1,1-dioxo-2H-1,2-benzothiazine-2-yl-1-phenylethanone by liquid chromatography-tandem mass spectrometry", "2014.05.", "", ""],
+      ["Determination of mesoridazine by liquid chromatography-tandem mass spectrometry and its application to pharmacokinetic study in rats", "2014.05.", "", ""],
+      ["Preclinical pharmacokinetic characterization of a novel DGAT-1 inhibitor", "2014.05.", "", ""],
+      ["Loss of von Hippel-Lindau protein increases systemic cholesterol levels through targeting HIF-2 alpha and regulation of bile acid homeostasis", "2014.04.", "", ""],
+      ["Determination of a novel diacylglycerol acyltransferase 1 inhibitor KR-69232 in rat plasma using liquid chromatography-tandem mass spectrometry and its application to a pharmacokinetic study", "2014.03.", "", ""],
+      ["Quantification of zabofloxacin in rat plasma using HPLC-UV detector and its application to a pharmacokinetic study", "2014.02.", "", ""],
+      ["Cholestasis induces reversible accumulation of periplakin in mouse liver", "2013.07.", "", ""],
+      ["Determination of 2-aryl-7(3',4'-dialkoxyphenyl)-pyrazolo[1,5-alpha]pyrimidine, a novel phosphodiesterase-4 inhibitor, in rat plasma by liquid chromatography-tandem mass spectrometry", "2013.07.", "", ""],
+      ["Determination of PF-04620110, a novel inhibitor of diacylglycerol acyltransferase-1, in rat plasma using liquid chromatography-tandem mass spectrometry and its application in pharmacokinetic studies", "2013.07.", "", ""],
+      ["Hepatic cannabinoid receptor type 1 mediates alcohol-induced regulation of bile acid enzyme genes expression via CREBH", "2013.07.", "", ""],
+      ["Pharmacokinetic characterization of the novel TAZ modulator TM-25659 using a multicompartment kinetic model in rats and a possibility of its drug-drug interactions in humans", "2013.02.", "", ""],
+      ["Determination of 5-HT receptor antagonists, MEFWAY and MPPF using liquid chromatography electrospray ionization tandem mass spectrometry in rat plasma and brain tissue", "2013.01.", "", ""],
+      ["Predicted drug-induced bradycardia related cardiotoxicity using a zebrafish in vivo model is highly correlated with results from in vitro tests", "2013.01.", "", ""],
+      ["Development of a LC-MS method for quantification of FK-3000 and its application to in vivo pharmacokinetic study in drug development", "2012.11.", "", ""],
+      ["Determination of a novel TAZ modulator TM-25659 in rat plasma by liquid chromatography-tandem mass spectrometry", "2012.04.", "", ""],
+      ["Evaluation of a multi-kinase inhibitor KRC-108 as an anti-tumor agent in vitro and in vivo", "2012.04.", "", ""],
+      ["Pharmacokinetics and pharmacodynamics of KR-66223, a novel DPP-4 inhibitor", "2012.04.", "", ""],
+      ["Synthesis and biological evaluation of cyclic sulfamide derivatives as 11 beta-hydroxysteroid dehydrogenase 1 inhibitors", "2012.02.", "", ""],
+      ["Dose-independent pharmacokinetics of a new peroxisome proliferator-activated receptor-gamma agonist, KR-62980, in Sprague-Dawley rats and ICR mice", "2011.12.", "", ""],
+      ["Pharmacokinetic characterization of decursinol derived from Angelica gigas Nakai in rats", "2011.10.", "", ""],
+      ["Determination of a dipeptidyl peptidase IV agonist, beta-aminoacyl containing thiazolidine derivatives KR-66223 in rat plasma by liquid chromatography-tandem mass spectrometry", "2011.07.", "", ""],
+      ["Inhibitory effects of ketoconazole and rifampin on OAT1 and OATP1B1 transport activities: considerations on drug-drug interactions", "2011.04.", "", ""],
+      ["Determination of a peroxisome proliferator-activated receptor gamma agonist KR-62980 in rat plasma by liquid chromatography-tandem mass spectrometry", "2011.01.", "", ""],
+      ["Identification of cyclicsulfonamide derivatives with an acetamide group as 11 beta-hydroxysteroid dehydrogenase 1 inhibitors", "2011.01.", "", ""],
+      ["Preclinical pharmacokinetics of PDE-310, a novel PDE4 inhibitor", "2011", "", ""],
+      ["Sitagliptin attenuates metformin-mediated AMPK phosphorylation through inhibition of organic cation transporters", "2010.12.", "", ""],
+      ["Discovery of cannabinoid-1 receptor antagonists by virtual screening", "2010.09.", "", ""],
+      ["Urinary metabolomics in Fxr-null mice reveals activated adaptive metabolic pathways upon bile acid challenge", "2010.05.", "", ""],
+      ["Discovery of cyclicsulfonamide derivatives as 11 beta-hydroxysteroid dehydrogenase 1 inhibitors", "2010.02.", "", ""],
+      ["Contribution of a significant first-pass effect to poor bioavailability in rats", "2009.09.", "", ""],
+      ["Metabolomics reveals a novel vitamin E metabolite and attenuated vitamin E metabolism upon PXR activation", "2009.05.", "", ""],
+      ["Hepatocyte nuclear factor 4 alpha in the intestinal epithelial cells protects against inflammatory bowel disease", "2008.07.", "", ""],
+      ["Differential regulation of bile acid homeostasis by the farnesoid X receptor in liver and intestine", "2007.12.", "", ""],
+      ["Application of a sample pooling method for the uptake of drugs by the brain in rats", "2006.06.", "", ""],
+      ["Mechanism for increased bioavailability of tacrine in fasted rats", "2006.05.", "", ""],
+      ["Quantification of clotiazepam in human plasma by gas chromatography-mass spectrometry", "2006.04.", "", ""],
+      ["Comparison of pharmacokinetics of loxoprofen and its active metabolites after intravenous, intramuscular, and oral administration in rats: evidence for extrahepatic metabolism", "2005.10.", "", ""],
+      ["Pharmacokinetic characterization of dehydroevodiamine in the rat brain", "2004.02.", "", ""],
+      ["Simple liquid chromatography-electrospray ionization mass spectrometry method for the routine determination of salmon calcitonin in serum", "2002.08.", "", ""]
+    ];
+
+    const list = document.querySelector("#publicationList");
+    const count = document.querySelector("#publicationCount");
+    const toggle = document.querySelector("#togglePublications");
+    let expanded = false;
+
+    function renderPublications() {
+      const visible = expanded ? publications : publications.slice(0, 12);
+      list.innerHTML = visible.map((pub) => {
+        const [title, date, venue, doi] = pub;
+        const link = doi ? `<a class="doi" href="${doi}" target="_blank" rel="noopener">DOI</a>` : `<span class="doi" aria-label="DOI not listed">Listed</span>`;
+        const meta = [venue, date].filter(Boolean).join(" · ");
+        return `<article class="publication"><div><h3>${title}</h3><p>${meta}</p></div>${link}</article>`;
+      }).join("");
+      count.textContent = expanded ? `${publications.length} publications shown` : `Showing 12 of ${publications.length}`;
+      toggle.textContent = expanded ? "Show selected publications" : "Show full publication list";
+    }
+
+    toggle.addEventListener("click", () => {
+      expanded = !expanded;
+      renderPublications();
+    });
+    renderPublications();
+  </script>
+</body>
+</html>
