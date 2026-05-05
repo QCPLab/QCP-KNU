@@ -1,0 +1,1489 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="QCP Lab, Laboratory of Quantitative and Computational Pharmacokinetics, Kangwon National University College of Pharmacy">
+  <meta name="theme-color" content="#244f92">
+  <title>QCP Lab | Kangwon National University</title>
+  <style>
+    :root {
+      --ink: #102033;
+      --muted: #5f6f82;
+      --line: #d8e2ee;
+      --paper: #ffffff;
+      --soft: #f5f8fb;
+      --blue: #244f92;
+      --blue-dark: #102033;
+      --teal: #16a89b;
+      --cyan: #55c4df;
+      --gold: #e4b45b;
+      --red: #cf5d50;
+      --leaf: #4f9d69;
+      --shadow: 0 18px 44px rgba(16, 32, 51, .14);
+      --radius: 8px;
+      --max: 1540px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--paper);
+      font-family: "Segoe UI", Arial, sans-serif;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+    button { font: inherit; }
+    h1, h2, h3, p { margin-top: 0; }
+
+    .skip-link {
+      position: absolute;
+      left: 16px;
+      top: -54px;
+      z-index: 80;
+      padding: 10px 14px;
+      color: #fff;
+      background: var(--blue-dark);
+      border-radius: 6px;
+    }
+    .skip-link:focus { top: 16px; }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      border-bottom: 1px solid rgba(216, 226, 238, .94);
+      background: rgba(255, 255, 255, .96);
+      backdrop-filter: blur(16px);
+    }
+    .nav {
+      width: min(100% - 32px, var(--max));
+      min-height: 76px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      min-width: 420px;
+    }
+    .lab-logo-svg {
+      width: 112px;
+      height: 72px;
+      flex: 0 0 auto;
+      display: block;
+      overflow: visible;
+    }
+    .brand-name {
+      display: grid;
+      line-height: 1.08;
+    }
+    .brand-name strong {
+      color: var(--blue);
+      font-size: 1.12rem;
+      font-weight: 900;
+      letter-spacing: 0;
+    }
+    .brand-name span {
+      margin-top: 4px;
+      max-width: 350px;
+      color: var(--muted);
+      font-size: .68rem;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 4px;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      font-size: .92rem;
+      font-weight: 850;
+    }
+    .nav-links a {
+      min-height: 42px;
+      display: inline-flex;
+      align-items: center;
+      padding: 0 11px;
+      border-radius: 6px;
+      color: #2b4057;
+    }
+    .nav-links a:hover { color: var(--blue); background: var(--soft); }
+    .nav-links .external { margin-left: 6px; color: #fff; background: var(--blue); }
+    .nav-links .external:hover { color: #fff; background: #163866; }
+    .menu-toggle {
+      display: none;
+      width: 44px;
+      height: 44px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      color: var(--blue);
+      background: #fff;
+      cursor: pointer;
+    }
+    .menu-toggle span {
+      display: block;
+      width: 20px;
+      height: 2px;
+      margin: 5px auto;
+      background: currentColor;
+    }
+
+    .hero {
+      min-height: calc(100svh - 76px);
+      border-bottom: 1px solid var(--line);
+      background:
+        linear-gradient(120deg, rgba(255,255,255,.99), rgba(241,247,251,.96) 52%, rgba(231,246,244,.9)),
+        #f4f8fb;
+      overflow: hidden;
+    }
+    .hero-inner {
+      width: min(100% - 32px, var(--max));
+      margin: 0 auto;
+      padding: 64px 0 78px;
+      display: grid;
+      grid-template-columns: minmax(360px, .46fr) minmax(780px, 1.54fr);
+      gap: clamp(26px, 3vw, 54px);
+      align-items: center;
+    }
+    .hero-inner > * { min-width: 0; }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 0 0 18px;
+      color: var(--teal);
+      font-size: .82rem;
+      font-weight: 900;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      max-width: 100%;
+      overflow-wrap: anywhere;
+    }
+    .eyebrow::before { content: ""; width: 32px; height: 2px; background: var(--teal); }
+    h1 {
+      max-width: 820px;
+      margin-bottom: 22px;
+      font-size: clamp(3.5rem, 8vw, 6.8rem);
+      line-height: .96;
+      letter-spacing: 0;
+    }
+    .subtitle {
+      color: var(--blue);
+      font-size: clamp(1.14rem, 2vw, 1.48rem);
+      font-weight: 900;
+      line-height: 1.3;
+      overflow-wrap: anywhere;
+    }
+    .hero-copy {
+      max-width: 680px;
+      color: #314760;
+      font-size: clamp(1.02rem, 1.35vw, 1.18rem);
+      overflow-wrap: anywhere;
+    }
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 30px;
+    }
+    .button {
+      min-height: 48px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 18px;
+      border: 1px solid var(--blue);
+      border-radius: 6px;
+      font-weight: 900;
+      white-space: nowrap;
+      cursor: pointer;
+      transition: transform .18s ease, box-shadow .18s ease;
+    }
+    .button.primary { color: #fff; background: var(--blue); }
+    .button.secondary { color: var(--blue); background: rgba(255,255,255,.86); }
+    .button:hover { transform: translateY(-1px); box-shadow: 0 12px 24px rgba(36,79,146,.18); }
+
+    .hero-visual {
+      min-width: 0;
+      min-height: 790px;
+      padding: 20px;
+      border: 1px solid rgba(36,79,146,.18);
+      border-radius: var(--radius);
+      background: linear-gradient(180deg, rgba(255,255,255,.94), rgba(244,249,253,.98));
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+    .overview-top {
+      min-height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 4px 4px 16px;
+    }
+    .overview-kicker {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      color: var(--teal);
+      font-size: .83rem;
+      font-weight: 900;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      max-width: 100%;
+      overflow-wrap: anywhere;
+    }
+    .overview-kicker::after {
+      content: "";
+      width: 44px;
+      height: 2px;
+      background: linear-gradient(90deg, var(--teal), var(--gold), var(--red));
+      animation: overviewLine 2.2s ease-in-out infinite;
+    }
+    .overview-title {
+      margin: 6px 0 0;
+      color: var(--ink);
+      font-size: clamp(1.45rem, 2.2vw, 2.25rem);
+      line-height: 1.08;
+      font-weight: 900;
+      overflow-wrap: anywhere;
+    }
+    .overview-orbit {
+      width: 122px;
+      height: 54px;
+      flex: 0 0 auto;
+    }
+    .overview-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-auto-rows: 330px;
+      gap: 16px;
+    }
+    .overview-card {
+      position: relative;
+      min-width: 0;
+      border: 1px solid #d8e4ef;
+      border-radius: var(--radius);
+      background: #fff;
+      box-shadow: 0 8px 20px rgba(16, 32, 51, .07);
+      overflow: hidden;
+    }
+    .overview-card h3 {
+      position: absolute;
+      left: 18px;
+      top: 14px;
+      z-index: 2;
+      margin: 0;
+      color: #17304d;
+      font-size: 1.02rem;
+      line-height: 1.2;
+      font-weight: 900;
+    }
+    .overview-card .visual {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .section {
+      padding: clamp(72px, 8vw, 110px) 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .section.soft { background: var(--soft); }
+    .section.dark { color: #fff; background: var(--blue-dark); }
+    .container { width: min(100% - 32px, var(--max)); margin: 0 auto; }
+    .section-head { max-width: 900px; margin-bottom: 38px; }
+    .section-head.wide { max-width: 1120px; }
+    .section-head h2 {
+      margin-bottom: 12px;
+      font-size: clamp(2.1rem, 4.6vw, 4rem);
+      line-height: 1.04;
+      letter-spacing: 0;
+    }
+    .section-head p { color: var(--muted); font-size: 1.06rem; }
+    .dark .section-head p { color: rgba(255,255,255,.72); }
+    .label {
+      display: inline-flex;
+      margin-bottom: 12px;
+      color: var(--teal);
+      font-size: .76rem;
+      font-weight: 900;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    .pipeline-visual {
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fff;
+      box-shadow: 0 14px 36px rgba(16,32,51,.08);
+      overflow: hidden;
+    }
+    .pipeline-grid {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 14px;
+    }
+    .pipeline-step {
+      min-width: 0;
+      min-height: 330px;
+      display: grid;
+      grid-template-rows: auto 1fr;
+      gap: 12px;
+      padding: 16px;
+      border: 1px solid #d8e4ef;
+      border-radius: var(--radius);
+      background: #fff;
+      overflow: hidden;
+    }
+    .pipeline-step h3 {
+      margin: 0;
+      color: var(--blue);
+      font-size: 1rem;
+      line-height: 1.2;
+      font-weight: 900;
+    }
+    .pipeline-step svg { width: 100%; height: 250px; display: block; }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 22px;
+    }
+    .card {
+      min-width: 0;
+      padding: 24px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fff;
+      transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+    }
+    .card:hover { transform: translateY(-2px); border-color: rgba(36,79,146,.28); box-shadow: 0 18px 34px rgba(16,32,51,.1); }
+    .card h3 { margin-bottom: 10px; font-size: 1.18rem; line-height: 1.3; }
+    .card p, .card li { color: #4b5b70; }
+    .mini-visual {
+      width: 100%;
+      height: 300px;
+      margin-bottom: 20px;
+      border-radius: var(--radius);
+      display: block;
+      overflow: hidden;
+      background: #102033;
+    }
+
+    .research-stage {
+      display: grid;
+      grid-template-columns: minmax(0, 1.08fr) minmax(360px, .92fr);
+      gap: 22px;
+      align-items: stretch;
+    }
+    .research-diagram {
+      min-height: 700px;
+      padding: 18px;
+      border: 1px solid rgba(255,255,255,.16);
+      border-radius: var(--radius);
+      background: #fff;
+      overflow: hidden;
+    }
+    .research-diagram svg {
+      width: 100%;
+      height: 100%;
+      min-height: 664px;
+      display: block;
+    }
+    .platform-static,
+    .platform-static * { animation: none !important; }
+    .research-points {
+      display: grid;
+      gap: 12px;
+      align-content: stretch;
+    }
+    .flow-item {
+      display: grid;
+      grid-template-columns: 44px minmax(0,1fr);
+      gap: 14px;
+      align-items: start;
+      padding: 18px;
+      border: 1px solid rgba(255,255,255,.14);
+      border-radius: var(--radius);
+      background: rgba(255,255,255,.06);
+    }
+    .flow-index {
+      width: 44px;
+      height: 44px;
+      display: grid;
+      place-items: center;
+      border-radius: 6px;
+      color: var(--blue-dark);
+      background: #fff;
+      font-weight: 900;
+    }
+    .flow-item h3 { margin: 0 0 5px; font-size: 1.03rem; }
+    .flow-item p { margin: 0; color: rgba(255,255,255,.74); font-size: .94rem; }
+
+    .research-list {
+      display: grid;
+      gap: 12px;
+      max-width: 1120px;
+    }
+    .research-row {
+      display: grid;
+      grid-template-columns: 90px minmax(220px, .52fr) minmax(0, 1fr);
+      gap: 18px;
+      align-items: start;
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fff;
+    }
+    .research-row .num {
+      width: 48px;
+      height: 48px;
+      display: grid;
+      place-items: center;
+      border-radius: 6px;
+      color: #fff;
+      background: var(--blue);
+      font-weight: 900;
+    }
+    .research-row strong { color: var(--blue); font-size: 1.08rem; }
+    .research-row p { margin: 0; color: #4b5b70; }
+
+    .people-layout {
+      display: grid;
+      grid-template-columns: minmax(360px, .68fr) minmax(0, 1.32fr);
+      gap: 24px;
+      align-items: start;
+    }
+    .pi-card {
+      display: grid;
+      grid-template-columns: 180px minmax(0, 1fr);
+      gap: 20px;
+      align-items: center;
+    }
+    .pi-photo {
+      width: 180px;
+      height: 220px;
+      object-fit: cover;
+      object-position: center;
+      border-radius: var(--radius);
+      border: 1px solid var(--line);
+      box-shadow: 0 14px 26px rgba(16,32,51,.12);
+    }
+    .contact-lines { display: grid; gap: 6px; color: #4b5b70; font-size: .95rem; font-weight: 700; }
+    .contact-lines a { color: var(--blue); }
+    .member-group {
+      padding: 24px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fff;
+    }
+    .member-group h3 { margin: 0 0 14px; color: var(--blue); }
+    .member-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap: 10px;
+      margin-bottom: 22px;
+    }
+    .member {
+      min-height: 76px;
+      display: grid;
+      align-content: center;
+      gap: 4px;
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: var(--soft);
+    }
+    .member strong { color: var(--ink); }
+    .member span, .member a { color: var(--muted); font-size: .88rem; font-weight: 700; overflow-wrap: anywhere; }
+    .member a { color: var(--blue); }
+
+    .programs {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0,1fr));
+      gap: 18px;
+    }
+    .program {
+      min-width: 0;
+      min-height: 230px;
+      display: grid;
+      grid-template-rows: 108px auto auto;
+      gap: 12px;
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fff;
+      transition: transform .18s ease, box-shadow .18s ease;
+    }
+    .program:hover { transform: translateY(-2px); box-shadow: 0 16px 28px rgba(16,32,51,.1); }
+    .logo-box {
+      height: 108px;
+      display: grid;
+      place-items: center;
+      border: 1px solid #e1e9f2;
+      border-radius: 6px;
+      background: #f9fbfd;
+      overflow: hidden;
+    }
+    .logo-box img { max-width: 90%; max-height: 88px; object-fit: contain; }
+    .program strong { color: var(--ink); font-size: 1rem; line-height: 1.25; }
+    .program p { margin: 0; color: var(--muted); font-size: .88rem; font-weight: 700; }
+    .text-logo {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .contact-band {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(300px, .6fr);
+      gap: 24px;
+      align-items: stretch;
+      padding: 28px;
+      border-radius: var(--radius);
+      color: #fff;
+      background: linear-gradient(135deg, var(--blue), #17304d);
+    }
+    .contact-band h2 { margin-bottom: 10px; font-size: clamp(2rem, 4vw, 3.4rem); line-height: 1.05; }
+    .contact-card {
+      padding: 20px;
+      border: 1px solid rgba(255,255,255,.18);
+      border-radius: var(--radius);
+      background: rgba(255,255,255,.1);
+    }
+    .contact-card a { color: #fff; font-weight: 900; }
+
+    .site-footer {
+      color: rgba(255,255,255,.72);
+      background: var(--blue-dark);
+    }
+    .footer-inner {
+      width: min(100% - 32px, var(--max));
+      min-height: 96px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 22px 0;
+    }
+    .footer-brand { display: grid; gap: 2px; }
+    .footer-brand strong { color: #fff; }
+    .footer-logos {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .footer-logo {
+      min-height: 40px;
+      display: inline-flex;
+      align-items: center;
+      padding: 7px 10px;
+      border: 1px solid rgba(255,255,255,.2);
+      border-radius: 6px;
+      background: rgba(255,255,255,.94);
+    }
+    .footer-logo img { height: 28px; width: auto; object-fit: contain; }
+
+    svg text { font-family: "Segoe UI", Arial, sans-serif; }
+    .protein-motion { animation: proteinBreathe 5.4s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+    .helix-spin { animation: helixSpin 3.6s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+    .ligand-dock { animation: ligandDock 4.8s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+    .cyp-spin { animation: spin 7s linear infinite; transform-box: fill-box; transform-origin: center; }
+    .fragment-a { animation: fragA 3.2s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+    .fragment-b { animation: fragB 3.2s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+    .pulse-soft { animation: pulseSoft 2.4s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+    .cohort-change { animation: cohortChange 3.4s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+    .ai-think { animation: aiThink 2.2s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+    .edge-dash { stroke-dasharray: 9 8; animation: dash 5.4s linear infinite; }
+    .drug-absorb-1 { animation: absorb1 2.7s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+    .drug-absorb-2 { animation: absorb2 2.7s ease-in-out infinite .7s; transform-box: fill-box; transform-origin: center; }
+    .drug-transporter { animation: transport 2.6s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+    .urine-dot { animation: urine 2.8s linear infinite; transform-box: fill-box; transform-origin: center; }
+    .curve-blue, .curve-gold, .curve-red { animation: curveShift 4.4s ease-in-out infinite; }
+    .curve-gold { animation-delay: .35s; }
+    .curve-red { animation-delay: .7s; }
+    .bar-a { animation: barMove 2.3s ease-in-out infinite; transform-box: fill-box; transform-origin: bottom; }
+    .bar-b { animation: barMove 2.1s ease-in-out infinite .3s; transform-box: fill-box; transform-origin: bottom; }
+    .bar-c { animation: barMove 2.5s ease-in-out infinite .6s; transform-box: fill-box; transform-origin: bottom; }
+    .bar-d { animation: barMove 2s ease-in-out infinite .9s; transform-box: fill-box; transform-origin: bottom; }
+
+    @keyframes overviewLine {
+      0%, 100% { transform: scaleX(.45); opacity: .55; }
+      50% { transform: scaleX(1); opacity: 1; }
+    }
+    @keyframes proteinBreathe {
+      0%, 100% { transform: translate(0,0) rotate(0deg) scale(1); }
+      50% { transform: translate(3px,-4px) rotate(1.2deg) scale(1.015); }
+    }
+    @keyframes helixSpin {
+      0%, 100% { transform: rotate(-2deg); }
+      50% { transform: rotate(3deg); }
+    }
+    @keyframes ligandDock {
+      0%, 18% { transform: translate(-50px, 16px) rotate(-10deg); opacity: .65; }
+      46%, 76% { transform: translate(0,0) rotate(0deg); opacity: 1; }
+      100% { transform: translate(-50px, 16px) rotate(-10deg); opacity: .65; }
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    @keyframes fragA {
+      0%, 28% { transform: translate(0,0); opacity: 0; }
+      52%, 78% { transform: translate(30px,-28px); opacity: 1; }
+      100% { transform: translate(48px,-44px); opacity: 0; }
+    }
+    @keyframes fragB {
+      0%, 28% { transform: translate(0,0); opacity: 0; }
+      52%, 78% { transform: translate(34px,28px); opacity: 1; }
+      100% { transform: translate(52px,44px); opacity: 0; }
+    }
+    @keyframes pulseSoft {
+      0%, 100% { opacity: .48; }
+      50% { opacity: 1; }
+    }
+    @keyframes cohortChange {
+      0%, 100% { opacity: .45; }
+      50% { opacity: 1; }
+    }
+    @keyframes aiThink {
+      0%, 100% { filter: drop-shadow(0 0 0 rgba(85,196,223,0)); }
+      50% { filter: drop-shadow(0 0 12px rgba(85,196,223,.7)); }
+    }
+    @keyframes dash { to { stroke-dashoffset: -120; } }
+    @keyframes absorb1 {
+      0% { transform: translate(0,-24px); opacity: 0; }
+      20%, 80% { opacity: 1; }
+      100% { transform: translate(34px,50px); opacity: 0; }
+    }
+    @keyframes absorb2 {
+      0% { transform: translate(0,-18px); opacity: 0; }
+      20%, 80% { opacity: 1; }
+      100% { transform: translate(48px,46px); opacity: 0; }
+    }
+    @keyframes transport {
+      0% { transform: translateX(-34px); opacity: 0; }
+      20%, 78% { opacity: 1; }
+      100% { transform: translateX(42px); opacity: 0; }
+    }
+    @keyframes urine {
+      0% { transform: translateY(-34px); opacity: 0; }
+      20%, 82% { opacity: 1; }
+      100% { transform: translateY(64px); opacity: 0; }
+    }
+    @keyframes curveShift {
+      0%, 100% { opacity: .72; stroke-width: 3; }
+      50% { opacity: 1; stroke-width: 5; }
+    }
+    @keyframes barMove {
+      0%, 100% { transform: scaleY(.38); opacity: .62; }
+      50% { transform: scaleY(1); opacity: 1; }
+    }
+
+    @media (max-width: 1360px) {
+      .hero-inner,
+      .research-stage,
+      .people-layout,
+      .contact-band,
+      .pipeline-grid,
+      .programs {
+        grid-template-columns: 1fr 1fr;
+      }
+      .hero-inner,
+      .research-stage,
+      .people-layout,
+      .contact-band { grid-template-columns: 1fr; }
+      .nav-links {
+        position: absolute;
+        left: 16px;
+        right: 16px;
+        top: 76px;
+        display: none;
+        padding: 12px;
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        background: #fff;
+        box-shadow: var(--shadow);
+      }
+      .nav-links.open { display: grid; }
+      .nav-links a, .nav-links .external { justify-content: flex-start; margin-left: 0; }
+      .menu-toggle { display: inline-block; }
+      .hero-visual { min-height: auto; }
+    }
+    @media (max-width: 820px) {
+      .nav, .container, .hero-inner, .footer-inner {
+        width: calc(100vw - 24px) !important;
+        max-width: calc(100vw - 24px) !important;
+      }
+      .brand { min-width: 0; }
+      .brand-name span { display: none; }
+      .lab-logo-svg { width: 86px; height: 58px; }
+      .hero { min-height: auto; }
+      .hero-inner { padding-top: 48px; padding-bottom: 66px; }
+      .overview-top { display: grid; }
+      .eyebrow {
+        display: block;
+      }
+      .eyebrow::before {
+        display: block;
+        margin-bottom: 12px;
+      }
+      .eyebrow,
+      .overview-kicker {
+        letter-spacing: .08em;
+        line-height: 1.45;
+      }
+      .overview-grid,
+      .pipeline-grid,
+      .cards,
+      .programs,
+      .member-grid,
+      .research-row,
+      .pi-card {
+        grid-template-columns: 1fr;
+      }
+      .overview-grid { grid-auto-rows: 330px; }
+      .hero-visual,
+      .overview-grid,
+      .overview-card,
+      .pipeline-visual,
+      .pipeline-step,
+      .card {
+        width: 100% !important;
+        max-width: 100% !important;
+      }
+      .hero-visual { padding: 12px; }
+      .research-diagram { min-height: auto; padding: 10px; }
+      .research-diagram svg { min-height: 520px; }
+      .button { width: 100%; }
+      .hero-actions { display: grid; }
+      .footer-inner { display: grid; }
+      .footer-logos { justify-content: flex-start; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav" aria-label="Primary navigation">
+      <a class="brand" href="#top" aria-label="QCP Lab home">
+        <svg class="lab-logo-svg" viewBox="0 0 220 140" role="img" aria-label="QCP Lab logo">
+          <defs>
+            <linearGradient id="qcpGrad" x1="0" x2="1">
+              <stop offset="0" stop-color="#244f92"/>
+              <stop offset="1" stop-color="#16a89b"/>
+            </linearGradient>
+          </defs>
+          <rect x="8" y="10" width="204" height="120" rx="18" fill="#ffffff" stroke="#cfddea" stroke-width="2"/>
+          <path d="M28 94 C58 50 106 42 138 60 C160 72 174 88 194 96" fill="none" stroke="url(#qcpGrad)" stroke-width="8" stroke-linecap="round" opacity=".68"/>
+          <text x="26" y="84" fill="#0d2850" font-size="58" font-weight="900">QCP</text>
+          <text x="31" y="116" fill="#244f92" font-size="24" font-weight="900">Lab</text>
+        </svg>
+        <span class="brand-name">
+          <strong>QCP Lab</strong>
+          <span>Laboratory of Quantitative and Computational Pharmacokinetics</span>
+        </span>
+      </a>
+      <button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#about">About</a></li>
+        <li><a href="#platform">Platform</a></li>
+        <li><a href="#research">Research</a></li>
+        <li><a href="#people">People</a></li>
+        <li><a href="#programs">Programs</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a class="external" href="https://github.com/tiredpiryo/tiredpiryo.github.io" target="_blank" rel="noopener">GitHub</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="hero" id="top" aria-labelledby="hero-title">
+      <div class="hero-inner">
+        <div>
+          <p class="eyebrow">Kangwon National University College of Pharmacy</p>
+          <h1 id="hero-title">QCP Lab</h1>
+          <p class="subtitle">Laboratory of Quantitative and Computational Pharmacokinetics</p>
+          <p class="hero-copy">QCP Lab connects pharmacokinetic experiments, ADME biology, LC-MS/MS bioanalysis, PBPK/population PK modeling, and machine-learning workflows for quantitative pharmacology research.</p>
+          <div class="hero-actions">
+            <a class="button primary" href="#platform">Explore the research platform</a>
+            <a class="button secondary" href="#research">View research interests</a>
+          </div>
+        </div>
+
+        <div class="hero-visual" aria-label="Animated QCP Lab scientific overview">
+          <div class="overview-top">
+            <div>
+              <div class="overview-kicker">QCP Lab Scientific Overview</div>
+              <p class="overview-title">Drug movement, exposure, and prediction</p>
+            </div>
+            <svg class="overview-orbit" viewBox="0 0 122 54" aria-hidden="true">
+              <path d="M10 28 C28 4 84 4 106 28 C84 50 28 50 10 28Z" fill="none" stroke="#d8e2ee" stroke-width="2"/>
+              <circle class="pulse-soft" cx="28" cy="18" r="5" fill="#16a89b"/>
+              <circle class="pulse-soft" cx="68" cy="36" r="5" fill="#e4b45b" style="animation-delay:.45s"/>
+              <circle class="pulse-soft" cx="102" cy="25" r="5" fill="#cf5d50" style="animation-delay:.9s"/>
+            </svg>
+          </div>
+          <div class="overview-grid">
+            <article class="overview-card">
+              <h3>1. Molecular Docking</h3>
+              <svg class="visual" viewBox="0 0 560 330" role="img" aria-label="Animated protein secondary structure and ligand docking">
+                <rect width="560" height="330" fill="#fff"/>
+                <g opacity=".22" stroke="#dce7f1"><path d="M28 82H532M28 164H532M28 246H532M140 40V296M280 40V296M420 40V296"/></g>
+                <g class="protein-motion" transform="translate(72 58)">
+                  <path class="helix-spin" d="M72 124 C46 76 82 24 126 42 C162 56 152 106 114 108 C78 110 68 162 116 184 C158 204 194 158 172 126" fill="none" stroke="#6d8ec5" stroke-width="18" stroke-linecap="round"/>
+                  <path class="helix-spin" d="M208 58 C250 26 314 48 310 104 C306 152 244 154 230 112 C216 70 268 40 306 70" fill="none" stroke="#7ea0d9" stroke-width="18" stroke-linecap="round" style="animation-delay:.4s"/>
+                  <polygon points="86,216 142,196 132,250" fill="#5f84c2"/>
+                  <polygon points="300,190 356,172 342,226" fill="#5f84c2"/>
+                  <polygon points="252,34 310,20 288,72" fill="#648ac7"/>
+                  <path d="M142 216 C184 186 226 180 268 204" fill="none" stroke="#8fb2e5" stroke-width="10" stroke-linecap="round"/>
+                  <ellipse cx="220" cy="130" rx="72" ry="48" fill="rgba(85,196,223,.15)" stroke="#55c4df" stroke-width="4"/>
+                </g>
+                <g class="ligand-dock" transform="translate(280 188)">
+                  <circle cx="-18" cy="-12" r="9" fill="#4f9d69"/>
+                  <circle cx="12" cy="-26" r="8" fill="#9c55b8"/>
+                  <circle cx="28" cy="2" r="8" fill="#f0a53d"/>
+                  <circle cx="-32" cy="18" r="7" fill="#cf5d50"/>
+                  <path d="M-18 -12 L12 -26 L28 2 L4 22 L-32 18 Z" fill="none" stroke="#102033" stroke-width="3"/>
+                </g>
+                <g transform="translate(404 116)">
+                  <circle class="pulse-soft" cx="0" cy="0" r="7" fill="#55c4df"/>
+                  <text x="14" y="5" fill="#17304d" font-size="13" font-weight="800">binding pocket</text>
+                  <circle class="pulse-soft" cx="0" cy="36" r="7" fill="#16a89b" style="animation-delay:.5s"/>
+                  <text x="14" y="41" fill="#17304d" font-size="13" font-weight="800">docking pose</text>
+                </g>
+              </svg>
+            </article>
+
+            <article class="overview-card">
+              <h3>2. ADME &amp; Transport</h3>
+              <svg class="visual" viewBox="0 0 560 330" role="img" aria-label="Animated gut absorption, CYP metabolism, transporter distribution, and renal excretion">
+                <rect width="560" height="330" fill="#fff"/>
+                <g transform="translate(24 76)">
+                  <path d="M44 42 C14 58 16 112 52 120 C54 86 98 96 86 140 C118 138 134 112 128 88 C122 58 94 48 76 58 C78 42 62 34 44 42Z" fill="#eab28f" stroke="#a96d49" stroke-width="3"/>
+                  <path d="M30 70 C48 82 50 104 62 126" fill="none" stroke="#fff" stroke-width="7" opacity=".7"/>
+                  <circle class="drug-absorb-1" cx="38" cy="76" r="6" fill="#e4b45b"/>
+                  <circle class="drug-absorb-2" cx="58" cy="88" r="5" fill="#55c4df"/>
+                  <path d="M142 96 H184" stroke="#244f92" stroke-width="5" marker-end="url(#arrOverview)"/>
+
+                  <path d="M218 44 C174 54 166 120 214 142 C270 164 336 128 322 72 C294 80 252 78 218 44Z" fill="#c66d4d" stroke="#853a27" stroke-width="3"/>
+                  <g class="cyp-spin" transform="translate(268 96)">
+                    <circle cx="0" cy="0" r="24" fill="#20364b" stroke="#e4b45b" stroke-width="3"/>
+                    <circle cx="0" cy="0" r="7" fill="#ffcc66"/>
+                    <path d="M0 -18V-26M0 18V26M18 0H26M-18 0H-26M12 12L19 19M-12 -12L-19 -19M12 -12L19 -19M-12 12L-19 19" stroke="#fff" stroke-width="2"/>
+                  </g>
+                  <circle class="fragment-a" cx="272" cy="98" r="5" fill="#cf5d50"/>
+                  <circle class="fragment-b" cx="266" cy="98" r="5" fill="#55c4df"/>
+                  <path d="M338 96 H380" stroke="#244f92" stroke-width="5" marker-end="url(#arrOverview)"/>
+
+                  <g transform="translate(392 52)">
+                    <rect x="0" y="22" width="82" height="92" rx="10" fill="#eef4fa" stroke="#c4d4e3"/>
+                    <rect x="0" y="46" width="82" height="10" fill="#d8e7f3"/>
+                    <rect x="0" y="82" width="82" height="10" fill="#d8e7f3"/>
+                    <rect x="28" y="38" width="26" height="62" rx="13" fill="#16a89b"/>
+                    <circle class="drug-transporter" cx="14" cy="70" r="6" fill="#e4b45b"/>
+                    <circle class="drug-transporter" cx="22" cy="70" r="5" fill="#55c4df" style="animation-delay:.6s"/>
+                  </g>
+                  <path d="M484 96 H516" stroke="#244f92" stroke-width="5"/>
+                </g>
+                <g transform="translate(428 220)">
+                  <path d="M72 16 C34 0 4 22 6 66 C8 124 74 132 102 98 C124 72 116 28 72 16Z" fill="#d8b9a6" stroke="#7e5b4a" stroke-width="3"/>
+                  <path d="M54 54 C58 74 70 90 82 106 C94 122 96 140 96 158" fill="none" stroke="#55c4df" stroke-width="5" stroke-linecap="round"/>
+                  <circle class="urine-dot" cx="72" cy="54" r="5" fill="#16a89b"/>
+                </g>
+                <defs><marker id="arrOverview" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#244f92"/></marker></defs>
+              </svg>
+            </article>
+
+            <article class="overview-card">
+              <h3>3. LC-MS/MS Bioanalysis</h3>
+              <svg class="visual" viewBox="0 0 560 330" role="img" aria-label="Animated autosampler, LC column, triple quadrupole MS, chromatogram, and mass spectrum">
+                <rect width="560" height="330" fill="#fff"/>
+                <g transform="translate(34 76)">
+                  <rect x="0" y="34" width="60" height="90" rx="8" fill="#edf3f9" stroke="#8ea7c2" stroke-width="3"/>
+                  <rect x="18" y="0" width="24" height="34" rx="5" fill="#55c4df"/>
+                  <circle cx="30" cy="82" r="8" fill="#e4b45b"/>
+                  <path id="lcPathA" d="M60 82 H128 C154 82 166 34 206 34 H262" fill="none" stroke="#4b8fd2" stroke-width="6" stroke-linecap="round"/>
+                  <circle r="5" fill="#e4b45b"><animateMotion dur="2.7s" repeatCount="indefinite" path="M60 82 H128 C154 82 166 34 206 34 H262"/></circle>
+                  <circle r="5" fill="#55c4df"><animateMotion dur="2.7s" begin="1.1s" repeatCount="indefinite" path="M60 82 H128 C154 82 166 34 206 34 H262"/></circle>
+                  <rect x="206" y="12" width="96" height="48" rx="12" fill="#7dd1e8" stroke="#4b8fd2" stroke-width="3"/>
+                  <rect x="226" y="23" width="58" height="24" rx="12" fill="#d8f1f7"/>
+                  <path d="M302 36 H344" stroke="#4b8fd2" stroke-width="6"/>
+                  <circle r="4" fill="#16a89b"><animateMotion dur="1.1s" repeatCount="indefinite" path="M302 36 H344"/></circle>
+                  <rect x="344" y="0" width="142" height="78" rx="10" fill="#22374c" stroke="#9fb7cc" stroke-width="3"/>
+                  <rect x="366" y="22" width="22" height="34" rx="4" fill="#0f1722" stroke="#cfd9e5"/>
+                  <rect x="404" y="22" width="22" height="34" rx="4" fill="#0f1722" stroke="#cfd9e5"/>
+                  <rect x="442" y="22" width="22" height="34" rx="4" fill="#0f1722" stroke="#cfd9e5"/>
+                  <text x="369" y="68" fill="#fff" font-size="12" font-weight="900">Q1</text>
+                  <text x="406" y="68" fill="#fff" font-size="12" font-weight="900">q2</text>
+                  <text x="445" y="68" fill="#fff" font-size="12" font-weight="900">Q3</text>
+                </g>
+                <g transform="translate(40 220)">
+                  <rect x="0" y="0" width="230" height="74" rx="10" fill="#fbfdff" stroke="#d5e2ef" stroke-width="2"/>
+                  <path d="M22 14 V56 H206" stroke="#9db1c7"/>
+                  <path fill="none" stroke="#244f92" stroke-width="3">
+                    <animate attributeName="d" dur="4s" repeatCount="indefinite" values="M22 52 C42 52 42 34 56 34 C72 34 72 52 92 52 C112 52 120 18 140 18 C156 18 158 52 180 52 C194 52 198 42 206 42;M22 52 C38 52 42 26 58 26 C76 26 78 52 96 52 C112 52 116 38 136 38 C154 38 158 16 180 16 C198 16 200 52 206 52;M22 52 C42 52 42 40 58 40 C74 40 76 52 98 52 C116 52 122 20 142 20 C160 20 160 52 180 52 C196 52 198 34 206 34;M22 52 C42 52 42 34 56 34 C72 34 72 52 92 52 C112 52 120 18 140 18 C156 18 158 52 180 52 C194 52 198 42 206 42"/>
+                  </path>
+                </g>
+                <g transform="translate(300 220)">
+                  <rect x="0" y="0" width="220" height="74" rx="10" fill="#fbfdff" stroke="#d5e2ef" stroke-width="2"/>
+                  <path d="M22 14 V56 H198" stroke="#9db1c7"/>
+                  <line class="bar-a" x1="38" y1="56" x2="38" y2="30" stroke="#16a89b" stroke-width="4"/>
+                  <line class="bar-b" x1="58" y1="56" x2="58" y2="18" stroke="#16a89b" stroke-width="4"/>
+                  <line class="bar-c" x1="78" y1="56" x2="78" y2="38" stroke="#16a89b" stroke-width="4"/>
+                  <line class="bar-d" x1="104" y1="56" x2="104" y2="12" stroke="#16a89b" stroke-width="4"/>
+                  <line class="bar-a" x1="130" y1="56" x2="130" y2="28" stroke="#16a89b" stroke-width="4"/>
+                  <line class="bar-b" x1="158" y1="56" x2="158" y2="22" stroke="#16a89b" stroke-width="4"/>
+                  <line class="bar-c" x1="182" y1="56" x2="182" y2="36" stroke="#16a89b" stroke-width="4"/>
+                </g>
+              </svg>
+            </article>
+
+            <article class="overview-card">
+              <h3>4. PBPK, Population PK &amp; ML</h3>
+              <svg class="visual" viewBox="0 0 560 330" role="img" aria-label="Animated organs, PBPK drug movement, population PK profiles, virtual cohort, and AI modeling">
+                <rect width="560" height="330" fill="#fff"/>
+                <g transform="translate(26 74)">
+                  <rect x="0" y="0" width="206" height="210" rx="12" fill="#f8fbfe" stroke="#d8e2ee"/>
+                  <path class="edge-dash" d="M58 72 C92 36 132 36 166 74 C130 110 94 112 58 72Z" fill="none" stroke="#244f92" stroke-width="3"/>
+                  <circle r="5" fill="#e4b45b"><animateMotion dur="4s" repeatCount="indefinite" path="M58 72 C92 36 132 36 166 74 C130 110 94 112 58 72Z"/></circle>
+                  <path d="M76 58 C64 72 64 92 78 102 C92 92 102 82 106 70 C104 58 94 54 76 58Z" fill="#b56347" stroke="#8a3a27" stroke-width="2"/>
+                  <path d="M30 100 C12 116 14 142 34 150 C48 136 48 116 40 104Z" fill="#e6b58c" stroke="#a06f44" stroke-width="2"/>
+                  <path d="M112 106 C134 94 154 106 158 130 C150 144 132 150 116 140Z" fill="#b54848" stroke="#842d2d" stroke-width="2"/>
+                  <path d="M144 56 C116 44 96 60 96 90 C98 132 144 138 164 112 C178 92 174 66 144 56Z" fill="#d9b9a9" stroke="#7e5b4a" stroke-width="2"/>
+                </g>
+                <g transform="translate(252 74)">
+                  <rect x="0" y="0" width="280" height="116" rx="12" fill="#f8fbfe" stroke="#d8e2ee"/>
+                  <path d="M24 92 C58 24 88 62 120 24 C154 -14 188 74 232 34" fill="none" stroke="#244f92" stroke-width="4">
+                    <animate attributeName="d" dur="4.2s" repeatCount="indefinite" values="M24 92 C58 24 88 62 120 24 C154 -14 188 74 232 34;M24 92 C58 46 92 76 122 44 C154 12 190 86 232 60;M24 92 C58 18 88 58 120 20 C154 -18 188 70 232 30;M24 92 C58 24 88 62 120 24 C154 -14 188 74 232 34"/>
+                  </path>
+                  <path d="M24 100 C64 54 96 92 128 58 C158 28 190 110 242 74" fill="none" stroke="#e4b45b" stroke-width="4">
+                    <animate attributeName="d" dur="4.2s" repeatCount="indefinite" values="M24 100 C64 54 96 92 128 58 C158 28 190 110 242 74;M24 100 C64 66 96 98 128 72 C158 44 190 116 242 90;M24 100 C64 46 96 88 128 54 C158 24 190 106 242 70;M24 100 C64 54 96 92 128 58 C158 28 190 110 242 74"/>
+                  </path>
+                  <path d="M24 108 C64 84 98 106 134 84 C166 66 196 112 246 98" fill="none" stroke="#cf5d50" stroke-width="4"/>
+                </g>
+                <g transform="translate(266 226)" fill="#7a9cc0">
+                  <circle class="cohort-change" cx="10" cy="10" r="8"/><path class="cohort-change" d="M0 40C4 18 26 18 30 40Z"/>
+                  <circle class="cohort-change" cx="56" cy="10" r="8" style="animation-delay:.4s"/><path class="cohort-change" d="M46 40C50 18 72 18 76 40Z" style="animation-delay:.4s"/>
+                  <circle class="cohort-change" cx="102" cy="10" r="8" style="animation-delay:.8s"/><path class="cohort-change" d="M92 40C96 18 118 18 122 40Z" style="animation-delay:.8s"/>
+                </g>
+                <g class="ai-think" transform="translate(424 214)" stroke="#55c4df" stroke-width="3" fill="none">
+                  <rect x="0" y="0" width="92" height="64" rx="10" fill="#102033"/>
+                  <circle cx="24" cy="24" r="8" fill="#244f92"/>
+                  <circle cx="46" cy="14" r="6" fill="#16a89b"/>
+                  <circle cx="46" cy="36" r="6" fill="#16a89b"/>
+                  <circle cx="68" cy="24" r="8" fill="#e4b45b"/>
+                  <path d="M32 22 L40 16 M32 26 L40 34 M52 16 L60 22 M52 36 L60 28"/>
+                </g>
+              </svg>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="about" aria-labelledby="about-title">
+      <div class="container">
+        <div class="section-head">
+          <span class="label">About</span>
+          <h2 id="about-title">A translational pharmacokinetics laboratory built around quantitative evidence.</h2>
+          <p>QCP Lab focuses on docking, ADME/Tox, LC-MS/MS bioanalysis, in vitro PK/PD, PBPK, population PK, and machine-learning workflows.</p>
+        </div>
+        <div class="pipeline-visual">
+          <div class="pipeline-grid" aria-label="Integrated QCP Lab workflow">
+            <article class="pipeline-step">
+              <h3>Docking</h3>
+              <svg viewBox="0 0 220 250" role="img" aria-label="Docking pipeline step">
+                <rect width="220" height="250" rx="8" fill="#fbfdff"/>
+                <g class="protein-motion" transform="translate(26 54)">
+                  <path d="M52 80 C30 40 64 18 92 38 C120 58 86 90 58 72 C30 106 72 138 106 112" fill="none" stroke="#6d8ec5" stroke-width="14" stroke-linecap="round"/>
+                  <path d="M128 40 C164 22 188 60 168 94 C148 128 110 112 126 74" fill="none" stroke="#7ea0d9" stroke-width="14" stroke-linecap="round"/>
+                  <polygon points="40,152 88,136 76,182" fill="#5f84c2"/>
+                  <ellipse cx="112" cy="92" rx="44" ry="32" fill="rgba(85,196,223,.16)" stroke="#55c4df" stroke-width="3"/>
+                </g>
+                <g class="ligand-dock" transform="translate(122 146)">
+                  <circle cx="-10" cy="-8" r="7" fill="#4f9d69"/><circle cx="12" cy="-18" r="6" fill="#9c55b8"/><circle cx="22" cy="4" r="6" fill="#e4b45b"/>
+                  <path d="M-10 -8L12 -18L22 4L0 16Z" fill="none" stroke="#102033" stroke-width="2"/>
+                </g>
+              </svg>
+            </article>
+
+            <article class="pipeline-step">
+              <h3>ADME/Tox</h3>
+              <svg viewBox="0 0 220 250" role="img" aria-label="ADME Tox pipeline step">
+                <rect width="220" height="250" rx="8" fill="#fbfdff"/>
+                <path d="M42 72 C20 88 22 126 50 134 C52 108 82 112 74 148 C98 144 108 126 104 104 C100 82 76 74 62 84 C64 70 54 66 42 72Z" fill="#eab28f" stroke="#a96d49" stroke-width="3"/>
+                <circle class="drug-absorb-1" cx="54" cy="98" r="5" fill="#e4b45b"/>
+                <path d="M112 68 C80 76 76 132 112 148 C154 164 194 140 186 94 C166 102 140 96 112 68Z" fill="#c66d4d" stroke="#853a27" stroke-width="3"/>
+                <g class="cyp-spin" transform="translate(150 112)">
+                  <circle cx="0" cy="0" r="22" fill="#20364b" stroke="#e4b45b" stroke-width="3"/>
+                  <path d="M0 -16V-24M0 16V24M16 0H24M-16 0H-24" stroke="#fff" stroke-width="2"/>
+                </g>
+                <circle class="fragment-a" cx="150" cy="112" r="5" fill="#cf5d50"/>
+                <circle class="fragment-b" cx="150" cy="112" r="5" fill="#55c4df"/>
+              </svg>
+            </article>
+
+            <article class="pipeline-step">
+              <h3>LC-MS/MS</h3>
+              <svg viewBox="0 0 220 250" role="img" aria-label="LC MSMS fragmentation pipeline step">
+                <rect width="220" height="250" rx="8" fill="#fbfdff"/>
+                <g transform="translate(42 58)">
+                  <circle cx="22" cy="34" r="8" fill="#4f9d69"/>
+                  <circle cx="54" cy="22" r="7" fill="#9c55b8"/>
+                  <circle cx="74" cy="54" r="7" fill="#e4b45b"/>
+                  <circle cx="26" cy="70" r="6" fill="#cf5d50"/>
+                  <path d="M22 34L54 22L74 54L48 78L26 70Z" fill="none" stroke="#102033" stroke-width="3"/>
+                  <path class="edge-dash" d="M96 52 H138" stroke="#244f92" stroke-width="4"/>
+                  <circle class="fragment-a" cx="138" cy="52" r="6" fill="#cf5d50"/>
+                  <circle class="fragment-b" cx="138" cy="52" r="6" fill="#55c4df"/>
+                  <text x="118" y="108" fill="#244f92" font-size="15" font-weight="900">Q3 fragment</text>
+                </g>
+                <g transform="translate(28 178)">
+                  <path d="M0 42 V0 H70" stroke="#9db1c7"/>
+                  <path fill="none" stroke="#244f92" stroke-width="3"><animate attributeName="d" dur="3.4s" repeatCount="indefinite" values="M0 38 C12 38 14 18 26 18 C38 18 38 38 52 38;M0 38 C12 38 14 26 26 26 C38 26 38 38 52 38;M0 38 C12 38 14 14 26 14 C38 14 38 38 52 38;M0 38 C12 38 14 18 26 18 C38 18 38 38 52 38"/></path>
+                  <path d="M92 42 V0 H176" stroke="#9db1c7"/>
+                  <line class="bar-a" x1="108" y1="42" x2="108" y2="14" stroke="#16a89b" stroke-width="4"/>
+                  <line class="bar-b" x1="130" y1="42" x2="130" y2="24" stroke="#16a89b" stroke-width="4"/>
+                  <line class="bar-c" x1="152" y1="42" x2="152" y2="8" stroke="#16a89b" stroke-width="4"/>
+                </g>
+              </svg>
+            </article>
+
+            <article class="pipeline-step">
+              <h3>In vitro PK/PD</h3>
+              <svg viewBox="0 0 220 250" role="img" aria-label="PK PD graph pipeline step">
+                <rect width="220" height="250" rx="8" fill="#fbfdff"/>
+                <rect x="24" y="42" width="78" height="128" rx="8" fill="#fff" stroke="#d8e2ee"/>
+                <path d="M38 148 C48 90 66 64 90 78 C96 96 96 122 92 150" fill="none" stroke="#244f92" stroke-width="4">
+                  <animate attributeName="d" dur="3.5s" repeatCount="indefinite" values="M38 148 C48 90 66 64 90 78 C96 96 96 122 92 150;M38 148 C48 110 66 82 90 90 C96 104 96 128 92 150;M38 148 C48 82 66 58 90 72 C96 92 96 118 92 150;M38 148 C48 90 66 64 90 78 C96 96 96 122 92 150"/>
+                </path>
+                <rect x="118" y="42" width="78" height="128" rx="8" fill="#fff" stroke="#d8e2ee"/>
+                <path d="M132 148 C144 138 150 118 158 98 C166 76 178 58 188 50" fill="none" stroke="#cf5d50" stroke-width="4">
+                  <animate attributeName="d" dur="3.2s" repeatCount="indefinite" values="M132 148 C144 138 150 118 158 98 C166 76 178 58 188 50;M132 148 C144 144 150 128 158 110 C166 88 178 68 188 62;M132 148 C144 134 150 112 158 92 C166 72 178 54 188 46;M132 148 C144 138 150 118 158 98 C166 76 178 58 188 50"/>
+                </path>
+              </svg>
+            </article>
+
+            <article class="pipeline-step">
+              <h3>PBPK</h3>
+              <svg viewBox="0 0 220 250" role="img" aria-label="PBPK virtual clinical trial pipeline step">
+                <rect width="220" height="250" rx="8" fill="#fbfdff"/>
+                <rect x="26" y="42" width="112" height="82" rx="10" fill="#102033"/>
+                <path d="M40 104 C56 66 76 52 96 64 C116 76 118 88 126 100" fill="none" stroke="#55c4df" stroke-width="4">
+                  <animate attributeName="d" dur="4s" repeatCount="indefinite" values="M40 104 C56 66 76 52 96 64 C116 76 118 88 126 100;M40 104 C56 80 76 66 96 74 C116 84 118 94 126 104;M40 104 C56 58 76 48 96 60 C116 72 118 84 126 96;M40 104 C56 66 76 52 96 64 C116 76 118 88 126 100"/>
+                </path>
+                <g transform="translate(34 154)" fill="#7a9cc0">
+                  <circle class="cohort-change" cx="10" cy="10" r="8"/><path class="cohort-change" d="M0 40C4 18 26 18 30 40Z"/>
+                  <circle class="cohort-change" cx="54" cy="10" r="8" style="animation-delay:.4s"/><path class="cohort-change" d="M44 40C48 18 70 18 74 40Z" style="animation-delay:.4s"/>
+                  <circle class="cohort-change" cx="98" cy="10" r="8" style="animation-delay:.8s"/><path class="cohort-change" d="M88 40C92 18 114 18 118 40Z" style="animation-delay:.8s"/>
+                </g>
+                <circle r="5" fill="#e4b45b"><animateMotion dur="3.6s" repeatCount="indefinite" path="M154 64 C184 92 184 142 142 166"/></circle>
+              </svg>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section soft" aria-labelledby="visuals-title">
+      <div class="container">
+        <div class="section-head">
+          <span class="label">Research Scope</span>
+          <h2 id="visuals-title">Core experimental and computational workflows.</h2>
+        </div>
+        <div class="cards">
+          <article class="card">
+            <svg class="mini-visual" viewBox="0 0 620 330" role="img" aria-label="Protein ligand docking with secondary structure">
+              <rect width="620" height="330" fill="#0f2239"/>
+              <text x="28" y="40" fill="#fff" font-size="21" font-weight="900">Molecular docking</text>
+              <g opacity=".16" stroke="#fff"><path d="M34 76H586M34 170H586M34 264H586M154 54V292M314 54V292M474 54V292"/></g>
+              <g class="protein-motion" transform="translate(78 70)">
+                <path d="M112 104 C80 54 112 4 158 24 C204 44 170 102 126 90 C84 126 118 178 170 152" fill="none" stroke="#6d8ec5" stroke-width="18" stroke-linecap="round"/>
+                <path d="M226 58 C276 18 350 44 346 110 C342 166 272 172 252 120 C236 78 284 40 330 70" fill="none" stroke="#7ea0d9" stroke-width="18" stroke-linecap="round"/>
+                <polygon points="96,206 156,184 144,246" fill="#5f84c2"/>
+                <polygon points="330,192 390,170 374,232" fill="#648ac7"/>
+                <path d="M174 216 C220 184 272 184 318 212" fill="none" stroke="#8fb2e5" stroke-width="10" stroke-linecap="round"/>
+                <ellipse cx="252" cy="128" rx="76" ry="50" fill="rgba(85,196,223,.18)" stroke="#55c4df" stroke-width="4"/>
+              </g>
+              <g class="ligand-dock" transform="translate(332 196)">
+                <circle cx="-18" cy="-12" r="10" fill="#4f9d69"/><circle cx="16" cy="-28" r="8" fill="#9c55b8"/><circle cx="34" cy="4" r="8" fill="#e4b45b"/><circle cx="-38" cy="20" r="7" fill="#cf5d50"/>
+                <path d="M-18 -12L16 -28L34 4L4 24L-38 20Z" fill="none" stroke="#fff" stroke-width="3"/>
+              </g>
+              <text x="28" y="306" fill="rgba(255,255,255,.72)" font-size="14">alpha helices, beta sheets, binding pocket, docking pose</text>
+            </svg>
+            <span class="label">Molecular</span>
+            <h3>Docking and molecular interaction modeling</h3>
+            <p>Protein-ligand docking and transporter/enzyme interaction hypotheses for ADME mechanisms.</p>
+          </article>
+
+          <article class="card">
+            <svg class="mini-visual" viewBox="0 0 620 330" role="img" aria-label="ADME Tox gut absorption liver P450 kidney excretion tissue transporter">
+              <rect width="620" height="330" fill="#0f2239"/>
+              <text x="28" y="40" fill="#fff" font-size="21" font-weight="900">ADME/Tox</text>
+              <g transform="translate(38 70)">
+                <path d="M46 34 C12 52 14 114 52 126 C56 92 104 102 92 148 C124 146 142 116 136 88 C130 56 98 46 80 58 C82 40 64 28 46 34Z" fill="#eab28f" stroke="#ffc9a9" stroke-width="3"/>
+                <circle class="drug-absorb-1" cx="50" cy="72" r="6" fill="#e4b45b"/>
+                <circle class="drug-absorb-2" cx="72" cy="88" r="5" fill="#55c4df"/>
+                <text x="0" y="184" fill="#fff" font-size="14" font-weight="800">Gut absorption</text>
+
+                <path d="M196 38 C150 50 142 120 190 144 C250 168 318 132 304 70 C276 80 232 78 196 38Z" fill="#c66d4d" stroke="#ffb098" stroke-width="3"/>
+                <g class="cyp-spin" transform="translate(250 94)"><circle cx="0" cy="0" r="25" fill="#20364b" stroke="#e4b45b" stroke-width="3"/><path d="M0 -18V-26M0 18V26M18 0H26M-18 0H-26M12 12L19 19M-12 -12L-19 -19" stroke="#fff" stroke-width="2"/></g>
+                <circle class="fragment-a" cx="254" cy="96" r="5" fill="#cf5d50"/>
+                <circle class="fragment-b" cx="250" cy="96" r="5" fill="#55c4df"/>
+                <text x="186" y="184" fill="#fff" font-size="14" font-weight="800">Liver P450</text>
+
+                <g transform="translate(350 42)">
+                  <rect x="0" y="24" width="88" height="94" rx="10" fill="#eef4fa" stroke="#fff" stroke-width="2"/>
+                  <rect x="0" y="48" width="88" height="10" fill="#d8e7f3"/>
+                  <rect x="0" y="84" width="88" height="10" fill="#d8e7f3"/>
+                  <rect x="30" y="38" width="28" height="64" rx="14" fill="#16a89b"/>
+                  <circle class="drug-transporter" cx="16" cy="72" r="6" fill="#e4b45b"/>
+                  <circle class="drug-transporter" cx="24" cy="72" r="5" fill="#55c4df" style="animation-delay:.6s"/>
+                </g>
+                <text x="340" y="184" fill="#fff" font-size="14" font-weight="800">Tissue uptake</text>
+
+                <path d="M538 34 C500 16 466 42 468 88 C470 150 536 160 566 122 C590 94 582 48 538 34Z" fill="#d8b9a6" stroke="#f1d0bd" stroke-width="3"/>
+                <path d="M520 72 C526 98 536 116 550 134 C562 152 566 174 566 198" fill="none" stroke="#55c4df" stroke-width="5"/>
+                <circle class="urine-dot" cx="536" cy="82" r="5" fill="#16a89b"/>
+                <text x="502" y="222" fill="#fff" font-size="14" font-weight="800">Kidney excretion</text>
+              </g>
+            </svg>
+            <span class="label">ADME/Tox</span>
+            <h3>ADME, metabolism, transport, and toxicity</h3>
+            <p>Gut absorption, hepatic metabolism, renal excretion, and transporter-mediated tissue uptake are visualized as continuous drug movement.</p>
+          </article>
+
+          <article class="card">
+            <svg class="mini-visual" viewBox="0 0 620 330" role="img" aria-label="Bioanalysis LC MSMS ions and dynamic MS spectrum">
+              <rect width="620" height="330" fill="#0f2239"/>
+              <text x="28" y="40" fill="#fff" font-size="21" font-weight="900">Bioanalysis</text>
+              <g transform="translate(46 92)">
+                <rect x="0" y="34" width="72" height="90" rx="8" fill="rgba(255,255,255,.12)" stroke="#fff"/>
+                <rect x="24" y="0" width="24" height="34" rx="5" fill="#55c4df"/>
+                <path d="M72 80 H146 C172 80 184 32 230 32 H290" fill="none" stroke="#55c4df" stroke-width="7" stroke-linecap="round"/>
+                <circle r="6" fill="#e4b45b"><animateMotion dur="2.4s" repeatCount="indefinite" path="M72 80 H146 C172 80 184 32 230 32 H290"/></circle>
+                <circle r="5" fill="#55c4df"><animateMotion dur="2.4s" begin=".9s" repeatCount="indefinite" path="M72 80 H146 C172 80 184 32 230 32 H290"/></circle>
+                <rect x="228" y="8" width="96" height="52" rx="10" fill="#7dd1e8"/>
+                <path d="M324 34 H362" stroke="#55c4df" stroke-width="7"/>
+                <circle r="4" fill="#16a89b"><animateMotion dur="1.1s" repeatCount="indefinite" path="M324 34 H362"/></circle>
+                <rect x="362" y="-8" width="148" height="96" rx="10" fill="rgba(255,255,255,.12)" stroke="#fff"/>
+                <rect x="390" y="22" width="24" height="38" rx="4" fill="#0f1722" stroke="#fff"/>
+                <rect x="428" y="22" width="24" height="38" rx="4" fill="#0f1722" stroke="#fff"/>
+                <rect x="466" y="22" width="24" height="38" rx="4" fill="#0f1722" stroke="#fff"/>
+                <text x="392" y="76" fill="#fff" font-size="12" font-weight="900">Q1</text>
+                <text x="430" y="76" fill="#fff" font-size="12" font-weight="900">q2</text>
+                <text x="468" y="76" fill="#fff" font-size="12" font-weight="900">Q3</text>
+              </g>
+              <g transform="translate(68 232)">
+                <path d="M0 58 V0 H200" stroke="#6e8298"/>
+                <path fill="none" stroke="#244f92" stroke-width="4"><animate attributeName="d" dur="3.8s" repeatCount="indefinite" values="M0 54 C30 54 34 26 56 26 C74 26 78 54 106 54 C136 54 144 10 176 10;M0 54 C30 54 34 38 56 38 C74 38 78 54 106 54 C136 54 144 22 176 22;M0 54 C30 54 34 18 56 18 C74 18 78 54 106 54 C136 54 144 8 176 8;M0 54 C30 54 34 26 56 26 C74 26 78 54 106 54 C136 54 144 10 176 10"/></path>
+                <path d="M260 58 V0 H462" stroke="#6e8298"/>
+                <line class="bar-a" x1="286" y1="58" x2="286" y2="24" stroke="#16a89b" stroke-width="5"/>
+                <line class="bar-b" x1="316" y1="58" x2="316" y2="12" stroke="#16a89b" stroke-width="5"/>
+                <line class="bar-c" x1="346" y1="58" x2="346" y2="36" stroke="#16a89b" stroke-width="5"/>
+                <line class="bar-d" x1="380" y1="58" x2="380" y2="8" stroke="#16a89b" stroke-width="5"/>
+                <line class="bar-a" x1="416" y1="58" x2="416" y2="30" stroke="#16a89b" stroke-width="5"/>
+              </g>
+            </svg>
+            <span class="label">Bioanalysis</span>
+            <h3>LC-MS/MS and metabolomics</h3>
+            <p>Ion transfer from autosampler through LC column to MS/MS is animated, with dynamic chromatogram and MS spectrum readouts.</p>
+          </article>
+
+          <article class="card">
+            <svg class="mini-visual" viewBox="0 0 620 330" role="img" aria-label="Computational PK with population graph, cohort, and covariates">
+              <rect width="620" height="330" fill="#0f2239"/>
+              <text x="28" y="40" fill="#fff" font-size="21" font-weight="900">Computational PK</text>
+              <rect x="42" y="72" width="286" height="170" rx="12" fill="rgba(255,255,255,.1)" stroke="#fff"/>
+              <rect x="62" y="92" width="220" height="98" rx="8" fill="#102033" stroke="#55c4df"/>
+              <path fill="none" stroke="#16a89b" stroke-width="4"><animate attributeName="d" dur="4s" repeatCount="indefinite" values="M78 170 C112 100 146 140 180 92 C210 56 236 130 262 86;M78 170 C112 118 146 150 180 112 C210 78 236 142 262 104;M78 170 C112 94 146 136 180 88 C210 52 236 126 262 82;M78 170 C112 100 146 140 180 92 C210 56 236 130 262 86"/></path>
+              <path fill="none" stroke="#e4b45b" stroke-width="4"><animate attributeName="d" dur="4s" repeatCount="indefinite" values="M78 178 C116 132 150 164 188 122 C212 94 238 166 264 138;M78 178 C116 146 150 170 188 138 C212 110 238 172 264 152;M78 178 C116 126 150 160 188 118 C212 90 238 162 264 134;M78 178 C116 132 150 164 188 122 C212 94 238 166 264 138"/></path>
+              <g fill="#fff" transform="translate(72 206)">
+                <circle class="cohort-change" cx="10" cy="10" r="8"/><path class="cohort-change" d="M0 38C4 18 26 18 30 38Z"/>
+                <circle class="cohort-change" cx="54" cy="10" r="8" style="animation-delay:.4s"/><path class="cohort-change" d="M44 38C48 18 70 18 74 38Z" style="animation-delay:.4s"/>
+                <circle class="cohort-change" cx="98" cy="10" r="8" style="animation-delay:.8s"/><path class="cohort-change" d="M88 38C92 18 114 18 118 38Z" style="animation-delay:.8s"/>
+              </g>
+              <g transform="translate(372 72)">
+                <rect x="0" y="0" width="206" height="170" rx="12" fill="rgba(255,255,255,.1)" stroke="#fff"/>
+                <g class="pulse-soft" transform="translate(34 42)"><circle cx="0" cy="0" r="14" fill="#e4b45b"/><text x="-12" y="5" fill="#102033" font-size="12" font-weight="900">CYP</text></g>
+                <g class="pulse-soft" transform="translate(100 42)" style="animation-delay:.25s"><circle cx="0" cy="0" r="14" fill="#55c4df"/><text x="-12" y="5" fill="#102033" font-size="12" font-weight="900">sex</text></g>
+                <g class="pulse-soft" transform="translate(160 42)" style="animation-delay:.5s"><circle cx="0" cy="0" r="14" fill="#16a89b"/><text x="-14" y="5" fill="#102033" font-size="12" font-weight="900">age</text></g>
+                <g class="pulse-soft" transform="translate(62 112)" style="animation-delay:.75s"><rect x="-18" y="-14" width="36" height="28" rx="6" fill="#cf5d50"/><text x="-9" y="5" fill="#fff" font-size="11" font-weight="900">Dx</text></g>
+                <g class="pulse-soft" transform="translate(138 112)" style="animation-delay:1s"><rect x="-18" y="-14" width="36" height="28" rx="6" fill="#7ea0d9"/><text x="-9" y="5" fill="#102033" font-size="11" font-weight="900">kg</text></g>
+                <path class="edge-dash" d="M34 42 C72 78 110 78 160 42 M62 112 C98 82 128 84 138 112 M100 42 C100 74 98 94 62 112" fill="none" stroke="#8de6dc" stroke-width="2"/>
+              </g>
+            </svg>
+            <span class="label">Computational PK</span>
+            <h3>PBPK, PopPK, machine learning, and deep learning</h3>
+            <p>Population PK profiles, virtual cohorts, and covariates such as CYP phenotype, sex, body weight, age, and disease state are shown as interacting inputs.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section dark" id="platform" aria-labelledby="platform-title">
+      <div class="container">
+        <div class="section-head wide">
+          <span class="label">Platform</span>
+          <h2 id="platform-title">Graphical abstract of the QCP Lab platform.</h2>
+          <p>Static overview of the laboratory workflow from experimental PK and ADME through LC-MS/MS, PBPK/population PK, and machine learning.</p>
+        </div>
+        <div class="research-stage">
+          <div class="research-diagram platform-static">
+            <svg viewBox="0 0 980 720" role="img" aria-label="Static graphical abstract for QCP Lab platform">
+              <defs>
+                <linearGradient id="staticBg" x1="0" x2="1"><stop offset="0" stop-color="#f7fbfd"/><stop offset="1" stop-color="#eef6fb"/></linearGradient>
+                <marker id="staticArrow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#244f92"/></marker>
+              </defs>
+              <rect width="980" height="720" rx="12" fill="url(#staticBg)"/>
+              <text x="44" y="44" fill="#16a89b" font-size="18" font-weight="900" letter-spacing="2">GRAPHICAL ABSTRACT</text>
+              <text x="44" y="82" fill="#102033" font-size="32" font-weight="900">Quantitative pharmacokinetics research platform</text>
+              <path d="M176 364 H804" stroke="#244f92" stroke-width="5" marker-end="url(#staticArrow)"/>
+
+              <g transform="translate(54 126)">
+                <rect width="200" height="260" rx="12" fill="#fff" stroke="#d8e2ee"/>
+                <text x="18" y="34" fill="#244f92" font-size="22" font-weight="900">01 Experimental PK</text>
+                <text x="18" y="60" fill="#244f92" font-size="22" font-weight="900">and ADME</text>
+                <path d="M48 104 C22 118 24 164 54 172 C56 142 94 150 84 190 C110 188 124 164 118 140 C112 114 82 108 66 118 C68 102 56 98 48 104Z" fill="#eab28f" stroke="#a96d49" stroke-width="3"/>
+                <path d="M86 92 C54 100 50 150 86 168 C128 184 176 160 168 116 C148 122 116 118 86 92Z" fill="#c66d4d" stroke="#853a27" stroke-width="3"/>
+                <circle cx="132" cy="132" r="22" fill="#20364b" stroke="#e4b45b" stroke-width="3"/>
+                <text x="18" y="232" fill="#4b5b70" font-size="13" font-weight="800">absorption, metabolism, transport, excretion</text>
+              </g>
+
+              <g transform="translate(280 126)">
+                <rect width="200" height="260" rx="12" fill="#fff" stroke="#d8e2ee"/>
+                <text x="18" y="34" fill="#244f92" font-size="22" font-weight="900">02 LC-MS/MS</text>
+                <text x="18" y="60" fill="#244f92" font-size="22" font-weight="900">bioanalysis</text>
+                <rect x="26" y="106" width="44" height="72" rx="8" fill="#edf3f9" stroke="#8ea7c2" stroke-width="3"/>
+                <path d="M70 142 H106 C124 142 132 108 156 108" fill="none" stroke="#55c4df" stroke-width="6"/>
+                <rect x="156" y="90" width="54" height="38" rx="8" fill="#7dd1e8"/>
+                <rect x="112" y="166" width="70" height="44" rx="6" fill="#102033"/>
+                <line x1="126" y1="198" x2="126" y2="178" stroke="#16a89b" stroke-width="4"/>
+                <line x1="144" y1="198" x2="144" y2="170" stroke="#16a89b" stroke-width="4"/>
+                <line x1="162" y1="198" x2="162" y2="184" stroke="#16a89b" stroke-width="4"/>
+                <text x="18" y="232" fill="#4b5b70" font-size="13" font-weight="800">quantification and metabolite profiling</text>
+              </g>
+
+              <g transform="translate(506 126)">
+                <rect width="200" height="260" rx="12" fill="#fff" stroke="#d8e2ee"/>
+                <text x="18" y="34" fill="#244f92" font-size="22" font-weight="900">03 PBPK and</text>
+                <text x="18" y="60" fill="#244f92" font-size="22" font-weight="900">population PK</text>
+                <rect x="28" y="94" width="70" height="98" rx="8" fill="#f8fbfe" stroke="#d8e2ee"/>
+                <path d="M58 126 C48 136 48 150 58 160 C70 152 78 144 82 132 C78 122 70 120 58 126Z" fill="#b56347" stroke="#8a3a27" stroke-width="2"/>
+                <path d="M116 174 C132 116 154 104 180 132" fill="none" stroke="#244f92" stroke-width="4"/>
+                <path d="M116 184 C136 150 156 142 184 162" fill="none" stroke="#e4b45b" stroke-width="4"/>
+                <text x="18" y="232" fill="#4b5b70" font-size="13" font-weight="800">virtual population exposure prediction</text>
+              </g>
+
+              <g transform="translate(732 126)">
+                <rect width="200" height="260" rx="12" fill="#fff" stroke="#d8e2ee"/>
+                <text x="18" y="34" fill="#244f92" font-size="22" font-weight="900">04 Machine</text>
+                <text x="18" y="60" fill="#244f92" font-size="22" font-weight="900">learning</text>
+                <g transform="translate(46 104)" stroke="#55c4df" stroke-width="3" fill="none">
+                  <circle cx="12" cy="36" r="10" fill="#244f92"/>
+                  <circle cx="58" cy="16" r="9" fill="#16a89b"/>
+                  <circle cx="58" cy="58" r="9" fill="#16a89b"/>
+                  <circle cx="108" cy="36" r="11" fill="#e4b45b"/>
+                  <path d="M22 34 L49 18 M22 38 L49 56 M67 18 L98 34 M67 56 L98 38"/>
+                </g>
+                <g transform="translate(36 188)" fill="#7a9cc0">
+                  <circle cx="12" cy="10" r="8"/><path d="M0 38C4 18 28 18 32 38Z"/>
+                  <circle cx="58" cy="10" r="8"/><path d="M46 38C50 18 74 18 78 38Z"/>
+                  <circle cx="104" cy="10" r="8"/><path d="M92 38C96 18 120 18 124 38Z"/>
+                </g>
+                <text x="18" y="232" fill="#4b5b70" font-size="13" font-weight="800">data-driven variability prediction</text>
+              </g>
+
+              <g transform="translate(118 468)">
+                <rect width="744" height="140" rx="12" fill="#fff" stroke="#d8e2ee"/>
+                <text x="24" y="38" fill="#102033" font-size="21" font-weight="900">Integrated outputs</text>
+                <path d="M30 100 C86 36 140 76 196 46 C258 12 306 116 372 66 C432 20 488 104 552 58 C606 22 650 72 714 42" fill="none" stroke="#244f92" stroke-width="4"/>
+                <circle cx="118" cy="78" r="7" fill="#16a89b"/>
+                <circle cx="316" cy="88" r="7" fill="#e4b45b"/>
+                <circle cx="542" cy="70" r="7" fill="#cf5d50"/>
+              </g>
+            </svg>
+          </div>
+          <div class="research-points">
+            <article class="flow-item"><span class="flow-index">01</span><div><h3>Experimental PK and ADME</h3><p>In vitro and in vivo pharmacokinetic studies, metabolism, transport, and ADME/Tox interpretation.</p></div></article>
+            <article class="flow-item"><span class="flow-index">02</span><div><h3>LC-MS/MS bioanalysis</h3><p>Targeted quantification, metabolite identification, and endogenous compound profiling.</p></div></article>
+            <article class="flow-item"><span class="flow-index">03</span><div><h3>PBPK and population PK</h3><p>Mechanistic modeling, virtual populations, exposure prediction, and DDI simulation.</p></div></article>
+            <article class="flow-item"><span class="flow-index">04</span><div><h3>Machine learning</h3><p>Data-driven prediction and variability analysis for pharmacokinetic decision support.</p></div></article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section soft" id="research" aria-labelledby="research-title">
+      <div class="container">
+        <div class="section-head">
+          <span class="label">Research</span>
+          <h2 id="research-title">Research interests</h2>
+          <p>The research-interest order follows the requested platform sequence.</p>
+        </div>
+        <div class="research-list">
+          <div class="research-row"><span class="num">01</span><strong>Experimental PK and ADME</strong><p>In vitro and in vivo pharmacokinetic studies, metabolism, transport, ADME/Tox evaluation, and PK/PD interpretation.</p></div>
+          <div class="research-row"><span class="num">02</span><strong>LC-MS/MS Bioanalysis and Metabolomics</strong><p>Targeted quantitative bioanalysis, metabolite identification, bile acid and endogenous hormone profiling, and mass-spectrometry-based interpretation.</p></div>
+          <div class="research-row"><span class="num">03</span><strong>PBPK and Population PK</strong><p>Physiologically based and population PK modeling, DDI simulation, virtual clinical trial analysis, and translational quantitative pharmacokinetics.</p></div>
+          <div class="research-row"><span class="num">04</span><strong>Machine Learning</strong><p>Machine-learning and deep-learning workflows for exposure prediction, population variability analysis, and computational pharmacokinetic insight generation.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="people" aria-labelledby="people-title">
+      <div class="container">
+        <div class="section-head">
+          <span class="label">People</span>
+          <h2 id="people-title">Members</h2>
+        </div>
+        <div class="people-layout">
+          <article class="card pi-card">
+            <img class="pi-photo" src="assets/prof-ahn-sunghoon-thumb.jpg" alt="Sung-Hoon Ahn profile photo">
+            <div>
+              <span class="label">Principal Investigator</span>
+              <h3>Sung-Hoon Ahn, Ph.D.</h3>
+              <p>Professor, College of Pharmacy, Kangwon National University</p>
+              <div class="contact-lines">
+                <a href="mailto:ahnsh@kangwon.ac.kr">ahnsh@kangwon.ac.kr</a>
+                <span>Office: Innovation Pharmaceutical Clinical Research Building 210</span>
+                <span>Tel: +82-33-250-6912</span>
+              </div>
+            </div>
+          </article>
+          <div class="member-group">
+            <h3>Doctoral students</h3>
+            <div class="member-grid">
+              <div class="member"><strong>Kyung-Sun Moon</strong><a href="mailto:moonks97@kangwon.ac.kr">moonks97@kangwon.ac.kr</a></div>
+              <div class="member"><strong>Jong-Min Song</strong><a href="mailto:nayasjm@kangwon.ac.kr">nayasjm@kangwon.ac.kr</a></div>
+              <div class="member"><strong>Juhyun Park</strong><span>Ph.D. student</span></div>
+              <div class="member"><strong>Hui-Wook Kim</strong><span>Ph.D. student</span></div>
+              <div class="member"><strong>Eun-Dong Shin</strong><span>Ph.D. student</span></div>
+              <div class="member"><strong>Jong-Bae Kim</strong><span>Ph.D. student</span></div>
+              <div class="member"><strong>Young-Hyun Nam</strong><span>Ph.D. student</span></div>
+              <div class="member"><strong>Jun-Hak Bae</strong><span>Ph.D. student</span></div>
+              <div class="member"><strong>Hyun-Chan Lim</strong><span>Ph.D. student</span></div>
+              <div class="member"><strong>Ki-Ok Ahn</strong><span>Ph.D. student</span></div>
+              <div class="member"><strong>Jun-Hee Lee</strong><span>Ph.D. student</span></div>
+            </div>
+            <h3>Master's students</h3>
+            <div class="member-grid">
+              <div class="member"><strong>Chae-I Shin</strong><span>M.S. student</span></div>
+              <div class="member"><strong>Min-Kyung Jeong</strong><span>M.S. student</span></div>
+              <div class="member"><strong>Su-A Choi</strong><span>M.S. student</span></div>
+              <div class="member"><strong>Min Lee</strong><span>M.S. student</span></div>
+              <div class="member"><strong>Mariam Khaled</strong><span>M.S. student</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section soft" id="programs" aria-labelledby="programs-title">
+      <div class="container">
+        <div class="section-head">
+          <span class="label">Programs</span>
+          <h2 id="programs-title">Ongoing programs and partners</h2>
+          <p>Current program marks are kept simple so they do not compete with the scientific figures.</p>
+        </div>
+        <div class="programs">
+          <a class="program" href="https://www.gwrise.or.kr/" target="_blank" rel="noopener">
+            <div class="logo-box">
+              <svg class="text-logo" viewBox="0 0 260 108" role="img" aria-label="Gangwon RISE Center logo text">
+                <rect width="260" height="108" rx="8" fill="#f9fbfd"/>
+                <text x="20" y="64" fill="#b95d97" font-size="32" font-weight="900">강원RISE센터</text>
+              </svg>
+            </div>
+            <strong>Gangwon RISE Center</strong><p>Regional innovation and university-city ecosystem program.</p>
+          </a>
+          <a class="program" href="https://kiit.kr/lang_kr_new.php?pid=RLRC" target="_blank" rel="noopener">
+            <div class="logo-box">
+              <svg class="text-logo" viewBox="0 0 260 108" role="img" aria-label="GIB-RLRC text">
+                <rect width="260" height="108" rx="8" fill="#f9fbfd"/>
+                <text x="36" y="66" fill="#245090" font-size="34" font-weight="900">GIB-RLRC</text>
+              </svg>
+            </div>
+            <strong>GIB-RLRC</strong><p>Regional leading research center program.</p>
+          </a>
+          <a class="program" href="https://www.mafra.go.kr/sites/home/index.do" target="_blank" rel="noopener">
+            <div class="logo-box"><img src="assets/logo-mafra.png" alt="Ministry of Agriculture, Food and Rural Affairs logo"></div>
+            <strong>MAFRA</strong><p>Ministry-linked research and development program.</p>
+          </a>
+          <a class="program" href="https://pharmacy.kangwon.ac.kr/pharmacy/index.do" target="_blank" rel="noopener">
+            <div class="logo-box"><img src="assets/knu-seal.png" alt="Kangwon National University KNU logo"></div>
+            <strong>KNU College of Pharmacy</strong><p>Academic home of the Laboratory of Quantitative and Computational Pharmacokinetics.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contact" aria-labelledby="contact-title">
+      <div class="container">
+        <div class="contact-band">
+          <div>
+            <span class="label">Contact</span>
+            <h2 id="contact-title">QCP Lab, Kangwon National University</h2>
+            <p>College of Pharmacy, 1 Kangwondaehak-gil, Chuncheon, Gangwon State 24341, Republic of Korea</p>
+          </div>
+          <div class="contact-card">
+            <p><strong>Office</strong><br>Innovation Pharmaceutical Clinical Research Building 208-210</p>
+            <p><strong>Email</strong><br><a href="mailto:ahnsh@kangwon.ac.kr">ahnsh@kangwon.ac.kr</a></p>
+            <p><strong>Note</strong><br>Animated figures are schematic website illustrations, not measured experimental trajectories.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand"><strong>QCP Lab</strong><span>Laboratory of Quantitative and Computational Pharmacokinetics</span></div>
+      <div class="footer-logos">
+        <a class="footer-logo" href="https://www.gwrise.or.kr/" target="_blank" rel="noopener"><span style="color:#b95d97;font-weight:900">강원RISE센터</span></a>
+        <a class="footer-logo" href="https://kiit.kr/lang_kr_new.php?pid=RLRC" target="_blank" rel="noopener"><span style="color:#245090;font-weight:900">GIB-RLRC</span></a>
+        <a class="footer-logo" href="https://www.mafra.go.kr/sites/home/index.do" target="_blank" rel="noopener"><img src="assets/logo-mafra.png" alt="MAFRA logo"></a>
+        <a class="footer-logo" href="https://pharmacy.kangwon.ac.kr/pharmacy/index.do" target="_blank" rel="noopener"><img src="assets/knu-seal.png" alt="KNU logo"></a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const menuToggle = document.querySelector(".menu-toggle");
+    const navLinks = document.querySelector("#navLinks");
+    menuToggle?.addEventListener("click", () => {
+      const open = navLinks.classList.toggle("open");
+      menuToggle.setAttribute("aria-expanded", String(open));
+    });
+    navLinks?.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => {
+        navLinks.classList.remove("open");
+        menuToggle?.setAttribute("aria-expanded", "false");
+      });
+    });
+  </script>
+</body>
+</html>
