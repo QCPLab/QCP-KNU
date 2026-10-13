@@ -58,8 +58,20 @@
 
   /* "How we work": turn the static list into a keyboard-operable tab set */
   $$('[data-process]').forEach((root) => {
-    const list = $('.steps', root);
-    const steps = Array.from(list.children);
+    /* swap <ol>/<li> for plain divs: <li role="tabpanel"> is not valid ARIA, and the tab pattern replaces the list semantics */
+    const ol = $('.steps', root);
+    const list = document.createElement('div');
+    list.className = ol.className;
+    const steps = Array.from(ol.children).map((li) => {
+      const d = document.createElement('div');
+      d.className = li.className;
+      d.id = li.id;
+      d.dataset.step = li.dataset.step;
+      while (li.firstChild) d.appendChild(li.firstChild);
+      list.appendChild(d);
+      return d;
+    });
+    ol.replaceWith(list);
     const rail = document.createElement('div');
     rail.className = 'rail';
     rail.setAttribute('role', 'tablist');
@@ -109,8 +121,9 @@
       e.preventDefault();
       select(next, true);
     });
-    const fromHash = steps.findIndex((li) => '#' + li.id === window.location.hash);
-    select(fromHash >= 0 ? fromHash : 0);
+    const fromHash = () => steps.findIndex((li) => '#' + li.id === window.location.hash);
+    select(Math.max(0, fromHash()));
+    window.addEventListener('hashchange', () => { if (fromHash() >= 0) select(fromHash()); });
   });
 
   /* scroll-spy for the research side navigation */
