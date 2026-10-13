@@ -38,7 +38,7 @@
 <li class="pub" data-year="{{ p.year }}" data-text="{{ pub_search(p) }}">
   <div class="pub-body">
     <h3 class="pub-title"{% if lang == 'ko' %} lang="en"{% endif %}>{{ p.title }}</h3>
-    {% if p.authors %}<p class="pub-authors"{% if lang == 'ko' %} lang="en"{% endif %}>{% for a in p.authors %}{% if pi_re.search(a) %}<strong>{{ a }}</strong>{% else %}{{ a }}{% endif %}{% if not loop.last %}, {% endif %}{% endfor %}</p>{% endif %}
+    {% if p.authors %}<p class="pub-authors"{% if lang == 'ko' %} lang="en"{% endif %}>{% for a in p.authors %}{% if pi_re.search(a) %}<strong class="nb">{{ a }}</strong>{% else %}<span class="nb">{{ a }}</span>{% endif %}{% if not loop.last %}, {% endif %}{% endfor %}</p>{% endif %}
     <p class="pub-meta"><span class="pub-journal"{% if lang == 'ko' %} lang="en"{% endif %}>{{ p.journal }}</span>
       <span class="pub-cite">{{ p.year }}{% if p.volume %};&nbsp;{{ p.volume }}{% if p.issue %}({{ p.issue }}){% endif %}{% endif %}{% if p.page %}:&nbsp;{{ p.page|replace('-', '–') }}{% endif %}</span>
       {% if p.doi %}<a class="pub-doi" href="https://doi.org/{{ p.doi }}" rel="noopener" target="_blank" aria-label="{{ t.pubs.doi_aria }}: {{ p.title }}">DOI {{ icon('external', 'xs') }}</a>{% endif %}</p>

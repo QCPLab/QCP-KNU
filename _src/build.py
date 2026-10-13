@@ -184,6 +184,7 @@ def build() -> dict[str, str]:
             teaser_nlme=figures.teaser_nlme(), teaser_dl=figures.teaser_dl(),
         )
         text = env.get_template(f"{page_id}.html").render(**ctx)
+        text = nobreak(text)
         if lang == "ko":
             text = re.sub(r"\)(?=[가-힣])", ")\u2060", text)  # no line break between ")" and a following particle
         out[(("ko/" if lang == "ko" else "") + PATHS[page_id] + ("index.html" if page_id != "404" else ""))] = text
@@ -199,6 +200,23 @@ def build() -> dict[str, str]:
         out["sitemap.xml"] = ('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
                               + "".join(f"  <url><loc>{u}</loc></url>\n" for u in urls) + "</urlset>\n")
     return out
+
+
+NOBREAK = [re.compile(p) for p in (r"LC-MS/MS", r"\(\+82-33-250-6912\)", r"\b[A-Za-z]{1,6}-\d{2,}\b", r"Gangwon-do 24341")]
+
+
+def nobreak(page: str) -> str:
+    """Keep technical tokens (LC-MS/MS, drug codes, phone numbers) in one piece and bind list separators to the previous word.
+    Only text nodes are touched; scripts, styles, SVG and the head are left alone."""
+    parts = re.split(r"(<script\b.*?</script>|<style\b.*?</style>|<svg\b.*?</svg>|<head>.*?</head>)", page, flags=re.S)
+
+    def node(m):
+        t = m.group(1)
+        for rx in NOBREAK:
+            t = rx.sub(lambda mm: f'<span class="nb">{mm.group(0)}</span>', t)
+        return ">" + t.replace(" · ", "\u00a0· ") + "<"
+
+    return "".join(p if i % 2 else re.sub(r">([^<>]+)<", node, p) for i, p in enumerate(parts))
 
 
 def guard(out: dict[str, str]) -> list[str]:

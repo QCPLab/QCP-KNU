@@ -169,6 +169,14 @@
       });
     }, { rootMargin: '-25% 0px -65% 0px' });
     map.forEach((_, id) => { const s = document.getElementById(id); if (s) io.observe(s); });
+    const first = links[0];
+    const atTop = () => {
+      if (window.scrollY > 160) return;
+      links.forEach((a) => { a.classList.remove('is-current'); a.removeAttribute('aria-current'); });
+      first.classList.add('is-current'); first.setAttribute('aria-current', 'location');
+    };
+    atTop();
+    window.addEventListener('scroll', atTop, { passive: true });
   }
   } catch (err) {
     /* if an enhancement fails, fall back to the plain page instead of leaving content hidden */

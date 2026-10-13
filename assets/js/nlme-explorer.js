@@ -447,7 +447,7 @@
       var log = S.logY, yr = log ? fitRange.log : fitRange.lin, tmax = fitRange.tmax;
       var xs = lin(0, tmax, m.l, w - m.r), ys = log ? lin(Math.log(yr[0]), Math.log(yr[1]), h - m.b, m.t) : lin(yr[0], yr[1], h - m.b, m.t);
       var yv = function (v) { return log ? ys(Math.log(v)) : ys(v); };
-      var cid = 'nx' + id + 'fc', defs = sv(svg, 'defs'), cp = sv(defs, 'clipPath', { id: cid }); sv(cp, 'rect', { x: m.l, y: m.t, width: w - m.l - m.r, height: h - m.t - m.b });
+      var cid = 'nx' + id + 'fc', defs = sv(svg, 'defs'), cp = sv(defs, 'clipPath', { id: cid }); sv(cp, 'rect', { x: m.l, y: m.t - 2, width: w - m.l - m.r + 6, height: h - m.t - m.b + 4 });
       axes(svg, { w: w, h: h, m: m, xs: xs, ys: yv, xt: thinTicks(linTicks(0, tmax, w < 420 ? 4 : 6), xs, 28), yt: log ? logTicks(yr[0], yr[1]).filter(function (v) { return v >= yr[0] && v <= yr[1]; }) : linTicks(yr[0], yr[1], 5), xl: T.xTime, yl: T.yConc });
       var g = sv(svg, 'g', { 'clip-path': 'url(#' + cid + ')' }), tg = [0], q;
       for (q = 0.25; q <= tmax + 1e-9; q += 0.25) tg.push(q);

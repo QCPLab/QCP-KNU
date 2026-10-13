@@ -120,7 +120,7 @@ def hero(t):
     out.append(f'<g transform="translate({_f(lx)} {_f(ly)})">'
                f'<line class="popline" x1="0" x2="26" y1="8" y2="8"/><text class="lg" x="34" y="12.5">{escape(f["typical"])}</text>'
                f'<line class="sub lgs" x1="0" x2="26" y1="31" y2="31"/><text class="lg" x="34" y="35.5">{escape(f["virtual"])}</text>'
-               f'<circle class="obs" cx="13" cy="54" r="4.2"/><text class="lg" x="34" y="58.5">{escape(f["observed"])}</text></g>')
+               f'<line class="ex" x1="0" x2="26" y1="54" y2="54"/><circle class="obs" cx="13" cy="54" r="4.2"/><text class="lg" x="34" y="58.5">{escape(f["observed"])}</text></g>')
     return _svg("0 0 480 360", "".join(out), f["hero_alt"], "fig fig-hero", f["hero_desc"].format(cmax=f"{cmax:.1f}", tmax=f"{tmax:.1f}"))
 
 
@@ -178,12 +178,12 @@ def step_design(t):
         o.append(f'<line class="tick" x1="{_f(P.X(x))}" x2="{_f(P.X(x))}" y1="150" y2="155"/><text class="tl" x="{_f(P.X(x))}" y="171" text-anchor="middle">{x}</text>')
     o.append(f'<text class="al" x="{_f((P.l + 400 - P.r) / 2)}" y="198" text-anchor="middle">{escape(f["time"])}</text>')
     # dose arrow
-    o.append(f'<line class="dose" x1="{_f(P.X(0))}" x2="{_f(P.X(0))}" y1="58" y2="146"/><path class="doseh" d="M{_f(P.X(0))} 150 l-6 -11 h12Z"/>')
+    o.append(f'<line class="dose" x1="{_f(P.X(0))}" x2="{_f(P.X(0))}" y1="58" y2="124"/><path class="doseh" d="M{_f(P.X(0))} 138 l-6 -13 h12Z"/>')
     o.append(f'<text class="an" x="{_f(P.X(0) + 9)}" y="72">{escape(f["dose"])}</text>')
-    for x in (0.25, 0.5, 1, 2, 4, 8, 12, 24):
-        o.append(f'<circle class="sam" cx="{_f(P.X(x))}" cy="150" r="5.2"/>')
+    for x in (0.5, 1, 2, 4, 8, 12, 24):
+        o.append(f'<circle class="sam" cx="{_f(P.X(x))}" cy="150" r="4.6"/>')
     o.append(f'<text class="an" x="{_f(P.X(12))}" y="124" text-anchor="middle">{escape(f["sampling"])}</text>')
-    o.append(f'<path class="brk" d="M{_f(P.X(0.25))} 134 V138 H{_f(P.X(24))} V134"/>')
+    o.append(f'<path class="brk" d="M{_f(P.X(0.5))} 134 V138 H{_f(P.X(24))} V134"/>')
     return _svg("0 0 400 230", "".join(o), f["s_design_alt"], "fig fig-step")
 
 
@@ -237,7 +237,9 @@ def step_pkanalysis(t):
     # terminal half-life marker
     t1 = 14.0
     c1 = conc(t1)
-    o.append(f'<line class="guide" x1="{_f(P.X(t1))}" x2="{_f(P.X(t1 + math.log(2) / ke))}" y1="{_f(P.Y(c1))}" y2="{_f(P.Y(c1))}"/>')
+    t2 = t1 + math.log(2) / ke
+    o.append(f'<line class="guide" x1="{_f(P.X(t1))}" x2="{_f(P.X(t2))}" y1="{_f(P.Y(c1))}" y2="{_f(P.Y(c1))}"/>')
+    o.append(f'<text class="an alt" x="{_f((P.X(t1) + P.X(t2)) / 2)}" y="{_f(P.Y(c1) - 7)}" text-anchor="middle">t<tspan class="sb" dy="3">½</tspan></text>')
     return _svg("0 0 400 230", "".join(o), f["s_pkanalysis_alt"], "fig fig-step")
 
 
