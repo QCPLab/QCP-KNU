@@ -75,7 +75,7 @@ methods:
   dl_eyebrow: "Deep learning"
   dl_title: "How a neural network computes"
   dl_lead: "A neural network is a chain of simple calculations: weighted sums followed by a non-linearity. Training changes the weights to reduce the error. Run the forward pass, inspect the gradients of the backward pass, and follow message passing across a real drug molecule."
-  dl_limits: "Teaching examples: small models trained on synthetic clearance data or on public molecule data. They show the mechanics and are not validated for prediction."
+  dl_limits: "Teaching examples with small models. The neural network learns a known formula from synthetic patients. The graph network learns to reproduce the Crippen logP that RDKit calculates (a calculated value, not a measurement) from about 4,600 public structures. They show the mechanics and are not validated for prediction."
   reading_eyebrow: "Further reading"
   reading_title: "Further reading"
   reading_sub: "General references for the methods above, not publications of this laboratory. Every DOI was checked against Crossref on 2026-10-13."
