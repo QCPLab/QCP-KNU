@@ -62,7 +62,7 @@
 
 /* svg parts */
 .nx-svg text{font-family:inherit}
-.nx-tk{font-size:11px;fill:var(--nx-muted)}.nx-tkb{fill:var(--nx-ink);font-weight:600}
+.nx-tk{font-size:11px;fill:var(--nx-muted)}.nx-tkb{fill:var(--nx-ink);font-weight:600;paint-order:stroke;stroke:var(--nx-bg);stroke-width:3px;stroke-linejoin:round}
 .nx-al{font-size:11.5px;fill:var(--nx-ink2)}
 .nx-gl{stroke:var(--nx-line);stroke-width:1}
 .nx-ax{stroke:var(--nx-line2);stroke-width:1;fill:none}
@@ -97,6 +97,7 @@
 
 .nx-tab{margin-bottom:14px}
 .nx-scroll{max-width:100%;overflow-x:auto;margin-top:6px}
+.nx-scroll:focus-visible{outline:2px solid transparent;box-shadow:var(--focus,0 0 0 3px rgba(10,125,119,.35))}
 .nx-table{width:100%;border-collapse:collapse;font-size:.86rem;font-variant-numeric:tabular-nums}
 .nx-table caption{text-align:left;font-size:.82rem;color:var(--nx-muted);padding:0 0 6px;caption-side:top}
 .nx-table th,.nx-table td{padding:6px 8px;border-bottom:1px solid var(--nx-line);text-align:right;vertical-align:top;color:var(--nx-ink2)}
@@ -125,6 +126,7 @@
   .nx-controls,.nx-panel,.nx-see{padding-left:10px;padding-right:10px}
   .nx-segbtn{flex:1 1 30%}
   .nx-primary{min-width:70px}
+  .nx-table th,.nx-table td{padding:6px 4px}
 }
 @media (prefers-reduced-motion:reduce){
   .nx-root *,.nx-root *::before,.nx-root *::after{transition:none!important;animation:none!important;scroll-behavior:auto!important}

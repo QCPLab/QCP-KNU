@@ -29,13 +29,13 @@
       parT: 'Parameters vs iteration', pnames: ['CL/F (L/h)', 'V/F (L)', 'ka (1/h)', 'ω CL/F', 'ω V/F', 'ω ka', 'σ (proportional)'],
       parNote: 'ω = SD of the log-normal between-subject variability (log scale); σ = proportional residual error. Dashed line = value used to simulate; orange marker = current iteration.',
       truthWord: 'truth', parAlt: '{n}: {v} at iteration {it}, true value {t}.', xIter: 'Iteration',
-      ofvT: 'Objective function', ofvLine: 'OFV versus iteration', dOfv: 'ΔOFV, log scale', ofvAlt: 'Objective function value versus iteration; current iteration {it}, OFV {v}.',
+      ofvT: 'Objective function', ofvLine: 'OFV versus iteration', ofvNote: 'OFV = approximately −2 × log-likelihood summed over subjects, constants included. Only differences matter; negative values are normal for this concentration scale.', dOfv: 'ΔOFV, log scale', ofvAlt: 'Objective function value versus iteration; current iteration {it}, OFV {v}.',
       cT: 'OFV surface (slice over CL/F and V/F)', cAlt: 'Contour plot of the objective function over CL/F and V/F with the optimiser path up to iteration {it}.',
-      cNote: 'Contour lines: OFV above the lowest value of the grid (levels {lv}). κ is not used; ka, ω and σ are held at their final values and every subject’s η̂ is re-optimised at each grid point, so the orange path (all parameters moving) only approximately lies on this slice. Outside the dotted rectangle the surface was not computed.',
+      cNote: 'Contour lines: OFV above the lowest value of the grid (levels {lv}). ka, ω and σ are held at their final values and every subject’s η̂ is re-optimised at each grid point, so the orange path (all parameters moving) only approximately lies on this slice. Outside the dotted rectangle the surface was not computed.',
       cStart: 'start', cEnd: 'final',
       etaT: 'Individual deviations (η̂) and shrinkage', etaNote: 'Dots: η̂ of each subject (click a dot to highlight the subject). Shaded band: ±2ω at this iteration. Shrinkage = 1 − SD(η̂)/ω: high values mean the data of a subject say little about that effect.',
       showEta: 'Show true η (simulation)', shr: 'η-shrinkage', etaAlt: 'Estimated individual deviations for CL/F, V/F and ka at iteration {it}; shrinkage {s}.',
-      tabT: 'Final estimates versus truth', tabCap: 'Estimates at the last stored iteration of each scenario (percentage deviation from truth in brackets).',
+      tabT: 'Final estimates versus truth', tabCap: 'Estimates at the last stored iteration of each scenario; the percentage deviation from truth is printed below each estimate.',
       tabCols: ['Parameter', 'Truth', 'Rich', 'Moderate', 'Sparse'], shrRow: 'η-shrinkage {n}', itRow: 'Accepted iterations',
       iterT: 'What happens in one iteration', iterSteps: [
         'Inner problem. With the current population values (θ, ω, σ) the optimiser finds, for every subject separately, the individual deviation η̂ that is most probable given that subject’s data (the minimum of Σ[ln var + res²/var] + η′Ω⁻¹η, with the residual variance evaluated at η = interaction).',
@@ -68,7 +68,7 @@
       scenLbl: '채혈 시나리오', rich: '풍부', moderate: '중간', sparse: '희박', perSubj: '개인당 {n}점',
       pbLbl: '최적화 반복 재생', play: '재생', pause: '일시정지', back: '한 단계 뒤로', fwd: '한 단계 앞으로', toFirst: '처음 반복', toLast: '마지막 반복',
       slider: '반복', speed: '속도', frameLbl: '반복 {it}회 · 프레임 {k}/{n}',
-      reduced: '시스템에서 동작 줄이기를 요청했으므로 자동 재생을 끄었습니다. 단계 버튼이나 슬라이더를 사용하십시오.',
+      reduced: '시스템에서 동작 줄이기를 요청했으므로 자동 재생이 꺼져 있습니다. 단계 버튼이나 슬라이더를 사용하십시오.',
       thinNo: '채택된 반복 {n}회를 모두 표시합니다(반복 0 = 초기값).',
       thinYes: '채택된 반복 {n}회 중 {f}개를 표시합니다(처음 10개, 마지막 10개, 그 사이는 균등 간격).',
       stopOk: '최적화 알고리즘이 {n}회 반복 후 수렴 기준을 충족하여 종료했습니다({msg}). 로그 척도 모수에 대한 OFV 기울기의 최댓값은 {g}입니다.',
@@ -81,13 +81,13 @@
       parT: '반복에 따른 모수 변화', pnames: ['CL/F (L/h)', 'V/F (L)', 'ka (1/h)', 'ω CL/F', 'ω V/F', 'ω ka', 'σ (비례 오차)'],
       parNote: 'ω는 로그정규 개체간 변동의 표준편차(로그 척도), σ는 비례 잔차 오차입니다. 점선은 시뮬레이션에 사용한 값, 주황색 표시는 현재 반복입니다.',
       truthWord: '참값', parAlt: '{n}: 반복 {it}회에서 {v}, 참값 {t}.', xIter: '반복',
-      ofvT: '목적함수', ofvLine: '반복에 따른 OFV', dOfv: 'ΔOFV, 로그 척도', ofvAlt: '반복에 따른 목적함수 값입니다. 현재 반복 {it}회, OFV {v}.',
+      ofvT: '목적함수', ofvLine: '반복에 따른 OFV', ofvNote: 'OFV는 개체별 합산 로그우도의 약 −2배이며 상수를 포함합니다. 차이만 의미가 있고, 이 농도 척도에서는 음수가 나오는 것이 정상입니다.', dOfv: 'ΔOFV, 로그 척도', ofvAlt: '반복에 따른 목적함수 값입니다. 현재 반복 {it}회, OFV {v}.',
       cT: 'OFV 곡면(CL/F·V/F 단면)', cAlt: 'CL/F와 V/F에 대한 목적함수 등고선 그래프이며 반복 {it}회까지의 최적화 경로를 함께 보여 줍니다.',
       cNote: '등고선은 격자의 최솟값보다 높은 OFV입니다(수준 {lv}). ka, ω, σ는 최종 추정값으로 고정하고 각 격자점에서 모든 개체의 η̂를 다시 최적화했으므로, 모든 모수가 함께 움직이는 주황색 경로는 이 단면에 근사적으로만 놓입니다. 점선 사각형 바깥에서는 곡면을 계산하지 않았습니다.',
       cStart: '시작', cEnd: '최종',
       etaT: '개인별 편차(η̂)와 수축', etaNote: '점은 각 개체의 η̂입니다(점을 누르면 해당 개체가 강조됩니다). 음영 띠는 현재 반복의 ±2ω입니다. 수축 = 1 − SD(η̂)/ω이며, 값이 크면 개체별 자료가 해당 효과에 대한 정보를 거의 주지 못한다는 뜻입니다.',
       showEta: '참 η 표시(시뮬레이션)', shr: 'η 수축', etaAlt: '반복 {it}회에서 CL/F, V/F, ka의 개인별 편차 추정값이며 수축은 {s}입니다.',
-      tabT: '최종 추정값과 참값', tabCap: '각 시나리오의 마지막 저장 반복에서의 추정값입니다(괄호 안은 참값 대비 편차 %).',
+      tabT: '최종 추정값과 참값', tabCap: '각 시나리오의 마지막 저장 반복에서의 추정값이며, 참값 대비 편차(%)를 추정값 아래에 표시했습니다.',
       tabCols: ['모수', '참값', '풍부', '중간', '희박'], shrRow: 'η 수축 {n}', itRow: '채택된 반복 횟수',
       iterT: '한 번의 반복에서 일어나는 일', iterSteps: [
         '내부 문제. 현재의 모집단 값(θ, ω, σ)에서 각 개체마다 그 개체의 자료로 볼 때 가장 그럴듯한 개인 편차 η̂를 찾습니다(Σ[ln var + res²/var] + η′Ω⁻¹η의 최솟값이며, 잔차 분산을 η에서 계산하는 것이 상호작용입니다).',
@@ -130,10 +130,11 @@
     if (parent) parent.appendChild(e);
     return e;
   }
+  function scroller(parent, label) { var d = el('div', 'nx-scroll', null, parent); d.tabIndex = 0; d.setAttribute('role', 'region'); d.setAttribute('aria-label', label); return d; }
   function clear(n) { while (n.firstChild) n.removeChild(n.firstChild); }
   function tpl(s, o) { return s.replace(/\{(\w+)\}/g, function (m, k) { return o[k] != null ? o[k] : m; }); }
   function num(x, d) { var s = Number(x).toFixed(d); return s.replace(/^-(?=0*\.?0*$)/, '').replace('-', MINUS); }
-  function sgn(x, d) { return (x >= 0 ? '+' : '') + num(x, d); }
+  function sgn(x, d) { return (x >= 0 && Math.abs(x) >= 0.5 * Math.pow(10, -d) ? '+' : '') + num(x, d); }
   function sig3(x) { var a = Math.abs(x); if (a === 0) return '0'; if (a >= 100) return num(x, 0); if (a >= 10) return num(x, 1); if (a >= 1) return num(x, 2); if (a >= 0.1) return num(x, 3); return num(x, 4); }
   function lin(d0, d1, r0, r1) { return function (v) { return r0 + (v - d0) / (d1 - d0) * (r1 - r0); }; }
   function niceStep(range, n) { var raw = range / n, p = Math.pow(10, Math.floor(Math.log10(raw))), f = raw / p; return (f < 1.5 ? 1 : f < 3 ? 2 : f < 7 ? 5 : 10) * p; }
@@ -280,13 +281,14 @@
     var lg = el('ul', 'nx-legend', null, pf);
     [['nx-sw-obs', T.obs], ['nx-sw-ind', T.ind], ['nx-sw-pop', T.pop], ['nx-sw-tru', T.tru], ['nx-sw-sel', T.sel]].forEach(function (a) { var li = el('li', null, null, lg); el('i', 'nx-sw ' + a[0], null, li); el('span', null, a[1], li); });
     X.subjInfo = el('p', 'nx-note', '', pf); X.subjInfo.hidden = true;
-    X.mini = el('div', 'nx-scroll', null, pf); X.mini.hidden = true;
+    X.mini = scroller(pf, T.miniCap); X.mini.hidden = true;
 
     // objective panel
     var po = panel('nx-obj', T.ofvT);
     var tb2 = el('div', 'nx-toolbar', null, po); el('span', 'nx-lbl', T.ofvLine, tb2);
     tog(T.dOfv, 'ofvLog', tb2, render);
     X.ofvBox = el('div', 'nx-chart', null, po); X.ofvSvg = svgEl(X.ofvBox);
+    el('p', 'nx-note', T.ofvNote, po);
     el('h4', 'nx-h4', T.cT, po);
     X.cBox = el('div', 'nx-chart', null, po); X.cSvg = svgEl(X.cBox);
     X.cNote = el('p', 'nx-note', '', po);
@@ -307,7 +309,7 @@
     // table
     var pt = el('section', 'nx-panel nx-tab', null, root);
     var th = el('h3', 'nx-h3', T.tabT, pt); th.id = 'nx' + id + 'tab'; pt.setAttribute('aria-labelledby', th.id);
-    var tw = el('div', 'nx-scroll', null, pt); X.table = el('table', 'nx-table', null, tw);
+    var tw = scroller(pt, T.tabCap); X.table = el('table', 'nx-table', null, tw);
     el('caption', null, T.tabCap, X.table);
     buildTable();
 
@@ -341,8 +343,8 @@
       var ri = el('tr', null, null, tb), hi = el('th', null, T.itRow, ri); hi.scope = 'row'; el('td', null, '–', ri);
       ['rich', 'moderate', 'sparse'].forEach(function (k) { var td = el('td', null, String(data.scenarios[k].n_iter_total), ri); td.dataset.scen = k; });
     }
-    function vTable(parent, cols, rows) {
-      var w = el('div', 'nx-scroll', null, parent), t = el('table', 'nx-table nx-small', null, w), tr = el('tr', null, null, el('thead', null, null, t));
+    function vTable(parent, label, cols, rows) {
+      var w = scroller(parent, label), t = el('table', 'nx-table nx-small', null, w), tr = el('tr', null, null, el('thead', null, null, t));
       cols.forEach(function (c) { el('th', null, c, tr).scope = 'col'; });
       var tb = el('tbody', null, null, t);
       rows.forEach(function (r) { var q = el('tr', null, null, tb); r.forEach(function (c, i) { if (i === 0) el('th', null, c, q).scope = 'row'; else el('td', null, c, q); }); });
@@ -357,13 +359,13 @@
       var lp = v.laplace_vs_bruteforce;
       if (lp) {
         el('p', 'nx-p', T.vLapT, d);
-        vTable(d, T.vLapCols, ['rich', 'moderate', 'sparse'].map(function (k) { var g = lp[k]; return [names[k], String(g.n_obs_per_subject), sgn(g.gap_mean, 3), sgn(g.gap_min, 3) + ' … ' + sgn(g.gap_max, 3), sgn(g.sum_gap, 2)]; }));
+        vTable(d, T.vLapT, T.vLapCols, ['rich', 'moderate', 'sparse'].map(function (k) { var g = lp[k]; return [names[k], String(g.n_obs_per_subject), sgn(g.gap_mean, 3), sgn(g.gap_min, 3) + ' … ' + sgn(g.gap_max, 3), sgn(g.sum_gap, 2)]; }));
         if (lp.rich_at_start_values) { var s0 = lp.rich_at_start_values; el('p', 'nx-p', tpl(T.vLapStart, { m: sgn(s0.gap_mean, 2), a: sgn(s0.gap_min, 2), b: sgn(s0.gap_max, 2) }), d); }
       }
       var rs = v.independent_starts;
       if (rs) {
         el('p', 'nx-p', T.vRestT, d);
-        vTable(d, T.vRestCols, ['rich', 'moderate', 'sparse'].map(function (k) {
+        vTable(d, T.vRestT, T.vRestCols, ['rich', 'moderate', 'sparse'].map(function (k) {
           var r = rs[k].runs, md = 0, mp = 0, ok = 0; r.forEach(function (x) { md = Math.max(md, Math.abs(x.d_ofv)); mp = Math.max(mp, x.max_rel_diff_pct); if (x.success) ok++; });
           return [names[k], md.toExponential(1), num(mp, 2), ok + '/' + r.length];
         }));
@@ -374,7 +376,7 @@
         el('p', 'nx-p', tpl(T.vRepT, { n: n0 }), d);
         var rows = T.pnames.map(function (pn, p) { return [pn].concat(['rich', 'moderate', 'sparse'].map(function (k) { return sgn(res[k].median_err_pct[p], 1); })); });
         rows.push([T.vRepConv].concat(['rich', 'moderate', 'sparse'].map(function (k) { return res[k].n_converged + '/' + res[k].n_replicates; })));
-        vTable(d, T.vRepCols, rows);
+        vTable(d, tpl(T.vRepT, { n: n0 }), T.vRepCols, rows);
       }
     }
 
@@ -430,7 +432,7 @@
     ranges();
 
     function drawFit(W) {
-      var fr = frame(), w = W, h = Math.max(240, Math.min(380, Math.round(W * 0.64))), m = { l: 50, r: 10, t: 8, b: 40 }, svg = X.fitSvg;
+      var fr = frame(), w = W, h = Math.max(250, Math.min(440, Math.round(W * 0.8))), m = { l: 50, r: 10, t: 8, b: 40 }, svg = X.fitSvg;
       setSvg(svg, w, h, tpl(T.fitAlt, { it: fr.iter }));
       var log = S.logY, yr = log ? fitRange.log : fitRange.lin, tmax = fitRange.tmax;
       var xs = lin(0, tmax, m.l, w - m.r), ys = log ? lin(Math.log(yr[0]), Math.log(yr[1]), h - m.b, m.t) : lin(yr[0], yr[1], h - m.b, m.t);

@@ -347,11 +347,11 @@
       o = o || {};
       const nc = rows[0].length, all = [].concat(...rows), vmax = o.vmax || Math.max(1e-12, ...all.map(Math.abs)), nf = o.fmt || ((v) => f(v, o.dig));
       const g = h('div', { class: 'dx-cells' + (rows.length > 1 ? ' dx-mat' : ''), role: 'group', 'aria-label': o.label || '', 'data-cols': nc });
-      g.style.setProperty('--n', nc); g.style.setProperty('--nm', nc <= 5 ? nc : Math.ceil(nc / 2));
+      g.style.setProperty('--n', nc); g.style.setProperty('--nm', nc <= 4 ? nc : Math.ceil(nc / 2));
       rows.forEach((row, r) => row.forEach((v, c) => {
         const nm = o.names ? o.names[c] : String(c + 1), ex = o.ex ? o.ex(r, c, v) : '';
         const cell = h('button', { type: 'button', class: 'dx-cell' + (o.act && v === 0 ? ' dx-zero' : ''), tabindex: r + c === 0 ? '0' : '-1', 'data-ex': ex, title: ex || null, 'aria-label': `${o.rowName ? o.rowName(r) + ' ' : ''}${nm}: ${nf(v)}${ex ? '. ' + ex : ''}` },
-          [h('span', { class: 'dx-cn', 'aria-hidden': 'true', text: nm }), h('span', { class: 'dx-cv', text: nf(v) })]);
+          [r === 0 || rows.length === 1 ? h('span', { class: 'dx-cn', 'aria-hidden': 'true', text: nm }) : null, h('span', { class: 'dx-cv', text: nf(v) })]);
         cell.style.background = tint(v, vmax, o.act);
         g.append(cell);
       }));
@@ -417,15 +417,15 @@
       h('p', { class: 'dx-note', text: T('pNote') })]);
 
     // network diagram (built once, attributes updated)
-    const VW = 420, VH = 330, LX = [96, 192, 288, 380], SIZES = [5, 8, 6, 1];
+    const VW = 360, VH = 330, LX = [92, 170, 248, 316], SIZES = [5, 8, 6, 1];
     const NY = SIZES.map((n) => { const sp = Math.min(36, 270 / n), t0 = 172 - (sp * (n - 1)) / 2; return Array.from({ length: n }, (_, i) => t0 + i * sp); });
     const net = s('svg', { viewBox: `0 0 ${VW} ${VH}`, class: 'dx-net', role: 'img', focusable: 'false' });
     const edges = [[], [], []], nodes = SIZES.map(() => []);
     for (let l = 0; l < 3; l++) { const gE = s('g'); for (let i = 0; i < SIZES[l + 1]; i++) for (let j = 0; j < SIZES[l]; j++) { const ln = s('line', { x1: LX[l], y1: NY[l][j], x2: LX[l + 1], y2: NY[l + 1][i], 'stroke-linecap': 'round' }); gE.append(ln); edges[l].push(ln); } net.append(gE); }
     SIZES.forEach((n, l) => { for (let i = 0; i < n; i++) { const c = s('circle', { cx: LX[l], cy: NY[l][i], r: 8, class: 'dx-node' }, s('title')); net.append(c); nodes[l].push(c); } });
-    D.colHead.forEach((t, l) => net.append(s('text', { x: LX[l], y: 16, class: 'dx-nlab dx-nhead', 'text-anchor': 'middle', text: t })));
-    D.inShort.forEach((t, i) => net.append(s('text', { x: LX[0] - 14, y: NY[0][i] + 4, class: 'dx-nlab', 'text-anchor': 'end', text: t })));
-    const outLab = s('text', { x: LX[3], y: NY[3][0] + 30, class: 'dx-nlab', 'text-anchor': 'middle' });
+    D.colHead.forEach((t, l) => net.append(s('text', { x: LX[l], y: 18, class: 'dx-nlab dx-nhead', 'text-anchor': l === 3 ? 'end' : 'middle', text: t })));
+    D.inShort.forEach((t, i) => net.append(s('text', { x: LX[0] - 15, y: NY[0][i] + 5, class: 'dx-nlab', 'text-anchor': 'end', text: t })));
+    const outLab = s('text', { x: VW - 4, y: NY[3][0] + 32, class: 'dx-nlab dx-nhalo', 'text-anchor': 'end' });
     net.append(outLab);
     const netCap = h('p', { class: 'dx-note' }), netDesc = h('p', { class: 'dx-sr', id: `${id}-nd` });
     net.setAttribute('aria-describedby', netDesc.id);
@@ -621,7 +621,7 @@
     const how = h('details', { class: 'dx-details dx-wide' }, [h('summary', { text: T('howH') }), h('ol', null, D.how.map((t) => h('li', { text: t }))), h('p', { class: 'dx-note', text: T('adme') })]);
     P2.append(h('p', { class: 'dx-lede', text: T('lede2') }), h('div', { class: 'dx-grid dx-grid1' }, [cardMol, cardRd, cardEv]), how);
 
-    const SC = 360, PAD = 30, R = 14;
+    const SC = 360, PAD = 30, R = 15;
     const xy = (a) => [PAD + a.x * SC, PAD + a.y * SC];
     function buildMol() {
       mol = mols[st.mi]; fwd = gnnFwd(Gd, mol); st.atom = 0; let bd = -1; mol.atoms.forEach((a, i) => { if (a.deg > bd) { bd = a.deg; st.atom = i; } });
@@ -646,7 +646,7 @@
       atomEls = mol.atoms.map((a, i) => {
         const [x, y] = xy(a);
         const ring = s('circle', { cx: x, cy: y, r: R + 5, class: 'dx-atom-ring' }), dot = s('circle', { cx: x, cy: y, r: R, class: 'dx-atom-dot' }), lab = s('text', { x, y: y + 4.5, class: 'dx-atom-lab', 'text-anchor': 'middle', text: a.el }), sel = s('circle', { cx: x, cy: y, r: R + 3, class: 'dx-atom-sel' });
-        const g = s('g', { class: 'dx-atom', tabindex: i === st.atom ? '0' : '-1', role: 'button', 'data-i': i }, [ring, sel, dot, lab]);
+        const g = s('g', { class: 'dx-atom', tabindex: i === st.atom ? '0' : '-1', role: 'button', 'data-i': i }, [ring, sel, dot, lab, s('circle', { cx: x, cy: y, r: 19, class: 'dx-atom-hit' })]);
         g.addEventListener('focus', () => pick(i, true)); g.addEventListener('click', () => { pick(i, true); g.focus(); });
         g.addEventListener('keydown', (e) => atomKey(e, i));
         ga.append(g); return g;
