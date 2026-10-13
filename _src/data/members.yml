@@ -1,0 +1,20 @@
+# Public member list: names + roles only (HANDOFF D8). Extracted from the previous site by code (see handoff data/members.yml).
+# role: pi | phd | ms | alumni. name_ko: ask each member. show_email: only with the member's consent AND site.yml show_member_emails.
+members:
+  - {name_en: "Sung-Hoon Ahn", role: pi, name_ko: null, email: "ahnsh@kangwon.ac.kr", show_email: true}
+  - {name_en: "Kyung-Sun Moon", role: phd, name_ko: null, email: null, show_email: false}
+  - {name_en: "Jong-Min Song", role: phd, name_ko: null, email: null, show_email: false}
+  - {name_en: "Ju Hyun Park", role: phd, name_ko: null, email: null, show_email: false}
+  - {name_en: "Hee Uk Kim", role: phd, name_ko: null, email: null, show_email: false}
+  - {name_en: "Eun Dong Shin", role: phd, name_ko: null, email: null, show_email: false}
+  - {name_en: "Jong Bae Kim", role: phd, name_ko: null, email: null, show_email: false}
+  - {name_en: "Young-Hyean Nam", role: phd, name_ko: null, email: null, show_email: false}
+  - {name_en: "June Hahk Bae", role: phd, name_ko: null, email: null, show_email: false}
+  - {name_en: "Hyun Chan Lim", role: phd, name_ko: null, email: null, show_email: false}
+  - {name_en: "Kiok Ahn", role: phd, name_ko: null, email: null, show_email: false}
+  - {name_en: "Joon Hee Lee", role: phd, name_ko: null, email: null, show_email: false}
+  - {name_en: "Chae-I Shin", role: ms, name_ko: null, email: null, show_email: false}
+  - {name_en: "Min-Kyung Jeong", role: ms, name_ko: null, email: null, show_email: false}
+  - {name_en: "Su-A Choi", role: ms, name_ko: null, email: null, show_email: false}
+  - {name_en: "Min Lee", role: ms, name_ko: null, email: null, show_email: false}
+  - {name_en: "Mariam Khaled", role: ms, name_ko: null, email: null, show_email: false}

@@ -1,0 +1,138 @@
+{% extends "base.html" %}
+{% from "_macros.html" import icon, section_head, pub_compact %}
+{% block main %}
+<section class="hero" aria-labelledby="hero-title">
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <p class="eyebrow">{{ L(site.identity.college) }} · {{ L(site.identity.university) }}</p>
+      <h1 id="hero-title">{{ L(site.identity.name) }}</h1>
+      <p class="hero-tag">{{ L(site.identity.tagline) }}</p>
+      <p class="lead">{{ t.hero.lead }}</p>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="{{ url('research') }}">{{ t.hero.cta_research }}{{ icon('arrow') }}</a>
+        <a class="btn btn-ghost" href="{{ url('methods') }}">{{ t.hero.cta_methods }}</a>
+      </div>
+    </div>
+    <figure class="hero-fig">
+      <div class="fig-card">{{ fig_hero|safe }}</div>
+      <figcaption>{{ t.hero.caption }}</figcaption>
+    </figure>
+  </div>
+  <div class="wrap">
+    <dl class="facts" data-reveal>
+      <div><dt>{{ t.facts.pubs }}</dt><dd><span class="num">{{ n_pubs }}</span><small>{{ year_min }}–{{ year_max }}</small></dd></div>
+      <div><dt>{{ t.facts.areas }}</dt><dd><span class="num">{{ research.areas|length }}</span><small>{{ t.facts.areas_note }}</small></dd></div>
+      <div><dt>{{ t.facts.students }}</dt><dd><span class="num">{{ n_students }}</span><small>{{ t.facts.students_note }}</small></dd></div>
+    </dl>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="study-title">
+  <div class="wrap">
+    {{ section_head(t.home.study_eyebrow, t.home.study_title, t.home.study_sub, 'study-title') }}
+    <div class="card-grid cols-2">
+    {%- for a in research.areas %}
+      <article class="card area-card" data-reveal>
+        <div class="card-top"><span class="icon-tile">{{ icon(a.icon) }}</span><span class="card-num">0{{ loop.index }}</span></div>
+        <h3>{{ L(a.title) }}</h3>
+        <p>{{ L(a.text) }}</p>
+        <ul class="chips">{% for tag in L(a.tags) %}<li>{{ tag }}</li>{% endfor %}</ul>
+        <a class="more" href="{{ url('research') }}#{{ a.id }}">{{ t.home.learn_more }}<span class="visually-hidden"> — {{ L(a.title) }}</span>{{ icon('arrow') }}</a>
+      </article>
+    {%- endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section soft" aria-labelledby="work-title">
+  <div class="wrap">
+    {{ section_head(t.home.work_eyebrow, t.home.work_title, t.home.work_sub, 'work-title') }}
+    <div class="process" data-process data-label="{{ t.home.work_title }}">
+      <ol class="steps">
+      {%- for s in process.steps %}
+        <li class="step" id="step-{{ s.id }}" data-step="{{ s.id }}">
+          <div class="step-copy">
+            <span class="step-icon">{{ icon(s.icon) }}</span>
+            <h3 class="step-title"><span class="step-n">{{ loop.index }}</span>{{ L(s.title) }}</h3>
+            <p class="step-text">{{ L(s.text) }}</p>
+          </div>
+          <div class="step-fig" aria-hidden="false">{{ fig_steps[s.id]|safe }}</div>
+        </li>
+      {%- endfor %}
+      </ol>
+    </div>
+    <p class="fine">{{ t.home.work_note }}</p>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="methods-title">
+  <div class="wrap">
+    {{ section_head(t.home.methods_eyebrow, t.home.methods_title, t.home.methods_sub, 'methods-title') }}
+    <div class="card-grid cols-2">
+      <a class="card demo-card" href="{{ url('methods') }}#nlme" data-reveal>
+        <div class="demo-fig">{{ teaser_nlme|safe }}<span class="badge">{{ t.badge.synthetic }}</span></div>
+        <h3>{{ t.methods.nlme_title }}</h3>
+        <p>{{ t.home.nlme_text }}</p>
+        <span class="more">{{ t.home.try_it }}{{ icon('arrow') }}</span>
+      </a>
+      <a class="card demo-card" href="{{ url('methods') }}#deep-learning" data-reveal>
+        <div class="demo-fig">{{ teaser_dl|safe }}<span class="badge">{{ t.badge.synthetic }}</span></div>
+        <h3>{{ t.methods.dl_title }}</h3>
+        <p>{{ t.home.dl_text }}</p>
+        <span class="more">{{ t.home.try_it }}{{ icon('arrow') }}</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+{%- if news_items %}
+<section class="section" aria-labelledby="news-title">
+  <div class="wrap">
+    {{ section_head(t.home.news_eyebrow, t.home.news_title, None, 'news-title') }}
+    <ul class="news">{% for n in news_items[:3] %}<li data-reveal><time datetime="{{ n.date }}">{{ n.date }}</time><div><h3>{{ L(n.title) }}</h3><p>{{ L(n.text) }}</p></div></li>{% endfor %}</ul>
+  </div>
+</section>
+{%- endif %}
+
+<section class="section soft" aria-labelledby="pubs-title">
+  <div class="wrap pubs-home">
+    <div>
+      {{ section_head(t.home.pubs_eyebrow, t.home.pubs_title, t.home.pubs_sub, 'pubs-title') }}
+      <ol class="pub-compact" data-reveal>
+      {%- for p in recent %}{{ pub_compact(p, t, pi_re) }}{% endfor %}
+      </ol>
+      <a class="btn btn-ghost" href="{{ url('publications') }}">{{ t.home.pubs_all.format(n=n_pubs) }}{{ icon('arrow') }}</a>
+    </div>
+    <div class="hist-card" data-reveal>{{ fig_hist|safe }}</div>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="people-title">
+  <div class="wrap people-teaser">
+    <div data-reveal>
+      <p class="eyebrow">{{ t.home.people_eyebrow }}</p>
+      <h2 id="people-title">{{ t.home.people_title }}</h2>
+      <p class="sec-sub">{{ t.home.people_sub.format(phd=n_phd, ms=n_ms) }}</p>
+      <a class="btn btn-ghost" href="{{ url('people') }}">{{ t.home.people_all }}{{ icon('arrow') }}</a>
+    </div>
+    <div class="pi-mini card" data-reveal>
+      <span class="avatar lg" aria-hidden="true">{{ pi.initials }}</span>
+      <div>
+        <p class="pi-name">{{ pi.name }}</p>
+        <p class="pi-role">{{ t.people.pi_role }}</p>
+        <p class="pi-fields">{{ t.people.pi_fields }}</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="join" aria-labelledby="join-title">
+  <div class="wrap join-grid">
+    <div>
+      <h2 id="join-title">{{ L(contact.join.title) }}</h2>
+      <p>{{ L(contact.join.text) }}</p>
+    </div>
+    <a class="btn btn-light" href="mailto:{{ contact.pi_email }}">{{ icon('mail') }}{{ t.contact.write }}</a>
+  </div>
+</section>
+{% endblock %}

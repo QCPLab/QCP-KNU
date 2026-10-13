@@ -1,0 +1,58 @@
+{
+ "Mould & Upton 2013 (popPK basics pt2)": {
+  "doi": "10.1038/psp.2013.14",
+  "title": "Basic Concepts in Population Modeling, Simulation, and Model‐Based Drug Development—Part 2: Introduction to Pharmacokinetic Modeling Methods",
+  "year": 2013,
+  "journal": "CPT: Pharmacometrics &amp; Systems Pharmacology",
+  "authors": "Mould, Upton"
+ },
+ "Kuepfer 2016 (PBPK how-to)": {
+  "doi": "10.1002/psp4.12134",
+  "title": "Applied Concepts in PBPK Modeling: How to Build a PBPK/PD Model",
+  "year": 2016,
+  "journal": "CPT: Pharmacometrics &amp; Systems Pharmacology",
+  "authors": "Kuepfer, Niederalt, Wendl"
+ },
+ "Wang 2007 (NONMEM estimation methods)": {
+  "doi": "10.1007/s10928-007-9060-6",
+  "title": "Derivation of various NONMEM estimation methods",
+  "year": 2007,
+  "journal": "Journal of Pharmacokinetics and Pharmacodynamics",
+  "authors": "Wang"
+ },
+ "Kuhn & Lavielle 2005 (SAEM)": {
+  "doi": "10.1016/j.csda.2004.07.002",
+  "title": "Maximum likelihood estimation in nonlinear mixed effects models",
+  "year": 2005,
+  "journal": "Computational Statistics &amp; Data Analysis",
+  "authors": "Kuhn, Lavielle"
+ },
+ "Yang 2019 (Chemprop)": {
+  "doi": "10.1021/acs.jcim.9b00237",
+  "title": "Analyzing Learned Molecular Representations for Property Prediction",
+  "year": 2019,
+  "journal": "Journal of Chemical Information and Modeling",
+  "authors": "Yang, Swanson, Jin"
+ },
+ "Marshall 2016 (good practices in model-informed drug discovery & development)": {
+  "doi": "10.1002/psp4.12049",
+  "title": "Good Practices in Model‐Informed Drug Discovery and Development: Practice, Application, and Documentation",
+  "year": 2016,
+  "journal": "CPT: Pharmacometrics &amp; Systems Pharmacology",
+  "authors": ", Marshall, Burghaus"
+ },
+ "Lindstrom & Bates 1990 (NLME for repeated measures)": {
+  "doi": "10.2307/2532087",
+  "title": "Nonlinear Mixed Effects Models for Repeated Measures Data",
+  "year": 1990,
+  "journal": "Biometrics",
+  "authors": "Lindstrom, Bates"
+ },
+ "Rumelhart, Hinton, Williams 1986 (backpropagation)": {
+  "doi": "10.1038/323533a0",
+  "title": "Learning representations by back-propagating errors",
+  "year": 1986,
+  "journal": "Nature",
+  "authors": "Rumelhart, Hinton, Williams"
+ }
+}

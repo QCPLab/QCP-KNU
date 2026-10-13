@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% from "_macros.html" import icon %}
+{% block main %}
+<section class="notfound">
+  <div class="wrap">
+    <p class="eyebrow">404</p>
+    <h1>{{ t.nf.title }}</h1>
+    <p class="lead">{{ t.nf.text }}</p>
+    <div class="hero-cta">
+      <a class="btn btn-primary" href="{{ url('home') }}">{{ t.nf.home }}{{ icon('arrow') }}</a>
+      <a class="btn btn-ghost" href="{{ url('publications') }}">{{ t.nav.publications }}</a>
+    </div>
+  </div>
+</section>
+{% endblock %}

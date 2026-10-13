@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% from "_macros.html" import icon, section_head, pub_compact %}
+{% block main %}
+<section class="page-head">
+  <div class="wrap">
+    <p class="eyebrow">{{ t.nav.research }}</p>
+    <h1>{{ t.research.title }}</h1>
+    <p class="lead">{{ t.research.lead }}</p>
+  </div>
+</section>
+
+<div class="wrap research-layout">
+  <aside class="side-nav" aria-label="{{ t.research.on_this_page }}">
+    <p class="side-title">{{ t.research.on_this_page }}</p>
+    <ul data-spy>
+    {%- for a in research.areas %}<li><a href="#{{ a.id }}"><span>0{{ loop.index }}</span>{{ L(a.title) }}</a></li>{% endfor %}
+      <li><a href="#bioanalysis"><span>＋</span>{{ t.research.bio_nav }}</a></li>
+      <li><a href="#official"><span>↗</span>{{ t.research.official_nav }}</a></li>
+    </ul>
+  </aside>
+
+  <div class="research-main">
+  {%- for a in research.areas %}
+    <section class="area" id="{{ a.id }}" aria-labelledby="{{ a.id }}-h" data-reveal>
+      <div class="area-head">
+        <span class="icon-tile lg">{{ icon(a.icon) }}</span>
+        <p class="card-num">0{{ loop.index }}</p>
+      </div>
+      <h2 id="{{ a.id }}-h">{{ L(a.title) }}</h2>
+      <p class="area-text">{{ L(a.text) }}</p>
+      <div class="area-cols">
+        <div>
+          <h3 class="mini-h">{{ t.research.questions }}</h3>
+          <ul class="qs">{% for q in L(a.questions) %}<li>{{ q }}</li>{% endfor %}</ul>
+        </div>
+        <div>
+          <h3 class="mini-h">{{ t.research.approaches }}</h3>
+          <ul class="chips">{% for tag in L(a.tags) %}<li>{{ tag }}</li>{% endfor %}</ul>
+        </div>
+      </div>
+      {%- if area_pubs[a.id] %}
+      <h3 class="mini-h">{{ t.research.selected }}</h3>
+      <ol class="pub-compact">{% for p in area_pubs[a.id] %}{{ pub_compact(p, t, pi_re) }}{% endfor %}</ol>
+      {%- endif %}
+    </section>
+  {%- endfor %}
+
+    <section class="area area-support" id="bioanalysis" aria-labelledby="bioanalysis-h" data-reveal>
+      <div class="area-head"><span class="icon-tile lg">{{ icon('peaks') }}</span><p class="card-num">＋</p></div>
+      <h2 id="bioanalysis-h">{{ L(research.bioanalysis.title) }}</h2>
+      <p class="area-text">{{ L(research.bioanalysis.text) }}</p>
+      <h3 class="mini-h">{{ t.research.selected }}</h3>
+      <ol class="pub-compact">{% for p in bio_pubs %}{{ pub_compact(p, t, pi_re) }}{% endfor %}</ol>
+    </section>
+
+    <section class="official" id="official" aria-labelledby="official-h" data-reveal>
+      <h2 id="official-h">{{ t.research.official_title }}</h2>
+      <p class="area-text">{{ t.research.official_text }}</p>
+      <ol class="official-list">{% for it in research.official_items %}<li>{{ L(it) }}</li>{% endfor %}</ol>
+      <a class="more" href="{{ site.official_page }}" rel="noopener" target="_blank">{{ t.research.official_link }}{{ icon('external') }}</a>
+    </section>
+
+    <div class="cta-strip" data-reveal>
+      <div><h2>{{ t.research.cta_title }}</h2><p>{{ t.research.cta_text }}</p></div>
+      <a class="btn btn-primary" href="{{ url('methods') }}">{{ t.research.cta_btn }}{{ icon('arrow') }}</a>
+    </div>
+  </div>
+</div>
+{% endblock %}

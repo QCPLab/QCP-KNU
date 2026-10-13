@@ -1,0 +1,26 @@
+/* Design tokens shared by the site and every interactive widget. Widgets must read these with fallbacks, e.g. var(--accent, #0a7d77). */
+:root{
+  --font: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", system-ui, sans-serif;
+  --mono: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
+
+  --ink:#10243a;        /* headings, key numbers            (15.9:1 on white) */
+  --ink-2:#33475b;      /* body text                        (9.3:1)           */
+  --muted:#566a7e;      /* secondary text, axis labels      (5.6:1)           */
+  --line:#dde4ec;       /* hairlines, card borders                            */
+  --line-2:#c4cfdb;     /* stronger rules, axis lines                         */
+
+  --bg:#ffffff;  --bg-soft:#f3f6f9;  --surface:#ffffff;
+
+  --accent:#0a7d77;     /* teal: links, population curve    (5.0:1 on white)  */
+  --accent-2:#065e59;   /* teal, hover / emphasis                              */
+  --accent-soft:#e1f1ef;
+  --data:#c8590f;       /* orange: observed data points, 'current' markers     */
+  --blue:#2859a8;       /* secondary series                                    */
+  --plum:#6b4d9a;       /* tertiary series                                     */
+  --good:#2f7d3a; --bad:#b3261e;
+
+  --radius:12px; --radius-sm:8px;
+  --shadow:0 1px 2px rgba(16,36,58,.06), 0 8px 24px rgba(16,36,58,.06);
+  --focus:0 0 0 3px rgba(10,125,119,.35);
+}
+.visually-hidden{position:absolute!important;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}

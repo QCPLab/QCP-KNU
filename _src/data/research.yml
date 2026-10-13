@@ -1,0 +1,65 @@
+# Research areas (4) grouped from the department's 5 official topics; text from docs copy deck, PI review pending.
+official_items:
+  - {en: "Pharmacokinetics and disposition of drug candidates", ko: "신약후보물질의 체내동태 및 약동학 연구"}
+  - {en: "Drug metabolism and metabolite studies", ko: "약물대사 및 약물대사체 연구"}
+  - {en: "Drug transporter studies", ko: "약물수송체 연구"}
+  - {en: "Pharmacokinetics in disease models", ko: "질병모델에서의 약동학 연구"}
+  - {en: "Drug–drug interactions based on metabolism and transporters", ko: "약물대사 및 수송체 기반의 약물상호작용 연구"}
+
+areas:
+  - id: pk
+    icon: curve
+    official: [1, 4]
+    title: {en: "Pharmacokinetics of drug candidates and disease models", ko: "신약후보물질·질병모델 약동학"}
+    text:
+      en: "We characterize the systemic exposure of new drug candidates and marketed drugs, in healthy animals and in disease models, and identify what governs it."
+      ko: "신약후보물질과 기존 의약품의 전신 노출을 건강한 동물과 질병모델에서 평가하고, 이를 좌우하는 요인을 규명합니다."
+    questions:
+      en: ["How much of a dose reaches the circulation, and how quickly is it cleared?", "How does exposure change in a disease model compared with healthy animals?", "Which properties of a candidate limit its exposure?"]
+      ko: ["투여한 약물이 얼마나 순환계에 도달하고, 얼마나 빨리 제거되는가?", "질병모델에서 노출은 건강한 동물과 어떻게 다른가?", "후보물질의 어떤 성질이 노출을 제한하는가?"]
+    tags: {en: ["In vivo PK", "Disease models", "Drug candidates"], ko: ["생체 내 약동학", "질병모델", "신약후보물질"]}
+    papers: [45, 48, 58]
+  - id: metabolism
+    icon: molecule
+    official: [2]
+    title: {en: "Drug metabolism and metabolites", ko: "약물대사·대사체"}
+    text:
+      en: "We study how drugs are metabolized, which metabolites form, and how metabolism shapes exposure and safety, supported by LC-MS/MS metabolite analysis."
+      ko: "약물이 어떻게 대사되고 어떤 대사체가 생기는지, 대사가 노출과 안전성에 어떤 영향을 주는지 LC-MS/MS 분석으로 뒷받침해 연구합니다."
+    questions:
+      en: ["Which metabolites form, and through which pathways?", "How does metabolic clearance shape systemic exposure?", "Could a metabolite matter for activity or safety?"]
+      ko: ["어떤 대사체가 어떤 경로로 생성되는가?", "대사 청소율은 전신 노출을 어떻게 결정하는가?", "대사체가 활성이나 안전성에 영향을 줄 수 있는가?"]
+    tags: {en: ["Metabolite profiling", "In vitro metabolism", "LC-MS/MS"], ko: ["대사체 분석", "in vitro 대사", "LC-MS/MS"]}
+    papers: [47, 53, 46]
+  - id: transport
+    icon: transporter
+    official: [3, 5]
+    title: {en: "Drug transporters and drug–drug interactions", ko: "약물수송체·약물상호작용"}
+    text:
+      en: "Co-prescribed drugs often compete for the same enzymes and transporters. We examine enzyme- and transporter-mediated interactions to explain changes in efficacy and adverse effects."
+      ko: "함께 처방되는 약물은 같은 대사효소·수송체를 두고 경쟁하는 경우가 많습니다. 효소·수송체 기반 상호작용을 분석해 효과와 부작용 변화를 설명합니다."
+    questions:
+      en: ["Is a drug a substrate or an inhibitor of a given transporter?", "What happens to exposure when two drugs are given together?", "Can an interaction explain a change in efficacy or adverse effects?"]
+      ko: ["약물이 특정 수송체의 기질인가, 저해제인가?", "두 약물을 함께 투여하면 노출은 어떻게 달라지는가?", "상호작용이 효과나 부작용의 변화를 설명할 수 있는가?"]
+    tags: {en: ["Transporters", "Enzymes", "Interaction risk"], ko: ["수송체", "대사효소", "상호작용 위험"]}
+    papers: [14, 57]
+  - id: modeling
+    icon: model
+    official: []
+    # TODO(PI): confirm which modeling activities the lab actually performs (Q7). Titles show 4 of 69 papers on modeling/in silico; a PBPK review (#68).
+    title: {en: "Quantitative modeling and prediction", ko: "정량적 모델링·예측"}
+    text:
+      en: "We use pharmacokinetic, physiologically based (PBPK) and population (nonlinear mixed-effects) models, and machine learning, to interpret data and predict exposure in situations that were not tested."
+      ko: "약동학 모델, 생리학 기반(PBPK) 모델, 집단(비선형 혼합효과) 모델과 기계학습으로 자료를 해석하고, 시험하지 않은 상황의 노출을 예측합니다."
+    questions:
+      en: ["Which model structure explains the concentration–time data?", "How much of the variability is between individuals?", "What exposure is expected in a scenario that was not tested?"]
+      ko: ["어떤 모델 구조가 농도–시간 자료를 설명하는가?", "변동 중 개체 간 변동은 얼마나 되는가?", "시험하지 않은 상황에서는 어떤 노출이 예상되는가?"]
+    tags: {en: ["Compartmental", "Population (NLME)", "PBPK", "Machine learning"], ko: ["구획 모델", "집단(NLME)", "PBPK", "기계학습"]}
+    papers: [68, 67, 29]
+
+bioanalysis:
+  title: {en: "Bioanalysis: the measurement behind every study", ko: "생체시료 분석: 모든 연구의 바탕이 되는 정량"}
+  text:
+    en: "Every pharmacokinetic result starts with a reliable concentration. We develop and validate LC-MS/MS methods to measure drugs and metabolites in biological samples such as plasma."
+    ko: "모든 약동학 결과는 신뢰할 수 있는 농도 측정에서 시작합니다. 혈장 같은 생체시료 중 약물과 대사체를 정량하는 LC-MS/MS 분석법을 개발하고 검증합니다."
+  papers: [65, 56, 40]

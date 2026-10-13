@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Methods | Laboratory of Pharmaceutical Sciences</title>
+<meta name="description" content="Interactive explainers built on simulated data: how a population pharmacokinetic model is fitted and how a neural network computes.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#ffffff">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Methods | Laboratory of Pharmaceutical Sciences">
+<meta property="og:description" content="Interactive explainers built on simulated data: how a population pharmacokinetic model is fitted and how a neural network computes.">
+<meta property="og:locale" content="en_US">
+<link rel="icon" type="image/svg+xml" href="../assets/img/favicon.svg">
+<link rel="alternate" hreflang="en" href="./">
+<link rel="alternate" hreflang="ko" href="../ko/methods/">
+<link rel="alternate" hreflang="x-default" href="./">
+<script>document.documentElement.classList.add('js')</script>
+<link rel="stylesheet" href="../assets/fonts/pretendard/pretendard.css">
+<link rel="stylesheet" href="../assets/css/tokens.css">
+<link rel="stylesheet" href="../assets/css/site.css">
+<link rel="stylesheet" href="../assets/css/nlme-explorer.css">
+<link rel="stylesheet" href="../assets/css/dl-explorer.css">
+</head>
+<body class="page-methods lang-en">
+<a class="skip-link" href="#main">Skip to main content</a>
+<header class="site-header" data-header>
+  <div class="wrap bar">
+    <a class="brand" href="../" >
+      <span class="brand-name">Laboratory of Pharmaceutical Sciences</span>
+      <span class="brand-sub">Kangwon National University · College of Pharmacy</span>
+    </a>
+    <nav id="primary-nav" class="nav" aria-label="Main navigation">
+      <ul>
+        <li><a href="../research/" >Research</a></li>
+        <li><a href="./" aria-current="page">Methods</a></li>
+        <li><a href="../publications/" >Publications</a></li>
+        <li><a href="../people/" >People</a></li>
+        <li><a href="../contact/" >Contact</a></li>
+      </ul>
+    </nav>
+    <a class="lang-switch" href="../ko/methods/" hreflang="ko" lang="ko" aria-label="한국어로 보기 (view in Korean)"><svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.5 2.5 3.5 5.4 3.5 8.5s-1 6-3.5 8.5c-2.5-2.5-3.5-5.4-3.5-8.5s1-6 3.5-8.5z"/></svg><span>한국어</span></a>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="primary-nav" aria-label="Menu" data-menu>
+      <span class="when-closed"><svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 7h16M4 12h16M4 17h16"/></svg></span><span class="when-open"><svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6L6 18"/></svg></span>
+    </button>
+  </div>
+</header>
+
+<main id="main" tabindex="-1">
+
+<section class="page-head">
+  <div class="wrap">
+    <p class="eyebrow">Methods</p>
+    <h1>Methods you can explore</h1>
+    <p class="lead">Two interactive explainers built on simulated data show how methods used in modern pharmacology work. They are teaching examples, not results from patients or from our experiments.</p>
+    <p class="honesty"><svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 4.5h9a3 3 0 0 1 3 3V20H8a3 3 0 0 1-3-3z"/><path d="M17 8h2v12h-2M8.5 9h5M8.5 12.5h5"/></svg><span>Everything on this page is synthetic. The calculations run in your browser; nothing is sent anywhere.</span></p>
+    <ul class="jump">
+      <li><a href="#nlme">How a population PK model is fitted</a></li>
+      <li><a href="#deep-learning">How a neural network computes</a></li>
+      <li><a href="#reading">Further reading</a></li>
+    </ul>
+  </div>
+</section>
+
+<section class="section tight" id="nlme" aria-labelledby="nlme-h">
+  <div class="wrap">
+    <header class="sec-head"><p class="eyebrow">Population pharmacokinetics</p><h2 id="nlme-h">How a population PK model is fitted</h2><p class="sec-sub">People differ in how fast they clear a drug. A nonlinear mixed-effects (NLME) model describes the typical values and the spread between individuals at once. The optimiser starts from poor guesses and improves them step by step; here you can move through every step.</p></header>
+    <div class="howto">
+      <ol><li>Choose a sampling scenario: rich, moderate or sparse.</li><li>Press play, or drag the slider through the optimiser&#39;s iterations.</li><li>Watch the fitted curves, the parameter estimates and the objective function change.</li><li>Select a subject to compare its data with its individual fit.</li></ol>
+    </div>
+    <div class="widget-slot" data-lab-widget="nlme-explorer" data-src="../assets/data/nlme-demo.json" data-lang="en">
+      <noscript><p class="widget-fallback">These explainers need JavaScript. Please enable it to use them.</p></noscript>
+    </div>
+    <p class="fine">Simulated data from 30 virtual subjects and a single model. The estimator is a from-scratch implementation of first-order conditional estimation with interaction (FOCE-I). It illustrates the idea and is not a substitute for validated software.</p>
+  </div>
+</section>
+
+<section class="section soft tight" id="deep-learning" aria-labelledby="dl-h">
+  <div class="wrap">
+    <header class="sec-head"><p class="eyebrow">Deep learning</p><h2 id="dl-h">How a neural network computes</h2><p class="sec-sub">A neural network is a chain of simple calculations: weighted sums followed by a non-linearity. Training changes the weights to reduce the error. Run the forward pass, inspect the gradients of the backward pass, and follow message passing across a real drug molecule.</p></header>
+    <div class="widget-slot" data-lab-widget="dl-explorer" data-mlp="../assets/data/dl-mlp.json" data-gnn="../assets/data/dl-gnn.json" data-lang="en">
+      <noscript><p class="widget-fallback">These explainers need JavaScript. Please enable it to use them.</p></noscript>
+    </div>
+    <p class="fine">Teaching examples: small models trained on synthetic clearance data or on public molecule data. They show the mechanics and are not validated for prediction.</p>
+  </div>
+</section>
+
+<section class="section" id="reading" aria-labelledby="reading-h">
+  <div class="wrap">
+    <header class="sec-head"><p class="eyebrow">Further reading</p><h2 id="reading-h">Further reading</h2><p class="sec-sub">General references for the methods above, not publications of this laboratory. Every DOI was checked against Crossref on 2026-10-13.</p></header>
+    <ul class="reading">
+      <li>
+        <span class="reading-topic">Nonlinear mixed-effects models (classic)</span>
+        <a class="reading-title" href="https://doi.org/10.2307/2532087" rel="noopener" target="_blank">Nonlinear Mixed Effects Models for Repeated Measures Data</a>
+        <span class="reading-meta">Lindstrom, Bates (1990). <em>Biometrics</em></span>
+      </li>
+      <li>
+        <span class="reading-topic">Population modeling primer</span>
+        <a class="reading-title" href="https://doi.org/10.1038/psp.2013.14" rel="noopener" target="_blank">Basic Concepts in Population Modeling, Simulation, and Model‐Based Drug Development—Part 2: Introduction to Pharmacokinetic Modeling Methods</a>
+        <span class="reading-meta">Mould, Upton (2013). <em>CPT: Pharmacometrics &amp; Systems Pharmacology</em></span>
+      </li>
+      <li>
+        <span class="reading-topic">Estimation methods</span>
+        <a class="reading-title" href="https://doi.org/10.1007/s10928-007-9060-6" rel="noopener" target="_blank">Derivation of various NONMEM estimation methods</a>
+        <span class="reading-meta">Wang (2007). <em>Journal of Pharmacokinetics and Pharmacodynamics</em></span>
+      </li>
+      <li>
+        <span class="reading-topic">SAEM estimation</span>
+        <a class="reading-title" href="https://doi.org/10.1016/j.csda.2004.07.002" rel="noopener" target="_blank">Maximum likelihood estimation in nonlinear mixed effects models</a>
+        <span class="reading-meta">Kuhn, Lavielle (2005). <em>Computational Statistics &amp; Data Analysis</em></span>
+      </li>
+      <li>
+        <span class="reading-topic">Building a PBPK model</span>
+        <a class="reading-title" href="https://doi.org/10.1002/psp4.12134" rel="noopener" target="_blank">Applied Concepts in PBPK Modeling: How to Build a PBPK/PD Model</a>
+        <span class="reading-meta">Kuepfer, Niederalt, Wendl (2016). <em>CPT: Pharmacometrics &amp; Systems Pharmacology</em></span>
+      </li>
+      <li>
+        <span class="reading-topic">Good modeling practice</span>
+        <a class="reading-title" href="https://doi.org/10.1002/psp4.12049" rel="noopener" target="_blank">Good Practices in Model‐Informed Drug Discovery and Development: Practice, Application, and Documentation</a>
+        <span class="reading-meta">, Marshall, Burghaus (2016). <em>CPT: Pharmacometrics &amp; Systems Pharmacology</em></span>
+      </li>
+      <li>
+        <span class="reading-topic">Backpropagation</span>
+        <a class="reading-title" href="https://doi.org/10.1038/323533a0" rel="noopener" target="_blank">Learning representations by back-propagating errors</a>
+        <span class="reading-meta">Rumelhart, Hinton, Williams (1986). <em>Nature</em></span>
+      </li>
+      <li>
+        <span class="reading-topic">Graph neural networks for molecules</span>
+        <a class="reading-title" href="https://doi.org/10.1021/acs.jcim.9b00237" rel="noopener" target="_blank">Analyzing Learned Molecular Representations for Property Prediction</a>
+        <span class="reading-meta">Yang, Swanson, Jin (2019). <em>Journal of Chemical Information and Modeling</em></span>
+      </li>
+    </ul>
+  </div>
+</section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap foot-grid">
+    <div class="foot-id">
+      <p class="foot-name">Laboratory of Pharmaceutical Sciences</p>
+      <address>College of Pharmacy, Kangwon National University<br>Innovation Pharmaceutical Clinical Research Building<br>1 Gangwondaehak-gil, Chuncheon-si, Gangwon-do 24341<br>Republic of Korea
+      </address>
+    </div>
+    <nav class="foot-nav" aria-label="Footer navigation">
+      <ul><li><a href="../research/">Research</a></li><li><a href="./">Methods</a></li><li><a href="../publications/">Publications</a></li><li><a href="../people/">People</a></li><li><a href="../contact/">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="foot-contact">
+      <p><a href="mailto:ahnsh@kangwon.ac.kr"><svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3.5" y="5.5" width="17" height="13" rx="2"/><path d="M4 7.5l8 6 8-6"/></svg>ahnsh@kangwon.ac.kr</a></p>
+      <p><a href="tel:+82332506912"><svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6.5 3.5h3l1.5 4-2 1.3a10 10 0 0 0 5.2 5.2l1.3-2 4 1.5v3a2 2 0 0 1-2.2 2A14.5 14.5 0 0 1 4.5 5.7 2 2 0 0 1 6.5 3.5z"/></svg>033-250-6912</a></p>
+      <p><a href="https://pharmacy.kangwon.ac.kr/pharmacy/lab/laboratory-of-pharmaceutical-sciences.do" rel="noopener" target="_blank"><svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 6H6.5A1.5 1.5 0 0 0 5 7.5v10A1.5 1.5 0 0 0 6.5 19h10a1.5 1.5 0 0 0 1.5-1.5V15M13 5h6v6M19 5l-8 8"/></svg>Department page</a></p>
+    </div>
+  </div>
+  <div class="wrap foot-base">
+    <p>© 2026 Laboratory of Pharmaceutical Sciences, Kangwon National University. Illustrations and interactive explainers use simulated data.</p>
+  </div>
+</footer>
+<script src="../assets/js/site.js" defer></script>
+<script src="../assets/js/nlme-explorer.js" defer></script>
+<script src="../assets/js/dl-explorer.js" defer></script>
+</body>
+</html>

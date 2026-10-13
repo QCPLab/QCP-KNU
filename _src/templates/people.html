@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% from "_macros.html" import icon %}
+{% block main %}
+<section class="page-head">
+  <div class="wrap">
+    <p class="eyebrow">{{ t.nav.people }}</p>
+    <h1>{{ t.people.title }}</h1>
+    <p class="lead">{{ t.people.lead }}</p>
+  </div>
+</section>
+
+<section class="section tight">
+  <div class="wrap">
+    <article class="card pi-card" data-reveal>
+      <span class="avatar xl" aria-hidden="true">{{ pi.initials }}</span>
+      <div class="pi-body">
+        <p class="eyebrow">{{ t.people.pi_label }}</p>
+        <h2>{{ pi.name }}</h2>
+        <p class="pi-role">{{ t.people.pi_role }} · {{ L(site.identity.college) }}, {{ L(site.identity.university) }}</p>
+        <p class="pi-fields-h">{{ t.people.fields_label }}</p>
+        <ul class="chips">{% for f in t.people.fields %}<li>{{ f }}</li>{% endfor %}</ul>
+        <ul class="pi-links">
+          <li><a href="mailto:{{ contact.pi_email }}">{{ icon('mail') }}{{ contact.pi_email }}</a></li>
+          <li><a href="tel:{{ contact.phone_intl|replace('-', '') }}">{{ icon('phone') }}{{ contact.phone }}</a></li>
+          <li><a href="{{ site.official_page }}" rel="noopener" target="_blank">{{ icon('external') }}{{ t.people.official }}</a></li>
+        </ul>
+      </div>
+    </article>
+
+    {%- for g in groups %}
+    <section class="people-group" aria-labelledby="g-{{ g.role }}" data-reveal>
+      <h2 id="g-{{ g.role }}">{{ t.people.roles[g.role] }}<small>{{ g.members|length }}</small></h2>
+      <ul class="people-grid">
+      {%- for m in g.members %}
+        <li class="person"><span class="avatar" aria-hidden="true">{{ m.initials }}</span>
+          <span class="person-name">{{ m.name_ko if (lang == 'ko' and m.name_ko) else m.name_en }}{% if lang == 'ko' and m.name_ko %}<small>{{ m.name_en }}</small>{% endif %}</span>
+          {% if m.email_public %}<a class="person-mail" href="mailto:{{ m.email_public }}">{{ m.email_public }}</a>{% endif %}
+        </li>
+      {%- endfor %}
+      </ul>
+    </section>
+    {%- endfor %}
+    <p class="fine">{{ t.people.note }}</p>
+  </div>
+</section>
+{% endblock %}
