@@ -564,7 +564,7 @@ def build_gnn():
         "meta": meta("gnn", {"split_and_init": GNN_SEED, "minibatch_shuffle": GNN_SEED + 1}),
         "task": "Predict RDKit Crippen logP (a calculated value, not a measurement) from the molecular graph",
         "source": {"file": "Data/NCI/first_5K.smi inside the installed RDKit package", "origin": "NCI Open Database structures as bundled with RDKit",
-                   "licence_note": "RDKit is BSD-3-Clause. Terms of the NCI structure set were not retrievable offline; structures are not redistributed in this repository, only 3 public drug SMILES and derived numbers.",
+                   "licence_note": "RDKit is BSD-3-Clause. The training structures come from the NCI Open Database file shipped inside RDKit (Data/NCI/first_5K.smi); that file is not copied here, but this JSON contains the SMILES and 2D coordinates of six molecules: caffeine, ibuprofen and propranolol (display molecules) and three NCI-derived molecules used only by the self-test. The terms of use of the NCI structure set could not be checked (the NCI host returned 403 through the proxy); confirm them before the page is made public.",
                    "filter": stats, "elements_kept": "C N O F P S Cl Br I", "max_heavy_atoms": GNN_MAX_HEAVY},
         "feature_names": FEATURE_NAMES,
         "feature_doc": "8 numbers per heavy atom: one-hot element (C, N, O, other), aromatic flag, degree/4 (heavy-atom neighbours), formal charge, in-ring flag",

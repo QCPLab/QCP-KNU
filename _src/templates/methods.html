@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% from "_macros.html" import icon %}
+{% from "_macros.html" import icon with context %}
 {% block main %}
 <section class="page-head">
   <div class="wrap">
@@ -45,8 +45,8 @@
     {%- for r in refs %}
       <li>
         <span class="reading-topic">{{ r.topic }}</span>
-        <a class="reading-title" href="https://doi.org/{{ r.doi }}" rel="noopener" target="_blank">{{ r.title }}</a>
-        <span class="reading-meta">{{ r.authors }} ({{ r.year }}). <em>{{ r.journal }}</em></span>
+        <a class="reading-title"{% if lang == 'ko' %} lang="en"{% endif %} href="https://doi.org/{{ r.doi }}" rel="noopener" target="_blank">{{ r.title }}</a>
+        <span class="reading-meta"{% if lang == 'ko' %} lang="en"{% endif %}>{{ r.authors }} ({{ r.year }}). <em>{{ r.journal }}</em></span>
       </li>
     {%- endfor %}
     </ul>

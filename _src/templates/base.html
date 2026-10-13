@@ -39,8 +39,11 @@
   <div class="wrap bar">
     <a class="brand" href="{{ url('home') }}" {% if page.id == 'home' %}aria-current="page"{% endif %}>
       <span class="brand-name">{{ L(site.identity.name) }}</span>
-      <span class="brand-sub">{{ L(site.identity.university) }} · {{ L(site.identity.college) }}</span>
+      <span class="brand-sub">{{ affil[0] }} · {{ affil[1] }}</span>
     </a>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="primary-nav" aria-label="{{ t.nav.menu }}" data-menu>
+      <span class="when-closed">{{ icon('menu') }}</span><span class="when-open">{{ icon('close') }}</span>
+    </button>
     <nav id="primary-nav" class="nav" aria-label="{{ t.nav.main }}">
       <ul>
       {%- for item in nav %}
@@ -51,9 +54,6 @@
     {%- if page.id != '404' %}
     <a class="lang-switch" href="{{ url(page.id, other_lang) }}" hreflang="{{ other_lang }}" lang="{{ other_lang }}" aria-label="{{ t.lang_switch.aria }}">{{ icon('globe') }}<span>{{ t.lang_switch.label }}</span></a>
     {%- endif %}
-    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="primary-nav" aria-label="{{ t.nav.menu }}" data-menu>
-      <span class="when-closed">{{ icon('menu') }}</span><span class="when-open">{{ icon('close') }}</span>
-    </button>
   </div>
 </header>
 
@@ -84,7 +84,7 @@
     <p>© {{ year }} {{ L(site.identity.name) }}, {{ L(site.identity.university) }}. {{ t.footer.synthetic }}</p>
   </div>
 </footer>
-<script src="{{ asset('js/site.js') }}" defer></script>
+<script src="{{ asset('js/site.js') }}" defer onerror="document.documentElement.classList.remove('js')"></script>
 {%- for js in page.js %}
 <script src="{{ asset('js/' ~ js ~ '.js') }}" defer></script>
 {%- endfor %}

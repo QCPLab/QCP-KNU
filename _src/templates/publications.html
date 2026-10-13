@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% from "_macros.html" import icon, pub %}
+{% from "_macros.html" import icon, pub with context %}
 {% block main %}
 <section class="page-head">
   <div class="wrap head-split">
@@ -14,7 +14,7 @@
 
 <section class="section tight">
   <div class="wrap">
-    <form class="pub-tools" role="search" aria-label="{{ t.pubs.filter }}" data-pub-filter onsubmit="return false">
+    <form class="pub-tools" role="search" aria-label="{{ t.pubs.filter }}" data-pub-filter data-one="{{ t.pubs.n_one }}" data-many="{{ t.pubs.n_items }}">
       <label class="field grow"><span class="visually-hidden">{{ t.pubs.search_label }}</span>
         {{ icon('search') }}<input type="search" name="q" placeholder="{{ t.pubs.search_ph }}" autocomplete="off" spellcheck="false">
       </label>
@@ -31,7 +31,7 @@
     <div class="pub-list" data-pub-list>
     {%- for y in years_desc %}
       <section class="pub-group" data-group="{{ y }}" aria-labelledby="y{{ y }}">
-        <h2 class="pub-group-year" id="y{{ y }}">{{ y }}<small>{{ t.pubs.n_items.format(n=by_year[y]|length) }}</small></h2>
+        <h2 class="pub-group-year" id="y{{ y }}">{{ y }}<small>{{ t.pubs.n_one if by_year[y]|length == 1 else t.pubs.n_items.format(n=by_year[y]|length) }}</small></h2>
         <ol class="pubs">{% for p in by_year[y] %}{{ pub(p, t, pi_re) }}{% endfor %}</ol>
       </section>
     {%- endfor %}

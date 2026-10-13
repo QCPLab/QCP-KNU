@@ -1,14 +1,15 @@
 {% extends "base.html" %}
-{% from "_macros.html" import icon %}
+{% from "_macros.html" import icon with context %}
 {% block main %}
 <section class="notfound">
   <div class="wrap">
     <p class="eyebrow">404</p>
-    <h1>{{ t.nf.title }}</h1>
-    <p class="lead">{{ t.nf.text }}</p>
+    <h1>{{ t_en.nf.title }}</h1>
+    <p class="lead">{{ t_en.nf.text }}</p>
+    <p class="lead" lang="ko">{{ t_ko.nf.title }}. {{ t_ko.nf.text }}</p>
     <div class="hero-cta">
-      <a class="btn btn-primary" href="{{ url('home') }}">{{ t.nf.home }}{{ icon('arrow') }}</a>
-      <a class="btn btn-ghost" href="{{ url('publications') }}">{{ t.nav.publications }}</a>
+      <a class="btn btn-primary" href="{{ url('home') }}">{{ t_en.nf.home }}{{ icon('arrow') }}</a>
+      <a class="btn btn-ghost" href="{{ url('home', 'ko') }}" lang="ko">{{ t_ko.nf.home }}</a>
     </div>
   </div>
 </section>

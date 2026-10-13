@@ -26,8 +26,11 @@
   <div class="wrap bar">
     <a class="brand" href="../" >
       <span class="brand-name">Laboratory of Pharmaceutical Sciences</span>
-      <span class="brand-sub">Kangwon National University · College of Pharmacy</span>
+      <span class="brand-sub">College of Pharmacy · Kangwon National University</span>
     </a>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="primary-nav" aria-label="Menu" data-menu>
+      <span class="when-closed"><svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 7h16M4 12h16M4 17h16"/></svg></span><span class="when-open"><svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6L6 18"/></svg></span>
+    </button>
     <nav id="primary-nav" class="nav" aria-label="Main navigation">
       <ul>
         <li><a href="../research/" >Research</a></li>
@@ -38,9 +41,6 @@
       </ul>
     </nav>
     <a class="lang-switch" href="../ko/publications/" hreflang="ko" lang="ko" aria-label="한국어로 보기 (view in Korean)"><svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.5 2.5 3.5 5.4 3.5 8.5s-1 6-3.5 8.5c-2.5-2.5-3.5-5.4-3.5-8.5s1-6 3.5-8.5z"/></svg><span>한국어</span></a>
-    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="primary-nav" aria-label="Menu" data-menu>
-      <span class="when-closed"><svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 7h16M4 12h16M4 17h16"/></svg></span><span class="when-open"><svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6L6 18"/></svg></span>
-    </button>
   </div>
 </header>
 
@@ -59,7 +59,7 @@
 
 <section class="section tight">
   <div class="wrap">
-    <form class="pub-tools" role="search" aria-label="Filter publications" data-pub-filter onsubmit="return false">
+    <form class="pub-tools" role="search" aria-label="Filter publications" data-pub-filter data-one="1 paper" data-many="{n} papers">
       <label class="field grow"><span class="visually-hidden">Search publications</span>
         <svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="11" cy="11" r="6"/><path d="M20 20l-4.2-4.2"/></svg><input type="search" name="q" placeholder="Search title, author or journal" autocomplete="off" spellcheck="false">
       </label>
@@ -130,7 +130,7 @@
 </li></ol>
       </section>
       <section class="pub-group" data-group="2023" aria-labelledby="y2023">
-        <h2 class="pub-group-year" id="y2023">2023<small>1 papers</small></h2>
+        <h2 class="pub-group-year" id="y2023">2023<small>1 paper</small></h2>
         <ol class="pubs"><li class="pub" data-year="2023" data-text="development and evaluation of self-microemulsifying drug delivery system for improving oral absorption of poorly water-soluble olaparib pharmaceutics 2023 yong-han kim seong-bo kim se-hee choi thi-thao-linh nguyen sung-hoon ahn kyung-sun moon kwan-hyung cho tae-yong sim eun-ji heo sung tae kim hyun-suk jung jun-pil jee han-gon choi dong-jin jang">
   <div class="pub-body">
     <h3 class="pub-title">Development and Evaluation of Self-Microemulsifying Drug Delivery System for Improving Oral Absorption of Poorly Water-Soluble Olaparib</h3>
@@ -142,7 +142,7 @@
 </li></ol>
       </section>
       <section class="pub-group" data-group="2022" aria-labelledby="y2022">
-        <h2 class="pub-group-year" id="y2022">2022<small>1 papers</small></h2>
+        <h2 class="pub-group-year" id="y2022">2022<small>1 paper</small></h2>
         <ol class="pubs"><li class="pub" data-year="2022" data-text="the risk of gastrointestinal cancer on daily intake of low-dose bap in c57bl/6 for 60 days journal of korean medical science 2022 zhi zheng jung kuk park oh wook kwon sung hoon ahn young joo kwon linjuan jiang shaohui zhu byoung hee park">
   <div class="pub-body">
     <h3 class="pub-title">The Risk of Gastrointestinal Cancer on Daily Intake of Low-Dose BaP in C57BL/6 for 60 Days</h3>
@@ -154,7 +154,7 @@
 </li></ol>
       </section>
       <section class="pub-group" data-group="2021" aria-labelledby="y2021">
-        <h2 class="pub-group-year" id="y2021">2021<small>1 papers</small></h2>
+        <h2 class="pub-group-year" id="y2021">2021<small>1 paper</small></h2>
         <ol class="pubs"><li class="pub" data-year="2021" data-text="fast dissolving nanofiber mat for the local antimicrobial application of roxithromycin in oral cavity materials science &amp; engineering c 2021 sungyun kim jung-jin kim jae-hyeon jeong yonghoon kim jihye park da in jeong hyun jin kim chaerim hwang sung-hoon ahn hyun-jeong ko hyun-jong cho">
   <div class="pub-body">
     <h3 class="pub-title">Fast dissolving nanofiber mat for the local antimicrobial application of roxithromycin in oral cavity</h3>
@@ -250,7 +250,7 @@
 </li><li class="pub" data-year="2017" data-text="gut commensal bacteroides acidifaciens prevents obesity and improves insulin sensitivity in mice mucosal immunology 2017 j-y yang y-s lee y. kim s-h lee s. ryu s. fukuda k. hase c-s yang h.s. lim m-s kim h-m kim s-h ahn b-e kwon h-j ko m-n kweon">
   <div class="pub-body">
     <h3 class="pub-title">Gut commensal Bacteroides acidifaciens prevents obesity and improves insulin sensitivity in mice</h3>
-    <p class="pub-authors">J-Y Yang, Y-S Lee, Y. Kim, S-H Lee, S. Ryu, S. Fukuda, K. Hase, C-S Yang, H.S. Lim, M-S Kim, H-M Kim, S-H Ahn, B-E Kwon, H-J Ko, M-N Kweon</p>
+    <p class="pub-authors">J-Y Yang, Y-S Lee, Y. Kim, S-H Lee, S. Ryu, S. Fukuda, K. Hase, C-S Yang, H.S. Lim, M-S Kim, H-M Kim, <strong>S-H Ahn</strong>, B-E Kwon, H-J Ko, M-N Kweon</p>
     <p class="pub-meta"><span class="pub-journal">Mucosal Immunology</span>
       <span class="pub-cite">2017;&nbsp;10(1):&nbsp;104–116</span>
       <a class="pub-doi" href="https://doi.org/10.1038/mi.2016.42" rel="noopener" target="_blank" aria-label="Open DOI link for: Gut commensal Bacteroides acidifaciens prevents obesity and improves insulin sensitivity in mice">DOI <svg class="icon xs" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 6H6.5A1.5 1.5 0 0 0 5 7.5v10A1.5 1.5 0 0 0 6.5 19h10a1.5 1.5 0 0 0 1.5-1.5V15M13 5h6v6M19 5l-8 8"/></svg></a></p>
@@ -262,15 +262,15 @@
         <ol class="pubs"><li class="pub" data-year="2016" data-text="gut microbiota-associated bile acid deconjugation accelerates hepatic steatosis in ob/ob mice journal of applied microbiology 2016 m.-y. park s.j. kim e.k. ko s.-h. ahn h. seo m.-k. sung">
   <div class="pub-body">
     <h3 class="pub-title">Gut microbiota-associated bile acid deconjugation accelerates hepatic steatosis in ob/ob mice</h3>
-    <p class="pub-authors">M.-Y. Park, S.J. Kim, E.K. Ko, S.-H. Ahn, H. Seo, M.-K. Sung</p>
+    <p class="pub-authors">M.-Y. Park, S.J. Kim, E.K. Ko, <strong>S.-H. Ahn</strong>, H. Seo, M.-K. Sung</p>
     <p class="pub-meta"><span class="pub-journal">Journal of Applied Microbiology</span>
       <span class="pub-cite">2016;&nbsp;121(3):&nbsp;800–810</span>
       <a class="pub-doi" href="https://doi.org/10.1111/jam.13158" rel="noopener" target="_blank" aria-label="Open DOI link for: Gut microbiota-associated bile acid deconjugation accelerates hepatic steatosis in ob/ob mice">DOI <svg class="icon xs" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 6H6.5A1.5 1.5 0 0 0 5 7.5v10A1.5 1.5 0 0 0 6.5 19h10a1.5 1.5 0 0 0 1.5-1.5V15M13 5h6v6M19 5l-8 8"/></svg></a></p>
   </div>
-</li><li class="pub" data-year="2016" data-text="quantification of mequitazine in human plasma by gas chromatography-quadrupole mass spectrometry and its application to a human pharmacokinetic study biomedical chromatography 2016 sung‐hoon ahn han‐joo maeng">
+</li><li class="pub" data-year="2016" data-text="quantification of mequitazine in human plasma by gas chromatography-quadrupole mass spectrometry and its application to a human pharmacokinetic study biomedical chromatography 2016 sung-hoon ahn han-joo maeng">
   <div class="pub-body">
     <h3 class="pub-title">Quantification of mequitazine in human plasma by gas chromatography-quadrupole mass spectrometry and its application to a human pharmacokinetic study</h3>
-    <p class="pub-authors">Sung‐Hoon Ahn, Han‐Joo Maeng</p>
+    <p class="pub-authors"><strong>Sung-Hoon Ahn</strong>, Han-Joo Maeng</p>
     <p class="pub-meta"><span class="pub-journal">Biomedical Chromatography</span>
       <span class="pub-cite">2016;&nbsp;30(4):&nbsp;574–578</span>
       <a class="pub-doi" href="https://doi.org/10.1002/bmc.3585" rel="noopener" target="_blank" aria-label="Open DOI link for: Quantification of mequitazine in human plasma by gas chromatography-quadrupole mass spectrometry and its application to a human pharmacokinetic study">DOI <svg class="icon xs" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 6H6.5A1.5 1.5 0 0 0 5 7.5v10A1.5 1.5 0 0 0 6.5 19h10a1.5 1.5 0 0 0 1.5-1.5V15M13 5h6v6M19 5l-8 8"/></svg></a></p>
@@ -295,10 +295,10 @@
       <span class="pub-cite">2015;&nbsp;115:&nbsp;375–382</span>
       <a class="pub-doi" href="https://doi.org/10.1016/j.jpba.2015.07.040" rel="noopener" target="_blank" aria-label="Open DOI link for: The identification of lobeglitazone metabolites in rat liver microsomes and the kinetics of the in vivo formation of the major metabolite M1 in rats">DOI <svg class="icon xs" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 6H6.5A1.5 1.5 0 0 0 5 7.5v10A1.5 1.5 0 0 0 6.5 19h10a1.5 1.5 0 0 0 1.5-1.5V15M13 5h6v6M19 5l-8 8"/></svg></a></p>
   </div>
-</li><li class="pub" data-year="2015" data-text="gender differences in the hepatic elimination and pharmacokinetics of lobeglitazone in rats biopharmaceutics &amp; drug disposition 2015 jong‐hwa lee jun‐hyeng son yoon‐jee chae sung hoon ahn wooin lee dae‐duk kim suk‐jae chung">
+</li><li class="pub" data-year="2015" data-text="gender differences in the hepatic elimination and pharmacokinetics of lobeglitazone in rats biopharmaceutics &amp; drug disposition 2015 jong-hwa lee jun-hyeng son yoon-jee chae sung hoon ahn wooin lee dae-duk kim suk-jae chung">
   <div class="pub-body">
     <h3 class="pub-title">Gender differences in the hepatic elimination and pharmacokinetics of lobeglitazone in rats</h3>
-    <p class="pub-authors">Jong‐Hwa Lee, Jun‐Hyeng Son, Yoon‐Jee Chae, <strong>Sung Hoon Ahn</strong>, Wooin Lee, Dae‐Duk Kim, Suk‐Jae Chung</p>
+    <p class="pub-authors">Jong-Hwa Lee, Jun-Hyeng Son, Yoon-Jee Chae, <strong>Sung Hoon Ahn</strong>, Wooin Lee, Dae-Duk Kim, Suk-Jae Chung</p>
     <p class="pub-meta"><span class="pub-journal">Biopharmaceutics &amp; Drug Disposition</span>
       <span class="pub-cite">2015;&nbsp;36(6):&nbsp;410–415</span>
       <a class="pub-doi" href="https://doi.org/10.1002/bdd.1954" rel="noopener" target="_blank" aria-label="Open DOI link for: Gender differences in the hepatic elimination and pharmacokinetics of lobeglitazone in rats">DOI <svg class="icon xs" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 6H6.5A1.5 1.5 0 0 0 5 7.5v10A1.5 1.5 0 0 0 6.5 19h10a1.5 1.5 0 0 0 1.5-1.5V15M13 5h6v6M19 5l-8 8"/></svg></a></p>
@@ -347,10 +347,10 @@
       <span class="pub-cite">2014</span>
       </p>
   </div>
-</li><li class="pub" data-year="2014" data-text="quantitative determination of enzalutamide, an anti-prostate cancer drug, in rat plasma using liquid chromatography-tandem mass spectrometry, and its application to a pharmacokinetic study biomedical chromatography 2014 ji‐hye song tae‐heon kim jong‐woo jung nakjeong kim sung hoon ahn sung‐ook hwang nam sook kang sung‐eun yoo tae‐sung koo">
+</li><li class="pub" data-year="2014" data-text="quantitative determination of enzalutamide, an anti-prostate cancer drug, in rat plasma using liquid chromatography-tandem mass spectrometry, and its application to a pharmacokinetic study biomedical chromatography 2014 ji-hye song tae-heon kim jong-woo jung nakjeong kim sung hoon ahn sung-ook hwang nam sook kang sung-eun yoo tae-sung koo">
   <div class="pub-body">
     <h3 class="pub-title">Quantitative determination of enzalutamide, an anti-prostate cancer drug, in rat plasma using liquid chromatography-tandem mass spectrometry, and its application to a pharmacokinetic study</h3>
-    <p class="pub-authors">Ji‐Hye Song, Tae‐Heon Kim, Jong‐Woo Jung, Nakjeong Kim, <strong>Sung Hoon Ahn</strong>, Sung‐Ook Hwang, Nam Sook Kang, Sung‐Eun Yoo, Tae‐Sung Koo</p>
+    <p class="pub-authors">Ji-Hye Song, Tae-Heon Kim, Jong-Woo Jung, Nakjeong Kim, <strong>Sung Hoon Ahn</strong>, Sung-Ook Hwang, Nam Sook Kang, Sung-Eun Yoo, Tae-Sung Koo</p>
     <p class="pub-meta"><span class="pub-journal">Biomedical Chromatography</span>
       <span class="pub-cite">2014;&nbsp;28(8):&nbsp;1112–1117</span>
       <a class="pub-doi" href="https://doi.org/10.1002/bmc.3127" rel="noopener" target="_blank" aria-label="Open DOI link for: Quantitative determination of enzalutamide, an anti-prostate cancer drug, in rat plasma using liquid chromatography-tandem mass spectrometry, and its application to a pharmacokinetic study">DOI <svg class="icon xs" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 6H6.5A1.5 1.5 0 0 0 5 7.5v10A1.5 1.5 0 0 0 6.5 19h10a1.5 1.5 0 0 0 1.5-1.5V15M13 5h6v6M19 5l-8 8"/></svg></a></p>
@@ -418,15 +418,15 @@
 </li><li class="pub" data-year="2013" data-text="determination of 2-aryl-7(3&#39;,4&#39;-dialkoxyphenyl)-pyrazolo[1,5-alpha]pyrimidine, a novel phosphodiesterase-4 inhibitor, in rat plasma by liquid chromatography-tandem mass spectrometry journal of chromatographic science 2013 k.-r. lee j. s. song y.-j. chae m.-s. kim s.-h. choi d. j. jeon m. a. bae s.-h. ahn">
   <div class="pub-body">
     <h3 class="pub-title">Determination of 2-Aryl-7(3&#39;,4&#39;-Dialkoxyphenyl)-Pyrazolo[1,5-alpha]Pyrimidine, a Novel Phosphodiesterase-4 Inhibitor, in Rat Plasma by Liquid Chromatography-Tandem Mass Spectrometry</h3>
-    <p class="pub-authors">K.-R. Lee, J. S. Song, Y.-J. Chae, M.-S. Kim, S.-H. Choi, D. J. Jeon, M. A. Bae, S.-H. Ahn</p>
+    <p class="pub-authors">K.-R. Lee, J. S. Song, Y.-J. Chae, M.-S. Kim, S.-H. Choi, D. J. Jeon, M. A. Bae, <strong>S.-H. Ahn</strong></p>
     <p class="pub-meta"><span class="pub-journal">Journal of Chromatographic Science</span>
       <span class="pub-cite">2013;&nbsp;51(6):&nbsp;517–523</span>
       <a class="pub-doi" href="https://doi.org/10.1093/chromsci/bms173" rel="noopener" target="_blank" aria-label="Open DOI link for: Determination of 2-Aryl-7(3&#39;,4&#39;-Dialkoxyphenyl)-Pyrazolo[1,5-alpha]Pyrimidine, a Novel Phosphodiesterase-4 Inhibitor, in Rat Plasma by Liquid Chromatography-Tandem Mass Spectrometry">DOI <svg class="icon xs" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 6H6.5A1.5 1.5 0 0 0 5 7.5v10A1.5 1.5 0 0 0 6.5 19h10a1.5 1.5 0 0 0 1.5-1.5V15M13 5h6v6M19 5l-8 8"/></svg></a></p>
   </div>
-</li><li class="pub" data-year="2013" data-text="determination of pf-04620110, a novel inhibitor of diacylglycerol acyltransferase-1, in rat plasma using liquid chromatography-tandem mass spectrometry and its application in pharmacokinetic studies biomedical chromatography 2013 kyeong‐ryoon lee sung heum choi jin‐sook song hyewon seo yoon‐jee chae hwang eui cho jin hee ahn sung‐hoon ahn myung ae bae">
+</li><li class="pub" data-year="2013" data-text="determination of pf-04620110, a novel inhibitor of diacylglycerol acyltransferase-1, in rat plasma using liquid chromatography-tandem mass spectrometry and its application in pharmacokinetic studies biomedical chromatography 2013 kyeong-ryoon lee sung heum choi jin-sook song hyewon seo yoon-jee chae hwang eui cho jin hee ahn sung-hoon ahn myung ae bae">
   <div class="pub-body">
     <h3 class="pub-title">Determination of PF-04620110, a novel inhibitor of diacylglycerol acyltransferase-1, in rat plasma using liquid chromatography-tandem mass spectrometry and its application in pharmacokinetic studies</h3>
-    <p class="pub-authors">Kyeong‐Ryoon Lee, Sung Heum Choi, Jin‐Sook Song, Hyewon Seo, Yoon‐Jee Chae, Hwang Eui Cho, Jin Hee Ahn, Sung‐Hoon Ahn, Myung Ae Bae</p>
+    <p class="pub-authors">Kyeong-Ryoon Lee, Sung Heum Choi, Jin-Sook Song, Hyewon Seo, Yoon-Jee Chae, Hwang Eui Cho, Jin Hee Ahn, <strong>Sung-Hoon Ahn</strong>, Myung Ae Bae</p>
     <p class="pub-meta"><span class="pub-journal">Biomedical Chromatography</span>
       <span class="pub-cite">2013;&nbsp;27(7):&nbsp;846–852</span>
       <a class="pub-doi" href="https://doi.org/10.1002/bmc.2869" rel="noopener" target="_blank" aria-label="Open DOI link for: Determination of PF-04620110, a novel inhibitor of diacylglycerol acyltransferase-1, in rat plasma using liquid chromatography-tandem mass spectrometry and its application in pharmacokinetic studies">DOI <svg class="icon xs" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 6H6.5A1.5 1.5 0 0 0 5 7.5v10A1.5 1.5 0 0 0 6.5 19h10a1.5 1.5 0 0 0 1.5-1.5V15M13 5h6v6M19 5l-8 8"/></svg></a></p>
@@ -491,11 +491,11 @@
       <span class="pub-cite">2012;&nbsp;30(2):&nbsp;518–523</span>
       <a class="pub-doi" href="https://doi.org/10.1007/s10637-010-9584-2" rel="noopener" target="_blank" aria-label="Open DOI link for: Evaluation of a multi-kinase inhibitor KRC-108 as an anti-tumor agent in vitro and in vivo">DOI <svg class="icon xs" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 6H6.5A1.5 1.5 0 0 0 5 7.5v10A1.5 1.5 0 0 0 6.5 19h10a1.5 1.5 0 0 0 1.5-1.5V15M13 5h6v6M19 5l-8 8"/></svg></a></p>
   </div>
-</li><li class="pub" data-year="2012" data-text="pharmacokinetics and pharmacodynamics of kr-66223, a novel dpp-4 inhibitor european journal of drug metabolism and pharmacokinetics 2012 jin sook song kyeong-ryoon lee hyun jin kwon sang dal rhee min sun kim sung hum choi sung-hack lee im sook song jin hee ahn sung hoon ahn myung ae bae">
+</li><li class="pub" data-year="2012" data-text="pharmacokinetics and pharmacodynamics of kr-66223, a novel dpp-4 inhibitor drug metabolism and pharmacokinetics 2012 jin sook song kyeong-ryoon lee hyun jin kwon sang dal rhee min sun kim sung hum choi sung-hack lee im sook song jin hee ahn sung hoon ahn myung ae bae">
   <div class="pub-body">
     <h3 class="pub-title">Pharmacokinetics and Pharmacodynamics of KR-66223, a Novel DPP-4 Inhibitor</h3>
     <p class="pub-authors">Jin Sook Song, Kyeong-Ryoon Lee, Hyun Jin Kwon, Sang Dal Rhee, Min Sun Kim, Sung Hum Choi, Sung-Hack Lee, Im Sook Song, Jin Hee Ahn, <strong>Sung Hoon Ahn</strong>, Myung Ae Bae</p>
-    <p class="pub-meta"><span class="pub-journal">European Journal of Drug Metabolism and Pharmacokinetics</span>
+    <p class="pub-meta"><span class="pub-journal">Drug Metabolism and Pharmacokinetics</span>
       <span class="pub-cite">2012;&nbsp;27(2):&nbsp;216–222</span>
       <a class="pub-doi" href="https://doi.org/10.2133/dmpk.DMPK-11-RG-095" rel="noopener" target="_blank" aria-label="Open DOI link for: Pharmacokinetics and Pharmacodynamics of KR-66223, a Novel DPP-4 Inhibitor">DOI <svg class="icon xs" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 6H6.5A1.5 1.5 0 0 0 5 7.5v10A1.5 1.5 0 0 0 6.5 19h10a1.5 1.5 0 0 0 1.5-1.5V15M13 5h6v6M19 5l-8 8"/></svg></a></p>
   </div>
@@ -626,7 +626,7 @@
 </li></ol>
       </section>
       <section class="pub-group" data-group="2008" aria-labelledby="y2008">
-        <h2 class="pub-group-year" id="y2008">2008<small>1 papers</small></h2>
+        <h2 class="pub-group-year" id="y2008">2008<small>1 paper</small></h2>
         <ol class="pubs"><li class="pub" data-year="2008" data-text="hepatocyte nuclear factor 4 alpha in the intestinal epithelial cells protects against inflammatory bowel disease inflammatory bowel diseases 2008 sung-hoon ahn yatrik m. shah junko inoue keiichirou morimura insook kim sunhee yim gilles lambert reiko kurotani kunio nagashima frank j. gonzalez yusuke inoue">
   <div class="pub-body">
     <h3 class="pub-title">Hepatocyte nuclear factor 4 alpha in the intestinal epithelial cells protects against inflammatory bowel disease</h3>
@@ -638,7 +638,7 @@
 </li></ol>
       </section>
       <section class="pub-group" data-group="2007" aria-labelledby="y2007">
-        <h2 class="pub-group-year" id="y2007">2007<small>1 papers</small></h2>
+        <h2 class="pub-group-year" id="y2007">2007<small>1 paper</small></h2>
         <ol class="pubs"><li class="pub" data-year="2007" data-text="differential regulation of bile acid homeostasis by the farnesoid x receptor in liver and intestine journal of lipid research 2007 insook kim sung-hoon ahn takeshi inagaki mihwa choi shinji ito grace l. guo steven a. kliewer frank j. gonzalez">
   <div class="pub-body">
     <h3 class="pub-title">Differential regulation of bile acid homeostasis by the farnesoid X receptor in liver and intestine</h3>
@@ -678,7 +678,7 @@
 </li></ol>
       </section>
       <section class="pub-group" data-group="2005" aria-labelledby="y2005">
-        <h2 class="pub-group-year" id="y2005">2005<small>1 papers</small></h2>
+        <h2 class="pub-group-year" id="y2005">2005<small>1 paper</small></h2>
         <ol class="pubs"><li class="pub" data-year="2005" data-text="comparison of pharmacokinetics of loxoprofen and its active metabolites after an intravenous, intramuscular, and oral administration of loxoprofen in rats: evidence for extrahepatic metabolism journal of pharmaceutical sciences 2005 tae-sung koo dae-hyun kim sung-hoon ahn kang-pil kim in-wha kim seung-yong seo young-ger suh dae-duk kim chang-koo shim suk-jae chung">
   <div class="pub-body">
     <h3 class="pub-title">Comparison of pharmacokinetics of loxoprofen and its active metabolites after an intravenous, intramuscular, and oral administration of loxoprofen in rats: Evidence for extrahepatic metabolism</h3>
@@ -690,11 +690,11 @@
 </li></ol>
       </section>
       <section class="pub-group" data-group="2004" aria-labelledby="y2004">
-        <h2 class="pub-group-year" id="y2004">2004<small>1 papers</small></h2>
-        <ol class="pubs"><li class="pub" data-year="2004" data-text="pharmacokinetic characterization of dehydroevodiamine in the rat brain journal of pharmaceutical sciences 2004 sung‐hoon ahn seng‐ho jeon takashi tsuruo chang‐koo shim suk‐jae chung">
+        <h2 class="pub-group-year" id="y2004">2004<small>1 paper</small></h2>
+        <ol class="pubs"><li class="pub" data-year="2004" data-text="pharmacokinetic characterization of dehydroevodiamine in the rat brain journal of pharmaceutical sciences 2004 sung-hoon ahn seng-ho jeon takashi tsuruo chang-koo shim suk-jae chung">
   <div class="pub-body">
     <h3 class="pub-title">Pharmacokinetic characterization of dehydroevodiamine in the rat brain</h3>
-    <p class="pub-authors">Sung‐Hoon Ahn, Seng‐Ho Jeon, Takashi Tsuruo, Chang‐Koo Shim, Suk‐Jae Chung</p>
+    <p class="pub-authors"><strong>Sung-Hoon Ahn</strong>, Seng-Ho Jeon, Takashi Tsuruo, Chang-Koo Shim, Suk-Jae Chung</p>
     <p class="pub-meta"><span class="pub-journal">Journal of Pharmaceutical Sciences</span>
       <span class="pub-cite">2004;&nbsp;93(2):&nbsp;283–292</span>
       <a class="pub-doi" href="https://doi.org/10.1002/jps.10546" rel="noopener" target="_blank" aria-label="Open DOI link for: Pharmacokinetic characterization of dehydroevodiamine in the rat brain">DOI <svg class="icon xs" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 6H6.5A1.5 1.5 0 0 0 5 7.5v10A1.5 1.5 0 0 0 6.5 19h10a1.5 1.5 0 0 0 1.5-1.5V15M13 5h6v6M19 5l-8 8"/></svg></a></p>
@@ -702,7 +702,7 @@
 </li></ol>
       </section>
       <section class="pub-group" data-group="2002" aria-labelledby="y2002">
-        <h2 class="pub-group-year" id="y2002">2002<small>1 papers</small></h2>
+        <h2 class="pub-group-year" id="y2002">2002<small>1 paper</small></h2>
         <ol class="pubs"><li class="pub" data-year="2002" data-text="simple liquid chromatography-electrospray ionization mass spectrometry method for the routine determination of salmon calcitonin in serum journal of chromatography b 2002 keon-hyoung song heung-man an hack-joo kim sung-hoon ahn suk-jae chung chang-koo shim">
   <div class="pub-body">
     <h3 class="pub-title">Simple liquid chromatography-electrospray ionization mass spectrometry method for the routine determination of salmon calcitonin in serum</h3>
@@ -742,7 +742,7 @@
     <p>© 2026 Laboratory of Pharmaceutical Sciences, Kangwon National University. Illustrations and interactive explainers use simulated data.</p>
   </div>
 </footer>
-<script src="../assets/js/site.js" defer></script>
+<script src="../assets/js/site.js" defer onerror="document.documentElement.classList.remove('js')"></script>
 <script src="../assets/js/publications.js" defer></script>
 </body>
 </html>

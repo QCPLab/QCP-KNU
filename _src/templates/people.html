@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% from "_macros.html" import icon %}
+{% from "_macros.html" import icon with context %}
 {% block main %}
 <section class="page-head">
   <div class="wrap">
@@ -16,7 +16,7 @@
       <div class="pi-body">
         <p class="eyebrow">{{ t.people.pi_label }}</p>
         <h2>{{ pi.name }}</h2>
-        <p class="pi-role">{{ t.people.pi_role }} · {{ L(site.identity.college) }}, {{ L(site.identity.university) }}</p>
+        <p class="pi-role">{{ t.people.pi_role }} · {{ L(site.identity.affiliation) }}</p>
         <p class="pi-fields-h">{{ t.people.fields_label }}</p>
         <ul class="chips">{% for f in t.people.fields %}<li>{{ f }}</li>{% endfor %}</ul>
         <ul class="pi-links">

@@ -24,6 +24,7 @@
 
 /* layout */
 .dx-grid{display:grid;grid-template-columns:minmax(0,1fr);gap:16px;margin:0 0 16px}
+.dx-fwd{align-self:start}
 .dx-card{min-width:0;padding:16px;border:1px solid var(--line,#dde4ec);border-radius:var(--radius,12px);background:var(--surface,#fff)}
 .dx-card h3{margin:0 0 10px;font-size:1.02rem;line-height:1.35;color:var(--ink,#10243a)}
 .dx-card h4{margin:12px 0 6px;font-size:.95rem;color:var(--ink,#10243a)}
@@ -65,9 +66,9 @@
 .dx-root select{max-width:100%;min-height:44px;padding:0 10px;border:1px solid var(--line-2,#c4cfdb);border-radius:8px;background:#fff;color:var(--ink,#10243a);font:inherit}
 .dx-btns{display:flex;flex-wrap:wrap;gap:6px}
 .dx-btn{min-height:44px;padding:0 14px;border:1px solid var(--line-2,#c4cfdb);border-radius:8px;background:#fff;color:var(--ink,#10243a);font:inherit;cursor:pointer}
-.dx-btn:disabled{opacity:.45;cursor:default}
+.dx-btn[aria-disabled="true"]{opacity:.45;cursor:default}
 .dx-btn-p{background:var(--accent,#0a7d77);border-color:var(--accent,#0a7d77);color:#fff}
-.dx-btn-p:disabled{color:#fff}
+.dx-btn-p[aria-disabled="true"]{color:#fff}
 .dx-stepb.dx-on{background:var(--accent-soft,#e1f1ef);border-color:var(--accent,#0a7d77);color:var(--accent-2,#065e59);font-weight:600}
 .dx-stepper{margin:0 0 10px}
 .dx-steplab{margin:8px 0 0;font-weight:600;color:var(--ink,#10243a)}

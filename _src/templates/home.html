@@ -1,10 +1,10 @@
 {% extends "base.html" %}
-{% from "_macros.html" import icon, section_head, pub_compact %}
+{% from "_macros.html" import icon, section_head, pub_compact with context %}
 {% block main %}
 <section class="hero" aria-labelledby="hero-title">
   <div class="wrap hero-grid">
     <div class="hero-copy">
-      <p class="eyebrow">{{ L(site.identity.college) }} · {{ L(site.identity.university) }}</p>
+      <p class="eyebrow">{{ affil[0] }} · {{ affil[1] }}</p>
       <h1 id="hero-title">{{ L(site.identity.name) }}</h1>
       <p class="hero-tag">{{ L(site.identity.tagline) }}</p>
       <p class="lead">{{ t.hero.lead }}</p>

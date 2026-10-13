@@ -30,7 +30,7 @@ PATHS = {"home": "", "research": "research/", "methods": "methods/", "publicatio
 PAGE_ASSETS = {"methods": {"css": ["nlme-explorer", "dl-explorer"], "js": ["nlme-explorer", "dl-explorer"]},
                "publications": {"css": [], "js": ["publications"]}}
 LINKED = {"ok", "title-variant(check)", "journal-name-differs"}
-PI_RE = re.compile(r"sung[-\s]?hoon\s+ahn", re.I)
+PI_RE = re.compile(r"(sung[-\u2010-\u2015\s]?hoon\s+ahn|\bs[-\u2010-\u2015.\s]*h\.?\s*ahn)", re.I)
 
 # topic labels for the 'further reading' list, keyed by DOI (references verified against Crossref, docs/REFERENCES.md)
 READING = [
@@ -44,7 +44,10 @@ READING = [
     ("10.1021/acs.jcim.9b00237", {"en": "Graph neural networks for molecules", "ko": "분자 그래프 신경망"}),
 ]
 
-FORBIDDEN = [r"qcp", r"todo", r"lorem", r"준비 중", r"googletagmanager", r"fonts\.googleapis", r"AnSH\.png", r"bk21",
+# reading-list entries whose author list in refs_verified.json is a shortened one (checked in PubMed / Crossref)
+TRUNCATED_AUTHORS = {"10.1002/psp4.12049", "10.1002/psp4.12134", "10.1021/acs.jcim.9b00237"}
+
+FORBIDDEN = ["q" + "cp", r"todo", r"lorem", r"준비 중", r"googletagmanager", r"fonts\.googleapis", r"AnSH\.png", r"bk21",
              r"@(gmail|naver|daum|hanmail|kakao)\.", r"\[PI"]
 
 
@@ -96,10 +99,20 @@ def build() -> dict[str, str]:
     n_phd = sum(1 for m in members if m["role"] == "phd")
     n_ms = sum(1 for m in members if m["role"] == "ms")
 
+    # launch gate: an indexable site must be approved and free of open PI questions
+    if site["indexable"]:
+        open_items = [p.name for p in (SRC / "data").glob("*.yml") if "TODO(PI)" in p.read_text(encoding="utf-8")]
+        if not site["identity"]["approved_by_pi"] or open_items:
+            sys.exit(f"launch gate: indexable=true needs identity.approved_by_pi=true and no TODO(PI) markers (open: {open_items})")
+
     refs_raw = json.loads((SRC / "data" / "refs_verified.json").read_text(encoding="utf-8"))
     by_doi = {v["doi"]: v for v in refs_raw.values()}
+    def ref_authors(doi):
+        names = [a.strip() for a in by_doi[doi]["authors"].split(",") if a.strip()]  # an empty first entry = collective author
+        return ", ".join(names) + (", et al." if doi in TRUNCATED_AUTHORS else "")
+
     refs = [{"doi": doi, "topic": topic, "title": html.unescape(by_doi[doi]["title"]),
-             "authors": by_doi[doi]["authors"], "year": by_doi[doi]["year"], "journal": html.unescape(by_doi[doi]["journal"])}
+             "authors": ref_authors(doi), "year": by_doi[doi]["year"], "journal": html.unescape(by_doi[doi]["journal"])}
             for doi, topic in READING]
 
     # ---- jinja ------------------------------------------------------------------------------
@@ -146,7 +159,7 @@ def build() -> dict[str, str]:
         page = {"id": page_id, "dir": pdir, "alt": page_id != "404", "css": extra["css"], "js": extra["js"]}
         name = site["identity"]["name"][lang]
         if page_id == "home":
-            title = f'{name} | {site["identity"]["college"][lang]}, {site["identity"]["university"][lang]}'
+            title = f'{name} | {site["identity"]["affiliation"][lang]}'
             desc = t["meta"]["desc"]["home"]
         elif page_id == "404":
             title, desc = f'{t["nf"]["title"]} | {name}', t["nf"]["text"]
@@ -154,7 +167,9 @@ def build() -> dict[str, str]:
             title = f'{t["nav"][page_id]} | {name}'
             desc = t["meta"]["desc"][page_id]
         ctx = dict(
-            t=t, lang=lang, other_lang=other, page=page, title=title, description=desc,
+            t=t, t_en=T["en"], t_ko=T["ko"], lang=lang, other_lang=other, page=page,
+            affil=([site["identity"]["college"][lang], site["identity"]["university"][lang]] if lang == "en"
+                   else [site["identity"]["university"][lang], site["identity"]["college"][lang]]), title=title, description=desc,
             site=site, contact=contact, research=research, process=process, nav=site["nav"],
             year=site["copyright_year"], pi_re=PI_RE, pi=pi_ctx,
             n_pubs=len(pubs), year_min=min(counts), year_max=max(counts),

@@ -330,8 +330,8 @@ publications:
   title: Quantification of mequitazine in human plasma by gas chromatography-quadrupole mass spectrometry and its application to a human pharmacokinetic study
   journal: Biomedical Chromatography
   authors:
-  - Sung‐Hoon Ahn
-  - Han‐Joo Maeng
+  - Sung-Hoon Ahn
+  - Han-Joo Maeng
   volume: '30'
   issue: '4'
   page: 574-578
@@ -375,13 +375,13 @@ publications:
   title: Gender differences in the hepatic elimination and pharmacokinetics of lobeglitazone in rats
   journal: Biopharmaceutics & Drug Disposition
   authors:
-  - Jong‐Hwa Lee
-  - Jun‐Hyeng Son
-  - Yoon‐Jee Chae
+  - Jong-Hwa Lee
+  - Jun-Hyeng Son
+  - Yoon-Jee Chae
   - Sung Hoon Ahn
   - Wooin Lee
-  - Dae‐Duk Kim
-  - Suk‐Jae Chung
+  - Dae-Duk Kim
+  - Suk-Jae Chung
   volume: '36'
   issue: '6'
   page: 410-415
@@ -467,15 +467,15 @@ publications:
   title: Quantitative determination of enzalutamide, an anti-prostate cancer drug, in rat plasma using liquid chromatography-tandem mass spectrometry, and its application to a pharmacokinetic study
   journal: Biomedical Chromatography
   authors:
-  - Ji‐Hye Song
-  - Tae‐Heon Kim
-  - Jong‐Woo Jung
+  - Ji-Hye Song
+  - Tae-Heon Kim
+  - Jong-Woo Jung
   - Nakjeong Kim
   - Sung Hoon Ahn
-  - Sung‐Ook Hwang
+  - Sung-Ook Hwang
   - Nam Sook Kang
-  - Sung‐Eun Yoo
-  - Tae‐Sung Koo
+  - Sung-Eun Yoo
+  - Tae-Sung Koo
   volume: '28'
   issue: '8'
   page: 1112-1117
@@ -618,14 +618,14 @@ publications:
   title: Determination of PF-04620110, a novel inhibitor of diacylglycerol acyltransferase-1, in rat plasma using liquid chromatography-tandem mass spectrometry and its application in pharmacokinetic studies
   journal: Biomedical Chromatography
   authors:
-  - Kyeong‐Ryoon Lee
+  - Kyeong-Ryoon Lee
   - Sung Heum Choi
-  - Jin‐Sook Song
+  - Jin-Sook Song
   - Hyewon Seo
-  - Yoon‐Jee Chae
+  - Yoon-Jee Chae
   - Hwang Eui Cho
   - Jin Hee Ahn
-  - Sung‐Hoon Ahn
+  - Sung-Hoon Ahn
   - Myung Ae Bae
   volume: '27'
   issue: '7'
@@ -742,7 +742,7 @@ publications:
 - 'no': 23
   year: 2012
   title: Pharmacokinetics and Pharmacodynamics of KR-66223, a Novel DPP-4 Inhibitor
-  journal: European Journal of Drug Metabolism and Pharmacokinetics
+  journal: Drug Metabolism and Pharmacokinetics
   authors:
   - Jin Sook Song
   - Kyeong-Ryoon Lee
@@ -1098,11 +1098,11 @@ publications:
   title: Pharmacokinetic characterization of dehydroevodiamine in the rat brain
   journal: Journal of Pharmaceutical Sciences
   authors:
-  - Sung‐Hoon Ahn
-  - Seng‐Ho Jeon
+  - Sung-Hoon Ahn
+  - Seng-Ho Jeon
   - Takashi Tsuruo
-  - Chang‐Koo Shim
-  - Suk‐Jae Chung
+  - Chang-Koo Shim
+  - Suk-Jae Chung
   volume: '93'
   issue: '2'
   page: 283-292

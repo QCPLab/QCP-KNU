@@ -12,7 +12,7 @@
       title: 'How a population-PK (nonlinear mixed-effects) model is estimated',
       badge: 'Simulated example (30 virtual subjects) — not patient data',
       seeT: 'What you see',
-      see: 'The page replays a real estimation run on 30 simulated subjects. Each step of the slider is one accepted iteration of a FOCE-I optimiser that was implemented for this site: the population values (teal curve) move towards the values that generated the data (dashed lines), the objective function falls, and the individual fits (thin blue lines) follow the orange observations. Switch the sampling scenario to see how fewer samples per subject change the final estimates, their precision and the eta-shrinkage (how strongly individual estimates are pulled towards the population mean).',
+      see: 'The page replays a real estimation run on 30 simulated subjects. Each step of the slider is one accepted iteration of a FOCE-I optimiser that was implemented for this site: the population values (teal curve) move towards the values that generated the data (dashed lines), the objective function falls, and the individual fits (thin blue lines) follow the orange observations. Switch the sampling scenario to see how fewer samples per subject change the final estimates, their precision and the eta-shrinkage (how strongly individual estimates are pulled towards the population mean). All three scenarios use the same 30 subjects and the same noise draws; the smaller designs are subsets of the rich one.',
       scenLbl: 'Sampling scenario', rich: 'Rich', moderate: 'Moderate', sparse: 'Sparse', perSubj: '{n} samples per subject',
       pbLbl: 'Playback of optimiser iterations', play: 'Play', pause: 'Pause', back: 'Step back', fwd: 'Step forward', toFirst: 'First iteration', toLast: 'Last iteration',
       slider: 'Iteration', speed: 'Speed', frameLbl: 'Iteration {it} · frame {k} of {n}',
@@ -29,13 +29,13 @@
       parT: 'Parameters vs iteration', pnames: ['CL/F (L/h)', 'V/F (L)', 'ka (1/h)', 'ω CL/F', 'ω V/F', 'ω ka', 'σ (proportional)'],
       parNote: 'ω = SD of the log-normal between-subject variability (log scale); σ = proportional residual error. Dashed line = value used to simulate; orange marker = current iteration.',
       truthWord: 'truth', parAlt: '{n}: {v} at iteration {it}, true value {t}.', xIter: 'Iteration',
-      ofvT: 'Objective function', ofvLine: 'OFV versus iteration', ofvNote: 'OFV = approximately −2 × log-likelihood summed over subjects, constants included. Only differences matter; negative values are normal for this concentration scale.', dOfv: 'ΔOFV, log scale', ofvAlt: 'Objective function value versus iteration; current iteration {it}, OFV {v}.',
+      ofvT: 'Objective function', ofvLine: 'OFV versus iteration', ofvNote: 'OFV = approximately −2 × log-likelihood summed over subjects, constants included. Only differences matter; negative values are normal for this concentration scale. The values are specific to this implementation and cannot be compared with the output of other software.', dOfv: 'ΔOFV, log scale', ofvAlt: 'Objective function value versus iteration; current iteration {it}, OFV {v}.',
       cT: 'OFV surface (slice over CL/F and V/F)', cAlt: 'Contour plot of the objective function over CL/F and V/F with the optimiser path up to iteration {it}.',
       cNote: 'Contour lines: OFV above the lowest value of the grid (levels {lv}). ka, ω and σ are held at their final values and every subject’s η̂ is re-optimised at each grid point, so the orange path (all parameters moving) only approximately lies on this slice. Outside the dotted rectangle the surface was not computed.',
       cStart: 'start', cEnd: 'final',
-      etaT: 'Individual deviations (η̂) and shrinkage', etaNote: 'Dots: η̂ of each subject (click a dot to highlight the subject). Shaded band: ±2ω at this iteration. Shrinkage = 1 − SD(η̂)/ω: high values mean the data of a subject say little about that effect.',
+      etaT: 'Individual deviations (η̂) and shrinkage', etaNote: 'Dots: η̂ of each subject (click a dot to highlight the subject). Shaded band: ±2ω at this iteration. Shrinkage = 1 − SD(η̂)/ω: high values mean the data of a subject say little about that effect. Small negative values can occur before the fit has converged.',
       showEta: 'Show true η (simulation)', shr: 'η-shrinkage', etaAlt: 'Estimated individual deviations for CL/F, V/F and ka at iteration {it}; shrinkage {s}.',
-      tabT: 'Final estimates versus truth', tabCap: 'Estimates at the last stored iteration of each scenario. Below each estimate: percentage deviation from truth, and the approximate relative standard error (RSE) from the numerical Hessian of the OFV at that point.',
+      tabT: 'Final estimates versus truth', tabCap: 'Estimates at the last stored iteration of each scenario. Below each estimate: percentage deviation from truth, and the approximate relative standard error (RSE) from the numerical Hessian of the OFV at that point. “Truth” is the nominal value used for the simulation; the 30 simulated subjects have a realised spread of η that differs somewhat from the nominal ω, so deviations in ω are expected.',
       tabCols: ['Parameter', 'Truth', 'Rich', 'Moderate', 'Sparse'], shrRow: 'η-shrinkage {n}', itRow: 'Accepted iterations',
       iterT: 'What happens in one iteration', iterSteps: [
         'Inner problem. With the current population values (θ, ω, σ) the optimiser finds, for every subject separately, the individual deviation η̂ that is most probable given that subject’s data (the minimum of Σ[ln var + res²/var] + η′Ω⁻¹η, with the residual variance evaluated at η = interaction).',
@@ -44,7 +44,7 @@
       valT: 'Validation and cross-checks', limT: 'Limitations',
       lim: ['The data are simulated from the same model that is fitted, with one fixed random seed and 30 subjects. One data set per scenario is shown, not an average over repetitions, so single-run deviations from the truth are expected (a replicate study is summarised under Validation).',
         'FOCE-I is an approximation of the exact marginal likelihood (a Laplace approximation with a Gauss-Newton Hessian). The gap to numerically integrated values is reported under Validation.',
-        'Only one structural model (one compartment, first-order absorption), a diagonal Ω, a proportional error and no covariates are used. The page is a teaching demonstration, not a substitute for validated software such as NONMEM or nlmixr2.'],
+        'Only one structural model (one compartment, first-order absorption), a diagonal Ω, a proportional error and no covariates are used. The page is a teaching demonstration, not a substitute for validated software such as NONMEM or nlmixr2, and it has not been compared with their output.'],
       selfOk: 'Browser recomputation check passed: the concentrations recomputed in JavaScript match the Python values (max |Δ| = {e} mg/L, {n} reference values) and the stored iterations are internally consistent ({c} checks).',
       selfBad: 'Browser recomputation check FAILED ({msg}). Do not rely on the curves shown.',
       vJac: 'Sensitivity matrix: analytic J compared with central finite differences over {n} parameter sets (including ka close to ke): largest relative difference {r}.',
@@ -55,7 +55,7 @@
       vLapT: 'Laplace OFV of each subject versus brute-force numerical integration of the marginal likelihood (30 subjects, at each scenario’s final estimates). Gap = Laplace − exact, in OFV units.',
       vLapCols: ['Scenario', 'Samples/subject', 'Mean gap', 'Range of gap', 'Sum of gaps'], vLapStart: 'Rich design at the (poor) starting values: mean gap {m}, range {a} to {b}.',
       vRestT: 'Independent starting values (4 random starts per scenario): largest |ΔOFV| to the main run and largest relative difference of any of the 7 parameters.', vRestCols: ['Scenario', 'Max |ΔOFV|', 'Max difference (%)', 'Converged'],
-      vRepT: 'Replicate study: median error (%) over {n} newly simulated data sets per scenario (same estimator, same starting values).', vRepCols: ['Parameter', 'Rich', 'Moderate', 'Sparse'], vRepConv: 'Converged runs',
+      vRepT: 'Replicate study: median error (%) over {n} newly simulated data sets per scenario (same estimator, same starting values). The scenarios share the same subjects, so the columns are not independent, and with so few data sets the medians are imprecise.', vRepCols: ['Parameter', 'Rich', 'Moderate', 'Sparse'], vRepConv: 'Converged runs',
       loading: 'Loading the example…', fail: 'The example data could not be loaded.', liveLbl: 'Current state',
       cap0: 'Iteration 0 (starting values): OFV {ofv}; CL/F {cl} L/h, V/F {v} L, ka {ka} 1/h.',
       cap: 'Iteration {it}: OFV {ofv} ({d} since iteration {pv}); CL/F {a} → {b} L/h.', capEnd: ' Final stored iteration.',
@@ -65,7 +65,7 @@
       title: '집단 약동학(비선형 혼합효과) 모형은 이렇게 추정됩니다',
       badge: '시뮬레이션 예제(가상 30명) — 실제 환자 자료가 아닙니다',
       seeT: '화면에서 볼 수 있는 내용',
-      see: '이 페이지는 가상 30명의 시뮬레이션 자료에 대해 실제로 수행한 추정 과정을 재생합니다. 슬라이더의 한 칸은 이 사이트를 위해 직접 구현한 FOCE-I 최적화 알고리즘이 채택한 반복 한 번에 해당합니다. 모집단 값(청록색 곡선)이 자료를 만든 참값(점선)에 가까워지고, 목적함수가 감소하며, 개인별 적합선(가는 파란선)이 주황색 관측값을 따라가는 모습을 볼 수 있습니다. 표본 수 시나리오를 바꾸면 개인당 표본이 적을 때 최종 추정값, 정밀도, 에타 수축(개인별 추정값이 모집단 평균 쪽으로 끌려가는 정도)이 어떻게 달라지는지 확인할 수 있습니다.',
+      see: '이 페이지는 가상 30명의 시뮬레이션 자료에 대해 실제로 수행한 추정 과정을 재생합니다. 슬라이더의 한 칸은 이 사이트를 위해 직접 구현한 FOCE-I 최적화 알고리즘이 채택한 반복 한 번에 해당합니다. 모집단 값(청록색 곡선)이 자료를 만든 참값(점선)에 가까워지고, 목적함수가 감소하며, 개인별 적합선(가는 파란선)이 주황색 관측값을 따라가는 모습을 볼 수 있습니다. 표본 수 시나리오를 바꾸면 개인당 표본이 적을 때 최종 추정값, 정밀도, 에타 수축(개인별 추정값이 모집단 평균 쪽으로 끌려가는 정도)이 어떻게 달라지는지 확인할 수 있습니다. 세 시나리오는 같은 가상 피험자 30명과 같은 잡음을 사용하며, 표본이 적은 설계는 풍부 설계의 일부입니다.',
       scenLbl: '채혈 시나리오', rich: '풍부', moderate: '중간', sparse: '희박', perSubj: '개인당 {n}점',
       pbLbl: '최적화 반복 재생', play: '재생', pause: '일시정지', back: '한 단계 뒤로', fwd: '한 단계 앞으로', toFirst: '처음 반복', toLast: '마지막 반복',
       slider: '반복', speed: '속도', frameLbl: '반복 {it}회 · 프레임 {k}/{n}',
@@ -82,13 +82,13 @@
       parT: '반복에 따른 모수 변화', pnames: ['CL/F (L/h)', 'V/F (L)', 'ka (1/h)', 'ω CL/F', 'ω V/F', 'ω ka', 'σ (비례 오차)'],
       parNote: 'ω는 로그정규 개체간 변동의 표준편차(로그 척도), σ는 비례 잔차 오차입니다. 점선은 시뮬레이션에 사용한 값, 주황색 표시는 현재 반복입니다.',
       truthWord: '참값', parAlt: '{n}: 반복 {it}회에서 {v}, 참값 {t}.', xIter: '반복',
-      ofvT: '목적함수', ofvLine: '반복에 따른 OFV', ofvNote: 'OFV는 개체별 합산 로그우도의 약 −2배이며 상수를 포함합니다. 차이만 의미가 있고, 이 농도 척도에서는 음수가 나오는 것이 정상입니다.', dOfv: 'ΔOFV, 로그 척도', ofvAlt: '반복에 따른 목적함수 값입니다. 현재 반복 {it}회, OFV {v}.',
+      ofvT: '목적함수', ofvLine: '반복에 따른 OFV', ofvNote: 'OFV는 개체별 합산 로그우도의 약 −2배이며 상수를 포함합니다. 차이만 의미가 있고, 이 농도 척도에서는 음수가 나오는 것이 정상입니다. 값은 이 구현에 고유하므로 다른 소프트웨어의 출력과 직접 비교할 수 없습니다.', dOfv: 'ΔOFV, 로그 척도', ofvAlt: '반복에 따른 목적함수 값입니다. 현재 반복 {it}회, OFV {v}.',
       cT: 'OFV 곡면(CL/F·V/F 단면)', cAlt: 'CL/F와 V/F에 대한 목적함수 등고선 그래프이며 반복 {it}회까지의 최적화 경로를 함께 보여 줍니다.',
       cNote: '등고선은 격자의 최솟값보다 높은 OFV입니다(수준 {lv}). ka, ω, σ는 최종 추정값으로 고정하고 각 격자점에서 모든 개체의 η̂를 다시 최적화했으므로, 모든 모수가 함께 움직이는 주황색 경로는 이 단면에 근사적으로만 놓입니다. 점선 사각형 바깥에서는 곡면을 계산하지 않았습니다.',
       cStart: '시작', cEnd: '최종',
-      etaT: '개인별 편차(η̂)와 수축', etaNote: '점은 각 개체의 η̂입니다(점을 누르면 해당 개체가 강조됩니다). 음영 띠는 현재 반복의 ±2ω입니다. 수축 = 1 − SD(η̂)/ω이며, 값이 크면 개체별 자료가 해당 효과에 대한 정보를 거의 주지 못한다는 뜻입니다.',
+      etaT: '개인별 편차(η̂)와 수축', etaNote: '점은 각 개체의 η̂입니다(점을 누르면 해당 개체가 강조됩니다). 음영 띠는 현재 반복의 ±2ω입니다. 수축 = 1 − SD(η̂)/ω이며, 값이 크면 개체별 자료가 해당 효과에 대한 정보를 거의 주지 못한다는 뜻입니다. 수렴하기 전에는 값이 약간 음수일 수 있습니다.',
       showEta: '참 η 표시(시뮬레이션)', shr: 'η 수축', etaAlt: '반복 {it}회에서 CL/F, V/F, ka의 개인별 편차 추정값이며 수축은 {s}입니다.',
-      tabT: '최종 추정값과 참값', tabCap: '각 시나리오의 마지막 저장 반복에서의 추정값입니다. 추정값 아래에 참값 대비 편차(%)와, 그 지점에서 OFV의 수치 헤시안으로 구한 근사 상대표준오차(RSE)를 표시했습니다.',
+      tabT: '최종 추정값과 참값', tabCap: '각 시나리오의 마지막 저장 반복에서의 추정값입니다. 추정값 아래에 참값 대비 편차(%)와, 그 지점에서 OFV의 수치 헤시안으로 구한 근사 상대표준오차(RSE)를 표시했습니다. “참값”은 시뮬레이션에 쓴 명목값이며, 시뮬레이션된 30명의 실제 η 분포는 명목 ω와 다소 다르므로 ω의 편차는 예상되는 결과입니다.',
       tabCols: ['모수', '참값', '풍부', '중간', '희박'], shrRow: 'η 수축 {n}', itRow: '채택된 반복 횟수',
       iterT: '한 번의 반복에서 일어나는 일', iterSteps: [
         '내부 문제. 현재의 모집단 값(θ, ω, σ)에서 각 개체마다 그 개체의 자료로 볼 때 가장 그럴듯한 개인 편차 η̂를 찾습니다(Σ[ln var + res²/var] + η′Ω⁻¹η의 최솟값이며, 잔차 분산을 η에서 계산하는 것이 상호작용입니다).',
@@ -97,7 +97,7 @@
       valT: '검증과 교차 확인', limT: '한계',
       lim: ['자료는 적합에 쓰는 것과 같은 모형으로 시뮬레이션했으며, 난수 시드는 하나로 고정했고 개체는 30명입니다. 시나리오마다 자료 한 세트만 보여 주며 반복 시행의 평균이 아니므로, 한 번의 시행에서 참값과 차이가 나는 것은 당연합니다(반복 시뮬레이션 결과는 검증 항목에 요약되어 있습니다).',
         'FOCE-I는 정확한 주변 우도의 근사입니다(가우스-뉴턴 헤시안을 쓰는 라플라스 근사). 수치 적분 값과의 차이는 검증 항목에 보고합니다.',
-        '구조 모형은 한 가지(1구획, 1차 흡수), 분산-공분산 행렬은 대각 Ω, 오차는 비례 오차이며 공변량은 없습니다. 이 페이지는 교육용 시연이며 NONMEM이나 nlmixr2 같은 검증된 소프트웨어를 대체하지 않습니다.'],
+        '구조 모형은 한 가지(1구획, 1차 흡수), 분산-공분산 행렬은 대각 Ω, 오차는 비례 오차이며 공변량은 없습니다. 이 페이지는 교육용 시연이며 NONMEM이나 nlmixr2 같은 검증된 소프트웨어를 대체하지 않고, 그 출력과 비교한 적도 없습니다.'],
       selfOk: '브라우저 재계산 점검을 통과했습니다. JavaScript로 다시 계산한 농도가 Python 값과 일치하며(최대 |Δ| = {e} mg/L, 기준값 {n}개) 저장된 반복 자료도 서로 일관됩니다(점검 {c}건).',
       selfBad: '브라우저 재계산 점검에 실패했습니다({msg}). 표시된 곡선을 신뢰하지 마십시오.',
       vJac: '민감도 행렬: 해석적 J를 중심 유한차분과 {n}개 모수 조합(ka가 ke에 가까운 경우 포함)에서 비교했을 때 상대 차이의 최댓값은 {r}입니다.',
@@ -108,7 +108,7 @@
       vLapT: '개체별 라플라스 OFV와 주변 우도의 무차별 수치 적분 비교입니다(각 시나리오의 최종 추정값에서 30명). 차이 = 라플라스 − 정확값, OFV 단위입니다.',
       vLapCols: ['시나리오', '개인당 표본', '평균 차이', '차이 범위', '차이 합'], vLapStart: '풍부 설계, (불량한) 초기값에서: 평균 차이 {m}, 범위 {a} ~ {b}.',
       vRestT: '독립적인 시작값(시나리오마다 무작위 4회): 본 실행과의 |ΔOFV| 최댓값과 7개 모수 중 상대 차이의 최댓값입니다.', vRestCols: ['시나리오', '|ΔOFV| 최댓값', '최대 차이(%)', '수렴'],
-      vRepT: '반복 시뮬레이션: 시나리오마다 새로 만든 자료 {n}세트(같은 추정 방법, 같은 초기값)에서 오차(%)의 중앙값입니다.', vRepCols: ['모수', '풍부', '중간', '희박'], vRepConv: '수렴한 실행',
+      vRepT: '반복 시뮬레이션: 시나리오마다 새로 만든 자료 {n}세트(같은 추정 방법, 같은 초기값)에서 오차(%)의 중앙값입니다. 세 시나리오는 같은 피험자를 공유하므로 열은 서로 독립이 아니며, 자료 세트 수가 적어 중앙값은 정밀하지 않습니다.', vRepCols: ['모수', '풍부', '중간', '희박'], vRepConv: '수렴한 실행',
       loading: '예제를 불러오는 중입니다…', fail: '예제 자료를 불러오지 못했습니다.', liveLbl: '현재 상태',
       cap0: '반복 0회(초기값): OFV {ofv}; CL/F {cl} L/h, V/F {v} L, ka {ka} 1/h.',
       cap: '반복 {it}회: OFV {ofv} (반복 {pv}회 대비 {d}); CL/F {a} → {b} L/h.', capEnd: ' 마지막 저장 반복입니다.',
@@ -229,7 +229,7 @@
     root.setAttribute('role', 'group');
     root.setAttribute('aria-label', T.title);
     var head = el('header', 'nx-head', null, root);
-    el('h2', 'nx-title', T.title, head);
+    el('h3', 'nx-title', T.title, head);
     el('p', 'nx-badge', T.badge, head).setAttribute('role', 'note');
     var see = el('div', 'nx-see', null, head);
     el('h3', 'nx-h3', T.seeT, see); el('p', 'nx-p', T.see, see);

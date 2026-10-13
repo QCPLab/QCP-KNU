@@ -14,7 +14,7 @@
   const DICT = {
     en: {
       title: 'How deep learning computes',
-      badge: 'Teaching example: synthetic data, small models — not for prediction',
+      badge: 'Teaching example: simulated patients and public molecule structures, small models — not for prediction',
       tab1: 'Neural network (MLP)', tab2: 'Graph neural network (GNN)', tablist: 'Choose a model',
       loading: 'Loading data…', loaderr: 'The widget data could not be loaded.',
       back: 'Back', next: 'Next', restart: 'Restart', stepOf: 'Step {0} of {1}',
@@ -24,7 +24,7 @@
       snapH: 'Training snapshot', snapVal: 'Epoch {0} (snapshot {1} of {2})',
       snapNote: 'Epoch 0 = random starting weights; the last snapshot is the end of training. The whole page uses the weights of the chosen snapshot.',
       pNet: 'Network output', pTrue: 'True function (typical value)', pRatio: 'Network ÷ true',
-      pNote: 'Apparent clearance of a synthetic population. “True” is the formula that generated the data, without noise.',
+      pNote: 'Apparent clearance of a synthetic population. “True” is the formula that generated the data, without noise. The 2,000 training patients were mostly 45–100 kg and their eGFR falls with age; far outside that range (for example 30 kg, 20 y, eGFR 20) the network is extrapolating and can be far from the true function.',
       netH: 'Network 5 → 8 → 6 → 1',
       legF: 'Edge width = |weight|. Blue solid = positive, orange dashed = negative. Node size = |value| (relative within a layer).',
       legB: 'Edge width = |gradient ∂L/∂w| for this patient (relative within a layer). Blue solid = positive, orange dashed = negative.',
@@ -57,7 +57,7 @@
       molHint: 'Arrow keys move between atoms; Enter or Space replays the message flow. Colours are relative within the molecule.',
       replay: 'Replay message flow', atomH: 'Atom {0} · {1}', atomInfo: 'degree {0}, {1}, {2}',
       aromatic: 'aromatic', aliphatic: 'non-aromatic', inRing: 'in ring', noRing: 'not in ring',
-      lede2: 'A drug molecule is a graph. Each atom starts with 8 numbers. In each of two rounds an atom adds the vectors of its bonded neighbours to its own, multiplies by a weight matrix, adds a bias and applies ReLU. The average of the final atom vectors is turned into one number: the model’s estimate of RDKit’s Crippen logP — a calculated value, not a measurement.',
+      lede2: 'A drug molecule is a graph. Each atom starts with 8 numbers. In each of two rounds an atom adds the vectors of its bonded neighbours to its own, multiplies by a weight matrix, adds a bias and applies ReLU. The final atom vectors are averaged and turned into a logP per heavy atom; multiplied by the number of heavy atoms, this is the model’s estimate of RDKit’s Crippen logP — a calculated value, not a measurement.',
       dFeat: 'Features x of this atom (8 numbers)',
       dOwn: 'Own vector', dNb: 'Neighbour {0} ({1})', dSum: 'Sum: own + neighbours', dZ: 'z = W·sum + b', dH: 'h = ReLU(z)',
       dContribH: 'Contribution of this atom to the predicted logP', dHead: 'Head weights w', dProd: 'w · h per dimension', dC: 'c = Σ(w·h) + b = {0}',
@@ -77,7 +77,7 @@
         'Training happened once, offline, in plain NumPy (Adam, squared error against RDKit’s Crippen logP). The page only repeats the forward calculation from the stored weights and checks it against the NumPy numbers.'],
       adme: 'In the literature, graph networks of this kind are trained on thousands of measured compounds to predict ADME and toxicity properties (for example Yang et al., 2019, J Chem Inf Model); the model here is far smaller and learns only a calculated logP.',
       aboutH: 'About this example',
-      what: 'What you see', whatTxt: 'Left to right, top to bottom: one virtual patient is passed through the network (forward pass), the error is passed back (backward pass), and the snapshot slider replays training. In the second tab a molecule is a graph; atoms exchange numbers with their neighbours, and the averaged result is one logP value.',
+      what: 'What you see', whatTxt: 'Left to right, top to bottom: one virtual patient is passed through the network (forward pass), the error is passed back (backward pass), and the snapshot slider replays training. In the second tab a molecule is a graph; atoms exchange numbers with their neighbours, and the averaged result, scaled by the number of heavy atoms, is one logP value.',
       lim: 'Limitations', limTxt: 'Both models are small teaching examples. The MLP learns a formula that we wrote ourselves from simulated patients; its accuracy says nothing about real clearance, which depends on many other factors. The GNN imitates RDKit’s Crippen logP, a value calculated from atom-type contributions, on a few thousand structures from a public set; it is not a measured property and was not tested on other chemical series. Neither model should be used for prediction. R² and RMSE are for held-out data only (split by patient or by molecule).',
       selfOk: 'Self-test: browser calculation matches the NumPy reference (largest difference {0}, tolerance 1e-5; gradients also match finite differences).',
       selfBad: 'Self-test FAILED: browser and NumPy numbers differ by {0} (tolerance 1e-5).',
@@ -86,7 +86,7 @@
     },
     ko: {
       title: '딥러닝은 어떻게 계산하는가',
-      badge: '교육용 예제: 합성 자료·소형 모델 — 예측 용도가 아닙니다',
+      badge: '교육용 예제: 가상 환자 자료와 공개 분자 구조, 소형 모델 — 예측 용도가 아닙니다',
       tab1: '신경망(MLP)', tab2: '그래프 신경망(GNN)', tablist: '모형 선택',
       loading: '자료를 불러오는 중입니다…', loaderr: '위젯 자료를 불러오지 못했습니다.',
       back: '이전', next: '다음', restart: '처음부터', stepOf: '{1}단계 중 {0}단계',
@@ -96,7 +96,7 @@
       snapH: '학습 단계(스냅샷)', snapVal: '에폭 {0} (스냅샷 {2}개 중 {1}번째)',
       snapNote: '에폭 0은 무작위 초기 가중치이며 마지막 스냅샷은 학습이 끝난 상태입니다. 이 화면의 모든 계산은 선택한 스냅샷의 가중치를 사용합니다.',
       pNet: '신경망 출력', pTrue: '참 함수(전형값)', pRatio: '신경망 ÷ 참값',
-      pNote: '합성 집단의 겉보기 청소율입니다. “참값”은 자료를 만든 공식에서 잡음을 뺀 값입니다.',
+      pNote: '합성 집단의 겉보기 청소율입니다. “참값”은 자료를 만든 공식에서 잡음을 뺀 값입니다. 학습에 쓴 가상 환자 2,000명은 대부분 체중 45–100 kg이고 eGFR이 나이에 따라 낮아집니다. 이 범위를 크게 벗어난 조합(예: 30 kg, 20세, eGFR 20)에서는 신경망이 외삽하게 되어 참값과 크게 달라질 수 있습니다.',
       netH: '신경망 5 → 8 → 6 → 1',
       legF: '선 굵기 = |가중치|. 파란 실선 = 양수, 주황 점선 = 음수. 노드 크기 = |값|(층 안에서의 상대값).',
       legB: '선 굵기 = 이 환자의 |기울기 ∂L/∂w|(층 안에서의 상대값). 파란 실선 = 양수, 주황 점선 = 음수.',
@@ -129,7 +129,7 @@
       molHint: '화살표 키로 원자 사이를 이동하고 Enter 또는 Space로 메시지 흐름을 다시 봅니다. 색은 분자 안에서의 상대값입니다.',
       replay: '메시지 흐름 다시 보기', atomH: '원자 {0} · {1}', atomInfo: '결합 {0}개, {2}, {1}',
       aromatic: '방향족', aliphatic: '비방향족', inRing: '고리 안', noRing: '고리 밖',
-      lede2: '약물 분자는 그래프입니다. 각 원자는 숫자 8개로 시작합니다. 두 번의 회차마다 원자는 결합한 이웃의 벡터를 자기 벡터에 더하고, 가중치 행렬을 곱하고, 편향을 더한 뒤 ReLU를 적용합니다. 마지막 원자 벡터의 평균은 숫자 하나로 바뀌며, 이것이 RDKit Crippen logP(측정값이 아니라 계산값)에 대한 모형의 추정치입니다.',
+      lede2: '약물 분자는 그래프입니다. 각 원자는 숫자 8개로 시작합니다. 두 번의 회차마다 원자는 결합한 이웃의 벡터를 자기 벡터에 더하고, 가중치 행렬을 곱하고, 편향을 더한 뒤 ReLU를 적용합니다. 마지막 원자 벡터를 평균해 중원자(수소 제외 원자)당 logP로 바꾸고, 여기에 중원자 수를 곱한 값이 RDKit Crippen logP(측정값이 아니라 계산값)에 대한 모형의 추정치입니다.',
       dFeat: '이 원자의 특성 x (숫자 8개)',
       dOwn: '자기 벡터', dNb: '이웃 {0} ({1})', dSum: '합: 자기 + 이웃', dZ: 'z = W·합 + b', dH: 'h = ReLU(z)',
       dContribH: '이 원자가 예측 logP에 기여하는 값', dHead: '출력층 가중치 w', dProd: '차원별 w · h', dC: 'c = Σ(w·h) + b = {0}',
@@ -149,7 +149,7 @@
         '학습은 한 번, 오프라인에서 순수 NumPy(Adam, RDKit Crippen logP에 대한 제곱 오차)로 수행했습니다. 이 화면은 저장된 가중치로 순전파만 다시 계산하고 NumPy 결과와 일치하는지 확인합니다.'],
       adme: '문헌에서는 이와 같은 그래프 신경망을 실측 화합물 수천 개로 학습시켜 ADME 및 독성 성질을 예측하는 데 사용합니다(예: Yang 등, 2019, J Chem Inf Model). 여기의 모형은 훨씬 작고 계산된 logP만 학습합니다.',
       aboutH: '이 예제에 대하여',
-      what: '화면 설명', whatTxt: '왼쪽에서 오른쪽, 위에서 아래로 보면, 가상 환자 한 명이 신경망을 통과하고(순전파), 오차가 거꾸로 전달되며(역전파), 스냅샷 슬라이더로 학습 과정을 다시 볼 수 있습니다. 두 번째 탭에서는 분자가 그래프이며, 원자가 이웃과 숫자를 주고받고 그 평균이 하나의 logP 값이 됩니다.',
+      what: '화면 설명', whatTxt: '왼쪽에서 오른쪽, 위에서 아래로 보면, 가상 환자 한 명이 신경망을 통과하고(순전파), 오차가 거꾸로 전달되며(역전파), 스냅샷 슬라이더로 학습 과정을 다시 볼 수 있습니다. 두 번째 탭에서는 분자가 그래프이며, 원자가 이웃과 숫자를 주고받고, 그 평균에 중원자 수를 곱한 값이 하나의 logP 값이 됩니다.',
       lim: '한계', limTxt: '두 모형은 모두 작은 교육용 예제입니다. MLP는 우리가 직접 만든 공식을 모의 환자 자료에서 학습하므로, 정확도는 실제 청소율과 무관합니다. 실제 청소율에는 여기에 포함되지 않은 많은 요인이 관여합니다. GNN은 공개 구조 몇천 개로 RDKit의 Crippen logP(원자 유형별 기여로 계산한 값)를 모방하도록 학습했을 뿐이며, 측정된 성질이 아니고 다른 화학 계열에서는 검증하지 않았습니다. 어느 모형도 예측 용도로 사용해서는 안 됩니다. R²와 RMSE는 학습에 쓰지 않은 자료(환자 단위 또는 분자 단위 분할)에서만 계산했습니다.',
       selfOk: '자체 검사: 브라우저 계산이 NumPy 기준값과 일치합니다(최대 차이 {0}, 허용 오차 1e-5, 기울기는 유한 차분과도 일치).',
       selfBad: '자체 검사 실패: 브라우저와 NumPy 결과가 {0}만큼 다릅니다(허용 오차 1e-5).',
@@ -387,7 +387,7 @@
       i ? refreshG() : refreshM();
     }
     root.append(
-      h('header', { class: 'dx-head' }, [h('h2', { class: 'dx-title', text: T('title') }), h('p', { class: 'dx-badge', text: T('badge') })]),
+      h('header', { class: 'dx-head' }, [h('h3', { class: 'dx-title', text: T('title') }), h('p', { class: 'dx-badge', text: T('badge') })]),
       tablist, panels[0], panels[1], live);
 
     /* ================================================================== TAB 1: MLP */
@@ -439,11 +439,11 @@
       bk.addEventListener('click', () => { st[key] = Math.max(0, st[key] - 1); st.diag = key === 'fStep' ? 'f' : 'b'; go(); });
       nx.addEventListener('click', () => { st[key] = Math.min(n - 1, st[key] + 1); st.diag = key === 'fStep' ? 'f' : 'b'; go(); });
       rs.addEventListener('click', () => { st[key] = 0; st.diag = key === 'fStep' ? 'f' : 'b'; go(); });
-      const upd = () => { lab.textContent = `${T('stepOf', st[key] + 1, n)} — ${names[st[key]]}`; bk.disabled = st[key] === 0; nx.disabled = st[key] === n - 1; };
+      const upd = () => { lab.textContent = `${T('stepOf', st[key] + 1, n)} — ${names[st[key]]}`; bk.setAttribute('aria-disabled', String(st[key] === 0)); nx.setAttribute('aria-disabled', String(st[key] === n - 1)); };
       return { node: h('div', { class: 'dx-stepper' }, [h('div', { class: 'dx-btns' }, [bk, nx, rs]), lab]), upd };
     };
     const fStep = stepper('fStep', 7, D.fSteps, () => refreshM()), bStep = stepper('bStep', 4, D.bSteps, () => refreshM());
-    const cardF = h('section', { class: 'dx-card' }, [h('h3', { text: T('fwdH') }), h('p', { class: 'dx-note', text: T('fwdIntro') }), fStep.node, fBody, exF.box]);
+    const cardF = h('section', { class: 'dx-card dx-fwd' }, [h('h3', { text: T('fwdH') }), h('p', { class: 'dx-note', text: T('fwdIntro') }), fStep.node, fBody, exF.box]);
     const cardB = h('section', { class: 'dx-card' }, [h('h3', { text: T('bwdH') }), h('p', { class: 'dx-note', text: T('bwdIntro') }), bStep.node, bBody, exB.box]);
     exF.wire(fBody); exB.wire(bBody);
 
@@ -774,7 +774,7 @@
     function refreshG() {
       const S = st.gStep;
       stepBtns.forEach((b, i) => { b.setAttribute('aria-current', i === S ? 'step' : 'false'); b.classList.toggle('dx-on', i === S); });
-      gBack.disabled = S === 0; gNext.disabled = S === 3;
+      gBack.setAttribute('aria-disabled', String(S === 0)); gNext.setAttribute('aria-disabled', String(S === 3));
       const opts = dimOptions(); if (st.gDim[S] >= opts.length) st.gDim[S] = 0;
       colSel.replaceChildren(...opts.map((t, i) => h('option', { value: i, text: t, selected: i === st.gDim[S] ? true : null })));
       replay.hidden = reduce() || S < 1 || S > 2;

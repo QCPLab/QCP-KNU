@@ -8,6 +8,7 @@
   const groups = Array.from(list.querySelectorAll('.pub-group'));
   const count = form.querySelector('[data-count]');
   const empty = document.querySelector('[data-empty]');
+  const counts = groups.map((g) => g.querySelector('.pub-group-year small'));
   const q = form.elements.q;
   const year = form.elements.year;
 
@@ -19,7 +20,11 @@
       it.hidden = !ok;
       if (ok) shown += 1;
     });
-    groups.forEach((g) => { g.hidden = !g.querySelector('.pub:not([hidden])'); });
+    groups.forEach((g, i) => {
+      const n = g.querySelectorAll('.pub:not([hidden])').length;
+      g.hidden = n === 0;
+      if (counts[i]) counts[i].textContent = n === 1 ? form.dataset.one : form.dataset.many.replace('{n}', n);
+    });
     count.textContent = count.dataset.tpl.replace('{shown}', shown).replace('{total}', items.length);
     empty.hidden = shown > 0;
     const p = new URLSearchParams();
@@ -32,6 +37,7 @@
   const init = new URLSearchParams(window.location.search);
   if (init.get('q')) q.value = init.get('q');
   if (init.get('year') && Array.from(year.options).some((o) => o.value === init.get('year'))) year.value = init.get('year');
+  form.addEventListener('submit', (e) => e.preventDefault());
   form.addEventListener('input', apply);
   form.addEventListener('change', apply);
   form.addEventListener('reset', () => window.setTimeout(apply, 0));

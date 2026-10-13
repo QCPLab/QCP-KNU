@@ -192,12 +192,12 @@ def step_experiment(t):
     o = []
     o.append(f'<text class="al" x="100" y="26" text-anchor="middle">{escape(f["invitro"])}</text><text class="al" x="300" y="26" text-anchor="middle">{escape(f["invivo"])}</text>')
     o.append(f'<line class="grid" x1="200" x2="200" y1="38" y2="206"/>')
-    o.append(_box(24, 48, 152, 38, f["cells"], "box soft"))
-    o.append(_arrow(100, 88, 100, 112)); o.append(_box(24, 114, 152, 38, f["incubate"]))
-    o.append(_arrow(100, 154, 100, 178)); o.append(_box(24, 180, 152, 38, f["assay"], "box acc"))
-    o.append(_box(224, 48, 152, 38, f["dosing"], "box soft"))
-    o.append(_arrow(300, 88, 300, 112)); o.append(_box(224, 114, 152, 38, f["blood"]))
-    o.append(_arrow(300, 154, 300, 178)); o.append(_box(224, 180, 152, 38, f["plasma"], "box acc"))
+    o.append(_box(14, 48, 172, 38, f["cells"], "box soft"))
+    o.append(_arrow(100, 88, 100, 112)); o.append(_box(14, 114, 172, 38, f["incubate"]))
+    o.append(_arrow(100, 154, 100, 178)); o.append(_box(14, 180, 172, 38, f["assay"], "box acc"))
+    o.append(_box(214, 48, 172, 38, f["dosing"], "box soft"))
+    o.append(_arrow(300, 88, 300, 112)); o.append(_box(214, 114, 172, 38, f["blood"]))
+    o.append(_arrow(300, 154, 300, 178)); o.append(_box(214, 180, 172, 38, f["plasma"], "box acc"))
     return _svg("0 0 400 230", "".join(o), f["s_experiment_alt"], "fig fig-step")
 
 
@@ -244,13 +244,13 @@ def step_pkanalysis(t):
 def step_modeling(t):
     f = t["fig"]
     o = [_box(26, 84, 104, 56, f["gut"], "box soft", f["dose_in"]),
-         _box(246, 84, 128, 56, f["central"], "box acc", "V/F"),
-         _arrow(130, 112, 246, 112),
-         _arrow(310, 142, 310, 196)]
-    o.append(f'<text class="an" x="188" y="102" text-anchor="middle">ka</text>')
-    o.append(f'<text class="an" x="324" y="176">CL/F</text>')
-    o.append(f'<text class="bs" x="188" y="132" text-anchor="middle">{escape(f["absorption"])}</text>')
-    o.append(f'<text class="bs" x="310" y="214" text-anchor="middle">{escape(f["elimination"])}</text>')
+         _box(224, 84, 164, 56, f["central"], "box acc", "V/F"),
+         _arrow(130, 112, 224, 112),
+         _arrow(306, 142, 306, 196)]
+    o.append(f'<text class="an" x="177" y="102" text-anchor="middle">ka</text>')
+    o.append(f'<text class="an" x="320" y="176">CL/F</text>')
+    o.append(f'<text class="bs" x="177" y="132" text-anchor="middle">{escape(f["absorption"])}</text>')
+    o.append(f'<text class="bs" x="306" y="214" text-anchor="middle">{escape(f["elimination"])}</text>')
     o.append(f'<text class="al" x="200" y="40" text-anchor="middle">{escape(f["bsv"])}</text>')
     o.append(f'<path class="brk" d="M30 52 V48 H370 V52"/>')
     return _svg("0 0 400 230", "".join(o), f["s_modeling_alt"], "fig fig-step")

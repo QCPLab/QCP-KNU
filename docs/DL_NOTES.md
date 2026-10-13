@@ -5,7 +5,7 @@ Teaching example: synthetic data and a public molecule set, small models, not fo
 ## Data
 - MLP: 2,000 virtual patients drawn from a known formula, split 70/15/15 by patient (1,400 / 300 / 300). Body weight N(72, 14) truncated to 30-120 kg, age 20-85 y, eGFR 20-120 mL/min/1.73 m2 (correlated with age, r = -0.70), metabolizer class poor / normal / rapid = 10 / 70 / 20 %.
 - True apparent clearance: CL = 4.5 (WT/70)^0.75 (eGFR/90)^0.4 g(class), g = 0.55 / 1.0 / 1.35, times lognormal noise (SD 0.10). Target = ln CL. No real subject data.
-- GNN: 4,569 organic molecules (C N O F P S Cl Br I, 3-50 heavy atoms, single fragment, de-duplicated) from `Data/NCI/first_5K.smi`, a file that ships inside the RDKit package (NCI Open Database structures). The file is read in place, not copied here. Caffeine, ibuprofen and propranolol are the displayed molecules; caffeine was found in the file and removed, so none of the three was used for training. Split by molecule: 3,198 / 685 / 686.
+- GNN: 4,569 organic molecules (C N O F P S Cl Br I, 3-50 heavy atoms, single fragment, de-duplicated) from `Data/NCI/first_5K.smi`, a file that ships inside the RDKit package (NCI Open Database structures). The file is read in place, not copied here. Licence caveat: the terms of use of the NCI structure set were not verified; dl-gnn.json carries the SMILES and 2D coordinates of 3 display molecules and 3 NCI-derived self-test molecules. Caffeine, ibuprofen and propranolol are the displayed molecules; caffeine was found in the file and removed, so none of the three was used for training. Split by molecule: 3,198 / 685 / 686.
 - GNN target: RDKit Crippen logP, a calculated value (atom-type contributions), not a measurement.
 
 ## Models and training

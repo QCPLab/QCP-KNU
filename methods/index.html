@@ -28,8 +28,11 @@
   <div class="wrap bar">
     <a class="brand" href="../" >
       <span class="brand-name">Laboratory of Pharmaceutical Sciences</span>
-      <span class="brand-sub">Kangwon National University · College of Pharmacy</span>
+      <span class="brand-sub">College of Pharmacy · Kangwon National University</span>
     </a>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="primary-nav" aria-label="Menu" data-menu>
+      <span class="when-closed"><svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 7h16M4 12h16M4 17h16"/></svg></span><span class="when-open"><svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6L6 18"/></svg></span>
+    </button>
     <nav id="primary-nav" class="nav" aria-label="Main navigation">
       <ul>
         <li><a href="../research/" >Research</a></li>
@@ -40,9 +43,6 @@
       </ul>
     </nav>
     <a class="lang-switch" href="../ko/methods/" hreflang="ko" lang="ko" aria-label="한국어로 보기 (view in Korean)"><svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.5 2.5 3.5 5.4 3.5 8.5s-1 6-3.5 8.5c-2.5-2.5-3.5-5.4-3.5-8.5s1-6 3.5-8.5z"/></svg><span>한국어</span></a>
-    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="primary-nav" aria-label="Menu" data-menu>
-      <span class="when-closed"><svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 7h16M4 12h16M4 17h16"/></svg></span><span class="when-open"><svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6L6 18"/></svg></span>
-    </button>
   </div>
 </header>
 
@@ -81,7 +81,7 @@
     <div class="widget-slot" data-lab-widget="dl-explorer" data-mlp="../assets/data/dl-mlp.json" data-gnn="../assets/data/dl-gnn.json" data-lang="en">
       <noscript><p class="widget-fallback">These explainers need JavaScript. Please enable it to use them.</p></noscript>
     </div>
-    <p class="fine">Teaching examples with small models. The neural network learns a known formula from synthetic patients. The graph network learns to reproduce the Crippen logP that RDKit calculates (a calculated value, not a measurement) from about 4,600 public structures. They show the mechanics and are not validated for prediction.</p>
+    <p class="fine">Teaching examples with small models. The neural network learns a known formula from synthetic patients. The graph network learns to reproduce the Crippen logP that RDKit calculates (a calculated value, not a measurement) from about 4,600 public structures (NCI Open Database, as shipped with RDKit). They show the mechanics and are not validated for prediction.</p>
   </div>
 </section>
 
@@ -112,12 +112,12 @@
       <li>
         <span class="reading-topic">Building a PBPK model</span>
         <a class="reading-title" href="https://doi.org/10.1002/psp4.12134" rel="noopener" target="_blank">Applied Concepts in PBPK Modeling: How to Build a PBPK/PD Model</a>
-        <span class="reading-meta">Kuepfer, Niederalt, Wendl (2016). <em>CPT: Pharmacometrics &amp; Systems Pharmacology</em></span>
+        <span class="reading-meta">Kuepfer, Niederalt, Wendl, et al. (2016). <em>CPT: Pharmacometrics &amp; Systems Pharmacology</em></span>
       </li>
       <li>
         <span class="reading-topic">Good modeling practice</span>
         <a class="reading-title" href="https://doi.org/10.1002/psp4.12049" rel="noopener" target="_blank">Good Practices in Model‐Informed Drug Discovery and Development: Practice, Application, and Documentation</a>
-        <span class="reading-meta">, Marshall, Burghaus (2016). <em>CPT: Pharmacometrics &amp; Systems Pharmacology</em></span>
+        <span class="reading-meta">Marshall, Burghaus, et al. (2016). <em>CPT: Pharmacometrics &amp; Systems Pharmacology</em></span>
       </li>
       <li>
         <span class="reading-topic">Backpropagation</span>
@@ -127,7 +127,7 @@
       <li>
         <span class="reading-topic">Graph neural networks for molecules</span>
         <a class="reading-title" href="https://doi.org/10.1021/acs.jcim.9b00237" rel="noopener" target="_blank">Analyzing Learned Molecular Representations for Property Prediction</a>
-        <span class="reading-meta">Yang, Swanson, Jin (2019). <em>Journal of Chemical Information and Modeling</em></span>
+        <span class="reading-meta">Yang, Swanson, Jin, et al. (2019). <em>Journal of Chemical Information and Modeling</em></span>
       </li>
     </ul>
   </div>
@@ -156,7 +156,7 @@
     <p>© 2026 Laboratory of Pharmaceutical Sciences, Kangwon National University. Illustrations and interactive explainers use simulated data.</p>
   </div>
 </footer>
-<script src="../assets/js/site.js" defer></script>
+<script src="../assets/js/site.js" defer onerror="document.documentElement.classList.remove('js')"></script>
 <script src="../assets/js/nlme-explorer.js" defer></script>
 <script src="../assets/js/dl-explorer.js" defer></script>
 </body>

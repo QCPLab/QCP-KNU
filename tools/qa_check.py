@@ -79,10 +79,22 @@ with sync_playwright() as p:
             for y in range(0, H, 500): pg.evaluate(f"window.scrollTo(0,{y})"); pg.wait_for_timeout(40)
             pg.evaluate("window.scrollTo(0,0)"); pg.wait_for_timeout(200)
             d = pg.evaluate("({sw:document.documentElement.scrollWidth,sh:document.documentElement.scrollHeight})")
+            # schematic labels must stay inside their boxes (every workflow step is opened in turn)
+            clipped = pg.evaluate("""async () => {
+              const bad = [], tabs = [...document.querySelectorAll('[data-process] [role=tab]')];
+              const check = () => document.querySelectorAll('svg.fig-step').forEach(svg => {
+                if (!svg.getBoundingClientRect().width) return;
+                const rects = [...svg.querySelectorAll('rect.box')].map(r => r.getBBox());
+                svg.querySelectorAll('text.bt,text.bs').forEach(t => { const b = t.getBBox(), cx = b.x + b.width / 2, cy = b.y + b.height / 2;
+                  rects.forEach(r => { if (cx >= r.x && cx <= r.x + r.width && cy >= r.y && cy <= r.y + r.height && (b.x < r.x + 2 || b.x + b.width > r.x + r.width - 2)) bad.push(t.textContent); }); }); });
+              if (!tabs.length) check();
+              for (const t of tabs) { t.click(); await new Promise(r => setTimeout(r, 60)); check(); }
+              return [...new Set(bad)];
+            }""")
             over = d["sw"] > w + 1
             # elements wider than the viewport (first 3), helps locate overflow
             culprits = pg.evaluate("(w)=>[...document.querySelectorAll('body *')].filter(e=>e.getBoundingClientRect().right>w+1).slice(0,3).map(e=>e.tagName.toLowerCase()+'.'+String(e.className).slice(0,30))", w) if over else []
-            row = f"  w={w:<5} h={d['sh']:<6} overflow={'YES '+str(culprits) if over else 'no'}  console={len(errors)}  external={len(set(blocked))}  failed-local={len(bad)}"
+            row = f"  w={w:<5} h={d['sh']:<6} overflow={'YES '+str(culprits) if over else 'no'}  console={len(errors)}  external={len(set(blocked))}  failed-local={len(bad)}  svg-text-clipped={len(clipped)}"
             if a.axe:
                 pg.add_script_tag(path=a.axe)
                 v = pg.evaluate("axe.run(document,{resultTypes:['violations']}).then(r=>r.violations.map(v=>({id:v.id,impact:v.impact,n:v.nodes.length})))")
@@ -94,7 +106,8 @@ with sync_playwright() as p:
             for e in errors[:4]: print("      ", e)
             for u in sorted(set(blocked))[:4]: print("       blocked:", u)
             for u in bad[:4]: print("       failed:", u)
-            if over or errors or blocked or bad: fails += 1
+            if clipped: print("       clipped svg text:", clipped[:4])
+            if over or errors or blocked or bad or clipped: fails += 1
             if not a.no_shots:
                 pg.screenshot(path=os.path.join(a.out, re.sub(r"[^A-Za-z0-9]+", "_", page).strip("_") + f"_{w}.png"), full_page=True)
             ctx.close()

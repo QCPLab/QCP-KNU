@@ -6,7 +6,8 @@
   font-family:var(--font,system-ui,-apple-system,"Segoe UI","Apple SD Gothic Neo","Noto Sans KR",sans-serif);font-size:15px;line-height:1.55}
 .nx-root *,.nx-root *::before,.nx-root *::after{box-sizing:border-box}
 .nx-root[lang="ko"],.nx-root[lang="ko"] *{word-break:keep-all;overflow-wrap:break-word}
-.nx-root h2,.nx-root h3,.nx-root h4,.nx-root p,.nx-root ul,.nx-root ol,.nx-root figure{margin:0}
+:where(.nx-root) :is(h2,h3,h4,p,ul,ol,figure){margin:0}
+.nx-eta{align-self:start}
 
 .nx-head{margin-bottom:14px}
 .nx-title{font-size:1.35rem;line-height:1.3;color:var(--nx-ink);font-weight:700;letter-spacing:-.01em}
