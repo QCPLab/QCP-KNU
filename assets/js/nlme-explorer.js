@@ -1,6 +1,6 @@
 /* NLME explorer - replays a real FOCE-I estimation run (computed offline by tools/nlme_demo.py) on SIMULATED data.
    Vanilla JS, SVG, no libraries, no network except the single fetch of data-src. Mount: <div data-lab-widget="nlme-explorer" data-src="..." data-lang="en|ko">.
-   The browser recomputes every curve from the stored parameters; nothing is pre-rendered. window.LabWidgets.nlmeSelfTest() checks that against Python values. */
+   The browser recomputes every curve from the stored parameters; nothing is pre-rendered. window.LabWidgets.nlmeSelfTest([data|url]) returns a Promise of {ok, maxAbsErr, checks} comparing JS curves with the Python values (tolerance 1e-6). */
 (function () {
   'use strict';
   var NS = 'http://www.w3.org/2000/svg', NAME = 'nlme-explorer', MINUS = '−', uid = 0;
@@ -35,7 +35,7 @@
       cStart: 'start', cEnd: 'final',
       etaT: 'Individual deviations (η̂) and shrinkage', etaNote: 'Dots: η̂ of each subject (click a dot to highlight the subject). Shaded band: ±2ω at this iteration. Shrinkage = 1 − SD(η̂)/ω: high values mean the data of a subject say little about that effect.',
       showEta: 'Show true η (simulation)', shr: 'η-shrinkage', etaAlt: 'Estimated individual deviations for CL/F, V/F and ka at iteration {it}; shrinkage {s}.',
-      tabT: 'Final estimates versus truth', tabCap: 'Estimates at the last stored iteration of each scenario; the percentage deviation from truth is printed below each estimate.',
+      tabT: 'Final estimates versus truth', tabCap: 'Estimates at the last stored iteration of each scenario. Below each estimate: percentage deviation from truth, and the approximate relative standard error (RSE) from the numerical Hessian of the OFV at that point.',
       tabCols: ['Parameter', 'Truth', 'Rich', 'Moderate', 'Sparse'], shrRow: 'η-shrinkage {n}', itRow: 'Accepted iterations',
       iterT: 'What happens in one iteration', iterSteps: [
         'Inner problem. With the current population values (θ, ω, σ) the optimiser finds, for every subject separately, the individual deviation η̂ that is most probable given that subject’s data (the minimum of Σ[ln var + res²/var] + η′Ω⁻¹η, with the residual variance evaluated at η = interaction).',
@@ -88,7 +88,7 @@
       cStart: '시작', cEnd: '최종',
       etaT: '개인별 편차(η̂)와 수축', etaNote: '점은 각 개체의 η̂입니다(점을 누르면 해당 개체가 강조됩니다). 음영 띠는 현재 반복의 ±2ω입니다. 수축 = 1 − SD(η̂)/ω이며, 값이 크면 개체별 자료가 해당 효과에 대한 정보를 거의 주지 못한다는 뜻입니다.',
       showEta: '참 η 표시(시뮬레이션)', shr: 'η 수축', etaAlt: '반복 {it}회에서 CL/F, V/F, ka의 개인별 편차 추정값이며 수축은 {s}입니다.',
-      tabT: '최종 추정값과 참값', tabCap: '각 시나리오의 마지막 저장 반복에서의 추정값이며, 참값 대비 편차(%)를 추정값 아래에 표시했습니다.',
+      tabT: '최종 추정값과 참값', tabCap: '각 시나리오의 마지막 저장 반복에서의 추정값입니다. 추정값 아래에 참값 대비 편차(%)와, 그 지점에서 OFV의 수치 헤시안으로 구한 근사 상대표준오차(RSE)를 표시했습니다.',
       tabCols: ['모수', '참값', '풍부', '중간', '희박'], shrRow: 'η 수축 {n}', itRow: '채택된 반복 횟수',
       iterT: '한 번의 반복에서 일어나는 일', iterSteps: [
         '내부 문제. 현재의 모집단 값(θ, ω, σ)에서 각 개체마다 그 개체의 자료로 볼 때 가장 그럴듯한 개인 편차 η̂를 찾습니다(Σ[ln var + res²/var] + η′Ω⁻¹η의 최솟값이며, 잔차 분산을 η에서 계산하는 것이 상호작용입니다).',
@@ -103,7 +103,7 @@
       vJac: '민감도 행렬: 해석적 J를 중심 유한차분과 {n}개 모수 조합(ka가 ke에 가까운 경우 포함)에서 비교했을 때 상대 차이의 최댓값은 {r}입니다.',
       vInner: '내부 문제: 5번째마다 선택한 개체의 η̂를 다른 시작점에서 수행한 경계 제약 L-BFGS-B 최소화와 비교했을 때 차이의 최댓값은 {d}입니다.',
       vMulti: '내부 문제에는 일부 개체에서 두 번째(flip-flop) 국소 최솟값이 있어 여러 시작점에서 풉니다. 저장된 모든 반복을 워밍 스타트 없이 처음부터 다시 계산했을 때 OFV 차이의 최댓값은 {d}입니다. 최종 추정값에서 flip-flop 영역의 시작점은 {k}명(풍부 / 중간 / 희박)에서 다른 국소 최솟값에 도달했고, 목적함수가 더 낮은 경우는 {l}명이었습니다.',
-      vNlm: 'nlmixr2 FOCEi 비교: 수행하지 못했습니다. 자료를 생성한 환경에 R이 없었습니다. 풍부 자료는 tools/nlme_demo.py --csv로 내보내 다른 환경에서 실행할 수 있습니다.',
+      vNlm: 'nlmixr2 FOCEi 비교: 수행하지 못했습니다. 자료를 생성한 환경에 R이 설치되어 있지 않았습니다. 풍부 자료는 tools/nlme_demo.py --csv로 내보내 다른 환경에서 실행할 수 있습니다.',
       vNlmFound: 'nlmixr2 FOCEi 비교: 이 스크립트에서는 수행하지 않았습니다.',
       vLapT: '개체별 라플라스 OFV와 주변 우도의 무차별 수치 적분 비교입니다(각 시나리오의 최종 추정값에서 30명). 차이 = 라플라스 − 정확값, OFV 단위입니다.',
       vLapCols: ['시나리오', '개인당 표본', '평균 차이', '차이 범위', '차이 합'], vLapStart: '풍부 설계, (불량한) 초기값에서: 평균 차이 {m}, 범위 {a} ~ {b}.',
@@ -148,6 +148,7 @@
   }
   function thinTicks(ticks, sc, minPx) { var out = [], last = -1e9; ticks.forEach(function (v) { var x = sc(v); if (Math.abs(x - last) >= minPx) { out.push(v); last = x; } }); return out; }
   function tickFmt(v) { var a = Math.abs(v); if (a === 0) return '0'; if (a >= 100) return num(v, 0); if (a >= 10) return num(v, 0); if (a >= 1) return String(+v.toFixed(2)).replace('-', MINUS); if (a >= 0.01) return String(+v.toFixed(3)).replace('-', MINUS); return v.toExponential(0).replace('-', MINUS); }
+  function sci(x) { return x === 0 ? '0' : x.toExponential(1); }
   function sd(a) { var m = 0, s = 0, n = a.length; a.forEach(function (v) { m += v; }); m /= n; a.forEach(function (v) { s += (v - m) * (v - m); }); return Math.sqrt(s / (n - 1)); }
   function shrinkage(frame, k) { return 1 - sd(frame.eta.map(function (e) { return e[k]; })) / frame.omega[k]; }
 
@@ -285,21 +286,21 @@
     X.subjInfo = el('p', 'nx-note', '', pf); X.subjInfo.hidden = true;
     X.mini = scroller(pf, T.miniCap); X.mini.hidden = true;
 
-    // objective panel
-    var po = panel('nx-obj', T.ofvT);
-    var tb2 = el('div', 'nx-toolbar', null, po); el('span', 'nx-lbl', T.ofvLine, tb2);
-    tog(T.dOfv, 'ofvLog', tb2, render);
-    X.ofvBox = el('div', 'nx-chart', null, po); X.ofvSvg = svgEl(X.ofvBox);
-    el('p', 'nx-note', T.ofvNote, po);
-    el('h4', 'nx-h4', T.cT, po);
-    X.cBox = el('div', 'nx-chart', null, po); X.cSvg = svgEl(X.cBox);
-    X.cNote = el('p', 'nx-note', '', po);
-
     // parameters panel
     var pp = panel('nx-par', T.parT);
     X.multi = el('div', 'nx-multi', null, pp); X.cells = [];
     for (var q = 0; q < 7; q++) { var c = el('div', 'nx-cell', null, X.multi); X.cells.push({ head: el('div', 'nx-cellh', '', c), box: c, svg: svgEl(c) }); }
     el('p', 'nx-note', T.parNote, pp);
+
+    // objective panel (OFV curve + OFV surface side by side when wide)
+    var po = panel('nx-obj', T.ofvT), ow = el('div', 'nx-obwrap', null, po), o1 = el('div', 'nx-o1', null, ow), o2 = el('div', 'nx-o2', null, ow);
+    var tb2 = el('div', 'nx-toolbar', null, o1); el('span', 'nx-lbl', T.ofvLine, tb2);
+    tog(T.dOfv, 'ofvLog', tb2, render);
+    X.ofvBox = el('div', 'nx-chart', null, o1); X.ofvSvg = svgEl(X.ofvBox);
+    el('p', 'nx-note', T.ofvNote, o1);
+    var tb4 = el('div', 'nx-toolbar', null, o2); el('h4', 'nx-h4', T.cT, tb4);
+    X.cBox = el('div', 'nx-chart', null, o2); X.cSvg = svgEl(X.cBox);
+    X.cNote = el('p', 'nx-note', '', o2);
 
     // eta panel
     var pe = panel('nx-eta', T.etaT);
@@ -309,7 +310,7 @@
     el('p', 'nx-note', T.etaNote, pe);
 
     // table
-    var pt = el('section', 'nx-panel nx-tab', null, root);
+    var pt = el('section', 'nx-panel nx-tab', null, grid);
     var th = el('h3', 'nx-h3', T.tabT, pt); th.id = 'nx' + id + 'tab'; pt.setAttribute('aria-labelledby', th.id);
     var tw = scroller(pt, T.tabCap); X.table = el('table', 'nx-table', null, tw);
     el('caption', null, T.tabCap, X.table);
@@ -335,6 +336,7 @@
         ['rich', 'moderate', 'sparse'].forEach(function (k) {
           var f = data.scenarios[k].frames; f = f[f.length - 1]; var est = f.theta.concat(f.omega, [f.sigma])[p];
           var td = el('td', null, null, row); td.dataset.scen = k; el('span', 'nx-v', sig3(est), td); el('span', 'nx-pc', sgn((est / tr0[p] - 1) * 100, 1) + '%', td);
+          var rse = data.scenarios[k].final.rse_pct; if (rse) el('span', 'nx-pc', 'RSE ' + num(rse[p], 1) + '%', td);
         });
       }
       for (var e = 0; e < 3; e++) {
@@ -362,7 +364,7 @@
       if (ms) {
         var ks = ['rich', 'moderate', 'sparse'], wd2 = 0, kk = [], ll = 0;
         ks.forEach(function (k) { wd2 = Math.max(wd2, ms[k].max_abs_ofv_diff_all_frames); kk.push(ms[k].final_flipflop_start_other_local_minimum_subjects); ll += ms[k].final_flipflop_start_lower_objective_subjects; });
-        el('p', 'nx-p', tpl(T.vMulti, { d: wd2.toExponential(1), k: kk.join(' / '), l: ll }), d);
+        el('p', 'nx-p', tpl(T.vMulti, { d: sci(wd2), k: kk.join(' / '), l: ll }), d);
       }
       var lp = v.laplace_vs_bruteforce;
       if (lp) {
@@ -375,7 +377,7 @@
         el('p', 'nx-p', T.vRestT, d);
         vTable(d, T.vRestT, T.vRestCols, ['rich', 'moderate', 'sparse'].map(function (k) {
           var r = rs[k].runs, md = 0, mp = 0, ok = 0; r.forEach(function (x) { md = Math.max(md, Math.abs(x.d_ofv)); mp = Math.max(mp, x.max_rel_diff_pct); if (x.success) ok++; });
-          return [names[k], md.toExponential(1), num(mp, 2), ok + '/' + r.length];
+          return [names[k], md < 5e-5 ? '< 0.0001' : sci(md), mp <= 0.001 ? '\u2264 0.001' : num(mp, 3), ok + '/' + r.length];
         }));
       }
       var rp = v.replicate_study;

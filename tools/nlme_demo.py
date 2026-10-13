@@ -8,8 +8,11 @@ What it does (everything is real computation on SIMULATED data; no patient data,
   * records every accepted outer iteration (thinned to <= 60 frames if more were needed), an OFV surface over (ln CL/F, ln V/F),
     and the validation / cross-check numbers that the page displays.
 
-Reproduce:   python3 tools/nlme_demo.py                      (writes assets/data/nlme-demo.json; ~ a few minutes, numpy + scipy only)
-Options:     --out PATH   --csv PATH (export the rich data set for an external nlmixr2 run)   --no-validation   --replicates N
+Reproduce:   python3 tools/nlme_demo.py                      (writes assets/data/nlme-demo.json; numpy + scipy only; about 26 min on one core)
+Options:     --out PATH   --csv PATH (write the rich data set as CSV for an external nlmixr2 run and exit)
+             --no-validation (fits + OFV surfaces only, about 3 min; the JSON then has no validation/cross-check block)
+             --replicates N  (size of the replicate study, default 10; 0 skips it)
+Re-running with the same versions reproduced the stored frames, surfaces and final blocks exactly (checked with --no-validation).
 Verified with: Python 3.13.16, numpy 2.5.3, scipy 1.18.1 (the versions used for a run are also written to meta.numpy / meta.scipy).
 Seed: SEED below, fixed in advance and not tuned.
 """
@@ -386,7 +389,8 @@ def main():
                 fh.write(f"{i+1},0,.,{DOSE:g},1\n")
                 for k, tt in enumerate(T_RICH):
                     fh.write(f"{i+1},{tt:g},{y_rich[i][k]:g},.,0\n")
-        print("wrote", a.csv)
+        print("wrote", a.csv, "(export only; run without --csv to regenerate the JSON)")
+        return
 
     x0 = pack(START_THETA, START_OMEGA, START_SIGMA)
     scen_out, runs = {}, {}
