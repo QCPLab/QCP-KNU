@@ -3,11 +3,11 @@ steps:
   - id: design
     icon: clipboard
     title: {en: "Design", ko: "설계"}
-    text: {en: "Define the question, choose an in vitro system or animal model, and plan dosing and sampling.", ko: "연구 질문을 정하고 in vitro 시스템이나 동물 모델, 투여·채혈 설계를 정합니다."}
+    text: {en: "Define the question, choose an in vitro system or animal model, and plan dosing and sampling.", ko: "연구 질문을 정하고, in vitro 시스템이나 동물 모델을 선택하며, 투여·채혈 계획을 세웁니다."}
   - id: experiment
     icon: flask
     title: {en: "Experiment", ko: "실험"}
-    text: {en: "In vitro metabolism and transport assays; pharmacokinetic studies in rodents, including disease models.", ko: "in vitro 대사·수송 실험과, 질병모델을 포함한 설치류 약동학 시험을 수행합니다."}
+    text: {en: "In vitro metabolism and transport assays; pharmacokinetic studies in rodents, including disease models.", ko: "in vitro 대사·수송 실험과 질병모델을 포함한 설치류 약동학 시험을 수행합니다."}
   - id: bioanalysis
     icon: peaks
     title: {en: "Bioanalysis", ko: "생체시료 분석"}
@@ -19,8 +19,8 @@ steps:
   - id: modeling
     icon: compartments
     title: {en: "Modeling", ko: "모델링"}
-    text: {en: "Compartmental, population and physiologically based models explain variability and predict untested scenarios such as drug–drug interactions.", ko: "구획 모델, 집단 모델, 생리학 기반 모델로 변동을 설명하고 약물상호작용 같은 미시험 상황을 예측합니다."}
+    text: {en: "Compartmental, population and physiologically based models explain variability and predict untested scenarios such as drug–drug interactions.", ko: "구획 모형, 집단 모형, 생리학 기반 모형으로 변동을 설명하고 약물상호작용 같은 시험하지 않은 상황을 예측합니다."}
   - id: translate
     icon: route
     title: {en: "Translate", ko: "적용"}
-    text: {en: "Turn results into dosing rationale, interaction risk and safety considerations.", ko: "결과를 용량 설정 근거, 상호작용 위험, 안전성 고려사항으로 연결합니다."}
+    text: {en: "Turn results into dosing rationale, interaction risk and safety considerations.", ko: "결과를 용량 설정 근거, 상호작용 위험, 안전성 고려 사항으로 연결합니다."}

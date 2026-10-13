@@ -82,79 +82,82 @@
       selfOk: 'Self-test: browser calculation matches the NumPy reference (largest difference {0}, tolerance 1e-5; gradients also match finite differences).',
       selfBad: 'Self-test FAILED: browser and NumPy numbers differ by {0} (tolerance 1e-5).',
       live1: 'Weight {0} kg, age {1}, eGFR {2}, {3}. Epoch {4}: network {5} L/h, true function {6} L/h.',
-      live2: '{0}, step {1}: {2}. Atom {3} selected.'
+      live2: '{0}, step {1}: {2}. Atom {3} selected.',
+      selTag: 'selected', rowN: 'row {0}', reluOff: ' → 0 (ReLU off)', vsT: '{0}: {1} vs {2}'
     },
     ko: {
       title: '딥러닝은 어떻게 계산하는가',
-      badge: '교육용 예제: 가상 환자 자료와 공개 분자 구조, 소형 모델 — 예측 용도가 아닙니다',
+      badge: '교육용 예제: 가상 환자 자료와 공개 분자 구조, 소형 모형 — 예측 용도가 아닙니다',
       tab1: '신경망(MLP)', tab2: '그래프 신경망(GNN)', tablist: '모형 선택',
       loading: '자료를 불러오는 중입니다…', loaderr: '위젯 자료를 불러오지 못했습니다.',
       back: '이전', next: '다음', restart: '처음부터', stepOf: '{1}단계 중 {0}단계',
-      lede1: '작은 신경망이 체중, 나이, eGFR, 대사 유형으로부터 겉보기 청소율(CL)을 학습합니다. 가상 환자 2,000명은 알려진 공식에 잡음을 더해 만든 자료이므로, 신경망이 학습한 내용을 정답과 직접 비교할 수 있습니다. 합성 자료를 쓴 교육용 예제이며 실제 약물의 모형이 아닙니다.',
+      lede1: '작은 신경망(다층 퍼셉트론, MLP)이 체중, 나이, eGFR, 대사 유형으로부터 겉보기 청소율(CL)을 학습합니다. 가상 환자 2,000명은 알려진 공식에 잡음을 더해 만든 자료이므로, 신경망이 학습한 내용을 정답과 직접 비교할 수 있습니다. 시뮬레이션 자료를 쓴 교육용 예제이며 실제 약물의 모형이 아닙니다.',
       inH: '가상 환자', wt: '체중', age: '나이', egfr: 'eGFR', kg: 'kg', yr: '세', egfrU: 'mL/min/1.73 m²',
-      cls: '대사 유형', c0: '저대사', c1: '정상', c2: '고대사', lh: 'L/h',
-      snapH: '학습 단계(스냅샷)', snapVal: '에폭 {0} (스냅샷 {2}개 중 {1}번째)',
-      snapNote: '에폭 0은 무작위 초기 가중치이며 마지막 스냅샷은 학습이 끝난 상태입니다. 이 화면의 모든 계산은 선택한 스냅샷의 가중치를 사용합니다.',
+      cls: '대사 유형', c0: '불량 대사자', c1: '정상 대사자', c2: '신속 대사자', lh: 'L/h',
+      snapH: '학습 단계(스냅샷)', snapVal: '에포크 {0} (스냅샷 {2}개 중 {1}번째)',
+      snapNote: '에포크 0은 무작위 초기 가중치이며 마지막 스냅샷은 학습이 끝난 상태입니다. 이 화면의 모든 계산은 선택한 스냅샷의 가중치를 사용합니다.',
       pNet: '신경망 출력', pTrue: '참 함수(전형값)', pRatio: '신경망 ÷ 참값',
-      pNote: '합성 집단의 겉보기 청소율입니다. “참값”은 자료를 만든 공식에서 잡음을 뺀 값입니다. 학습에 쓴 가상 환자 2,000명은 대부분 체중 45–100 kg이고 eGFR이 나이에 따라 낮아집니다. 이 범위를 크게 벗어난 조합(예: 30 kg, 20세, eGFR 20)에서는 신경망이 외삽하게 되어 참값과 크게 달라질 수 있습니다.',
+      pNote: '가상 집단의 겉보기 청소율입니다. “참값”은 자료를 만든 공식에서 잡음을 뺀 값입니다. 학습에 쓴 가상 환자 2,000명은 대부분 체중 45–100 kg이고 eGFR이 나이에 따라 낮아집니다. 이 범위를 크게 벗어난 조합(예: 30 kg, 20세, eGFR 20)에서는 신경망이 외삽하게 되어 참값과 크게 달라질 수 있습니다.',
       netH: '신경망 5 → 8 → 6 → 1',
       legF: '선 굵기 = |가중치|. 파란 실선 = 양수, 주황 점선 = 음수. 노드 크기 = |값|(층 안에서의 상대값).',
       legB: '선 굵기 = 이 환자의 |기울기 ∂L/∂w|(층 안에서의 상대값). 파란 실선 = 양수, 주황 점선 = 음수.',
-      netAlt: '신경망 그림: 입력 {0}개, 은닉층 8개와 6개 유닛, 출력 1개. 출력 ln CL = {1}, CL = {2} L/h.',
+      netAlt: '신경망 그림: 입력 {0}개, 유닛이 각각 8개와 6개인 은닉층 2개, 출력 1개. 출력 ln CL = {1}, CL = {2} L/h.',
       colHead: ['입력 x', 'a₁', 'a₂', '출력'],
-      inNames: ['체중', '나이', 'eGFR', '저대사', '고대사'], inShort: ['체중', '나이', 'eGFR', '저대사', '고대사'],
+      inNames: ['체중', '나이', 'eGFR', '불량', '신속'], inShort: ['체중', '나이', 'eGFR', '불량', '신속'],
       fwdH: '순전파(forward pass)',
-      fwdIntro: '각 층은 가중치 행렬을 곱하고 편향을 더한 뒤(z = W·a + b) ReLU(a = max(0, z))를 적용합니다. 숫자를 선택하면 그 값이 어떻게 계산되었는지 볼 수 있습니다.',
+      fwdIntro: '각 층은 가중치 행렬을 곱하고 편향을 더한 뒤(z = W·a + b) 활성화 함수 ReLU(a = max(0, z))를 적용합니다. 숫자를 선택하면 그 값이 어떻게 계산되었는지 볼 수 있습니다.',
       fSteps: ['입력(표준화)', 'z₁ = W₁x + b₁', 'a₁ = ReLU(z₁)', 'z₂ = W₂a₁ + b₂', 'a₂ = ReLU(z₂)', 'ŷ = W₃a₂ + b₃  (ln CL)', 'CL = exp(ŷ)'],
       fRows: ['x (표준화)', 'z₁ = W₁x + b₁', 'a₁ = ReLU(z₁)', 'z₂ = W₂a₁ + b₂', 'a₂ = ReLU(z₂)', 'ŷ = W₃a₂ + b₃ = ln CL', 'CL = exp(ŷ) (L/h)'],
       exHint: '숫자를 선택하면 계산 과정이 표시됩니다.',
       bwdH: '역전파(backward pass)',
       bwdIntro: '이 환자 한 명에 대한 손실은 L = (ŷ − y)²이며, y는 참 전형값의 ln CL입니다. 연쇄 법칙으로 오차 δ를 층마다 거꾸로 전달하여 각 가중치 행렬의 기울기 ∂L/∂W = δ·aᵀ를 구합니다. 학습은 (미니배치 평균) 기울기의 반대 방향으로 각 가중치를 조금씩 옮깁니다.',
-      bSteps: ['손실과 출력 오차 δ₃', '3층: ∂L/∂W₃와 δ₂', '2층: ∂L/∂W₂와 δ₁', '1층: ∂L/∂W₁'],
+      bSteps: ['손실과 출력 오차 δ₃', '3층: ∂L/∂W₃과 δ₂', '2층: ∂L/∂W₂와 δ₁', '1층: ∂L/∂W₁'],
       bLoss: '예측 ŷ (ln CL)', bY: '목표 y (참 ln CL)', bL: '손실 L = (ŷ − y)²', bD3: 'δ₃ = ∂L/∂ŷ = 2(ŷ − y)',
-      bLayer: '{0}층', bDelta: 'δ = z에서의 오차', bW: '∂L/∂W', bB: '∂L/∂b', bNorm: '막대: 기울기 크기 ‖∂L/∂W‖ (프로베니우스 노름)와 ‖∂L/∂b‖이며 제곱근 척도로 그렸습니다.',
+      bLayer: '{0}층', bDelta: 'δ = z에서의 오차', bW: '∂L/∂W', bB: '∂L/∂b', bNorm: '막대: 기울기 크기 ‖∂L/∂W‖ (프로베니우스 노름)과 ‖∂L/∂b‖이며 제곱근 척도로 그렸습니다.',
       bFormula: ['δ₃ = 2(ŷ − y);  ∂L/∂W₃ = δ₃·a₂ᵀ', 'δ₂ = (W₃ᵀδ₃) ⊙ [z₂ > 0];  ∂L/∂W₂ = δ₂·a₁ᵀ', 'δ₁ = (W₂ᵀδ₂) ⊙ [z₁ > 0];  ∂L/∂W₁ = δ₁·xᵀ'],
       bNone: '아직 계산하지 않았습니다. ‘다음’을 누르십시오.',
       learnH: '신경망이 학습한 내용',
-      sMetrics: '이 스냅샷에서 학습에 쓰지 않은 시험 집단({0}명): R² = {1}, ln CL의 RMSE = {2}. 잡음 없는 참 함수를 같은 환자에 적용하면 R² = {3}이며, 이것이 잡음이 정하는 상한입니다. 체중 의존성과 참값의 최대 차이는 CL 기준 {4} %입니다(45–100 kg 구간에서는 {5} %).',
-      lossH: '학습 중 손실', lossAlt: '에폭에 따른 ln CL의 훈련·검증 평균제곱오차(로그 축). 에폭 {0} 표시: 훈련 {1}, 검증 {2}.',
-      scH: '예측 대 관측 CL', scAlt: '에폭 {1}에서 시험 환자 {0}명의 예측 청소율과 관측 청소율의 산점도. 시험 환자 {3}명 전체의 R² = {2}.',
-      pdH: '체중의 영향', pdAlt: '나이 50세, eGFR 90, 정상 대사자의 체중에 따른 청소율: 에폭 {0}의 신경망과 참 함수의 비교. CL 기준 최대 차이 {1} %.',
-      xEpoch: '에폭(로그 축)', yMse: 'ln CL의 MSE', xObs: '관측 CL (L/h)', yPred: '예측 CL (L/h)', xWt: '체중 (kg)', yCl: 'CL (L/h)',
+      sMetrics: '이 스냅샷에서 학습에 쓰지 않은 시험 환자 {0}명: R² = {1}, ln CL의 RMSE = {2}. 잡음 없는 참 함수를 같은 환자에 적용하면 R² = {3}이며, 이것이 잡음이 정하는 상한입니다. 체중 의존성과 참값의 최대 차이는 CL 기준 {4}%입니다(45–100 kg 구간에서는 {5}%).',
+      lossH: '학습 중 손실', lossAlt: '에포크에 따른 ln CL의 훈련·검증 평균제곱오차(로그 축). 에포크 {0} 표시: 훈련 {1}, 검증 {2}.',
+      scH: '예측 대 관측 CL', scAlt: '에포크 {1}에서 시험 환자 {0}명의 예측 청소율과 관측 청소율의 산점도. 시험 환자 {3}명 전체의 R² = {2}.',
+      pdH: '체중의 영향', pdAlt: '나이 50세, eGFR 90, 정상 대사자의 체중에 따른 청소율: 에포크 {0}의 신경망과 참 함수의 비교. CL 기준 최대 차이 {1}%.',
+      xEpoch: '에포크(로그 축)', yMse: 'ln CL의 MSE', xObs: '관측 CL (L/h)', yPred: '예측 CL (L/h)', xWt: '체중 (kg)', yCl: 'CL (L/h)',
       lgTrain: '훈련', lgVal: '검증', lgNet: '신경망', lgTruth: '참 함수', lgObs: '시험 환자', lgId: '일치선',
       clipped: '{0}개의 점이 그림 범위 밖에 있습니다.',
-      mol: '분자', steps: ['원자 특성', '1회차', '2회차', '판독'], stepsAria: '메시지 전달 단계', colour: '원자 색 기준',
+      mol: '분자', steps: ['원자 특성', '1회차', '2회차', '읽어내기'], stepsAria: '메시지 전달 단계', colour: '원자 색 기준',
       nsum: '노름 ‖h‖', contrib: 'GNN 원자 기여 c', refContrib: 'RDKit Crippen 원자 기여(기준값)',
       molAlt: '{0}: 중원자 {1}개를 그래프로 나타낸 그림. 단계: {2}. 선택한 원자 {3} ({4}).',
       molHint: '화살표 키로 원자 사이를 이동하고 Enter 또는 Space로 메시지 흐름을 다시 봅니다. 색은 분자 안에서의 상대값입니다.',
       replay: '메시지 흐름 다시 보기', atomH: '원자 {0} · {1}', atomInfo: '결합 {0}개, {2}, {1}',
       aromatic: '방향족', aliphatic: '비방향족', inRing: '고리 안', noRing: '고리 밖',
-      lede2: '약물 분자는 그래프입니다. 각 원자는 숫자 8개로 시작합니다. 두 번의 회차마다 원자는 결합한 이웃의 벡터를 자기 벡터에 더하고, 가중치 행렬을 곱하고, 편향을 더한 뒤 ReLU를 적용합니다. 마지막 원자 벡터를 평균해 중원자(수소 제외 원자)당 logP로 바꾸고, 여기에 중원자 수를 곱한 값이 RDKit Crippen logP(측정값이 아니라 계산값)에 대한 모형의 추정치입니다.',
+      lede2: '약물 분자는 그래프입니다. 각 원자는 숫자 8개로 시작합니다. 두 회차 각각에서 원자는 결합한 이웃의 벡터를 자기 벡터에 더하고, 가중치 행렬을 곱하고, 편향을 더한 뒤 ReLU를 적용합니다. 마지막 원자 벡터를 평균해 중원자(수소 제외 원자)당 logP로 바꾸고, 여기에 중원자 수를 곱한 값이 RDKit Crippen logP(측정값이 아니라 계산값)에 대한 모형의 추정치입니다.',
       dFeat: '이 원자의 특성 x (숫자 8개)',
       dOwn: '자기 벡터', dNb: '이웃 {0} ({1})', dSum: '합: 자기 + 이웃', dZ: 'z = W·합 + b', dH: 'h = ReLU(z)',
       dContribH: '이 원자가 예측 logP에 기여하는 값', dHead: '출력층 가중치 w', dProd: '차원별 w · h', dC: 'c = Σ(w·h) + b = {0}',
       dRef: '이 원자의 RDKit Crippen 기여(기준값): {0}. 신경망은 분자 전체의 logP만으로 학습했으므로 원자 하나의 값이 기준값과 일치할 필요는 없습니다.', dW: '이 회차의 가중치 행렬 W와 편향 b',
-      rdH: '판독(readout)', rdPool: '최종 원자 벡터 {0}개의 평균', rdW: '출력층 가중치 w', rdProd: 'w · 평균', rdS: 's = Σ(w·평균) + b = {0}  (중원자당 logP)',
+      rdH: '읽어내기(readout)', rdPool: '최종 원자 벡터 {0}개의 평균(평균 풀링)', rdW: '출력층 가중치 w', rdProd: 'w · 평균', rdS: 's = Σ(w·평균) + b = {0}  (중원자당 logP)',
       rdPred: '예측 logP = 원자 {0}개 × s', rdRef: 'RDKit Crippen logP (기준값)', rdDiff: '차이',
       rdNote: '이 분자는 학습 자료에서 제외했습니다.',
       evFig: 'GNN 대 RDKit logP', lgKept: '선택한 가중치(검증 RMSE 최저)',
       evH: '학습에 쓰지 않은 자료로 확인', evTxt: '적합과 모형 선택에 쓰지 않은 분자 {0}개(분자 단위 분할): R² = {1}, RMSE = {2} log 단위. 원소 개수만 쓴 회귀는 R² = {3}입니다. 화면에 표시한 세 분자는 여기에 포함되지 않습니다.',
       evAlt: '학습에 쓰지 않은 분자 {0}개에서 GNN 예측 logP와 RDKit Crippen logP의 산점도. R² = {1}.',
       xRef: 'RDKit Crippen logP', yGnn: 'GNN logP', lgHeld: '학습에 쓰지 않은 분자', lgShown: '위에 표시한 분자',
-      trH: 'GNN 학습', trAlt: '에폭에 따른 logP의 훈련·검증 RMSE.', xEp: '에폭', yRmse: 'RMSE (logP)',
+      trH: 'GNN 학습', trAlt: '에포크에 따른 logP의 훈련·검증 RMSE.', xEp: '에포크', yRmse: 'RMSE (logP)',
       howH: '계산 방법',
       how: ['원자 특성 x (숫자 8개): 원소 원-핫(C, N, O, 기타), 방향족(0/1), 중원자 결합 수 ÷ 4, 형식 전하, 고리 안(0/1).',
         '메시지 전달, 회차 k = 1, 2:  m = h(v) + 결합한 이웃 u에 대한 Σ h(u);  z = Wₖ·m + bₖ;  h′(v) = ReLU(z) = max(0, z). 1회차는 h = x에서 시작하며 회차마다 가중치가 따로 있고 은닉 크기는 8입니다.',
-        '판독: p = 모든 중원자(n개)의 h 평균;  s = w·p + b;  예측 logP = n × s. 같은 말로, 각 원자가 c = w·h + b를 기여하고 기여의 합이 예측값입니다.',
+        '읽어내기(평균 풀링): p = 모든 중원자(n개)의 h 평균;  s = w·p + b;  예측 logP = n × s. 같은 말로, 각 원자가 c = w·h + b를 기여하고 기여의 합이 예측값입니다.',
         '학습은 한 번, 오프라인에서 순수 NumPy(Adam, RDKit Crippen logP에 대한 제곱 오차)로 수행했습니다. 이 화면은 저장된 가중치로 순전파만 다시 계산하고 NumPy 결과와 일치하는지 확인합니다.'],
       adme: '문헌에서는 이와 같은 그래프 신경망을 실측 화합물 수천 개로 학습시켜 ADME 및 독성 성질을 예측하는 데 사용합니다(예: Yang 등, 2019, J Chem Inf Model). 여기의 모형은 훨씬 작고 계산된 logP만 학습합니다.',
       aboutH: '이 예제에 대하여',
       what: '화면 설명', whatTxt: '왼쪽에서 오른쪽, 위에서 아래로 보면, 가상 환자 한 명이 신경망을 통과하고(순전파), 오차가 거꾸로 전달되며(역전파), 스냅샷 슬라이더로 학습 과정을 다시 볼 수 있습니다. 두 번째 탭에서는 분자가 그래프이며, 원자가 이웃과 숫자를 주고받고, 그 평균에 중원자 수를 곱한 값이 하나의 logP 값이 됩니다.',
-      lim: '한계', limTxt: '두 모형은 모두 작은 교육용 예제입니다. MLP는 우리가 직접 만든 공식을 모의 환자 자료에서 학습하므로, 정확도는 실제 청소율과 무관합니다. 실제 청소율에는 여기에 포함되지 않은 많은 요인이 관여합니다. GNN은 공개 구조 몇천 개로 RDKit의 Crippen logP(원자 유형별 기여로 계산한 값)를 모방하도록 학습했을 뿐이며, 측정된 성질이 아니고 다른 화학 계열에서는 검증하지 않았습니다. 어느 모형도 예측 용도로 사용해서는 안 됩니다. R²와 RMSE는 학습에 쓰지 않은 자료(환자 단위 또는 분자 단위 분할)에서만 계산했습니다.',
-      selfOk: '자체 검사: 브라우저 계산이 NumPy 기준값과 일치합니다(최대 차이 {0}, 허용 오차 1e-5, 기울기는 유한 차분과도 일치).',
+      lim: '한계', limTxt: '두 모형은 모두 작은 교육용 예제입니다. MLP는 우리가 직접 만든 공식을 가상 환자 자료에서 학습하므로, 정확도는 실제 청소율과 무관합니다. 실제 청소율에는 여기에 포함되지 않은 많은 요인이 관여합니다. GNN은 공개 구조 몇천 개로 RDKit의 Crippen logP(원자 유형별 기여로 계산한 값)를 모방하도록 학습했을 뿐이며, 측정된 성질이 아니고 다른 화학 계열에서는 검증하지 않았습니다. 어느 모형도 예측 용도로 사용해서는 안 됩니다. R²과 RMSE는 학습에 쓰지 않은 자료(환자 단위 또는 분자 단위 분할)에서만 계산했습니다.',
+      selfOk: '자체 검사: 브라우저 계산이 NumPy 기준값과 일치합니다(최대 차이 {0}, 허용 오차 1e-5, 기울기는 유한차분과도 일치).',
       selfBad: '자체 검사 실패: 브라우저와 NumPy 결과가 {0}만큼 다릅니다(허용 오차 1e-5).',
-      live1: '체중 {0} kg, 나이 {1}세, eGFR {2}, {3}. 에폭 {4}: 신경망 {5} L/h, 참 함수 {6} L/h.',
-      live2: '{0}, {1}단계: {2}. 원자 {3} 선택됨.'
+      live1: '체중 {0} kg, 나이 {1}세, eGFR {2}, {3}. 에포크 {4}: 신경망 {5} L/h, 참 함수 {6} L/h.',
+      live2: '{0}, {1}단계: {2}. 원자 {3} 선택됨.',
+      feat: ['C', 'N', 'O', '기타 원소', '방향족', '중원자 결합 수÷4', '형식 전하', '고리 안'], featS: ['C', 'N', 'O', '기타', '방향족', '결합', '전하', '고리'],
+      mn: { caffeine: '카페인', ibuprofen: '이부프로펜', propranolol: '프로프라놀롤' }, selTag: '선택됨', rowN: '{0}행', reluOff: ' → 0 (ReLU 비활성)', vsT: '{0}: 예측 {1}, 기준 {2}'
     }
   };
   const fmtS = (str, a) => String(str).replace(/\{(\d+)\}/g, (m, i) => (a[+i] === undefined ? m : a[+i]));
@@ -517,8 +520,8 @@
     function deltaEx(n, j, dl) {
       const { w, c, g } = cur;
       if (n === 3) return `δ₃ = 2(ŷ − y) = ${fg(g.d3)}`;
-      if (n === 2) return `δ₂[${j + 1}] = W₃[${j + 1}]·δ₃·[z₂>0] = ${f(w.W3[0][j], 3)}·${fg(g.d3)}${c.z2[j] > 0 ? '' : ' → 0 (ReLU off)'} = ${fg(dl[j])}`;
-      return `δ₁[${j + 1}] = (Σ W₂[i][${j + 1}]·δ₂[i])·[z₁>0]${c.z1[j] > 0 ? '' : ' → 0 (ReLU off)'} = ${fg(dl[j])}`;
+      if (n === 2) return `δ₂[${j + 1}] = W₃[${j + 1}]·δ₃·[z₂>0] = ${f(w.W3[0][j], 3)}·${fg(g.d3)}${c.z2[j] > 0 ? '' : T('reluOff')} = ${fg(dl[j])}`;
+      return `δ₁[${j + 1}] = (Σ W₂[i][${j + 1}]·δ₂[i])·[z₁>0]${c.z1[j] > 0 ? '' : T('reluOff')} = ${fg(dl[j])}`;
     }
     function drawBackward() {
       const { c, g, x, yT } = cur, step = st.bStep, kids = [];
@@ -535,7 +538,7 @@
         const dl = L.d, mat = L.dW;
         sec.append(rowLab('δ' + sub(L.n) + ' (' + T('bDelta') + ')'), grid([dl], { label: 'δ' + sub(L.n), dig: 4, fmt: fg, ex: (r, j) => deltaEx(L.n, j, dl) }));
         sec.append(rowLab(T('bW') + sub(L.n) + ` (${mat.length}×${mat[0].length})`),
-          scroller(grid(mat, { names: L.n === 1 ? D.inShort : L.n === 2 ? mat[0].map((_, j) => 'a' + sub(1) + (j + 1)) : mat[0].map((_, j) => 'a' + sub(2) + (j + 1)), label: T('bW') + sub(L.n), fmt: fg, rowName: (r) => 'row ' + (r + 1), ex: (r, j) => `∂L/∂W${sub(L.n)}[${r + 1}][${j + 1}] = δ[${r + 1}]·${L.n === 1 ? 'x' : 'a'}[${j + 1}] = ${fg(dl[r])} · ${f(L.a[j], 3)} = ${fg(mat[r][j])}` }), T('bW') + sub(L.n)));
+          scroller(grid(mat, { names: L.n === 1 ? D.inShort : L.n === 2 ? mat[0].map((_, j) => 'a' + sub(1) + (j + 1)) : mat[0].map((_, j) => 'a' + sub(2) + (j + 1)), label: T('bW') + sub(L.n), fmt: fg, rowName: (r) => T('rowN', r + 1), ex: (r, j) => `∂L/∂W${sub(L.n)}[${r + 1}][${j + 1}] = δ[${r + 1}]·${L.n === 1 ? 'x' : 'a'}[${j + 1}] = ${fg(dl[r])} · ${f(L.a[j], 3)} = ${fg(mat[r][j])}` }), T('bW') + sub(L.n)));
         const nW = norms[k].W, nB = norms[k].b;
         sec.append(h('div', { class: 'dx-bars' }, [['‖∂L/∂W' + sub(L.n) + '‖', nW], ['‖∂L/∂b' + sub(L.n) + '‖', nB]].map(([lab, v]) => {
           const fillB = h('span', { class: 'dx-bar-f' }); fillB.style.width = (100 * Math.sqrt(v / nmax)).toFixed(1) + '%';
@@ -589,9 +592,9 @@
     }
 
     /* ================================================================== TAB 2: GNN */
-    const P2 = panels[1], mols = Gd.molecules, FN = Gd.feature_names, SH = ['C', 'N', 'O', 'oth', 'arom', 'deg', 'chg', 'ring'];
+    const P2 = panels[1], mols = Gd.molecules, FN = D.feat || Gd.feature_names, SH = D.featS || ['C', 'N', 'O', 'oth', 'arom', 'deg', 'chg', 'ring'], mnm = (m) => (D.mn && D.mn[m.id]) || m.id;
     let fwd = null, mol = null, adom = [], bondEls = [], atomEls = [];
-    const molSel = h('select', { id: `${id}-mol` }, mols.map((m, i) => h('option', { value: i, text: (lang === 'ko' ? { caffeine: '카페인', ibuprofen: '이부프로펜', propranolol: '프로프라놀롤' }[m.id] : m.id.charAt(0).toUpperCase() + m.id.slice(1)) || m.id })));
+    const molSel = h('select', { id: `${id}-mol` }, mols.map((m, i) => h('option', { value: i, text: D.mn ? mnm(m) : m.id.charAt(0).toUpperCase() + m.id.slice(1) })));
     molSel.addEventListener('change', () => { st.mi = +molSel.value; buildMol(); refreshG(); });
     const colSel = h('select', { id: `${id}-col` });
     colSel.addEventListener('change', () => { st.gDim[st.gStep] = +colSel.value; paintMol(); detail(); });
@@ -689,14 +692,14 @@
         const dot = g.children[2], lab = g.children[3];
         dot.setAttribute('fill', rgb(col)); lab.setAttribute('fill', dark ? '#ffffff' : rgb(pal.ink)); lab.setAttribute('class', 'dx-atom-lab ' + (dark ? 'dx-halo-d' : 'dx-halo-l'));
         g.classList.toggle('dx-selected', v === st.atom); g.classList.toggle('dx-nbr', nb.includes(v) && S > 0 && S < 3);
-        g.setAttribute('aria-label', `${T('atomH', v + 1, mol.atoms[v].el)}: ${dimOptions()[st.gDim[S]]} = ${f(vals[v])}${v === st.atom ? ', ' + 'selected' : ''}`);
+        g.setAttribute('aria-label', `${T('atomH', v + 1, mol.atoms[v].el)}: ${dimOptions()[st.gDim[S]]} = ${f(vals[v])}${v === st.atom ? ', ' + T('selTag') : ''}`);
         g.setAttribute('aria-pressed', v === st.atom ? 'true' : 'false');
       });
       // legend
       const c0 = div ? mix([255, 255, 255], pal.data, 1) : [248, 251, 252], c1 = div ? mix([255, 255, 255], pal.blue, 1) : pal.accent2;
       const bar = h('span', { class: 'dx-lbar' }); bar.style.background = `linear-gradient(90deg, ${rgb(c0)}, ${div ? '#fff,' : ''} ${rgb(c1)})`;
       legBox.replaceChildren(h('span', { text: f(div ? -span : mn, 3) }), bar, h('span', { text: f(div ? span : mx, 3) }));
-      molDesc.textContent = T('molAlt', mol.id, mol.n, D.steps[S], st.atom + 1, mol.atoms[st.atom].el);
+      molDesc.textContent = T('molAlt', mnm(mol), mol.n, D.steps[S], st.atom + 1, mol.atoms[st.atom].el);
       molSvg.setAttribute('aria-label', molDesc.textContent); molSvg.setAttribute('aria-describedby', molDesc.id);
       drawArrows();
     }
@@ -733,7 +736,7 @@
         kids.push(row(T('dSum'), g(R_.m[v], T('dSum'), { names: nmH, act: true, vmax: vm * 2, ex: (r, k) => `${[Hp[v][k]].concat(nb.map((u) => Hp[u][k])).map((x) => f(x, 2)).join(' + ')} = ${f(R_.m[v][k])}` }), 'dx-sum'));
         kids.push(row(T('dZ'), g(R_.z[v], T('dZ'), { names: nmH, vmax: vm * 2, ex: (r, k) => `z[${k + 1}] = ${sumExpr(Wm[k], R_.m[v], bm[k])} = ${f(R_.z[v][k])}` })));
         kids.push(row(T('dH'), g(R_.h[v], T('dH'), { names: nmH, act: true, vmax: vm, ex: (r, k) => `h${sub(S)}[${k + 1}] = max(0, ${f(R_.z[v][k])}) = ${f(R_.h[v][k])}` }), 'dx-now'));
-        kids.push(h('details', { class: 'dx-details dx-inner' }, [h('summary', { text: T('dW') }), scroller(grid(Wm, { names: nmH, label: T('dW'), dig: 2, rowName: (r) => 'row ' + (r + 1), ex: (r, k) => `W[${r + 1}][${k + 1}] = ${f(Wm[r][k], 4)}` }), T('dW')), g(bm, 'b', { names: nmH, dig: 3 })]));
+        kids.push(h('details', { class: 'dx-details dx-inner' }, [h('summary', { text: T('dW') }), scroller(grid(Wm, { names: nmH, label: T('dW'), dig: 2, rowName: (r) => T('rowN', r + 1), ex: (r, k) => `W[${r + 1}][${k + 1}] = ${f(Wm[r][k], 4)}` }), T('dW')), g(bm, 'b', { names: nmH, dig: 3 })]));
       } else {
         const w = Gd.weights.w, hv = fwd.h[2][v], prod = hv.map((x, k) => x * w[k]);
         kids.push(h('h4', { text: T('dContribH') }));
@@ -763,7 +766,7 @@
       const fr = chartFrame({ H: 270, label: T('evAlt', ts.ref.length, f(mt.test_r2, 3)), x: { sc: (a, b) => lin(lo, hi, a, b), ticks: tk, label: T('xRef') }, y: { sc: (a, b) => lin(lo, hi, a, b), ticks: tk, label: T('yGnn') } });
       fr.plot.append(s('line', { x1: fr.X(lo), y1: fr.Y(lo), x2: fr.X(hi), y2: fr.Y(hi), class: 'dx-id' }));
       ts.ref.forEach((r, i) => fr.plot.append(s('circle', { cx: fr.X(r), cy: fr.Y(ts.pred[i]), r: 2, class: 'dx-pt' })));
-      mols.forEach((m) => { const x = fr.X(m.ref), y = fr.Y(m.pred); fr.plot.append(s('path', { d: `M${x} ${y - 6}L${x + 6} ${y}L${x} ${y + 6}L${x - 6} ${y}z`, class: 'dx-pt-d2' }, s('title', { text: `${m.id}: ${f(m.pred, 2)} vs ${f(m.ref, 2)}` }))); });
+      mols.forEach((m) => { const x = fr.X(m.ref), y = fr.Y(m.pred); fr.plot.append(s('path', { d: `M${x} ${y - 6}L${x + 6} ${y}L${x} ${y + 6}L${x - 6} ${y}z`, class: 'dx-pt-d2' }, s('title', { text: T('vsT', mnm(m), f(m.pred, 2), f(m.ref, 2)) }))); });
       scG.replaceChildren(fr.svg);
       const tr = Gd.training.train_rmse, va = Gd.training.val_rmse, n = tr.length - 1, ymin = Math.min(...tr, ...va) * 0.9, ymax = Math.max(...tr, ...va) * 1.1;
       const ft = chartFrame({ H: 270, label: T('trAlt'), x: { sc: (a, b) => lin(0, n, a, b), ticks: [0, 50, 100, 150, 200].filter((v) => v <= n).map((v) => ({ v, l: String(v) })), label: T('xEp') }, y: { sc: (a, b) => lgs(ymin, ymax, a, b), ticks: [0.5, 1, 2, 5, 10].filter((v) => v > ymin && v < ymax).map((v) => ({ v, l: String(v) })), label: T('yRmse') } });
@@ -779,7 +782,7 @@
       colSel.replaceChildren(...opts.map((t, i) => h('option', { value: i, text: t, selected: i === st.gDim[S] ? true : null })));
       replay.hidden = reduce() || S < 1 || S > 2;
       paintMol(); detail(); drawReadout();
-      announce(T('live2', mol.id, S + 1, D.steps[S], st.atom + 1));
+      announce(T('live2', mnm(mol), S + 1, D.steps[S], st.atom + 1));
     }
     buildMol(); drawGCharts();
 

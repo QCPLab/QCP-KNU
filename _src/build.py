@@ -36,10 +36,10 @@ PI_RE = re.compile(r"(sung[-\u2010-\u2015\s]?hoon\s+ahn|\bs[-\u2010-\u2015.\s]*h
 READING = [
     ("10.2307/2532087", {"en": "Nonlinear mixed-effects models (classic)", "ko": "비선형 혼합효과 모형(고전)"}),
     ("10.1038/psp.2013.14", {"en": "Population modeling primer", "ko": "집단 모델링 입문"}),
-    ("10.1007/s10928-007-9060-6", {"en": "Estimation methods", "ko": "추정법의 유도"}),
+    ("10.1007/s10928-007-9060-6", {"en": "Estimation methods", "ko": "추정법 유도(NONMEM)"}),
     ("10.1016/j.csda.2004.07.002", {"en": "SAEM estimation", "ko": "SAEM 추정"}),
-    ("10.1002/psp4.12134", {"en": "Building a PBPK model", "ko": "PBPK 모델 구축 절차"}),
-    ("10.1002/psp4.12049", {"en": "Good modeling practice", "ko": "모델 기반 신약개발 모범 관행"}),
+    ("10.1002/psp4.12134", {"en": "Building a PBPK model", "ko": "PBPK 모형 구축 절차"}),
+    ("10.1002/psp4.12049", {"en": "Good modeling practice", "ko": "모형 기반 신약개발 모범 사례"}),
     ("10.1038/323533a0", {"en": "Backpropagation", "ko": "역전파"}),
     ("10.1021/acs.jcim.9b00237", {"en": "Graph neural networks for molecules", "ko": "분자 그래프 신경망"}),
 ]
@@ -183,8 +183,10 @@ def build() -> dict[str, str]:
             fig_steps={s["id"]: figures.STEP_FIGS[s["id"]](t) for s in process["steps"]},
             teaser_nlme=figures.teaser_nlme(), teaser_dl=figures.teaser_dl(),
         )
-        out[(("ko/" if lang == "ko" else "") + PATHS[page_id] + ("index.html" if page_id != "404" else ""))] = \
-            env.get_template(f"{page_id}.html").render(**ctx)
+        text = env.get_template(f"{page_id}.html").render(**ctx)
+        if lang == "ko":
+            text = re.sub(r"\)(?=[가-힣])", ")\u2060", text)  # no line break between ")" and a following particle
+        out[(("ko/" if lang == "ko" else "") + PATHS[page_id] + ("index.html" if page_id != "404" else ""))] = text
 
     for lang in ("en", "ko"):
         for p in PAGES:
