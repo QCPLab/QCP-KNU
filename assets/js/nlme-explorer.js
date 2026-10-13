@@ -49,6 +49,7 @@
       selfBad: 'Browser recomputation check FAILED ({msg}). Do not rely on the curves shown.',
       vJac: 'Sensitivity matrix: analytic J compared with central finite differences over {n} parameter sets (including ka close to ke): largest relative difference {r}.',
       vInner: 'Inner problem: η̂ of every fifth subject compared with an independent bounded L-BFGS-B minimisation from another start: largest difference {d}.',
+      vMulti: 'The inner problem has a second (flip-flop) local minimum for some subjects, so it is solved from several starting points. Every stored iteration was re-evaluated from scratch without a warm start: largest OFV difference {d}. At the final estimates a start in the flip-flop mode ended in a different local minimum for {k} subjects (rich / moderate / sparse), with a lower objective for {l} subjects.',
       vNlm: 'nlmixr2 FOCEi comparison: NOT performed — R was not available in the environment that generated the data. The rich data set can be exported with tools/nlme_demo.py --csv for a run elsewhere.',
       vNlmFound: 'nlmixr2 FOCEi comparison: not performed by this script.',
       vLapT: 'Laplace OFV of each subject versus brute-force numerical integration of the marginal likelihood (30 subjects, at each scenario’s final estimates). Gap = Laplace − exact, in OFV units.',
@@ -101,6 +102,7 @@
       selfBad: '브라우저 재계산 점검에 실패했습니다({msg}). 표시된 곡선을 신뢰하지 마십시오.',
       vJac: '민감도 행렬: 해석적 J를 중심 유한차분과 {n}개 모수 조합(ka가 ke에 가까운 경우 포함)에서 비교했을 때 상대 차이의 최댓값은 {r}입니다.',
       vInner: '내부 문제: 5번째마다 선택한 개체의 η̂를 다른 시작점에서 수행한 경계 제약 L-BFGS-B 최소화와 비교했을 때 차이의 최댓값은 {d}입니다.',
+      vMulti: '내부 문제에는 일부 개체에서 두 번째(flip-flop) 국소 최솟값이 있어 여러 시작점에서 풉니다. 저장된 모든 반복을 워밍 스타트 없이 처음부터 다시 계산했을 때 OFV 차이의 최댓값은 {d}입니다. 최종 추정값에서 flip-flop 영역의 시작점은 {k}명(풍부 / 중간 / 희박)에서 다른 국소 최솟값에 도달했고, 목적함수가 더 낮은 경우는 {l}명이었습니다.',
       vNlm: 'nlmixr2 FOCEi 비교: 수행하지 못했습니다. 자료를 생성한 환경에 R이 없었습니다. 풍부 자료는 tools/nlme_demo.py --csv로 내보내 다른 환경에서 실행할 수 있습니다.',
       vNlmFound: 'nlmixr2 FOCEi 비교: 이 스크립트에서는 수행하지 않았습니다.',
       vLapT: '개체별 라플라스 OFV와 주변 우도의 무차별 수치 적분 비교입니다(각 시나리오의 최종 추정값에서 30명). 차이 = 라플라스 − 정확값, OFV 단위입니다.',
@@ -356,6 +358,12 @@
       if (v.jacobian_vs_finite_difference) { var j = v.jacobian_vs_finite_difference; el('p', 'nx-p', tpl(T.vJac, { n: j.n_parameter_sets, r: j.max_rel_err.toExponential(1) }), d); }
       var iv = v.inner_problem_vs_scipy_lbfgsb;
       if (iv) { var wd = 0; for (var k in iv) wd = Math.max(wd, iv[k].max_abs_eta_diff); el('p', 'nx-p', tpl(T.vInner, { d: wd.toExponential(1) }), d); }
+      var ms = v.inner_problem_multistart;
+      if (ms) {
+        var ks = ['rich', 'moderate', 'sparse'], wd2 = 0, kk = [], ll = 0;
+        ks.forEach(function (k) { wd2 = Math.max(wd2, ms[k].max_abs_ofv_diff_all_frames); kk.push(ms[k].final_flipflop_start_other_local_minimum_subjects); ll += ms[k].final_flipflop_start_lower_objective_subjects; });
+        el('p', 'nx-p', tpl(T.vMulti, { d: wd2.toExponential(1), k: kk.join(' / '), l: ll }), d);
+      }
       var lp = v.laplace_vs_bruteforce;
       if (lp) {
         el('p', 'nx-p', T.vLapT, d);

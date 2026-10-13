@@ -40,7 +40,7 @@
       bwdIntro: 'For this one patient the loss is L = (ŷ − y)², with y the true typical ln CL. The chain rule passes the error δ backwards, layer by layer, and gives every weight matrix a gradient ∂L/∂W = δ·aᵀ. Training moves each weight a small step against its gradient (averaged over a mini-batch).',
       bSteps: ['Loss and output error δ₃', 'Layer 3: ∂L/∂W₃ and δ₂', 'Layer 2: ∂L/∂W₂ and δ₁', 'Layer 1: ∂L/∂W₁'],
       bLoss: 'Prediction ŷ (ln CL)', bY: 'Target y (true ln CL)', bL: 'Loss L = (ŷ − y)²', bD3: 'δ₃ = ∂L/∂ŷ = 2(ŷ − y)',
-      bLayer: 'Layer {0}', bDelta: 'δ = error at z', bW: '∂L/∂W', bB: '∂L/∂b', bNorm: 'Gradient size: ‖∂L/∂W‖ (Frobenius) and ‖∂L/∂b‖',
+      bLayer: 'Layer {0}', bDelta: 'δ = error at z', bW: '∂L/∂W', bB: '∂L/∂b', bNorm: 'Bars: gradient size ‖∂L/∂W‖ (Frobenius norm) and ‖∂L/∂b‖, drawn on a square-root scale.',
       bFormula: ['δ₃ = 2(ŷ − y);  ∂L/∂W₃ = δ₃·a₂ᵀ', 'δ₂ = (W₃ᵀδ₃) ⊙ [z₂ > 0];  ∂L/∂W₂ = δ₂·a₁ᵀ', 'δ₁ = (W₂ᵀδ₂) ⊙ [z₁ > 0];  ∂L/∂W₁ = δ₁·xᵀ'],
       bNone: 'Not reached yet — press Next.',
       learnH: 'What the network has learned',
@@ -61,7 +61,7 @@
       dFeat: 'Features x of this atom (8 numbers)',
       dOwn: 'Own vector', dNb: 'Neighbour {0} ({1})', dSum: 'Sum: own + neighbours', dZ: 'z = W·sum + b', dH: 'h = ReLU(z)',
       dContribH: 'Contribution of this atom to the predicted logP', dHead: 'Head weights w', dProd: 'w · h per dimension', dC: 'c = Σ(w·h) + b = {0}',
-      dRef: 'RDKit Crippen contribution of this atom (reference): {0}', dW: 'Weight matrix W and bias b of this round',
+      dRef: 'RDKit Crippen contribution of this atom (reference): {0}. The network was trained only on whole-molecule logP, so single-atom values need not agree with the reference.', dW: 'Weight matrix W and bias b of this round',
       rdH: 'Readout', rdPool: 'Mean of the {0} final atom vectors', rdW: 'Head weights w', rdProd: 'w · pooled', rdS: 's = Σ(w·pooled) + b = {0}  (logP per heavy atom)',
       rdPred: 'Predicted logP = {0} atoms × s', rdRef: 'RDKit Crippen logP (reference)', rdDiff: 'Difference',
       rdNote: 'This molecule was removed from the training data.',
@@ -112,11 +112,11 @@
       bwdIntro: '이 환자 한 명에 대한 손실은 L = (ŷ − y)²이며, y는 참 전형값의 ln CL입니다. 연쇄 법칙으로 오차 δ를 층마다 거꾸로 전달하여 각 가중치 행렬의 기울기 ∂L/∂W = δ·aᵀ를 구합니다. 학습은 (미니배치 평균) 기울기의 반대 방향으로 각 가중치를 조금씩 옮깁니다.',
       bSteps: ['손실과 출력 오차 δ₃', '3층: ∂L/∂W₃와 δ₂', '2층: ∂L/∂W₂와 δ₁', '1층: ∂L/∂W₁'],
       bLoss: '예측 ŷ (ln CL)', bY: '목표 y (참 ln CL)', bL: '손실 L = (ŷ − y)²', bD3: 'δ₃ = ∂L/∂ŷ = 2(ŷ − y)',
-      bLayer: '{0}층', bDelta: 'δ = z에서의 오차', bW: '∂L/∂W', bB: '∂L/∂b', bNorm: '기울기 크기: ‖∂L/∂W‖ (프로베니우스 노름), ‖∂L/∂b‖',
+      bLayer: '{0}층', bDelta: 'δ = z에서의 오차', bW: '∂L/∂W', bB: '∂L/∂b', bNorm: '막대: 기울기 크기 ‖∂L/∂W‖ (프로베니우스 노름)와 ‖∂L/∂b‖이며 제곱근 척도로 그렸습니다.',
       bFormula: ['δ₃ = 2(ŷ − y);  ∂L/∂W₃ = δ₃·a₂ᵀ', 'δ₂ = (W₃ᵀδ₃) ⊙ [z₂ > 0];  ∂L/∂W₂ = δ₂·a₁ᵀ', 'δ₁ = (W₂ᵀδ₂) ⊙ [z₁ > 0];  ∂L/∂W₁ = δ₁·xᵀ'],
       bNone: '아직 계산하지 않았습니다. ‘다음’을 누르십시오.',
       learnH: '신경망이 학습한 내용',
-      sMetrics: '이 스냅샷의 검증용 시험 집단({0}명): R² = {1}, ln CL의 RMSE = {2}. 잡음 없는 참 함수를 같은 환자에 적용하면 R² = {3}이며, 이것이 잡음이 정하는 상한입니다. 체중 의존성과 참값의 최대 차이는 CL 기준 {4} %입니다(45–100 kg 구간에서는 {5} %).',
+      sMetrics: '이 스냅샷에서 학습에 쓰지 않은 시험 집단({0}명): R² = {1}, ln CL의 RMSE = {2}. 잡음 없는 참 함수를 같은 환자에 적용하면 R² = {3}이며, 이것이 잡음이 정하는 상한입니다. 체중 의존성과 참값의 최대 차이는 CL 기준 {4} %입니다(45–100 kg 구간에서는 {5} %).',
       lossH: '학습 중 손실', lossAlt: '에폭에 따른 ln CL의 훈련·검증 평균제곱오차(로그 축). 에폭 {0} 표시: 훈련 {1}, 검증 {2}.',
       scH: '예측 대 관측 CL', scAlt: '에폭 {1}에서 시험 환자 {0}명의 예측 청소율과 관측 청소율의 산점도. 시험 환자 {3}명 전체의 R² = {2}.',
       pdH: '체중의 영향', pdAlt: '나이 50세, eGFR 90, 정상 대사자의 체중에 따른 청소율: 에폭 {0}의 신경망과 참 함수의 비교. CL 기준 최대 차이 {1} %.',
@@ -133,7 +133,7 @@
       dFeat: '이 원자의 특성 x (숫자 8개)',
       dOwn: '자기 벡터', dNb: '이웃 {0} ({1})', dSum: '합: 자기 + 이웃', dZ: 'z = W·합 + b', dH: 'h = ReLU(z)',
       dContribH: '이 원자가 예측 logP에 기여하는 값', dHead: '출력층 가중치 w', dProd: '차원별 w · h', dC: 'c = Σ(w·h) + b = {0}',
-      dRef: '이 원자의 RDKit Crippen 기여(기준값): {0}', dW: '이 회차의 가중치 행렬 W와 편향 b',
+      dRef: '이 원자의 RDKit Crippen 기여(기준값): {0}. 신경망은 분자 전체의 logP만으로 학습했으므로 원자 하나의 값이 기준값과 일치할 필요는 없습니다.', dW: '이 회차의 가중치 행렬 W와 편향 b',
       rdH: '판독(readout)', rdPool: '최종 원자 벡터 {0}개의 평균', rdW: '출력층 가중치 w', rdProd: 'w · 평균', rdS: 's = Σ(w·평균) + b = {0}  (중원자당 logP)',
       rdPred: '예측 logP = 원자 {0}개 × s', rdRef: 'RDKit Crippen logP (기준값)', rdDiff: '차이',
       rdNote: '이 분자는 학습 자료에서 제외했습니다.',
@@ -193,7 +193,6 @@
     const a = Math.abs(v);
     return (a >= 0.01 ? v.toFixed(3) : v.toExponential(1)).replace('e-', 'e−').replace('-', MINUS).replace('e+', 'e');
   }
-  const sig = (v) => (Math.abs(v) < 1e-300 ? '0' : Number(v.toPrecision(2)).toExponential(0).replace('e-', 'e−').replace('e+', 'e'));
   const sub = (n) => String(n).replace(/\d/g, (d) => '₀₁₂₃₄₅₆₇₈₉'[+d]);
   function hexRgb(c, fb) {
     c = (c || '').trim();
@@ -259,7 +258,7 @@
   }
   function selfTestData(M, G) {
     const out = { tol: 1e-5, mlp: { max: 0, n: 0, where: '' }, gnn: { max: 0, n: 0, where: '' }, fd: { max: 0, n: 0 } };
-    const W = M.weights, snaps = M.snapshots.length, wts = W.map((w) => w);
+    const snaps = M.snapshots.length, wts = M.weights;
     M.selftest.cases.forEach((c, i) => {
       const w = wts[c.snapshot], fw = mlpFwd(w, stdz(M, c.x_raw)), bw = mlpBwd(w, fw, c.target), A = out.mlp, p = 'case' + i + '.';
       cmp(fw.x, c.x, A, p + 'x'); cmp(fw.z1, c.z1, A, p + 'z1'); cmp(fw.a1, c.a1, A, p + 'a1'); cmp(fw.z2, c.z2, A, p + 'z2'); cmp(fw.a2, c.a2, A, p + 'a2');
@@ -300,7 +299,7 @@
     const X = o.x.sc(m.l, W - m.r), Y = o.y.sc(H - m.b, m.t);
     const svg = s('svg', { viewBox: `0 0 ${W} ${H}`, class: 'dx-chart', role: 'img', 'aria-label': o.label, focusable: 'false' });
     svg.append(s('defs', null, s('clipPath', { id: cid }, s('rect', { x: m.l, y: m.t, width: W - m.l - m.r, height: H - m.t - m.b }))));
-    const g = s('g', { class: 'dx-axes' });
+    const g = s('g');
     o.y.ticks.forEach((t) => { const y = Y(t.v); g.append(s('line', { x1: m.l, x2: W - m.r, y1: y, y2: y, class: 'dx-gl' }), s('text', { x: m.l - 5, y: y + 4, class: 'dx-tick', 'text-anchor': 'end', text: t.l })); });
     o.x.ticks.forEach((t) => { const x = X(t.v); g.append(s('line', { x1: x, x2: x, y1: m.t, y2: H - m.b, class: 'dx-gl' }), s('text', { x, y: H - m.b + 14, class: 'dx-tick', 'text-anchor': 'middle', text: t.l })); });
     g.append(s('line', { x1: m.l, x2: W - m.r, y1: H - m.b, y2: H - m.b, class: 'dx-axis' }), s('line', { x1: m.l, x2: m.l, y1: m.t, y2: H - m.b, class: 'dx-axis' }),
@@ -324,7 +323,7 @@
     const id = 'dx' + (++UID), reduce = () => !!(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches);
     const root = h('div', { class: 'dx-root', lang });
     const pal = (() => { const cs = getComputedStyle(el); const g = (n, fb) => hexRgb(cs.getPropertyValue(n), fb); return { accent: g('--accent', [10, 125, 119]), accent2: g('--accent-2', [6, 94, 89]), data: g('--data', [200, 89, 15]), blue: g('--blue', [40, 89, 168]), ink: g('--ink', [16, 36, 58]), soft: g('--bg-soft', [243, 246, 249]) }; })();
-    const tint = (v, vmax, act) => { const a = vmax > 0 ? Math.min(1, Math.abs(v) / vmax) : 0, c = act ? pal.accent : (v >= 0 ? pal.blue : pal.data); return `rgba(${c[0]},${c[1]},${c[2]},${(0.05 + 0.4 * a).toFixed(3)})`; };
+    const tint = (v, vmax, act) => { const a = vmax > 0 ? Math.min(1, Math.abs(v) / vmax) : 0, c = act ? pal.accent : (v >= 0 ? pal.blue : pal.data); return `rgba(${c[0]},${c[1]},${c[2]},${(0.05 + 0.32 * a).toFixed(3)})`; };
     const W = M.weights, NS_ = M.snapshots.length, FIN = NS_ - 1;
     const st = { tab: 0, snap: FIN, wt: 70, age: 50, egfr: 90, cls: 1, fStep: 6, bStep: 3, diag: 'f', mi: 0, gStep: 0, gDim: [4, 0, 0, 0], atom: 0 };
     let raf = 0, liveT = 0;
@@ -544,7 +543,7 @@
         })));
         kids.push(sec);
       });
-      kids.push(h('p', { class: 'dx-note', text: T('bNorm') + ' — sqrt scale' }));
+      kids.push(h('p', { class: 'dx-note', text: T('bNorm') }));
       bBody.replaceChildren(...kids);
     }
     const epLab = (si) => M.snapshots[si];
@@ -572,10 +571,9 @@
       const dev = Math.max(...net_.map((v, i) => Math.abs(v / tru[i] - 1))) * 100;
       fp.svg.setAttribute('aria-label', T('pdAlt', ep, f(dev, 1)));
       chPd.replaceChildren(fp.svg);
-      const fin = M.metrics.per_snapshot[FIN], cen = M.metrics.pd_central_range_wt_kg;
+      const cen = M.metrics.pd_central_range_wt_kg;
       const devC = Math.max(...M.pd.wt.map((v, i) => (v >= cen[0] && v <= cen[1] ? Math.abs(net_[i] / tru[i] - 1) : 0))) * 100;
       metTxt.textContent = T('sMetrics', M.data.split.test, f(ms.test_r2, 3), f(ms.test_rmse, 3), f(M.metrics.oracle_true_function.test_r2, 3), f(dev, 1), f(devC, 1));
-      return fin;
     }
     function refreshM() {
       compute();
@@ -645,8 +643,8 @@
       });
       atomEls = mol.atoms.map((a, i) => {
         const [x, y] = xy(a);
-        const ring = s('circle', { cx: x, cy: y, r: R + 5, class: 'dx-atom-ring' }), dot = s('circle', { cx: x, cy: y, r: R, class: 'dx-atom-dot' }), lab = s('text', { x, y: y + 4.5, class: 'dx-atom-lab', 'text-anchor': 'middle', text: a.el }), sel = s('circle', { cx: x, cy: y, r: R + 3, class: 'dx-atom-sel' });
-        const g = s('g', { class: 'dx-atom', tabindex: i === st.atom ? '0' : '-1', role: 'button', 'data-i': i }, [ring, sel, dot, lab, s('circle', { cx: x, cy: y, r: 19, class: 'dx-atom-hit' })]);
+        const ring = s('circle', { cx: x, cy: y, r: R + 5, class: 'dx-atom-ring' }), dot = s('circle', { cx: x, cy: y, r: R, class: 'dx-atom-dot' }), lab = s('text', { x, y: y + 5, class: 'dx-atom-lab', 'text-anchor': 'middle', text: a.el }), sel = s('circle', { cx: x, cy: y, r: R + 3, class: 'dx-atom-sel' });
+        const g = s('g', { class: 'dx-atom', tabindex: i === st.atom ? '0' : '-1', role: 'button', 'data-i': i }, [ring, sel, dot, lab, s('text', { x: x + R + 1, y: y - R + 4, class: 'dx-atom-idx', 'aria-hidden': 'true', text: i + 1 }), s('circle', { cx: x, cy: y, r: 19, class: 'dx-atom-hit' })]);
         g.addEventListener('focus', () => pick(i, true)); g.addEventListener('click', () => { pick(i, true); g.focus(); });
         g.addEventListener('keydown', (e) => atomKey(e, i));
         ga.append(g); return g;
@@ -798,7 +796,6 @@
     el.replaceChildren(h('p', { class: 'dx-loading', text: DICT[lang0].loading }));
     el.classList.add('dx-mount');
     el.__dxP = Promise.all([getJSON(new URL(el.getAttribute('data-mlp'), document.baseURI).href), getJSON(new URL(el.getAttribute('data-gnn'), document.baseURI).href)]).then(([M, G]) => {
-      M.weights = M.weights.map((w) => w);
       const inst = create(el, M, G);
       el.__dx = { M, G, inst };
       const r = selfTestData(M, G);

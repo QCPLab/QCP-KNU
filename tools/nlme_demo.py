@@ -86,6 +86,8 @@ class FoceI:
     (interaction: the variance is evaluated at eta). Laplace objective, constants included:
     OFV_i = m ln 2pi + sum_j [ln var_j + res_j^2/var_j] + eta_hat' Omega^-1 eta_hat + ln|I + Omega J' R^-1 J|,
     J = d f/d eta at eta_hat, R = diag(var). The Hessian is the Gauss-Newton one (d var/d eta and d2 f/d eta2 are neglected).
+    The inner problem has a second (flip-flop, ka <-> ke) local minimum for some subjects; it is solved from eta = 0 and from the
+    previous eta_hat and the lower converged objective is kept (found necessary by the independent-start check, see validation).
     """
 
     def __init__(self, t, y):
@@ -152,11 +154,34 @@ class FoceI:
         z = y / f
         grad = (2.0 * L * (1.0 - z * (z - 1.0) / s2)[..., None]).sum(1) + 2.0 * eta * inv
         gmax = np.abs(grad).max(1)
-        return eta, f, L, gmax
+        return eta, f, L, gmax, O
 
-    def subject_ofv(self, x, warm=True):
+    def flip_start(self, lnth):
+        """eta that moves a subject to the flip-flop parameterisation (ka <-> ke exchanged, CL unchanged, V -> V ke/ka)."""
+        d = math.log(math.exp(lnth[0] - lnth[1]) / math.exp(lnth[2]))
+        return np.tile([0.0, d, d], (self.n, 1))
+
+    def best_inner(self, lnth, om, sig, starts):
+        """The inner objective has a second (flip-flop) local minimum for some subjects, so it is solved from several starting
+        points and the lowest converged objective is kept per subject."""
+        best = None
+        for e0 in starts:
+            r = self.inner(lnth, om, sig, e0)
+            if best is None:
+                best = [a.copy() for a in r]
+                continue
+            score_new = r[4] + 1e6 * (r[3] > 1e-4)
+            score_old = best[4] + 1e6 * (best[3] > 1e-4)
+            better = score_new < score_old - 1e-9
+            for a, b in zip(best, r):
+                a[better] = b[better]
+        return best
+
+    def subject_ofv(self, x, warm=True, starts=None):
         lnth, om, sig = x[0:3], np.exp(x[3:6]), math.exp(x[6])
-        eta, f, L, gmax = self.inner(lnth, om, sig, self.warm if warm else None)
+        if starts is None:
+            starts = [np.zeros((self.n, 3))] + ([self.warm] if warm and np.any(self.warm) else [])
+        eta, f, L, gmax, _ = self.best_inner(lnth, om, sig, starts)
         self.nfev += 1
         if np.all(np.isfinite(eta)) and gmax.max() < 1e-4:
             self.warm = eta.copy()
@@ -460,6 +485,34 @@ def main():
         validation["inner_problem_vs_scipy_lbfgsb"] = inner_chk
         print("inner:", inner_chk)
 
+        # (b2) the inner problem has a flip-flop local minimum for some subjects: re-evaluate every stored iteration from scratch
+        # (no warm start; from eta = 0 and from the flip-flop start, lowest objective kept) and probe the final estimates with more starts
+        multi = {}
+        for name in runs:
+            r = runs[name]; mdl = r["model"]
+            worst_fr = 0.0
+            for q in r["states"]:
+                oq, _ = mdl.subject_ofv(q["x"], warm=False, starts=[np.zeros((mdl.n, 3)), mdl.flip_start(q["x"][0:3])])
+                worst_fr = max(worst_fr, abs(float(oq.sum()) - q["ofv"]))
+            th, om, sg = unpack(r["x"]); lnth = r["x"][0:3]
+            best = mdl.best_inner(lnth, om, sg, [np.zeros((mdl.n, 3))])
+            fl = mdl.inner(lnth, om, sg, mdl.flip_start(lnth))
+            other = (np.abs(fl[4] - best[4]) > 1e-6) & (fl[3] < 1e-4)
+            lower = other & (fl[4] < best[4] - 1e-6)
+            rr = np.random.default_rng(SEED + 11)
+            gain = 0.0
+            for _ in range(5):
+                e0 = rr.normal(0.0, 0.7, (mdl.n, 3))
+                rs = mdl.inner(lnth, om, sg, e0)
+                ok = rs[3] < 1e-4
+                gain = max(gain, float(np.max(np.where(ok, best[4] - rs[4], -np.inf))))
+            multi[name] = dict(n_frames_rechecked=len(r["states"]), max_abs_ofv_diff_all_frames=worst_fr,
+                               final_flipflop_start_other_local_minimum_subjects=int(other.sum()),
+                               final_flipflop_start_lower_objective_subjects=int(lower.sum()),
+                               final_random_starts_largest_objective_gain=round(max(gain, 0.0), 9))
+        validation["inner_problem_multistart"] = multi
+        print("multistart:", multi)
+
         # (c) Laplace vs brute-force integration
         lap_ex = {}
         for name in runs:
@@ -569,7 +622,7 @@ def main():
         runtime_s=round(time.time() - t_start), data_note="Synthetic: 30 virtual subjects simulated with a fixed seed. No patient data.",
         model="one-compartment, first-order absorption, single oral dose; f(t)=D ka/(V(ka-ke))(exp(-ke t)-exp(-ka t)), ke=CL/V; apparent CL/F, V/F",
         error_model="proportional: y = f (1 + sigma*eps); no additive floor was needed (all concentrations are well above zero)",
-        estimator="FOCE-I implemented in numpy; inner problem = MAP eta per subject (Newton step with the exact Hessian - first derivatives analytic, their central difference gives the second - "
+        estimator="FOCE-I implemented in numpy; inner problem = MAP eta per subject, solved from eta=0 and from the previous eta_hat (lowest converged objective kept, because a flip-flop local minimum exists) (Newton step with the exact Hessian - first derivatives analytic, their central difference gives the second - "
                   "Fisher-scoring fallback if it is not positive definite, step-halving line search, |grad|<1e-7); Laplace OFV with Gauss-Newton Hessian "
                   "(d var/d eta and second derivatives of f neglected); outer = scipy BFGS on ln(theta), ln(omega), ln(sigma) with central-difference gradient, "
                   "gtol 1e-3, maxiter 400",
