@@ -47,7 +47,8 @@ READING = [
 # reading-list entries whose author list in refs_verified.json is a shortened one (checked in PubMed / Crossref)
 TRUNCATED_AUTHORS = {"10.1002/psp4.12049", "10.1002/psp4.12134", "10.1021/acs.jcim.9b00237"}
 
-FORBIDDEN = ["q" + "cp", r"\bTODO\b", r"\blorem ipsum\b", r"준비 중", r"googletagmanager", r"fonts\.googleapis", r"AnSH\.png", r"bk21", r"\[PI"]
+# (the tokens are assembled from pieces so that a repository-wide grep for them stays clean)
+FORBIDDEN = ["q" + "cp", r"\bTODO\b", r"\blorem ipsum\b", r"준비 중", "google" + "tagmanager", r"fonts\." + "googleapis", "AnSH" + r"\.png", "bk" + "21", r"\[PI"]
 ALLOWED_EMAIL_DOMAIN = "@kangwon.ac.kr"  # any other e-mail address in a generated page fails the build
 
 
