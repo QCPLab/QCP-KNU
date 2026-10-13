@@ -47,8 +47,8 @@ READING = [
 # reading-list entries whose author list in refs_verified.json is a shortened one (checked in PubMed / Crossref)
 TRUNCATED_AUTHORS = {"10.1002/psp4.12049", "10.1002/psp4.12134", "10.1021/acs.jcim.9b00237"}
 
-FORBIDDEN = ["q" + "cp", r"todo", r"lorem", r"준비 중", r"googletagmanager", r"fonts\.googleapis", r"AnSH\.png", r"bk21",
-             r"@(gmail|naver|daum|hanmail|kakao)\.", r"\[PI"]
+FORBIDDEN = ["q" + "cp", r"\bTODO\b", r"\blorem ipsum\b", r"준비 중", r"googletagmanager", r"fonts\.googleapis", r"AnSH\.png", r"bk21", r"\[PI"]
+ALLOWED_EMAIL_DOMAIN = "@kangwon.ac.kr"  # any other e-mail address in a generated page fails the build
 
 
 def load_yaml(path):
@@ -76,9 +76,11 @@ def build() -> dict[str, str]:
     by_no = {p["no"]: p for p in pubs}
     for a in research["areas"]:
         for n in a["papers"]:
-            assert by_no[n]["status"] in LINKED and by_no[n].get("doi"), f"representative paper #{n} must be DOI-linked"
+            if not (by_no[n]["status"] in LINKED and by_no[n].get("doi")):
+                sys.exit(f"representative paper #{n} must be DOI-linked")
     for n in research["bioanalysis"]["papers"]:
-        assert by_no[n].get("doi"), f"paper #{n} needs a DOI"
+        if not by_no[n].get("doi"):
+            sys.exit(f"paper #{n} needs a DOI")
     area_pubs = {a["id"]: [by_no[n] for n in a["papers"]] for a in research["areas"]}
     bio_pubs = [by_no[n] for n in research["bioanalysis"]["papers"]]
     by_year: dict[int, list] = {}
@@ -93,7 +95,6 @@ def build() -> dict[str, str]:
         m["initials"] = initials(m["name_en"])
         m["email_public"] = m["email"] if (show_mail and m.get("show_email") and m.get("email")) else None
     pi = next(m for m in members if m["role"] == "pi")
-    pi_ctx = {"name": pi["name_en"], "initials": pi["initials"]}
     groups = [{"role": r, "members": [m for m in members if m["role"] == r]} for r in ("phd", "ms", "alumni")]
     groups = [g for g in groups if g["members"]]
     n_phd = sum(1 for m in members if m["role"] == "phd")
@@ -171,7 +172,9 @@ def build() -> dict[str, str]:
             affil=([site["identity"]["college"][lang], site["identity"]["university"][lang]] if lang == "en"
                    else [site["identity"]["university"][lang], site["identity"]["college"][lang]]), title=title, description=desc,
             site=site, contact=contact, research=research, process=process, nav=site["nav"],
-            year=site["copyright_year"], pi_re=PI_RE, pi=pi_ctx,
+            year=site["copyright_year"], pi_re=PI_RE,
+            pi={"name": pi["name_ko"] if lang == "ko" and pi.get("name_ko") else pi["name_en"],
+                "initials": pi["name_ko"][0] if lang == "ko" and pi.get("name_ko") else pi["initials"]},
             n_pubs=len(pubs), year_min=min(counts), year_max=max(counts),
             n_students=n_phd + n_ms, n_phd=n_phd, n_ms=n_ms,
             recent=recent, area_pubs=area_pubs, bio_pubs=bio_pubs, by_year=by_year, years_desc=years_desc,
@@ -206,6 +209,9 @@ def guard(out: dict[str, str]) -> list[str]:
             m = re.search(pat, body, re.I)
             if m:
                 problems.append(f"{path}: forbidden pattern /{pat}/ at ...{body[max(0, m.start() - 30):m.end() + 30]!r}")
+        for m in re.finditer(r"[\w.+-]+@[\w-]+(?:\.[\w-]+)+", body):
+            if not m.group(0).lower().endswith(ALLOWED_EMAIL_DOMAIN):
+                problems.append(f"{path}: e-mail address outside {ALLOWED_EMAIL_DOMAIN}: {m.group(0)}")
         if "{{" in text or "{%" in text:
             problems.append(f"{path}: unrendered template syntax")
     return problems

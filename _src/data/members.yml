@@ -1,7 +1,7 @@
 # Public member list: names + roles only (HANDOFF D8). Extracted from the previous site by code (see handoff data/members.yml).
 # role: pi | phd | ms | alumni. name_ko: ask each member. show_email: only with the member's consent AND site.yml show_member_emails.
 members:
-  - {name_en: "Sung-Hoon Ahn", role: pi, name_ko: null, email: "ahnsh@kangwon.ac.kr", show_email: true}
+  - {name_en: "Sung-Hoon Ahn", role: pi, name_ko: "안성훈", email: "ahnsh@kangwon.ac.kr", show_email: true}
   - {name_en: "Kyung-Sun Moon", role: phd, name_ko: null, email: null, show_email: false}
   - {name_en: "Jong-Min Song", role: phd, name_ko: null, email: null, show_email: false}
   - {name_en: "Ju Hyun Park", role: phd, name_ko: null, email: null, show_email: false}

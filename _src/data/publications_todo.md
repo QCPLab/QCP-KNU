@@ -1,11 +1,11 @@
 # Publication entries that need a human check
 
-Source: Crossref comparison, 2026-10-13. These are listed on the site with the display restrictions documented in tools/make_publications.py; replace with the PI's final list when available.
+Source: Crossref comparison, 2026-10-13. Confirmed corrections go into publications_overrides.yml (then the entry disappears from this list). These are listed on the site with the display restrictions documented in tools/make_publications.py; replace with the PI's final list when available.
 
-- #67 (2025, Yakhak Hoeji): Crossref author list has unnamed authors; author line omitted. Add the authors manually.
+- #67 (2025, Yakhak Hoeji): Crossref author list has unnamed authors; author line omitted. Add the authors in publications_overrides.yml.
 - #57 (2020, Yakhak Hoeji) `title-variant(check)`: title differs from the Crossref record of the same DOI; confirm it is the same paper
-- #55 (2018, Yakhak Hoeji): Crossref author list has unnamed authors; author line omitted. Add the authors manually.
-- #42 (2015, Yakhak Hoeji): Crossref author list has unnamed authors; author line omitted. Add the authors manually.
+- #55 (2018, Yakhak Hoeji): Crossref author list has unnamed authors; author line omitted. Add the authors in publications_overrides.yml.
+- #42 (2015, Yakhak Hoeji): Crossref author list has unnamed authors; author line omitted. Add the authors in publications_overrides.yml.
 - #42 (2015, Yakhak Hoeji) `title-variant(check)`: title differs from the Crossref record of the same DOI; confirm it is the same paper
 - #41 (2014, Oncotarget) `DOI-MISMATCH`: DOI on the old list points to a different paper (Crossref: 'TOPK promotes lung cancer resistance to EGFR tyrosine kinase inhibitors by phosp'); correct the DOI or the title
   - candidate (PubMed, unconfirmed): DOI 10.18632/oncotarget.2507, Oncotarget 5(20):10180-10197 (the list has the DOI of a different paper)

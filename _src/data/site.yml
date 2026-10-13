@@ -9,7 +9,6 @@ identity:
   approved_by_pi: false
 indexable: false          # false -> <meta name="robots" content="noindex">, no sitemap/canonical. Set true only after PI approval.
 site_url: ""              # TODO(PI): fill in when the final address is decided; used for canonical + sitemap only if indexable
-show_logos: false         # institutional logos hidden (HANDOFF D2/Q3)
 show_member_emails: false # personal e-mails never shown unless this AND the member's show_email are true (D8)
 official_page: "https://pharmacy.kangwon.ac.kr/pharmacy/lab/laboratory-of-pharmaceutical-sciences.do"
 copyright_year: 2026
