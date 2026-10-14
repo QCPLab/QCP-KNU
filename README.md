@@ -41,6 +41,8 @@ generated page other than `@kangwon.ac.kr`. It scans the generated HTML only.
 * **Publications** – the list comes from the Crossref-checked `_src/data/publications.verified.json`; run `python tools/make_publications.py`.
   Display rules for unverified entries are documented in that script; open points are in `_src/data/publications_todo.md`.
   Confirmed corrections go into `_src/data/publications_overrides.yml` (then rerun the script).
+  Papers added from the lab's own list go into `_src/data/publications_added.yml`. `docs/PUBLICATIONS_AUDIT.md` records the record-by-record
+  check against PubMed (titles, authors, DOIs) and what was changed.
 * **News / funding text** – `news.yml`, `support.yml`; a section appears only when it has entries.
 
 ## Quality checks

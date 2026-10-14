@@ -10,7 +10,7 @@
 <li class="pub" data-year="{{ p.year }}" data-text="{{ pub_search(p) }}">
   <h3 class="pub-title">{{ p.title }}</h3>
   {% if p.authors %}<p class="pub-authors">{% for a in p.authors %}{% if pi_re.search(a) %}<strong class="nb">{{ a }}</strong>{% else %}<span class="nb">{{ a }}</span>{% endif %}{% if not loop.last %}, {% endif %}{% endfor %}</p>{% endif %}
-  <p class="pub-meta"><span class="pub-journal">{{ p.journal }}</span>
+  <p class="pub-meta"><span class="pub-journal">{{ p.journal }}</span>{% if p.get('note') %} <span class="pub-note">({{ p.note }})</span>{% endif %}
     <span class="pub-cite">{{ p.year }}{% if p.volume %};&nbsp;{{ p.volume }}{% if p.issue %}({{ p.issue }}){% endif %}{% endif %}{% if p.page %}:&nbsp;{{ p.page|replace('-', '–') }}{% endif %}</span>
     {% if p.doi %}<a href="https://doi.org/{{ p.doi }}" rel="noopener" aria-label="{{ t.pubs.doi_aria }}: {{ p.title }}">DOI: {{ p.doi }}</a>{% endif %}</p>
 </li>
@@ -22,7 +22,7 @@
   <span class="pub-c-year">{{ p.year }}</span>
   <div>
     <p class="pub-c-title">{% if p.doi %}<a href="https://doi.org/{{ p.doi }}" rel="noopener">{{ p.title }}</a>{% else %}{{ p.title }}{% endif %}</p>
-    <p class="pub-c-meta">{{ p.journal }}</p>
+    <p class="pub-c-meta">{{ p.journal }}{% if p.get('note') %} ({{ p.note }}){% endif %}</p>
   </div>
 </li>
 {%- endmacro %}

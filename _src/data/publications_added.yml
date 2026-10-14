@@ -1,0 +1,64 @@
+# Papers added from the laboratory's own list (KNU_PK_Lab_Intro v10). Each record is checked against PubMed (PMIDs in docs/PUBLICATIONS_AUDIT.md)
+# before it is listed here. Merged by tools/make_publications.py. Number 71 is reserved for the Yakhak Hoeji review on polycyclic aromatic
+# hydrocarbons (Song, Moon, Ahn), which is held until its volume, pages, DOI and authors are confirmed from the KCI record.
+# Fields: no, year, title, journal, authors (list of "Given Family"), volume, issue, page, doi, note (optional, e.g. "in Korean").
+added:
+- 'no': 73
+  year: 2026
+  title: 'Heavy metal exposure and all health outcomes: An umbrella review of meta-analyses'
+  journal: Journal of Hazardous Materials
+  authors:
+  - Hogeon Lee
+  - Yeona Jo
+  - Minwoo Jung
+  - Jung Hyun Lee
+  - Tae Hee Kim
+  - Jungmin Lee
+  - Da Jung Kim
+  - Masoud Rahmati
+  - Lee Smith
+  - Damiano Pizzol
+  - Yejun Son
+  - Jaeyu Park
+  - Sung-Hoon Ahn
+  - Dong Keon Yon
+  - Dal Woong Choi
+  - Jiseung Kang
+  volume: '503'
+  page: '141141'
+  doi: 10.1016/j.jhazmat.2026.141141
+- 'no': 72
+  year: 2026
+  title: 'Volatile organic compounds exposure and all health outcomes: An umbrella review and evidence map'
+  journal: Environmental Research
+  authors:
+  - Jungmin Lee
+  - Yeona Jo
+  - Jinyoung Jeong
+  - Da Jung Kim
+  - Hogeon Lee
+  - Tae Hee Kim
+  - Jung Hyun Lee
+  - Masoud Rahmati
+  - Lee Smith
+  - Damiano Pizzol
+  - Yejun Son
+  - Sung-Hoon Ahn
+  - Dong Keon Yon
+  - Dal Woong Choi
+  - Jiseung Kang
+  volume: '298'
+  page: '124196'
+  doi: 10.1016/j.envres.2026.124196
+- 'no': 70
+  year: 2026
+  title: Simultaneous Determination of Thioridazine and Its Metabolites by UHPLC-MS/MS With Application to a Pharmacokinetic Study in Rats
+  journal: Biomedical Chromatography
+  authors:
+  - Kyung-Sun Moon
+  - Jong-Min Song
+  - Sung-Hoon Ahn
+  volume: '40'
+  issue: '1'
+  page: e70298
+  doi: 10.1002/bmc.70298
