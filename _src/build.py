@@ -210,7 +210,7 @@ NOBREAK = [re.compile(p) for p in (
     r"C\(t\) = ka/\(ka – ke\) ·", r"\(exp\(–ke·t\) – exp\(–ka·t\)\)",   # formulas in the figure captions: two parts each, never broken inside
     r"v = Vmax · C /", r"\(Km \(1 \+ \[I\]/Ki\) \+ C\)",
     r"(?:ka|ke|Km|Vmax) = \d[\d.]*(?: h⁻¹)?", r"\[I\]/Ki = \d")]
-UNIT_RX = re.compile(r"(?<=\d) (?=(?:h⁻¹|h(?![A-Za-z])|mg(?![A-Za-z])|mg/L|ng/mL|min(?![A-Za-z])|L/h|%))")  # a number and its unit are never split by a line break
+UNIT_RX = re.compile(r"(?<=\d) (?=(?:h⁻¹|h(?![A-Za-z])|SD(?![A-Za-z])|mg(?![A-Za-z])|mg/L|ng/mL|min(?![A-Za-z])|L/h|%))")  # a number and its unit are never split by a line break
 
 
 def nobreak(page: str) -> str:

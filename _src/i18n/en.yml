@@ -25,7 +25,7 @@ hero:
   lead: We study how drugs are absorbed, distributed, metabolized and excreted, and how these processes change with disease, drug–drug interactions and individual differences. We connect animal and in vitro experiments, LC-MS/MS bioanalysis and quantitative modeling to drug discovery and the safe use of medicines.
 home:
   motion_title: Our research in motion
-  motion_sub: "Five short simulations show the questions we work on. They run on model equations and simulated numbers, not laboratory data."
+  motion_sub: "Six short simulations show the questions we work on. They run on model equations and simulated numbers, not laboratory data."
   motion_hint: "Press Play or drag the time slider."
   methods_title: Interactive methods
   methods_sub: Two explainers with simulated patients and public molecule structures.
@@ -134,22 +134,28 @@ motion:
     pk:
       tab: "Pharmacokinetics"
       title: "Exposure after an oral dose."
-      text: "A, share of the dose at the dose site, in plasma and eliminated (one square is 2.5 %); arrow width follows the instantaneous rate, each arrow on its own scale. B, plasma concentration of a one-compartment model with first-order absorption and elimination, C(t) = ka/(ka – ke) · (exp(–ke·t) – exp(–ka·t)), relative to the reference peak; ka = 1.0 h⁻¹, ke = 0.20 h⁻¹ (0.10 h⁻¹ when clearance is halved at unchanged volume). Dose and volume are set to 1 and absorption is complete."
+      text: "A, concentration–time curve of a one-compartment model with first-order absorption and elimination, C(t) = ka/(ka – ke) · (exp(–ke·t) – exp(–ka·t)), relative to the reference peak, with the area under the curve filling in and the peak marked; ka = 1.0 h⁻¹, ke = 0.20 h⁻¹ (0.10 h⁻¹ when clearance is halved at unchanged volume). B, the same curve on a log scale: after absorption the decline is a straight line with slope –ke, from which the half-life follows. C, share of the dose at the dose site, in plasma and eliminated; the eliminated share equals AUC(0–t)/AUC(0–∞). The table lists the exposure parameters relative to the reference. Dose and volume are set to 1 and absorption is complete."
     metabolism:
       tab: "Metabolism"
       title: "From parent drug to metabolite."
-      text: "A, share of the dose as parent drug, metabolite and eliminated; arrow width follows the instantaneous rate, each arrow on its own scale. B, amounts over time. An intravenous dose is converted one-to-one (molar) into a single metabolite (rate constant 0.36 h⁻¹; 0.09 h⁻¹ with the enzyme inhibited), and the metabolite is eliminated (0.18 h⁻¹). The parent is cleared by metabolism only."
+      text: "A, the pathway: an intravenous dose is converted one-to-one (molar) into a single metabolite (rate constant 0.36 h⁻¹; 0.09 h⁻¹ with the enzyme inhibited), which is eliminated (0.18 h⁻¹); the parent is cleared by metabolism only. Arrow width follows the instantaneous rate, each arrow on its own scale. B, where the dose is over time, as a stacked area that always sums to 100 % (mass balance); dashed lines mark the boundaries with typical metabolism."
     transport:
       tab: "Transporters"
       title: "Competition at a transporter."
-      text: "A, share of the dose in plasma and taken up into the liver, and ten transporter sites that are held by the substrate, held by the inhibitor or free (arrow width follows the uptake rate). B, plasma concentration. After an intravenous dose the substrate is taken up by a saturable transporter, v = Vmax · C / (Km (1 + [I]/Ki) + C), with maximal rate Vmax = 0.5 h⁻¹ (relative units), Michaelis constant Km = 0.8 and initial concentration 1. An inhibitor at constant concentration binds the same sites (competitive, [I]/Ki = 3), so fewer sites are free for the substrate; the rate equals Vmax times the share of sites held by the substrate. There is no other elimination."
+      text: "A, share of the dose in plasma and taken up into the liver, and ten transporter sites that are held by the substrate, held by the inhibitor or free (arrow width follows the uptake rate). B, plasma concentration after an intravenous dose; the substrate is taken up by a saturable transporter, v = Vmax · C / (Km (1 + [I]/Ki) + C), with maximal rate Vmax = 0.5 h⁻¹ (relative units), Michaelis constant Km = 0.8 and initial concentration 1. An inhibitor at constant concentration binds the same sites (competitive), so fewer sites are free for the substrate; the rate equals Vmax times the share of sites held by the substrate. There is no other elimination. C, AUC ratio against [I]/Ki; for this model AUC ratio = 1 + ([I]/Ki) · Km/(Km + C0/2). The cut-offs 1.25, 2 and 5, used to classify CYP inhibitors as weak, moderate or strong, are drawn only as a scale."
     modeling:
-      tab: "Modeling"
+      tab: "Model fitting"
       title: "Fitting a model, then predicting."
-      text: "A, parameters and sum of squares of the model. B, nine concentrations after one 100 mg oral dose, measured up to 24 h (dotted vertical line; simulated with 8 % log-normal error), are fitted to the one-compartment model by least squares on the log scale. The curve moves through the accepted Levenberg–Marquardt steps (positions between steps are interpolated). The fitted model then predicts 100 mg every 12 h, adding the doses linearly; this regimen was not measured."
+      text: "A, nine concentrations after one 100 mg oral dose, measured up to 24 h (dotted vertical line; simulated with 8 % log-normal error), are fitted to the one-compartment model by least squares on the log scale; the fitted model then predicts 100 mg every 12 h, adding the doses linearly, a regimen that was not measured. B, sum of squares over CL/F and V/F, minimised over ka at each point (contours), with the Levenberg–Marquardt path projected onto this plane (dots mark accepted steps; positions between steps are interpolated) and the values used to simulate the data (open circle). C, parameters and sum of squares at the current step."
       more: "Population models extend this to many subjects:"
+      more_link: "nonlinear mixed-effects explainer"
+    nlme:
+      tab: "Population PK"
+      title: "Estimating a population model."
+      text: "A, observations of 30 simulated subjects (dots), each subject's fit with its empirical Bayes estimates (thin lines), the population curve (blue), the simulated true curve (dashed) and the 90 % prediction interval of the model (between-subject variability only, 240 simulated subjects). B, objective function value (OFV) at each accepted iteration. C, population estimates divided by the values used to simulate. D, empirical Bayes estimates of η for CL/F and V/F with the ±2 SD ellipse of ω. This replays a real run of FOCE with interaction (one-compartment oral model, log-normal between-subject variability, proportional error) that was implemented for this site; change the number of samples per subject to see how the precision changes."
+      more: "Step through every iteration and compare designs:"
       more_link: "nonlinear mixed-effects explainer"
     bioanalysis:
       tab: "Bioanalysis"
       title: "From chromatogram to concentration by LC-MS/MS."
-      text: "A, chromatogram of the analyte and its stable-isotope-labelled internal standard (SIL-IS), which elute together; the peak areas are integrated. B, the area ratio is read against a calibration curve fitted with 1/x² weighting. The calibrator ratios were generated from a straight line with 3 % error, not from chromatograms; matrix effects and recovery are not modelled."
+      text: "A, the instrument chain; the detector box darkens with the signal. B, chromatogram of the analyte and its stable-isotope-labelled internal standard (SIL-IS), which elute together; the peak areas are integrated. C, the area ratio is read against a calibration curve fitted with 1/x² weighting. The calibrator ratios were generated from a straight line with 3 % error, not from chromatograms; matrix effects and recovery are not modelled."

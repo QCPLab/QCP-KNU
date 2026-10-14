@@ -18,7 +18,9 @@
     <section class="area" id="{{ a.id }}" aria-labelledby="{{ a.id }}-h">
       <h2 id="{{ a.id }}-h">{{ L(a.title) }}</h2>
       <p>{{ L(a.text) }}</p>
-      {{ rm_fig(a.motion, loop.index, t) }}
+      {%- for mid in a.motion %}
+      {{ rm_fig(mid, research.motion_order.index(mid) + 1, t) }}
+      {%- endfor %}
       <dl class="kv">
         <dt>{{ t.research.approaches }}</dt>
         <dd>{{ L(a.tags)|join(' · ') }}</dd>
@@ -33,7 +35,9 @@
     <section class="area" id="bioanalysis" aria-labelledby="bioanalysis-h">
       <h2 id="bioanalysis-h">{{ L(research.bioanalysis.title) }}</h2>
       <p>{{ L(research.bioanalysis.text) }}</p>
-      {{ rm_fig(research.bioanalysis.motion, 5, t) }}
+      {%- for mid in research.bioanalysis.motion %}
+      {{ rm_fig(mid, research.motion_order.index(mid) + 1, t) }}
+      {%- endfor %}
       <p class="sublabel">{{ t.research.selected }}</p>
       <ol class="pub-compact">{% for p in bio_pubs %}{{ pub_compact(p, t, pi_re) }}{% endfor %}</ol>
     </section>
