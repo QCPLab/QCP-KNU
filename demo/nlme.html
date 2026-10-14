@@ -18,18 +18,9 @@
 <body>
 <main>
   <h1 class="demo-h1">NLME explorer demo</h1>
-  <p class="demo-note">Demo page for the NLME explorer widget. Add <code>?lang=ko</code> to the address for the Korean interface.</p>
+  <p class="demo-note">Demo page for the NLME explorer widget.</p>
   <div data-lab-widget="nlme-explorer" data-src="../assets/data/nlme-demo.json" data-lang="en"></div>
 </main>
-<script>
-  (function () {
-    var m = /[?&]lang=(en|ko)/.exec(location.search);
-    if (m) {
-      document.documentElement.lang = m[1];
-      document.querySelector('[data-lab-widget]').setAttribute('data-lang', m[1]);
-    }
-  })();
-</script>
 <script src="../assets/js/nlme-explorer.js"></script>
 </body>
 </html>

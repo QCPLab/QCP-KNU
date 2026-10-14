@@ -1,4 +1,4 @@
-# Laboratory of Pharmaceutical Sciences · 약제학 연구실
+# Laboratory of Pharmaceutical Sciences
 
 Website of the Laboratory of Pharmaceutical Sciences, College of Pharmacy, Kangwon National University.
 A static, English-only site for GitHub Pages. No tracking, no external requests at runtime.

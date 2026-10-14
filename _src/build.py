@@ -50,7 +50,7 @@ READING = [
 TRUNCATED_AUTHORS = {"10.1002/psp4.12049", "10.1002/psp4.12134", "10.1021/acs.jcim.9b00237"}
 
 # (the tokens are assembled from pieces so that a repository-wide grep for them stays clean)
-FORBIDDEN = ["q" + "cp", r"\bTODO\b", r"\blorem ipsum\b", r"준비 중", "google" + "tagmanager", r"fonts\." + "googleapis", "AnSH" + r"\.png", "bk" + "21", r"\[PI"]
+FORBIDDEN = ["q" + "cp", r"\bTODO\b", r"\blorem ipsum\b", "google" + "tagmanager", r"fonts\." + "googleapis", "AnSH" + r"\.png", "bk" + "21", r"\[PI"]
 ALLOWED_EMAILS: set[str] = set()  # filled by build(): the contact address plus the members whose address is meant to be shown
 
 
@@ -206,7 +206,7 @@ NOBREAK = [re.compile(p) for p in (
     r"C\(t\) = ka/\(ka – ke\) ·", r"\(exp\(–ke·t\) – exp\(–ka·t\)\)",   # formulas in the figure captions: two parts each, never broken inside
     r"v = Vmax · C /", r"\(Km \(1 \+ \[I\]/Ki\) \+ C\)",
     r"(?:ka|ke|Km|Vmax) = \d[\d.]*(?: h⁻¹)?", r"\[I\]/Ki = \d",
-    r"Levenberg–Marquardt", r"AUC (?:비|ratio) = 1 \+ \(\[I\]/Ki\) ·", r"Km/\(Km \+ C0/2\)")]
+    r"Levenberg–Marquardt", r"AUC ratio = 1 \+ \(\[I\]/Ki\) ·", r"Km/\(Km \+ C0/2\)")]
 UNIT_RX = re.compile(r"(?<=\d) (?=(?:h⁻¹|h(?![A-Za-z])|SD(?![A-Za-z])|mg(?![A-Za-z])|mg/L|ng/mL|min(?![A-Za-z])|L/h|%))")  # a number and its unit are never split by a line break
 
 

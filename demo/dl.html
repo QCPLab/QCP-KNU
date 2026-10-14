@@ -19,16 +19,8 @@
 <body>
 <main>
 <h1 class="visually-hidden">Deep-learning explorer demo (simulated data; development page)</h1>
-  <p class="demo-nav"><a href="dl.html">English</a><a href="dl.html?lang=ko">한국어</a></p>
   <div id="dl-mount" data-lab-widget="dl-explorer" data-mlp="../assets/data/dl-mlp.json" data-gnn="../assets/data/dl-gnn.json" data-lang="en"></div>
 </main>
-<script>
-  /* demo only: ?lang=ko switches the widget and page language before the widget script runs */
-  (function () {
-    var ko = /[?&]lang=ko\b/.test(location.search);
-    if (ko) { document.documentElement.lang = 'ko'; document.getElementById('dl-mount').setAttribute('data-lang', 'ko'); }
-  })();
-</script>
 <script src="../assets/js/dl-explorer.js"></script>
 </body>
 </html>
