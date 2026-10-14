@@ -72,20 +72,23 @@
 /* space reserved for a figure until research-motion.js has built it (heights measured per scene); removed again when the script is ready or after 4 s */
 .rm { container-type: inline-size; }
 .rm-ph { display: none; }
-.rm-pending .rm-ph { display: block; }
-.rm-pending .rm[data-rm="pk"] .rm-ph { height: 970px; }
-.rm-pending .rm[data-rm="metabolism"] .rm-ph { height: 550px; }
-.rm-pending .rm[data-rm="transport"] .rm-ph { height: 985px; }
-.rm-pending .rm[data-rm="modeling"] .rm-ph { height: 850px; }
-.rm-pending .rm[data-rm="nlme"] .rm-ph { height: 1190px; }
-.rm-pending .rm[data-rm="bioanalysis"] .rm-ph { height: 750px; }
+.rm-pending .rm-ph, .rm-wait .rm-ph { display: block; }
+.rm-wait .rm-ph { padding-top: 24px; color: var(--muted); }
+.rm.rm-failed[data-rm] .rm-ph { height: auto; }
+.rm-wait .rm-stage, .rm-wait .rm-bar, .rm-wait .rm-opts, .rm-wait .rm-result { display: none; }
+.rm[data-rm="pk"] .rm-ph { height: 970px; }
+.rm[data-rm="metabolism"] .rm-ph { height: 550px; }
+.rm[data-rm="transport"] .rm-ph { height: 985px; }
+.rm[data-rm="modeling"] .rm-ph { height: 850px; }
+.rm[data-rm="nlme"] .rm-ph { height: 1190px; }
+.rm[data-rm="bioanalysis"] .rm-ph { height: 750px; }
 @container (min-width: 560px) {
-  .rm-pending .rm[data-rm="pk"] .rm-ph { height: 670px; }
-  .rm-pending .rm[data-rm="metabolism"] .rm-ph { height: 515px; }
-  .rm-pending .rm[data-rm="transport"] .rm-ph { height: 535px; }
-  .rm-pending .rm[data-rm="modeling"] .rm-ph { height: 490px; }
-  .rm-pending .rm[data-rm="nlme"] .rm-ph { height: 655px; }
-  .rm-pending .rm[data-rm="bioanalysis"] .rm-ph { height: 465px; }
+  .rm[data-rm="pk"] .rm-ph { height: 670px; }
+  .rm[data-rm="metabolism"] .rm-ph { height: 515px; }
+  .rm[data-rm="transport"] .rm-ph { height: 535px; }
+  .rm[data-rm="modeling"] .rm-ph { height: 490px; }
+  .rm[data-rm="nlme"] .rm-ph { height: 655px; }
+  .rm[data-rm="bioanalysis"] .rm-ph { height: 465px; }
 }
 @container (max-width: 390px) { .rm-opts > span { flex: 0 0 100%; margin: 0; } }
 
@@ -105,7 +108,7 @@
 .dot-hollow { fill: #fff; stroke: var(--ink); stroke-width: 1.5; }
 .c-blue { stroke: var(--blue); }
 .rm-curve.thick { stroke-width: 3; }
-.rm-curve.ind { stroke-opacity: .45; }
+.rm-curve.ind { stroke-opacity: .6; }
 .ellipse { fill: none; stroke: var(--muted); stroke-width: 1.2; stroke-dasharray: 4 3; }
 .rm-loading { margin: 0; padding: 28px 0; color: var(--muted); }
 
@@ -119,3 +122,6 @@
 }
 @container rmv (max-width: 460px) { .rm-tabs { grid-template-columns: 1fr 1fr; } }
 @container rmv (max-width: 330px) { .rm-tab { padding-inline: 6px; } }
+
+/* only the active tab panel takes height, so no blank block is left under the shorter figures (all panels stay laid out at full width) */
+@media screen { .rm-panels > [data-rm-panel][data-active="false"] { max-height: 0; overflow: hidden; } }

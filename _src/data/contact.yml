@@ -3,14 +3,12 @@ phone: "033-250-6912"
 phone_intl: "+82-33-250-6912"
 address:
   en: ["College of Pharmacy, Kangwon National University", "Innovation Pharmaceutical Clinical Research Building", "1 Gangwondaehak-gil, Chuncheon-si, Gangwon-do 24341", "Republic of Korea"]
-  ko: ["(24341) 강원특별자치도 춘천시 강원대학길 1 (효자동)", "강원대학교 약학대학 혁신제약임상연구동"]
 rooms:
-  - {label: {en: "Professor's office", ko: "교수실"}, value: {en: "Room 210", ko: "210호"}}
-  - {label: {en: "Laboratory", ko: "실험실"}, value: {en: "Room 209", ko: "209호"}}
+  - {label: {en: "Professor's office"}, value: {en: "Room 210"}}
+  - {label: {en: "Laboratory"}, value: {en: "Room 209"}}
 map_url: "https://www.openstreetmap.org/search?query=Kangwon%20National%20University%20College%20of%20Pharmacy"
 join:
   # TODO(PI): wording needs PI approval (Q10)
-  title: {en: "Join us", ko: "연구실 합류 안내"}
+  title: {en: "Join us"}
   text:
     en: "We welcome inquiries from students interested in pharmacokinetics, drug metabolism and quantitative pharmacology. Please e-mail Professor Ahn with a short CV and your research interests."
-    ko: "약동학·약물대사·정량약리학에 관심 있는 학생의 문의를 환영합니다. 간단한 이력서와 연구 관심 분야를 교수님께 이메일로 보내 주시기 바랍니다."

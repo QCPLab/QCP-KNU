@@ -18,9 +18,6 @@ nav:
   main: Main navigation
   footer: Footer navigation
   menu: Menu
-lang_switch:
-  label: 한국어
-  aria: 한국어로 보기 (view in Korean)
 hero:
   lead: We study how drugs are absorbed, distributed, metabolized and excreted, and how these processes change with disease, drug–drug interactions and individual differences. We connect animal and in vitro experiments, LC-MS/MS bioanalysis and quantitative modeling to drug discovery and the safe use of medicines.
 home:
@@ -142,17 +139,17 @@ motion:
     transport:
       tab: "Transporters"
       title: "Competition at a transporter."
-      text: "A, share of the dose in plasma and taken up into the liver, and ten transporter sites that are held by the substrate, held by the inhibitor or free (arrow width follows the uptake rate). B, plasma concentration after an intravenous dose; the substrate is taken up by a saturable transporter, v = Vmax · C / (Km (1 + [I]/Ki) + C), with maximal rate Vmax = 0.5 h⁻¹ (relative units), Michaelis constant Km = 0.8 and initial concentration 1. An inhibitor at constant concentration binds the same sites (competitive), so fewer sites are free for the substrate; the rate equals Vmax times the share of sites held by the substrate. There is no other elimination. C, AUC ratio against [I]/Ki; for this model AUC ratio = 1 + ([I]/Ki) · Km/(Km + C0/2). The cut-offs 1.25, 2 and 5, used to classify CYP inhibitors as weak, moderate or strong, are drawn only as a scale."
+      text: "A, share of the dose in plasma and taken up into the liver, and ten transporter sites that are held by the substrate, held by the inhibitor or free, shown rounded to whole tenths (arrow width follows the uptake rate). B, plasma concentration after an intravenous dose; the substrate is taken up by a saturable transporter, v = Vmax · C / (Km (1 + [I]/Ki) + C), with maximal rate Vmax = 0.5 h⁻¹ (relative units), Michaelis constant Km = 0.8 and initial concentration 1. An inhibitor at constant concentration binds the same sites (competitive), so fewer sites are free for the substrate; the rate equals Vmax times the share of sites held by the substrate. There is no other elimination. C, AUC(0–∞) ratio against [I]/Ki; the curves in B are cut at 24 h, the ratio uses the whole curve. For this model AUC ratio = 1 + ([I]/Ki) · Km/(Km + C0/2). The cut-offs 1.25, 2 and 5, used to classify CYP inhibitors as weak, moderate or strong, are drawn only as a scale."
     modeling:
       tab: "Model fitting"
       title: "Fitting a model, then predicting."
-      text: "A, nine concentrations after one 100 mg oral dose, measured up to 24 h (dotted vertical line; simulated with 8 % log-normal error), are fitted to the one-compartment model by least squares on the log scale; the fitted model then predicts 100 mg every 12 h, adding the doses linearly, a regimen that was not measured. B, sum of squares over CL/F and V/F, minimised over ka at each point (contours), with the Levenberg–Marquardt path projected onto this plane (dots mark accepted steps; positions between steps are interpolated) and the values used to simulate the data (open circle). C, parameters and sum of squares at the current step."
+      text: "A, nine concentrations after one 100 mg oral dose, measured up to 24 h (dotted vertical line; simulated with 8 % log-normal error), are fitted to the one-compartment model by least squares on the log scale; the fitted model then predicts 100 mg every 12 h, adding the doses linearly, a regimen that was not measured. B, sum of squares over CL/F and V/F, minimised over ka at each point (contours at 1.5, 3, 8, 25 and 80 times the minimum), with the Levenberg–Marquardt path projected onto this plane (dots mark accepted steps; positions between steps are interpolated) and the values used to simulate the data (open circle). C, parameters and sum of squares at the current step."
       more: "Population models extend this to many subjects:"
       more_link: "nonlinear mixed-effects explainer"
     nlme:
       tab: "Population PK"
       title: "Estimating a population model."
-      text: "A, observations of 30 simulated subjects (dots), each subject's fit with its empirical Bayes estimates (thin lines), the population curve (blue), the simulated true curve (dashed) and the 90 % prediction interval of the model (between-subject variability only, 240 simulated subjects). B, objective function value (OFV) at each accepted iteration. C, population estimates divided by the values used to simulate. D, empirical Bayes estimates of η for CL/F and V/F with the ±2 SD ellipse of ω. This replays a real run of FOCE with interaction (one-compartment oral model, log-normal between-subject variability, proportional error) that was implemented for this site; change the number of samples per subject to see how the precision changes."
+      text: "A, observations of 30 simulated subjects (dots), each subject's fit with its empirical Bayes estimates (thin lines), the population curve (blue), the simulated true curve (dashed) and the 90 % range of the model with between-subject variability only (240 simulated subjects, no residual error). B, objective function value (OFV, about –2 log-likelihood with constants included) at each accepted iteration; it depends on the number of observations, so compare it only within one run, not between sampling designs or with other software. C, population estimates divided by the values used to simulate (fixed effects only). D, empirical Bayes estimates η̂ of CL/F against V/F for each subject, with the ±2ω ellipse (ω is the standard deviation of η, the between-subject variability). Positions between accepted iterations are interpolated. This replays a real run of FOCE with interaction (one-compartment oral model, log-normal between-subject variability, proportional error) that was implemented for this site; change the number of samples per subject to see how the estimates and the η-shrinkage change. The explainer lists all seven parameters with their standard errors."
       more: "Step through every iteration and compare designs:"
       more_link: "nonlinear mixed-effects explainer"
     bioanalysis:

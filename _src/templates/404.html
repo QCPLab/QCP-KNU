@@ -2,9 +2,8 @@
 {% from "_macros.html" import icon with context %}
 {% block main %}
 <div class="wrap notfound">
-  <h1>{{ t_en.nf.title }}</h1>
-  <p class="lead">{{ t_en.nf.text }}</p>
-  <p class="lead" lang="ko">{{ t_ko.nf.title }}. {{ t_ko.nf.text }}</p>
-  <p><a href="{{ url('home') }}">{{ t_en.nf.home }}</a> · <a href="{{ url('home', 'ko') }}" lang="ko">{{ t_ko.nf.home }}</a></p>
+  <h1>{{ t.nf.title }}</h1>
+  <p class="lead">{{ t.nf.text }}</p>
+  <p><a href="{{ url('home') }}">{{ t.nf.home }}</a></p>
 </div>
 {% endblock %}

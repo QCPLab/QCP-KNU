@@ -17,11 +17,6 @@
 <meta property="og:description" content="{{ description }}">
 <meta property="og:locale" content="{{ t.meta.og_locale }}">
 <link rel="icon" type="image/svg+xml" href="{{ asset('img/favicon.svg') }}">
-{%- if page.alt and page.id != '404' %}
-<link rel="alternate" hreflang="en" href="{{ abs_url('en') }}">
-<link rel="alternate" hreflang="ko" href="{{ abs_url('ko') }}">
-<link rel="alternate" hreflang="x-default" href="{{ abs_url('en') }}">
-{%- endif %}
 {%- if site.indexable and site.site_url and page.id != '404' %}
 <link rel="canonical" href="{{ abs_url(lang) }}">
 {%- endif %}
@@ -53,9 +48,6 @@
       {%- for item in nav %}
         <li><a href="{{ url(item) }}" {% if page.id == item %}aria-current="page"{% endif %}>{{ t.nav[item] }}</a></li>
       {%- endfor %}
-      {%- if page.id != '404' %}
-        <li class="lang"><a href="{{ url(page.id, other_lang) }}" hreflang="{{ other_lang }}" lang="{{ other_lang }}" aria-label="{{ t.lang_switch.aria }}">{{ t.lang_switch.label }}</a></li>
-      {%- endif %}
       </ul>
     </nav>
   </div>

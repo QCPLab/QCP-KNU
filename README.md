@@ -1,7 +1,7 @@
 # Laboratory of Pharmaceutical Sciences · 약제학 연구실
 
 Website of the Laboratory of Pharmaceutical Sciences, College of Pharmacy, Kangwon National University.
-A static, bilingual (English `/`, Korean `/ko/`) site for GitHub Pages. No tracking, no external requests at runtime.
+A static, English-only site for GitHub Pages. No tracking, no external requests at runtime.
 
 > Status: draft for review by the principal investigator. Every generated page is marked `noindex` until the lab
 > name, text and members are approved (`_src/data/site.yml` → `indexable`; the builder refuses `indexable: true`
@@ -11,9 +11,8 @@ A static, bilingual (English `/`, Korean `/ko/`) site for GitHub Pages. No track
 
 | Path | Content |
 |---|---|
-| `index.html`, `research/`, `methods/`, `publications/`, `people/`, `contact/`, `404.html` | generated English pages |
-| `ko/…` | generated Korean pages |
-| `_src/` | source: `data/*.yml` (content), `i18n/{en,ko}.yml` (interface text), `templates/` (Jinja2), `build.py` |
+| `index.html`, `research/`, `methods/`, `publications/`, `people/`, `contact/`, `404.html` | generated pages |
+| `_src/` | source: `data/*.yml` (content), `i18n/en.yml` (interface text), `templates/` (Jinja2), `build.py` |
 | `assets/` | `css/`, `js/`, `fonts/pretendard/` (self-hosted, SIL OFL 1.1), `data/` (explainer data), `img/` |
 | `tools/` | `make_publications.py`, `nlme_demo.py`, `dl_demo.py` (regenerate explainer data), `qa_check.py` (QA) |
 | `docs/` | notes for the two interactive explainers and the reading list |
@@ -43,15 +42,13 @@ generated page other than `@kangwon.ac.kr`. It scans the generated HTML only.
   Display rules for unverified entries are documented in that script; open points are in `_src/data/publications_todo.md`.
   Confirmed corrections go into `_src/data/publications_overrides.yml` (then rerun the script).
 * **News / funding text** – `news.yml`, `support.yml`; a section appears only when it has entries.
-* **Korean text** – `_src/i18n/ko.yml` and the `ko:` fields in `_src/data/*.yml`. It is a draft for review.
 
 ## Quality checks
 
 ```bash
 pip install -r tools/requirements-generators.txt && playwright install chromium
 python tools/qa_check.py --root . --widths 320 360 390 768 1440 --axe node_modules/axe-core/axe.min.js --pages \
-  index.html research/index.html methods/index.html publications/index.html people/index.html contact/index.html 404.html \
-  ko/index.html ko/research/index.html ko/methods/index.html ko/publications/index.html ko/people/index.html ko/contact/index.html
+  index.html research/index.html methods/index.html publications/index.html people/index.html contact/index.html 404.html
 ```
 
 Checks horizontal overflow, console errors, external requests (all blocked and reported), missing local files, text clipped

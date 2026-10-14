@@ -1,10 +1,10 @@
 # Site-wide switches. Change the lab name HERE only (HANDOFF D1-D3, D8).
 identity:
-  name:        {en: "Laboratory of Pharmaceutical Sciences", ko: "약제학 연구실"}
-  affiliation: {en: "College of Pharmacy, Kangwon National University", ko: "강원대학교 약학대학"}
-  university:  {en: "Kangwon National University", ko: "강원대학교"}
-  college:     {en: "College of Pharmacy", ko: "약학대학"}
-  tagline:     {en: "Pharmacokinetics · Drug metabolism · Drug transport", ko: "약동학 · 약물대사 · 약물수송"}
+  name:        {en: "Laboratory of Pharmaceutical Sciences"}
+  affiliation: {en: "College of Pharmacy, Kangwon National University"}
+  university:  {en: "Kangwon National University"}
+  college:     {en: "College of Pharmacy"}
+  tagline:     {en: "Pharmacokinetics · Drug metabolism · Drug transport"}
   # TODO(PI): name not yet approved by the PI (options: official name / "Ahn Lab" / PI's choice)
   approved_by_pi: false
 indexable: false          # false -> <meta name="robots" content="noindex">, no sitemap/canonical. Set true only after PI approval.

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Static site builder: _src/data/*.yml + _src/templates + _src/i18n  ->  EN pages at / and KO pages at /ko/.
+"""Static site builder: _src/data/*.yml + _src/templates + _src/i18n  ->  English pages at /.
 
     python _src/build.py            # writes the generated HTML into the repository root (commit the output)
     python _src/build.py --check    # build into memory only and run the content guards
@@ -36,14 +36,14 @@ PI_RE = re.compile(r"(sung[-\u2010-\u2015\s]?hoon\s+ahn|\bs[-\u2010-\u2015.\s]*h
 
 # topic labels for the 'further reading' list, keyed by DOI (references verified against Crossref, docs/REFERENCES.md)
 READING = [
-    ("10.2307/2532087", {"en": "Nonlinear mixed-effects models (classic)", "ko": "비선형 혼합효과 모형(고전)"}),
-    ("10.1038/psp.2013.14", {"en": "Population modeling primer", "ko": "집단 모델링 입문"}),
-    ("10.1007/s10928-007-9060-6", {"en": "Estimation methods", "ko": "추정법 유도(NONMEM)"}),
-    ("10.1016/j.csda.2004.07.002", {"en": "SAEM estimation", "ko": "SAEM 추정"}),
-    ("10.1002/psp4.12134", {"en": "Building a PBPK model", "ko": "PBPK 모형 구축 절차"}),
-    ("10.1002/psp4.12049", {"en": "Good modeling practice", "ko": "모형 기반 신약개발 모범 사례"}),
-    ("10.1038/323533a0", {"en": "Backpropagation", "ko": "역전파"}),
-    ("10.1021/acs.jcim.9b00237", {"en": "Graph neural networks for molecules", "ko": "분자 그래프 신경망"}),
+    ("10.2307/2532087", {"en": "Nonlinear mixed-effects models (classic)"}),
+    ("10.1038/psp.2013.14", {"en": "Population modeling primer"}),
+    ("10.1007/s10928-007-9060-6", {"en": "Estimation methods"}),
+    ("10.1016/j.csda.2004.07.002", {"en": "SAEM estimation"}),
+    ("10.1002/psp4.12134", {"en": "Building a PBPK model"}),
+    ("10.1002/psp4.12049", {"en": "Good modeling practice"}),
+    ("10.1038/323533a0", {"en": "Backpropagation"}),
+    ("10.1021/acs.jcim.9b00237", {"en": "Graph neural networks for molecules"}),
 ]
 
 # reading-list entries whose author list in refs_verified.json is a shortened one (checked in PubMed / Crossref)
@@ -71,7 +71,7 @@ def build() -> dict[str, str]:
         for k in ("authors", "volume", "issue", "page", "doi"):
             p.setdefault(k, None)
     members = d["members"]["members"]
-    T = {lang: load_yaml(SRC / "i18n" / f"{lang}.yml") for lang in ("en", "ko")}
+    T = {"en": load_yaml(SRC / "i18n" / "en.yml")}
     support_items = d["support"].get("items") or []
     news_items = sorted(d["news"].get("items") or [], key=lambda n: n["date"], reverse=True)
 
@@ -134,7 +134,7 @@ def build() -> dict[str, str]:
     def url(ctx, page, lang=None):
         lang = lang or ctx["lang"]
         cur = ctx["page"]["dir"] or "."
-        tgt = ("ko/" if lang == "ko" else "") + PATHS[page]
+        tgt = PATHS[page]
         if page == "404":
             return posixpath.relpath(tgt, cur)
         tdir = tgt.rstrip("/") or "."
@@ -148,7 +148,7 @@ def build() -> dict[str, str]:
     @pass_context
     def abs_url(ctx, lang):
         if site["site_url"]:
-            return site["site_url"].rstrip("/") + "/" + ("ko/" if lang == "ko" else "") + PATHS[ctx["page"]["id"]]
+            return site["site_url"].rstrip("/") + "/" + PATHS[ctx["page"]["id"]]
         return url(ctx, ctx["page"]["id"], lang)
 
     def pub_search(p):
@@ -159,8 +159,7 @@ def build() -> dict[str, str]:
 
     def render(page_id: str, lang: str):
         t = T[lang]
-        other = "en" if lang == "ko" else "ko"
-        pdir = ("ko/" if lang == "ko" else "") + PATHS[page_id]
+        pdir = PATHS[page_id]
         pdir = "" if page_id == "404" else pdir.rstrip("/")
         extra = PAGE_ASSETS.get(page_id, {"css": [], "js": []})
         page = {"id": page_id, "dir": pdir, "alt": page_id != "404", "css": extra["css"], "js": extra["js"]}
@@ -174,13 +173,12 @@ def build() -> dict[str, str]:
             title = f'{t["nav"][page_id]} | {name}'
             desc = t["meta"]["desc"][page_id]
         ctx = dict(
-            t=t, t_en=T["en"], t_ko=T["ko"], lang=lang, other_lang=other, page=page,
+            t=t, t_en=T["en"], lang=lang, page=page,
             affil=([site["identity"]["college"][lang], site["identity"]["university"][lang]] if lang == "en"
                    else [site["identity"]["university"][lang], site["identity"]["college"][lang]]), title=title, description=desc,
             site=site, contact=contact, research=research, nav=site["nav"],
             year=site["copyright_year"], pi_re=PI_RE,
-            pi={"name": pi["name_ko"] if lang == "ko" and pi.get("name_ko") else pi["name_en"],
-                "initials": pi["name_ko"][0] if lang == "ko" and pi.get("name_ko") else pi["initials"], "photo": pi.get("photo")},
+            pi={"name": pi["name_en"], "initials": pi["initials"], "photo": pi.get("photo")},
             n_pubs=len(pubs), year_min=min(counts), year_max=max(counts),
             n_students=n_phd + n_ms, n_phd=n_phd, n_ms=n_ms,
             recent=recent, area_pubs=area_pubs, bio_pubs=bio_pubs, by_year=by_year, years_desc=years_desc,
@@ -188,18 +186,16 @@ def build() -> dict[str, str]:
         )
         text = env.get_template(f"{page_id}.html").render(**ctx)
         text = nobreak(text)
-        if lang == "ko":
-            text = re.sub(r"\)(?=[가-힣])", ")\u2060", text)  # no line break between ")" and a following particle
-        out[(("ko/" if lang == "ko" else "") + PATHS[page_id] + ("index.html" if page_id != "404" else ""))] = text
+        out[PATHS[page_id] + ("index.html" if page_id != "404" else "")] = text
 
-    for lang in ("en", "ko"):
+    for lang in ("en",):
         for p in PAGES:
             render(p, lang)
     render("404", "en")
     out["assets/img/favicon.svg"] = figures.favicon()
     if site["indexable"] and site["site_url"]:
         base = site["site_url"].rstrip("/") + "/"
-        urls = [base + ("ko/" if l == "ko" else "") + PATHS[p] for l in ("en", "ko") for p in PAGES]
+        urls = [base + PATHS[p] for p in PAGES]
         out["sitemap.xml"] = ('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
                               + "".join(f"  <url><loc>{u}</loc></url>\n" for u in urls) + "</urlset>\n")
     return out
@@ -209,7 +205,8 @@ NOBREAK = [re.compile(p) for p in (
     r"LC-MS/MS", r"\(\+82-33-250-6912\)", r"\b[A-Za-z]{1,6}-\d{2,}\b", r"Gangwon-do 24341",
     r"C\(t\) = ka/\(ka – ke\) ·", r"\(exp\(–ke·t\) – exp\(–ka·t\)\)",   # formulas in the figure captions: two parts each, never broken inside
     r"v = Vmax · C /", r"\(Km \(1 \+ \[I\]/Ki\) \+ C\)",
-    r"(?:ka|ke|Km|Vmax) = \d[\d.]*(?: h⁻¹)?", r"\[I\]/Ki = \d")]
+    r"(?:ka|ke|Km|Vmax) = \d[\d.]*(?: h⁻¹)?", r"\[I\]/Ki = \d",
+    r"Levenberg–Marquardt", r"AUC (?:비|ratio) = 1 \+ \(\[I\]/Ki\) ·", r"Km/\(Km \+ C0/2\)")]
 UNIT_RX = re.compile(r"(?<=\d) (?=(?:h⁻¹|h(?![A-Za-z])|SD(?![A-Za-z])|mg(?![A-Za-z])|mg/L|ng/mL|min(?![A-Za-z])|L/h|%))")  # a number and its unit are never split by a line break
 
 
@@ -223,7 +220,7 @@ def nobreak(page: str) -> str:
         for rx in NOBREAK:
             t = rx.sub(lambda mm: f'<span class="nb">{mm.group(0)}</span>', t)
         t = UNIT_RX.sub("\u00a0", t)
-        t = re.sub(r"(?<![A-Za-z])([AB]), (?=\S)", "\\1,\u00a0", t)  # figure panel letters ("A, ...") stay with the next word
+        t = re.sub(r"(?<![A-Za-z])([A-D]), (?=\S)", "\\1,\u00a0", t)  # figure panel letters ("A, ...") stay with the next word
         t = re.sub(r"(?<=\S)·(?=\S)", "\u2060·\u2060", t)  # "A·B": no break before or after the dot
         return ">" + t.replace(" · ", "\u00a0· ") + "<"
 
