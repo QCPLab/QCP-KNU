@@ -1,0 +1,6 @@
+# Corrections confirmed by the lab / PI, keyed by the paper number on the old list ("no").
+# Any of: title, journal, year, authors (list of "Given Family"), volume, issue, page, doi.
+# A record listed here is shown in full with its DOI link and no longer appears in publications_todo.md.
+# Example:
+#   41: {doi: "10.18632/oncotarget.2507", authors: ["..."], volume: "5", issue: "20", page: "10180-10197"}
+overrides: {}

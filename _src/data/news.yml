@@ -1,0 +1,2 @@
+# Empty -> no News menu entry, no News section (HANDOFF 5.2). Add {date, title:{en,ko}, text:{en,ko}} items when real news exists.
+items: []

@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% from "_macros.html" import icon with context %}
+{% block main %}
+<div class="wrap notfound">
+  <h1>{{ t.nf.title }}</h1>
+  <p class="lead">{{ t.nf.text }}</p>
+  <p><a href="{{ url('home') }}">{{ t.nf.home }}</a></p>
+</div>
+{% endblock %}

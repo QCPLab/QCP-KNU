@@ -1,0 +1,6 @@
+qa_out/
+node_modules/
+__pycache__/
+*.pyc
+_src/data/members.private.yml
+handoff/data/members.private.yml

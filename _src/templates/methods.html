@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% from "_macros.html" import icon, pub_compact with context %}
+{% block main %}
+<div class="wrap">
+  <div class="page-title">
+    <h1>{{ t.methods.title }}</h1>
+    <p class="lead">{{ t.methods.lead }}</p>
+    <ul class="jump">
+      {%- for m in lab_methods %}<li><a href="#{{ m.id }}">{{ L(m.title) }}</a></li>{% endfor %}
+      <li><a href="#nlme">{{ t.methods.nlme_title }}</a></li>
+      <li><a href="#deep-learning">{{ t.methods.dl_title }}</a></li>
+      <li><a href="#reading">{{ t.methods.reading_title }}</a></li>
+    </ul>
+  </div>
+
+  <div class="single">
+    {%- for m in lab_methods %}
+    <section id="{{ m.id }}" aria-labelledby="{{ m.id }}-h">
+      <h2 id="{{ m.id }}-h">{{ L(m.title) }}</h2>
+      <p>{{ L(m.text) }}</p>
+      <h3 class="sub">{{ t.methods.workflow }}</h3>
+      <ol class="howto">{% for st in m.steps %}<li>{{ L(st) }}</li>{% endfor %}</ol>
+      <h3 class="sub">{{ t.methods.examples }}</h3>
+      <ol class="pub-compact">{% for p in m.pubs %}{{ pub_compact(p, t, pi_re) }}{% endfor %}</ol>
+      <p class="fine"><a href="{{ url('research') }}#{{ m.see.anchor }}">{{ L(m.see.text) }}</a></p>
+    </section>
+    {%- endfor %}
+
+    <section id="nlme" aria-labelledby="nlme-h">
+      <h2 id="nlme-h">{{ t.methods.nlme_title }}</h2>
+      <p class="note">{{ t.methods.honesty }}</p>
+      <p>{{ t.methods.nlme_lead }}</p>
+      <ol class="howto">{% for s in t.methods.nlme_steps %}<li>{{ s }}</li>{% endfor %}</ol>
+      <div class="widget-slot" data-lab-widget="nlme-explorer" data-src="{{ asset('data/nlme-demo.json') }}" data-lang="{{ lang }}">
+        <noscript><p class="widget-fallback">{{ t.methods.needs_js }}</p></noscript>
+      </div>
+      <p class="fine">{{ t.methods.nlme_limits }}</p>
+    </section>
+
+    <section id="deep-learning" aria-labelledby="dl-h">
+      <h2 id="dl-h">{{ t.methods.dl_title }}</h2>
+      <p>{{ t.methods.dl_lead }}</p>
+      <div class="widget-slot" data-lab-widget="dl-explorer" data-mlp="{{ asset('data/dl-mlp.json') }}" data-gnn="{{ asset('data/dl-gnn.json') }}" data-lang="{{ lang }}">
+        <noscript><p class="widget-fallback">{{ t.methods.needs_js }}</p></noscript>
+      </div>
+      <p class="fine">{{ t.methods.dl_limits }}</p>
+    </section>
+
+    <section id="reading" aria-labelledby="reading-h">
+      <h2 id="reading-h">{{ t.methods.reading_title }}</h2>
+      <p>{{ t.methods.reading_sub }}</p>
+      <ul class="reading">
+      {%- for r in refs %}
+        <li>
+          <span class="reading-topic">{{ r.topic }}</span>
+          <a class="reading-title" href="https://doi.org/{{ r.doi }}" rel="noopener">{{ r.title }}</a>
+          <span class="reading-meta">{{ r.authors }} ({{ r.year }}). <em>{{ r.journal }}</em></span>
+        </li>
+      {%- endfor %}
+      </ul>
+    </section>
+  </div>
+</div>
+{% endblock %}

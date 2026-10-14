@@ -1,0 +1,14 @@
+pi_email: "ahnsh@kangwon.ac.kr"
+phone: "033-250-6912"
+phone_intl: "+82-33-250-6912"
+address:
+  en: ["College of Pharmacy, Kangwon National University", "Innovation Pharmaceutical Clinical Research Building", "1 Gangwondaehak-gil, Chuncheon-si, Gangwon-do 24341", "Republic of Korea"]
+rooms:
+  - {label: {en: "Professor's office"}, value: {en: "Room 210"}}
+  - {label: {en: "Laboratory"}, value: {en: "Room 209"}}
+map_url: "https://www.openstreetmap.org/search?query=Kangwon%20National%20University%20College%20of%20Pharmacy"
+join:
+  # TODO(PI): wording needs PI approval (Q10)
+  title: {en: "Join us"}
+  text:
+    en: "We welcome inquiries from students interested in pharmacokinetics, drug metabolism and quantitative pharmacology. Please e-mail Professor Ahn with a short CV and your research interests."

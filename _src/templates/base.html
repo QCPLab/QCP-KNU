@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="{{ t.meta.html_lang }}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+{%- if page.id == '404' %}
+<script>(function(){var h=location.hostname,p=location.pathname.split('/')[1]||'';var b=(/\.github\.io$/.test(h)&&p)?'/'+p+'/':'/';document.write('<base href="'+b+'">');})();</script>
+{%- endif %}
+<title>{{ title }}</title>
+<meta name="description" content="{{ description }}">
+{%- if not site.indexable %}
+<meta name="robots" content="noindex">
+{%- endif %}
+<meta name="theme-color" content="#ffffff">
+<meta property="og:type" content="website">
+<meta property="og:title" content="{{ title }}">
+<meta property="og:description" content="{{ description }}">
+<meta property="og:locale" content="{{ t.meta.og_locale }}">
+<link rel="icon" type="image/svg+xml" href="{{ asset('img/favicon.svg') }}">
+{%- if site.indexable and site.site_url and page.id != '404' %}
+<link rel="canonical" href="{{ abs_url(lang) }}">
+{%- endif %}
+<script>document.documentElement.classList.add('js')</script>
+{%- if 'research-motion' in page.js %}
+<script>(function(d){d.classList.add('rm-pending');setTimeout(function(){d.classList.remove('rm-pending')},4000)})(document.documentElement)</script>
+{%- endif %}
+<link rel="preload" href="{{ asset('fonts/pretendard/PretendardVariable.subset.91.woff2') }}" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="{{ asset('fonts/pretendard/pretendard.css') }}">
+<link rel="stylesheet" href="{{ asset('css/tokens.css') }}">
+<link rel="stylesheet" href="{{ asset('css/site.css') }}">
+{%- for css in page.css %}
+<link rel="stylesheet" href="{{ asset('css/' ~ css ~ '.css') }}">
+{%- endfor %}
+</head>
+<body class="page-{{ page.id }} lang-{{ lang }}">
+<a class="skip-link" href="#main">{{ t.skip }}</a>
+<header class="site-header" data-header>
+  <div class="wrap bar">
+    <a class="brand" href="{{ url('home') }}">
+      <span class="brand-name">{{ L(site.identity.name) }}</span>
+      <span class="brand-sub">{{ affil[0] }} · {{ affil[1] }}</span>
+    </a>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="primary-nav" data-menu>
+      <span class="when-closed">{{ icon('menu') }}</span><span class="when-open">{{ icon('close') }}</span><span>{{ t.nav.menu }}</span>
+    </button>
+    <nav id="primary-nav" class="nav" aria-label="{{ t.nav.main }}">
+      <ul>
+      {%- for item in nav %}
+        <li><a href="{{ url(item) }}" {% if page.id == item %}aria-current="page"{% endif %}>{{ t.nav[item] }}</a></li>
+      {%- endfor %}
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main" tabindex="-1">
+{% block main %}{% endblock %}
+</main>
+
+<footer class="site-footer">
+  <div class="wrap foot-grid">
+    <div>
+      <p class="foot-name">{{ L(site.identity.name) }}</p>
+      <address>
+        {%- for line in L(contact.address) %}{{ line }}{% if not loop.last %}<br>{% endif %}{% endfor %}
+      </address>
+    </div>
+    <ul>
+      {%- for item in nav %}<li><a href="{{ url(item) }}">{{ t.nav[item] }}</a></li>{% endfor %}
+    </ul>
+    <div>
+      <p><a href="mailto:{{ contact.pi_email }}">{{ contact.pi_email }}</a></p>
+      <p>{{ contact.phone }}</p>
+      <p><a href="{{ site.official_page }}" rel="noopener">{{ t.footer.official }}</a></p>
+    </div>
+  </div>
+  <div class="wrap foot-base">
+    <p>© {{ year }} {{ L(site.identity.name) }}, {{ L(site.identity.university) }}</p>
+  </div>
+</footer>
+<script src="{{ asset('js/site.js') }}" defer onerror="document.documentElement.classList.remove('js')"></script>
+{%- for js in page.js %}
+<script src="{{ asset('js/' ~ js ~ '.js') }}" defer></script>
+{%- endfor %}
+</body>
+</html>

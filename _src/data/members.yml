@@ -1,0 +1,22 @@
+# Members shown on the People page. role: pi | phd | ms | alumni.
+# E-mail addresses are listed on purpose (the lab has always published them). To hide one, set show_email: false;
+# to hide all of them, set show_member_emails: false in site.yml.
+# photo: file in assets/img/ (PI only for now; the file is the 189x253 px portrait from the previous site, replace it with a larger one if available).
+members:
+  - {name_en: "Sung-Hoon Ahn", role: pi, email: "ahnsh@kangwon.ac.kr", show_email: true, photo: "pi-ahn.jpg"}
+  - {name_en: "Kyung-Sun Moon", role: phd, email: "moonks97@kangwon.ac.kr", show_email: true}
+  - {name_en: "Jong-Min Song", role: phd, email: "nayasjm@kangwon.ac.kr", show_email: true}
+  - {name_en: "Ju Hyun Park", role: phd, email: "blessingway@daum.net", show_email: true}
+  - {name_en: "Hee Uk Kim", role: phd, email: "heeukkim@naver.com", show_email: true}
+  - {name_en: "Eun Dong Shin", role: phd, email: "sed4001@kangwon.ac.kr", show_email: true}
+  - {name_en: "Jong Bae Kim", role: phd, email: "k9272467@gmail.com", show_email: true}
+  - {name_en: "Young-Hyean Nam", role: phd, email: "yhy-nam@daum.net", show_email: true}
+  - {name_en: "June Hahk Bae", role: phd, email: "tonyjbae@naver.com", show_email: true}
+  - {name_en: "Hyun Chan Lim", role: phd, email: "taxking@kakao.com", show_email: true}
+  - {name_en: "Kiok Ahn", role: phd, email: "kiokahn@daum.net", show_email: true}
+  - {name_en: "Joon Hee Lee", role: phd, email: "nato1971@naver.com", show_email: true}
+  - {name_en: "Chae-I Shin", role: ms, email: "scl2675@naver.com", show_email: true}
+  - {name_en: "Min-Kyung Jeong", role: ms, email: "ttdd4971@gmail.com", show_email: true}
+  - {name_en: "Su-A Choi", role: ms, email: "suah0408@naver.com", show_email: true}
+  - {name_en: "Min Lee", role: ms, email: "wsclm30@gmail.com", show_email: true}
+  - {name_en: "Mariam Khaled", role: ms, email: "mariemkhaled80@gmail.com", show_email: true}

@@ -1,0 +1,52 @@
+# Research areas (4) grouped from the department's 5 official topics; text from docs copy deck, PI review pending.
+official_items:
+  - {en: "Pharmacokinetics and disposition of drug candidates"}
+  - {en: "Drug metabolism and metabolite studies"}
+  - {en: "Drug transporter studies"}
+  - {en: "Pharmacokinetics in disease models"}
+  - {en: "Drug–drug interactions based on metabolism and transporters"}
+
+# Order of the animated figures (Fig. 1-5) on the home page; each area below names its own scene.
+motion_order: [pk, metabolism, transport, modeling, nlme, bioanalysis]
+
+areas:
+  - id: pk
+    official: [1, 4]
+    title: {en: "Pharmacokinetics of drug candidates and disease models"}
+    text:
+      en: "We characterize the systemic exposure of new drug candidates and marketed drugs, in healthy animals and in disease models, and identify what governs it."
+    tags: {en: ["In vivo PK", "Disease models", "Drug candidates"]}
+    papers: [45, 48, 58, 67]
+    motion: [pk]
+  - id: metabolism
+    official: [2]
+    title: {en: "Drug metabolism and metabolites"}
+    text:
+      en: "We study how drugs are metabolized, which metabolites form, and how metabolism shapes exposure and safety, supported by LC-MS/MS metabolite analysis."
+    tags: {en: ["Metabolite profiling", "In vitro metabolism", "LC-MS/MS"]}
+    papers: [47, 53, 46]
+    motion: [metabolism]
+  - id: transport
+    official: [3, 5]
+    title: {en: "Drug transporters and drug–drug interactions"}
+    text:
+      en: "Co-prescribed drugs often compete for the same enzymes and transporters. We examine enzyme- and transporter-mediated interactions to explain changes in efficacy and adverse effects."
+    tags: {en: ["Transporters", "Enzymes", "Interaction risk"]}
+    papers: [14, 57]
+    motion: [transport]
+  - id: modeling
+    official: []
+    # TODO(PI): confirm which modeling activities the lab actually performs (Q7). Titles show 4 of 69 papers on modeling/in silico; a PBPK review (#68).
+    title: {en: "Quantitative modeling and prediction"}
+    text:
+      en: "We use pharmacokinetic, physiologically based (PBPK) and population (nonlinear mixed-effects) models, and machine learning, to interpret data and predict exposure in situations that were not tested."
+    tags: {en: ["Compartmental", "Population (NLME)", "PBPK", "Machine learning"]}
+    papers: [68, 29]
+    motion: [modeling, nlme]
+
+bioanalysis:
+  title: {en: "Bioanalysis: the measurement behind every study"}
+  text:
+    en: "Every pharmacokinetic result starts with a reliable concentration. We develop and validate LC-MS/MS methods to measure drugs and metabolites in biological samples such as plasma."
+  papers: [65, 56, 40]
+  motion: [bioanalysis]

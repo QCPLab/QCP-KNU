@@ -1,0 +1,38 @@
+{% macro icon(name) -%}
+<svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+{%- if name == 'menu' %}<path d="M4 7h16M4 12h16M4 17h16"/>
+{%- elif name == 'close' %}<path d="M6 6l12 12M18 6L6 18"/>
+{%- endif %}</svg>
+{%- endmacro %}
+
+{# one publication entry (publications page) #}
+{% macro pub(p, t, pi_re) -%}
+<li class="pub" data-year="{{ p.year }}" data-text="{{ pub_search(p) }}">
+  <h3 class="pub-title">{{ p.title }}</h3>
+  {% if p.authors %}<p class="pub-authors">{% for a in p.authors %}{% if pi_re.search(a) %}<strong class="nb">{{ a }}</strong>{% else %}<span class="nb">{{ a }}</span>{% endif %}{% if not loop.last %}, {% endif %}{% endfor %}</p>{% endif %}
+  <p class="pub-meta"><span class="pub-journal">{{ p.journal }}</span>
+    <span class="pub-cite">{{ p.year }}{% if p.volume %};&nbsp;{{ p.volume }}{% if p.issue %}({{ p.issue }}){% endif %}{% endif %}{% if p.page %}:&nbsp;{{ p.page|replace('-', '–') }}{% endif %}</span>
+    {% if p.doi %}<a href="https://doi.org/{{ p.doi }}" rel="noopener" aria-label="{{ t.pubs.doi_aria }}: {{ p.title }}">DOI: {{ p.doi }}</a>{% endif %}</p>
+</li>
+{%- endmacro %}
+
+{# compact entry (home, research) #}
+{% macro pub_compact(p, t, pi_re) -%}
+<li class="pub-c">
+  <span class="pub-c-year">{{ p.year }}</span>
+  <div>
+    <p class="pub-c-title">{% if p.doi %}<a href="https://doi.org/{{ p.doi }}" rel="noopener">{{ p.title }}</a>{% else %}{{ p.title }}{% endif %}</p>
+    <p class="pub-c-meta">{{ p.journal }}</p>
+  </div>
+</li>
+{%- endmacro %}
+
+{# animated research figure: caption is server-rendered, the figure is drawn by research-motion.js #}
+{% macro rm_fig(id, n, t) -%}
+{%- set s = t.motion.scenes[id] %}
+<figure class="rm" data-rm="{{ id }}">
+  <noscript><p class="rm-fallback">{{ t.motion.nojs }}</p></noscript>
+  <div class="rm-ph" aria-hidden="true"></div>
+  <figcaption class="rm-cap"><strong>{{ t.motion.fig }} {{ n }} | {{ s.title }}</strong> {{ s.text }}{% if s.get('more') %} {{ s.more }} <a href="{{ url('methods') }}#nlme">{{ s.more_link }}</a>.{% endif %} {{ t.motion.sim }}</figcaption>
+</figure>
+{%- endmacro %}

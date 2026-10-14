@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+{% from "_macros.html" import icon, pub_compact, rm_fig with context %}
+{% block main %}
+<div class="wrap">
+  <div class="page-title">
+    <h1>{{ L(site.identity.name) }}</h1>
+    <p class="muted" style="margin:6px 0 0">{{ L(site.identity.tagline) }}</p>
+  </div>
+  {%- if site.hero_image %}
+  <figure class="banner"><img src="{{ asset('img/' ~ site.hero_image) }}" alt="{{ L(site.hero_image_alt) }}"></figure>
+  {%- endif %}
+
+  <div class="layout">
+    <div class="main">
+      <section>
+        <p class="lead">{{ t.hero.lead }}</p>
+      </section>
+
+      <section aria-labelledby="motion-h">
+        <h2 id="motion-h">{{ t.home.motion_title }}</h2>
+        <p>{{ t.home.motion_sub }} <span class="rm-needs-js">{{ t.home.motion_hint }}</span></p>
+        <div data-rm-viewer data-label="{{ t.home.motion_title }}">
+        {%- for id in research.motion_order %}
+          <div id="rm-panel-{{ id }}" data-rm-panel="{{ id }}" data-title="{{ t.motion.scenes[id].tab }}">{{ rm_fig(id, loop.index, t) }}</div>
+        {%- endfor %}
+        </div>
+      </section>
+
+      <section aria-labelledby="research-h">
+        <h2 id="research-h">{{ t.nav.research }}</h2>
+        <ul class="topics">
+        {%- for a in research.areas %}
+          <li>
+            <h3><a href="{{ url('research') }}#{{ a.id }}">{{ L(a.title) }}</a></h3>
+            <p>{{ L(a.text) }}</p>
+          </li>
+        {%- endfor %}
+        </ul>
+      </section>
+
+      <section aria-labelledby="methods-h">
+        <h2 id="methods-h">{{ t.home.methods_title }}</h2>
+        <p>{{ t.home.methods_sub }}</p>
+        <ul class="plain">
+          {%- for m in lab_methods %}
+          <li><a href="{{ url('methods') }}#{{ m.id }}">{{ L(m.title) }}</a><br>{{ L(m.short) }}</li>
+          {%- endfor %}
+          <li><a href="{{ url('methods') }}#nlme">{{ t.methods.nlme_title }}</a><br>{{ t.home.nlme_text }}</li>
+          <li><a href="{{ url('methods') }}#deep-learning">{{ t.methods.dl_title }}</a><br>{{ t.home.dl_text }}</li>
+        </ul>
+      </section>
+
+      {%- if news_items %}
+      <section aria-labelledby="news-h">
+        <h2 id="news-h">{{ t.home.news_title }}</h2>
+        <ul class="news">{% for n in news_items[:3] %}<li><time datetime="{{ n.date }}">{{ n.date }}</time><div><strong>{{ L(n.title) }}</strong><br>{{ L(n.text) }}</div></li>{% endfor %}</ul>
+      </section>
+      {%- endif %}
+
+      <section aria-labelledby="pubs-h">
+        <h2 id="pubs-h">{{ t.home.pubs_title }}</h2>
+        <ol class="pub-compact">
+        {%- for p in recent %}{{ pub_compact(p, t, pi_re) }}{% endfor %}
+        </ol>
+        <p style="margin-top:12px"><a href="{{ url('publications') }}">{{ t.home.pubs_all.format(n=n_pubs) }}</a></p>
+      </section>
+
+      <section aria-labelledby="join-h">
+        <h2 id="join-h">{{ L(contact.join.title) }}</h2>
+        <p>{{ L(contact.join.text) }}</p>
+        <p><a href="mailto:{{ contact.pi_email }}">{{ contact.pi_email }}</a></p>
+      </section>
+    </div>
+
+    <aside class="aside" aria-label="{{ t.home.aside }}">
+      <div class="box{% if pi.photo %} box-photo{% endif %}">
+        <h2>{{ t.people.pi_label }}</h2>
+        {%- if pi.photo %}<img src="{{ asset('img/' ~ pi.photo) }}" alt="" width="76" height="102">{% endif %}
+        <p><a href="{{ url('people') }}">{{ pi.name }}</a><br><span class="muted">{{ t.people.pi_role }}</span></p>
+        <p class="small">{{ t.people.pi_fields }}</p>
+      </div>
+      <div class="box">
+        <h2>{{ t.nav.contact }}</h2>
+        <address>{% for line in L(contact.address) %}{{ line }}{% if not loop.last %}<br>{% endif %}{% endfor %}</address>
+        <p style="margin-top:8px">{{ t.contact.phone }}: {{ contact.phone }}<br>{{ t.contact.email }}: <a href="mailto:{{ contact.pi_email }}">{{ contact.pi_email }}</a></p>
+      </div>
+      <div class="box">
+        <h2>{{ t.home.links }}</h2>
+        <ul class="plain">
+          <li><a href="{{ url('people') }}">{{ t.nav.people }} ({{ n_students + 1 }})</a></li>
+          <li><a href="{{ url('publications') }}">{{ t.nav.publications }} ({{ n_pubs }})</a></li>
+          <li><a href="{{ site.official_page }}" rel="noopener">{{ t.footer.official }}</a></li>
+        </ul>
+      </div>
+    </aside>
+  </div>
+</div>
+{% endblock %}

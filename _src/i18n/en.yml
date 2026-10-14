@@ -1,0 +1,160 @@
+meta:
+  html_lang: en
+  og_locale: en_US
+  desc:
+    home: Pharmacokinetics, drug metabolism and drug transport research at the College of Pharmacy, Kangwon National University.
+    research: 'Research areas: pharmacokinetics of drug candidates and disease models, drug metabolism, transporters and drug–drug interactions, and quantitative modeling.'
+    methods: 'Laboratory methods (animal in vivo pharmacokinetics, in vitro pharmacokinetics and metabolism, LC-MS/MS bioanalysis) and two interactive explainers of modeling methods.'
+    publications: Publications of the Laboratory of Pharmaceutical Sciences, Kangwon National University, searchable by year, title, author and journal.
+    people: Principal investigator and graduate students of the Laboratory of Pharmaceutical Sciences.
+    contact: Address, phone and e-mail of the Laboratory of Pharmaceutical Sciences, College of Pharmacy, Kangwon National University, Chuncheon.
+skip: Skip to main content
+nav:
+  research: Research
+  methods: Methods
+  publications: Publications
+  people: People
+  contact: Contact
+  main: Main navigation
+  footer: Footer navigation
+  menu: Menu
+hero:
+  lead: We study how drugs are absorbed, distributed, metabolized and excreted, and how these processes change with disease, drug–drug interactions and individual differences. We connect animal and in vitro experiments, LC-MS/MS bioanalysis and quantitative modeling to drug discovery and the safe use of medicines.
+home:
+  motion_title: Our research in motion
+  motion_sub: "Six short simulations show the questions we work on. They run on model equations and simulated numbers, not laboratory data."
+  motion_hint: "Press Play or drag the time slider."
+  methods_title: Methods
+  methods_sub: What we do in the laboratory, and two interactive explainers of modeling methods.
+  nlme_text: 'Watch a population pharmacokinetic model being estimated, iteration by iteration: the fit to the data, the parameters and the objective function.'
+  dl_text: Follow a neural network and a graph neural network from input to prediction, including the backward pass.
+  news_title: News
+  pubs_title: Recent publications
+  pubs_sub: The latest entries from the laboratory's publication list.
+  pubs_all: All {n} publications
+  aside: Laboratory information
+  links: Links
+research:
+  title: Research
+  lead: 'Our work follows a drug from the dose to the concentration in the body: how it is absorbed, metabolized, transported and eliminated, and what changes that in disease, with other drugs and between individuals.'
+  on_this_page: On this page
+  approaches: Approaches
+  selected: Selected publications
+  bio_nav: Bioanalysis
+  official_nav: Department topics
+  official_title: Research topics listed by the College of Pharmacy
+  official_text: The department's laboratory page lists five research topics. The four areas above group them and add the quantitative modeling that connects them.
+  official_link: View the department page
+  cta_title: Methods
+  cta_text: How we run animal and in vitro pharmacokinetic studies and LC-MS/MS assays, and two interactive explainers of population models and neural networks.
+  cta_btn: Open the methods page.
+methods:
+  title: Methods
+  lead: Our laboratory combines animal and in vitro pharmacokinetic experiments, LC-MS/MS bioanalysis and quantitative modeling. The first three sections describe the experimental work that runs through our publication list; the last two are interactive explainers of modeling methods.
+  workflow: Typical workflow
+  examples: Examples from our publications
+  honesty: 'About the two interactive explainers: they are teaching examples built on simulated patients and public molecule structures, not results from patients or from our experiments. In the deep-learning example the molecules are real public structures and their logP is calculated by software, not measured. The calculations run in your browser; nothing is sent anywhere.'
+  needs_js: These explainers need JavaScript. Please enable it to use them.
+  nlme_title: How a population PK model is fitted
+  nlme_lead: People differ in how fast they clear a drug. A nonlinear mixed-effects (NLME) model describes the typical values and the spread between individuals at once. The optimiser starts from poor guesses and improves them step by step; here you can move through every step.
+  nlme_steps:
+  - 'Choose a sampling scenario: rich, moderate or sparse.'
+  - Press play, or drag the slider through the optimiser's iterations.
+  - Watch the fitted curves, the parameter estimates and the objective function change.
+  - Select a subject to compare its data with its individual fit.
+  nlme_limits: Simulated data from 30 virtual subjects and a single model. The estimator is a from-scratch implementation of first-order conditional estimation with interaction (FOCE-I). It illustrates the idea and is not a substitute for validated software.
+  dl_title: How a neural network computes
+  dl_lead: 'A neural network is a chain of simple calculations: weighted sums followed by a non-linearity. Training changes the weights to reduce the error. Run the forward pass, inspect the gradients of the backward pass, and follow message passing across a real drug molecule.'
+  dl_limits: Teaching examples with small models. The neural network learns a known formula from synthetic patients. The graph network learns to reproduce the Crippen logP that RDKit calculates (a calculated value, not a measurement) from about 4,600 public structures (NCI Open Database, as shipped with RDKit). They show the mechanics and are not validated for prediction.
+  reading_title: Further reading
+  reading_sub: General references for the methods above; they are not publications of this laboratory.
+pubs:
+  title: Publications
+  lead: '{n} publications from {a} to {b}. Filter by year or search by title, author or journal.'
+  filter: Filter publications
+  search_label: Search publications
+  search_ph: Search title, author or journal
+  year: Year
+  all_years: All years
+  reset: Reset
+  showing: Showing {shown} of {total}
+  n_one: 1 paper
+  n_items: '{n} papers'
+  none: No publications match your search.
+  doi_aria: Open DOI link for
+  note: The principal investigator is shown in bold. Records that are still being checked are listed without authors or DOI link.
+people:
+  title: People
+  lead: A research group of graduate students led by Professor Sung-Hoon Ahn.
+  pi_label: Principal investigator
+  pi_role: Professor
+  pi_fields: Pharmaceutics · Pharmacokinetics · Drug metabolism · Drug transport
+  fields_label: Research fields
+  fields:
+  - Pharmaceutics
+  - Pharmacokinetics
+  - Drug metabolism
+  - Drug transport
+  official: Department profile
+  roles:
+    pi: Principal investigator
+    phd: Ph.D. students
+    ms: M.S. students
+    alumni: Alumni
+  official_label: Department page
+contact:
+  title: Contact
+  lead: We are at the College of Pharmacy, Kangwon National University, in Chuncheon.
+  reach: Get in touch
+  email: E-mail
+  phone: Phone
+  address: Address
+  write: Write an e-mail
+  inquire: Send an inquiry
+  map: Open in a map
+  join_list:
+  - A short CV
+  - Your research interests
+  join_subject: Inquiry about joining the laboratory
+  support: Support
+footer:
+  official: Department page
+  synthetic: Figures and explainers use simulated data; the molecule example also uses public structures.
+nf:
+  title: Page not found
+  text: The page you are looking for does not exist or has moved.
+  home: Back to the home page
+
+motion:
+  fig: "Fig."
+  sim: "Simulated; not laboratory data."
+  nojs: "This figure is animated and needs JavaScript. The caption below describes it."
+  scenes:
+    pk:
+      tab: "Pharmacokinetics"
+      title: "Exposure after an oral dose."
+      text: "A, concentration–time curve of a one-compartment model with first-order absorption and elimination, C(t) = ka/(ka – ke) · (exp(–ke·t) – exp(–ka·t)), relative to the reference peak, with the area under the curve filling in and the peak marked; ka = 1.0 h⁻¹, ke = 0.20 h⁻¹ (0.10 h⁻¹ when clearance is halved at unchanged volume). B, the same curve on a log scale: after absorption the decline is a straight line with slope –ke, from which the half-life follows. C, share of the dose at the dose site, in plasma and eliminated; the eliminated share equals AUC(0–t)/AUC(0–∞). The table lists the exposure parameters relative to the reference. Dose and volume are set to 1 and absorption is complete."
+    metabolism:
+      tab: "Metabolism"
+      title: "From parent drug to metabolite."
+      text: "A, the pathway: an intravenous dose is converted one-to-one (molar) into a single metabolite (rate constant 0.36 h⁻¹; 0.09 h⁻¹ with the enzyme inhibited), which is eliminated (0.18 h⁻¹); the parent is cleared by metabolism only. Arrow width follows the instantaneous rate, each arrow on its own scale. B, where the dose is over time, as a stacked area that always sums to 100 % (mass balance); dashed lines mark the boundaries with typical metabolism."
+    transport:
+      tab: "Transporters"
+      title: "Competition at a transporter."
+      text: "A, share of the dose in plasma and taken up into the liver, and ten transporter sites that are held by the substrate, held by the inhibitor or free, shown rounded to whole tenths (arrow width follows the uptake rate). B, plasma concentration after an intravenous dose; the substrate is taken up by a saturable transporter, v = Vmax · C / (Km (1 + [I]/Ki) + C), with maximal rate Vmax = 0.5 h⁻¹ (relative units), Michaelis constant Km = 0.8 and initial concentration 1. An inhibitor at constant concentration binds the same sites (competitive), so fewer sites are free for the substrate; the rate equals Vmax times the share of sites held by the substrate. There is no other elimination. C, AUC(0–∞) ratio against [I]/Ki; the curves in B are cut at 24 h, the ratio uses the whole curve. For this model AUC ratio = 1 + ([I]/Ki) · Km/(Km + C0/2). The cut-offs 1.25, 2 and 5, used to classify CYP inhibitors as weak, moderate or strong, are drawn only as a scale."
+    modeling:
+      tab: "Model fitting"
+      title: "Fitting a model, then predicting."
+      text: "A, nine concentrations after one 100 mg oral dose, measured up to 24 h (dotted vertical line; simulated with 8 % log-normal error), are fitted to the one-compartment model by least squares on the log scale; the fitted model then predicts 100 mg every 12 h, adding the doses linearly, a regimen that was not measured. B, sum of squares over CL/F and V/F, minimised over ka at each point (contours at 1.5, 3, 8, 25 and 80 times the minimum), with the Levenberg–Marquardt path projected onto this plane (dots mark accepted steps; positions between steps are interpolated) and the values used to simulate the data (open circle). C, parameters and sum of squares at the current step."
+      more: "Population models extend this to many subjects:"
+      more_link: "nonlinear mixed-effects explainer"
+    nlme:
+      tab: "Population PK"
+      title: "Estimating a population model."
+      text: "A, observations of 30 simulated subjects (dots), each subject's fit with its empirical Bayes estimates (thin lines), the population curve (blue), the simulated true curve (dashed) and the 90 % range of the model with between-subject variability only (240 simulated subjects, no residual error). B, objective function value (OFV, about –2 log-likelihood with constants included) at each accepted iteration; it depends on the number of observations, so compare it only within one run, not between sampling designs or with other software. C, population estimates divided by the values used to simulate (fixed effects only). D, empirical Bayes estimates η̂ of CL/F against V/F for each subject, with the ±2ω ellipse (ω is the standard deviation of η, the between-subject variability). Positions between accepted iterations are interpolated. This replays a real run of FOCE with interaction (one-compartment oral model, log-normal between-subject variability, proportional error) that was implemented for this site; change the number of samples per subject to see how the estimates and the η-shrinkage change. The explainer lists all seven parameters with their standard errors."
+      more: "Step through every iteration and compare designs:"
+      more_link: "nonlinear mixed-effects explainer"
+    bioanalysis:
+      tab: "Bioanalysis"
+      title: "From chromatogram to concentration by LC-MS/MS."
+      text: "A, the instrument chain; the detector box darkens with the signal. B, chromatogram of the analyte and its stable-isotope-labelled internal standard (SIL-IS), which elute together; the peak areas are integrated. C, the area ratio is read against a calibration curve fitted with 1/x² weighting. The calibrator ratios were generated from a straight line with 3 % error, not from chromatograms; matrix effects and recovery are not modelled."

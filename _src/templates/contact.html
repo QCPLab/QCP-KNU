@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% from "_macros.html" import icon with context %}
+{% block main %}
+<div class="wrap">
+  <div class="page-title">
+    <h1>{{ t.contact.title }}</h1>
+    <p class="lead">{{ t.contact.lead }}</p>
+  </div>
+
+  <div class="single">
+    <section aria-labelledby="reach-h">
+      <h2 id="reach-h">{{ t.contact.reach }}</h2>
+      <dl class="contact-dl">
+        <dt>{{ t.contact.email }}</dt><dd><a href="mailto:{{ contact.pi_email }}">{{ contact.pi_email }}</a></dd>
+        <dt>{{ t.contact.phone }}</dt><dd>{{ contact.phone }} <span class="muted">({{ contact.phone_intl }})</span></dd>
+        <dt>{{ t.contact.address }}</dt><dd><address>{% for line in L(contact.address) %}{{ line }}{% if not loop.last %}<br>{% endif %}{% endfor %}</address></dd>
+        {%- for r in contact.rooms %}
+        <dt>{{ L(r.label) }}</dt><dd>{{ L(r.value) }}</dd>
+        {%- endfor %}
+      </dl>
+      <p style="margin-top:16px"><a href="{{ contact.map_url }}" rel="noopener" target="_blank">{{ t.contact.map }}</a></p>
+    </section>
+
+    <section aria-labelledby="join-h">
+      <h2 id="join-h">{{ L(contact.join.title) }}</h2>
+      <p>{{ L(contact.join.text) }}</p>
+      <p><a href="mailto:{{ contact.pi_email }}?subject={{ t.contact.join_subject|urlencode }}">{{ t.contact.inquire }}</a></p>
+    </section>
+
+    {%- if support_items %}
+    <section aria-labelledby="support-h">
+      <h2 id="support-h">{{ t.contact.support }}</h2>
+      <ul class="support">{% for s in support_items %}<li>{{ L(s) }}</li>{% endfor %}</ul>
+    </section>
+    {%- endif %}
+  </div>
+</div>
+{% endblock %}

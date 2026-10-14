@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% from "_macros.html" import icon with context %}
+{% block main %}
+<div class="wrap">
+  <div class="page-title">
+    <h1>{{ t.people.title }}</h1>
+    <p class="lead">{{ t.people.lead }}</p>
+  </div>
+
+  <div class="single">
+    <section aria-labelledby="pi-h">
+      <div class="pi{% if pi.photo %} has-photo{% endif %}">
+        {%- if pi.photo %}<img src="{{ asset('img/' ~ pi.photo) }}" alt="{{ pi.name }}" width="189" height="253">{% endif %}
+        <div>
+          <h2 id="pi-h">{{ pi.name }}</h2>
+          <p class="role">{{ t.people.pi_role }}, {{ L(site.identity.affiliation) }}</p>
+          <dl class="contact-dl">
+            <dt>{{ t.people.fields_label }}</dt><dd>{{ t.people.fields|join(' · ') }}</dd>
+            <dt>{{ t.contact.email }}</dt><dd><a href="mailto:{{ contact.pi_email }}">{{ contact.pi_email }}</a></dd>
+            <dt>{{ t.contact.phone }}</dt><dd>{{ contact.phone }}</dd>
+            <dt>{{ t.people.official_label }}</dt><dd><a href="{{ site.official_page }}" rel="noopener">{{ t.people.official }}</a></dd>
+          </dl>
+        </div>
+      </div>
+    </section>
+
+    {%- for g in groups %}
+    <section aria-labelledby="g-{{ g.role }}">
+      <h2 class="group-h" id="g-{{ g.role }}">{{ t.people.roles[g.role] }}<small>{{ g.members|length }}</small></h2>
+      <ul class="roster">
+      {%- for m in g.members %}
+        <li><span class="n">{{ m.name_en }}</span>
+          {% if m.email_public %}<a class="e" href="mailto:{{ m.email_public }}">{{ m.email_public }}</a>{% endif %}</li>
+      {%- endfor %}
+      </ul>
+    </section>
+    {%- endfor %}
+  </div>
+</div>
+{% endblock %}

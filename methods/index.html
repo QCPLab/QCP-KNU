@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Methods | Laboratory of Pharmaceutical Sciences</title>
+<meta name="description" content="Laboratory methods (animal in vivo pharmacokinetics, in vitro pharmacokinetics and metabolism, LC-MS/MS bioanalysis) and two interactive explainers of modeling methods.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#ffffff">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Methods | Laboratory of Pharmaceutical Sciences">
+<meta property="og:description" content="Laboratory methods (animal in vivo pharmacokinetics, in vitro pharmacokinetics and metabolism, LC-MS/MS bioanalysis) and two interactive explainers of modeling methods.">
+<meta property="og:locale" content="en_US">
+<link rel="icon" type="image/svg+xml" href="../assets/img/favicon.svg">
+<script>document.documentElement.classList.add('js')</script>
+<link rel="preload" href="../assets/fonts/pretendard/PretendardVariable.subset.91.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../assets/fonts/pretendard/pretendard.css">
+<link rel="stylesheet" href="../assets/css/tokens.css">
+<link rel="stylesheet" href="../assets/css/site.css">
+<link rel="stylesheet" href="../assets/css/nlme-explorer.css">
+<link rel="stylesheet" href="../assets/css/dl-explorer.css">
+</head>
+<body class="page-methods lang-en">
+<a class="skip-link" href="#main">Skip to main content</a>
+<header class="site-header" data-header>
+  <div class="wrap bar">
+    <a class="brand" href="../">
+      <span class="brand-name">Laboratory of Pharmaceutical Sciences</span>
+      <span class="brand-sub">College of Pharmacy · Kangwon National University</span>
+    </a>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="primary-nav" data-menu>
+      <span class="when-closed"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 7h16M4 12h16M4 17h16"/></svg></span><span class="when-open"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6L6 18"/></svg></span><span>Menu</span>
+    </button>
+    <nav id="primary-nav" class="nav" aria-label="Main navigation">
+      <ul>
+        <li><a href="../research/" >Research</a></li>
+        <li><a href="./" aria-current="page">Methods</a></li>
+        <li><a href="../publications/" >Publications</a></li>
+        <li><a href="../people/" >People</a></li>
+        <li><a href="../contact/" >Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main" tabindex="-1">
+
+<div class="wrap">
+  <div class="page-title">
+    <h1>Methods</h1>
+    <p class="lead">Our laboratory combines animal and in vitro pharmacokinetic experiments, <span class="nb">LC-MS/MS</span> bioanalysis and quantitative modeling. The first three sections describe the experimental work that runs through our publication list; the last two are interactive explainers of modeling methods.</p>
+    <ul class="jump"><li><a href="#invivo">Animal in vivo pharmacokinetics</a></li><li><a href="#invitro">In vitro pharmacokinetics and metabolism</a></li><li><a href="#lcmsms"><span class="nb">LC-MS/MS</span> bioanalysis</a></li>
+      <li><a href="#nlme">How a population PK model is fitted</a></li>
+      <li><a href="#deep-learning">How a neural network computes</a></li>
+      <li><a href="#reading">Further reading</a></li>
+    </ul>
+  </div>
+
+  <div class="single">
+    <section id="invivo" aria-labelledby="invivo-h">
+      <h2 id="invivo-h">Animal in vivo pharmacokinetics</h2>
+      <p>Concentration–time profiles in rats and mice are a starting point of much of our work. We give a drug candidate or a marketed drug by one or more routes, collect blood at planned times and, when the question requires it, tissues, urine, bile or feces, and measure the drug and its metabolites by <span class="nb">LC-MS/MS</span>.</p>
+      <h3 class="sub">Typical workflow</h3>
+      <ol class="howto"><li>Design the study: species and strain, dose levels, routes (for example intravenous and oral), fasted or fed state and the sampling schedule.</li><li>Dose the animals and collect blood serially; collect brain or other tissues, urine, bile and feces when distribution or excretion is the question.</li><li>Quantify the parent drug and its metabolites in each sample with a validated <span class="nb">LC-MS/MS</span> method.</li><li>Calculate exposure and disposition parameters (AUC, clearance, volume of distribution, half-life, bioavailability) by non-compartmental analysis, or fit compartmental models.</li><li>Compare doses, sexes, feeding states, formulations and disease models to see what changes exposure.</li></ol>
+      <h3 class="sub">Examples from our publications</h3>
+      <ol class="pub-compact"><li class="pub-c">
+  <span class="pub-c-year">2015</span>
+  <div>
+    <p class="pub-c-title"><a href="https://doi.org/10.1002/bdd.1954" rel="noopener">Gender differences in the hepatic elimination and pharmacokinetics of lobeglitazone in rats</a></p>
+    <p class="pub-c-meta">Biopharmaceutics &amp; Drug Disposition</p>
+  </div>
+</li><li class="pub-c">
+  <span class="pub-c-year">2015</span>
+  <div>
+    <p class="pub-c-title"><a href="https://doi.org/10.1007/s12272-015-0592-9" rel="noopener">Pharmacokinetics of enzalutamide, an anti-prostate cancer drug, in rats</a></p>
+    <p class="pub-c-meta">Archives of Pharmacal Research</p>
+  </div>
+</li><li class="pub-c">
+  <span class="pub-c-year">2011</span>
+  <div>
+    <p class="pub-c-title"><a href="https://doi.org/10.1007/s12272-011-1207-8" rel="noopener">Dose-Independent Pharmacokinetics of a New Peroxisome Proliferator-Activated Receptor-gamma Agonist, <span class="nb">KR-62980</span>, in Sprague-Dawley Rats and ICR Mice</a></p>
+    <p class="pub-c-meta">Archives of Pharmacal Research</p>
+  </div>
+</li><li class="pub-c">
+  <span class="pub-c-year">2006</span>
+  <div>
+    <p class="pub-c-title"><a href="https://doi.org/10.1211/jpp.58.5.0009" rel="noopener">Mechanism for increased bioavailability of tacrine in fasted rats</a></p>
+    <p class="pub-c-meta">Journal of Pharmacy and Pharmacology</p>
+  </div>
+</li><li class="pub-c">
+  <span class="pub-c-year">2005</span>
+  <div>
+    <p class="pub-c-title"><a href="https://doi.org/10.1002/jps.20451" rel="noopener">Comparison of pharmacokinetics of loxoprofen and its active metabolites after an intravenous, intramuscular, and oral administration of loxoprofen in rats: Evidence for extrahepatic metabolism</a></p>
+    <p class="pub-c-meta">Journal of Pharmaceutical Sciences</p>
+  </div>
+</li></ol>
+      <p class="fine"><a href="../research/#pk">Animated figure: pharmacokinetics</a></p>
+    </section>
+    <section id="invitro" aria-labelledby="invitro-h">
+      <h2 id="invitro-h">In vitro pharmacokinetics and metabolism</h2>
+      <p>Experiments outside the animal explain what we see inside it: how quickly and by which routes a drug is metabolized, which metabolites form, how well it crosses membranes, and which enzymes and transporters it meets.</p>
+      <h3 class="sub">Typical workflow</h3>
+      <ol class="howto"><li>Incubate the drug with liver microsomes or other enzyme sources, follow its disappearance and the metabolites that appear by <span class="nb">LC-MS/MS</span>, and identify the metabolites from their fragment ions.</li><li>Measure the kinetics of metabolism and of transport, not only a single time point.</li><li>Measure membrane permeability and brain uptake in vitro and relate them to the concentrations seen in vivo.</li><li>Test uptake and inhibition of drug transporters such as OAT1, OATP1B1 and the organic cation transporters, to judge the risk of drug–drug interactions.</li><li>Profile the physicochemical properties of candidate compounds with validated screening methods.</li><li>Read the in vitro results together with the animal data, as in our work on lobeglitazone metabolites in rat liver microsomes and their formation in vivo.</li></ol>
+      <h3 class="sub">Examples from our publications</h3>
+      <ol class="pub-compact"><li class="pub-c">
+  <span class="pub-c-year">2015</span>
+  <div>
+    <p class="pub-c-title"><a href="https://doi.org/10.1016/j.jpba.2015.07.040" rel="noopener">The identification of lobeglitazone metabolites in rat liver microsomes and the kinetics of the in vivo formation of the major metabolite M1 in rats</a></p>
+    <p class="pub-c-meta">Journal of Pharmaceutical and Biomedical Analysis</p>
+  </div>
+</li><li class="pub-c">
+  <span class="pub-c-year">2015</span>
+  <div>
+    <p class="pub-c-title"><a href="https://doi.org/10.1007/s12272-014-0369-6" rel="noopener">In vitro permeability, pharmacokinetics and brain uptake of <span class="nb">WAY-100635</span> and FCWAY in rats using liquid chromatography electrospray ionization tandem mass spectrometry</a></p>
+    <p class="pub-c-meta">Archives of Pharmacal Research</p>
+  </div>
+</li><li class="pub-c">
+  <span class="pub-c-year">2020</span>
+  <div>
+    <p class="pub-c-title"><a href="https://doi.org/10.5713/ajas.19.0463" rel="noopener">In vitro and in vivo pharmacokinetic characterization of <span class="nb">LMT-28</span> as a novel small molecular interleukin-6 inhibitor</a></p>
+    <p class="pub-c-meta">Asian-Australasian Journal of Animal Sciences</p>
+  </div>
+</li><li class="pub-c">
+  <span class="pub-c-year">2010</span>
+  <div>
+    <p class="pub-c-title"><a href="https://doi.org/10.3109/00498254.2010.520349" rel="noopener">Sitagliptin attenuates metformin-mediated AMPK phosphorylation through inhibition of organic cation transporters</a></p>
+    <p class="pub-c-meta">Xenobiotica</p>
+  </div>
+</li><li class="pub-c">
+  <span class="pub-c-year">2018</span>
+  <div>
+    <p class="pub-c-title"><a href="https://doi.org/10.17480/psk.2018.62.4.274" rel="noopener">Validation and profiling of physicochemical screening methods for candidate optimization in early drug discovery</a></p>
+    <p class="pub-c-meta">Yakhak Hoeji</p>
+  </div>
+</li></ol>
+      <p class="fine"><a href="../research/#metabolism">Animated figure: drug metabolism</a></p>
+    </section>
+    <section id="lcmsms" aria-labelledby="lcmsms-h">
+      <h2 id="lcmsms-h"><span class="nb">LC-MS/MS</span> bioanalysis</h2>
+      <p>Every pharmacokinetic result starts with a reliable concentration. We develop and validate liquid chromatography–tandem mass spectrometry (<span class="nb">LC-MS/MS</span>) assays for drugs and their metabolites in plasma, serum and tissue, and apply them to study samples.</p>
+      <h3 class="sub">Typical workflow</h3>
+      <ol class="howto"><li>Tune the mass spectrometer for the analyte and an internal standard and choose the ion transitions for multiple reaction monitoring.</li><li>Develop the sample preparation and the chromatographic separation so that the run is clean, sensitive and fast.</li><li>Validate the method: selectivity, linearity of the calibration curve, accuracy and precision, recovery, matrix effect and stability.</li><li>Run the study samples together with calibration standards and quality-control samples in every batch.</li><li>Hand the concentrations to the pharmacokinetic analysis. For selected analytes we have also used GC-MS or HPLC-UV.</li></ol>
+      <h3 class="sub">Examples from our publications</h3>
+      <ol class="pub-compact"><li class="pub-c">
+  <span class="pub-c-year">2024</span>
+  <div>
+    <p class="pub-c-title"><a href="https://doi.org/10.1016/j.heliyon.2024.e32927" rel="noopener">Determination of mitomycin C in rat plasma by liquid chromatography-tandem mass spectrometry and its application for determining pharmacokinetics in rat</a></p>
+    <p class="pub-c-meta">Heliyon</p>
+  </div>
+</li><li class="pub-c">
+  <span class="pub-c-year">2018</span>
+  <div>
+    <p class="pub-c-title"><a href="https://doi.org/10.1016/j.jchromb.2018.08.025" rel="noopener">A rapid and sensitive liquid chromatography/tandem mass spectrometry assay for simultaneous quantitation of disopyramide and its major metabolite, mono-isopropyl-disopyramide, in rat plasma and its application to a pharmacokinetic study</a></p>
+    <p class="pub-c-meta">Journal of Chromatography B</p>
+  </div>
+</li><li class="pub-c">
+  <span class="pub-c-year">2014</span>
+  <div>
+    <p class="pub-c-title"><a href="https://doi.org/10.1002/bmc.3127" rel="noopener">Quantitative determination of enzalutamide, an anti-prostate cancer drug, in rat plasma using liquid chromatography-tandem mass spectrometry, and its application to a pharmacokinetic study</a></p>
+    <p class="pub-c-meta">Biomedical Chromatography</p>
+  </div>
+</li><li class="pub-c">
+  <span class="pub-c-year">2013</span>
+  <div>
+    <p class="pub-c-title"><a href="https://doi.org/10.1002/bmc.2869" rel="noopener">Determination of <span class="nb">PF-04620110</span>, a novel inhibitor of diacylglycerol acyltransferase-1, in rat plasma using liquid chromatography-tandem mass spectrometry and its application in pharmacokinetic studies</a></p>
+    <p class="pub-c-meta">Biomedical Chromatography</p>
+  </div>
+</li><li class="pub-c">
+  <span class="pub-c-year">2013</span>
+  <div>
+    <p class="pub-c-title"><a href="https://doi.org/10.1016/j.jchromb.2012.11.014" rel="noopener">Determination of 5-HT receptor antagonists, MEFWAY and MPPF using liquid chromatography electrospray ionization tandem mass spectrometry in rat plasma and brain tissue</a></p>
+    <p class="pub-c-meta">Journal of Chromatography B</p>
+  </div>
+</li></ol>
+      <p class="fine"><a href="../research/#bioanalysis">Animated figure: <span class="nb">LC-MS/MS</span></a></p>
+    </section>
+
+    <section id="nlme" aria-labelledby="nlme-h">
+      <h2 id="nlme-h">How a population PK model is fitted</h2>
+      <p class="note">About the two interactive explainers: they are teaching examples built on simulated patients and public molecule structures, not results from patients or from our experiments. In the deep-learning example the molecules are real public structures and their logP is calculated by software, not measured. The calculations run in your browser; nothing is sent anywhere.</p>
+      <p>People differ in how fast they clear a drug. A nonlinear mixed-effects (NLME) model describes the typical values and the spread between individuals at once. The optimiser starts from poor guesses and improves them step by step; here you can move through every step.</p>
+      <ol class="howto"><li>Choose a sampling scenario: rich, moderate or sparse.</li><li>Press play, or drag the slider through the optimiser&#39;s iterations.</li><li>Watch the fitted curves, the parameter estimates and the objective function change.</li><li>Select a subject to compare its data with its individual fit.</li></ol>
+      <div class="widget-slot" data-lab-widget="nlme-explorer" data-src="../assets/data/nlme-demo.json" data-lang="en">
+        <noscript><p class="widget-fallback">These explainers need JavaScript. Please enable it to use them.</p></noscript>
+      </div>
+      <p class="fine">Simulated data from 30 virtual subjects and a single model. The estimator is a from-scratch implementation of first-order conditional estimation with interaction (FOCE-I). It illustrates the idea and is not a substitute for validated software.</p>
+    </section>
+
+    <section id="deep-learning" aria-labelledby="dl-h">
+      <h2 id="dl-h">How a neural network computes</h2>
+      <p>A neural network is a chain of simple calculations: weighted sums followed by a non-linearity. Training changes the weights to reduce the error. Run the forward pass, inspect the gradients of the backward pass, and follow message passing across a real drug molecule.</p>
+      <div class="widget-slot" data-lab-widget="dl-explorer" data-mlp="../assets/data/dl-mlp.json" data-gnn="../assets/data/dl-gnn.json" data-lang="en">
+        <noscript><p class="widget-fallback">These explainers need JavaScript. Please enable it to use them.</p></noscript>
+      </div>
+      <p class="fine">Teaching examples with small models. The neural network learns a known formula from synthetic patients. The graph network learns to reproduce the Crippen logP that RDKit calculates (a calculated value, not a measurement) from about 4,600 public structures (NCI Open Database, as shipped with RDKit). They show the mechanics and are not validated for prediction.</p>
+    </section>
+
+    <section id="reading" aria-labelledby="reading-h">
+      <h2 id="reading-h">Further reading</h2>
+      <p>General references for the methods above; they are not publications of this laboratory.</p>
+      <ul class="reading">
+        <li>
+          <span class="reading-topic">Nonlinear mixed-effects models (classic)</span>
+          <a class="reading-title" href="https://doi.org/10.2307/2532087" rel="noopener">Nonlinear Mixed Effects Models for Repeated Measures Data</a>
+          <span class="reading-meta">Lindstrom, Bates (1990). <em>Biometrics</em></span>
+        </li>
+        <li>
+          <span class="reading-topic">Population modeling primer</span>
+          <a class="reading-title" href="https://doi.org/10.1038/psp.2013.14" rel="noopener">Basic Concepts in Population Modeling, Simulation, and Model‐Based Drug Development—Part 2: Introduction to Pharmacokinetic Modeling Methods</a>
+          <span class="reading-meta">Mould, Upton (2013). <em>CPT: Pharmacometrics &amp; Systems Pharmacology</em></span>
+        </li>
+        <li>
+          <span class="reading-topic">Estimation methods</span>
+          <a class="reading-title" href="https://doi.org/10.1007/s10928-007-9060-6" rel="noopener">Derivation of various NONMEM estimation methods</a>
+          <span class="reading-meta">Wang (2007). <em>Journal of Pharmacokinetics and Pharmacodynamics</em></span>
+        </li>
+        <li>
+          <span class="reading-topic">SAEM estimation</span>
+          <a class="reading-title" href="https://doi.org/10.1016/j.csda.2004.07.002" rel="noopener">Maximum likelihood estimation in nonlinear mixed effects models</a>
+          <span class="reading-meta">Kuhn, Lavielle (2005). <em>Computational Statistics &amp; Data Analysis</em></span>
+        </li>
+        <li>
+          <span class="reading-topic">Building a PBPK model</span>
+          <a class="reading-title" href="https://doi.org/10.1002/psp4.12134" rel="noopener">Applied Concepts in PBPK Modeling: How to Build a PBPK/PD Model</a>
+          <span class="reading-meta">Kuepfer, Niederalt, Wendl, et al. (2016). <em>CPT: Pharmacometrics &amp; Systems Pharmacology</em></span>
+        </li>
+        <li>
+          <span class="reading-topic">Good modeling practice</span>
+          <a class="reading-title" href="https://doi.org/10.1002/psp4.12049" rel="noopener">Good Practices in Model‐Informed Drug Discovery and Development: Practice, Application, and Documentation</a>
+          <span class="reading-meta">Marshall, Burghaus, et al. (2016). <em>CPT: Pharmacometrics &amp; Systems Pharmacology</em></span>
+        </li>
+        <li>
+          <span class="reading-topic">Backpropagation</span>
+          <a class="reading-title" href="https://doi.org/10.1038/323533a0" rel="noopener">Learning representations by back-propagating errors</a>
+          <span class="reading-meta">Rumelhart, Hinton, Williams (1986). <em>Nature</em></span>
+        </li>
+        <li>
+          <span class="reading-topic">Graph neural networks for molecules</span>
+          <a class="reading-title" href="https://doi.org/10.1021/acs.jcim.9b00237" rel="noopener">Analyzing Learned Molecular Representations for Property Prediction</a>
+          <span class="reading-meta">Yang, Swanson, Jin, et al. (2019). <em>Journal of Chemical Information and Modeling</em></span>
+        </li>
+      </ul>
+    </section>
+  </div>
+</div>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap foot-grid">
+    <div>
+      <p class="foot-name">Laboratory of Pharmaceutical Sciences</p>
+      <address>College of Pharmacy, Kangwon National University<br>Innovation Pharmaceutical Clinical Research Building<br>1 Gangwondaehak-gil, Chuncheon-si, <span class="nb">Gangwon-do 24341</span><br>Republic of Korea
+      </address>
+    </div>
+    <ul><li><a href="../research/">Research</a></li><li><a href="./">Methods</a></li><li><a href="../publications/">Publications</a></li><li><a href="../people/">People</a></li><li><a href="../contact/">Contact</a></li>
+    </ul>
+    <div>
+      <p><a href="mailto:ahnsh@kangwon.ac.kr">ahnsh@kangwon.ac.kr</a></p>
+      <p>033-250-6912</p>
+      <p><a href="https://pharmacy.kangwon.ac.kr/pharmacy/lab/laboratory-of-pharmaceutical-sciences.do" rel="noopener">Department page</a></p>
+    </div>
+  </div>
+  <div class="wrap foot-base">
+    <p>© 2026 Laboratory of Pharmaceutical Sciences, Kangwon National University</p>
+  </div>
+</footer>
+<script src="../assets/js/site.js" defer onerror="document.documentElement.classList.remove('js')"></script>
+<script src="../assets/js/nlme-explorer.js" defer></script>
+<script src="../assets/js/dl-explorer.js" defer></script>
+</body>
+</html>

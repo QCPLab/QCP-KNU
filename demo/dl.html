@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Deep-learning explorer (demo)</title>
+<link rel="stylesheet" href="../assets/css/tokens.css">
+<link rel="stylesheet" href="../assets/css/dl-explorer.css">
+<style>
+  /* demo page only: the widget itself sets no global styles */
+  body{margin:0;padding:16px;font-family:var(--font);background:var(--bg);color:var(--ink-2)}
+  main{max-width:1100px;margin:0 auto}
+  .demo-nav{margin:0 0 16px;font-size:.9rem}
+  .demo-nav a{color:var(--accent-2);margin-right:12px}
+  .visually-hidden{position:absolute!important;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+</style>
+</head>
+<body>
+<main>
+<h1 class="visually-hidden">Deep-learning explorer demo (simulated data; development page)</h1>
+  <div id="dl-mount" data-lab-widget="dl-explorer" data-mlp="../assets/data/dl-mlp.json" data-gnn="../assets/data/dl-gnn.json" data-lang="en"></div>
+</main>
+<script src="../assets/js/dl-explorer.js"></script>
+</body>
+</html>
