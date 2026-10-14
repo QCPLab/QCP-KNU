@@ -17,6 +17,7 @@
 <link rel="alternate" hreflang="x-default" href="../../research/">
 <script>document.documentElement.classList.add('js')</script>
 <script>(function(d){d.classList.add('rm-pending');setTimeout(function(){d.classList.remove('rm-pending')},4000)})(document.documentElement)</script>
+<link rel="preload" href="../../assets/fonts/pretendard/PretendardVariable.subset.91.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="../../assets/fonts/pretendard/pretendard.css">
 <link rel="stylesheet" href="../../assets/css/tokens.css">
 <link rel="stylesheet" href="../../assets/css/site.css">
@@ -67,7 +68,7 @@
 <figure class="rm" data-rm="pk">
   <noscript><p class="rm-fallback">이 그림은 애니메이션이라 JavaScript가 필요합니다. 아래 설명을 참고하십시오.</p></noscript>
   <div class="rm-ph" aria-hidden="true"></div>
-  <figcaption class="rm-cap"><strong>그림 1 | 경구 투여 후의 노출.</strong> A, 투여량 중 투여 부위에 남은 비율, 혈장에 있는 비율, 소실된 비율(사각형 하나가 2.5%). 화살표 굵기는 그 순간의 속도를 나타내며 화살표마다 자체 최댓값을 기준으로 합니다. B, 1차 흡수⁠·⁠1차 소실을 따르는 1구획 모형의 혈장 농도 <span class="nb">C(t) = ka/(ka – ke) · (exp(–ke⁠·⁠t) – exp(–ka⁠·⁠t))</span>를 기준 조건의 최고 농도에 대한 상대값으로 나타냈으며, <span class="nb">ka = 1.0 h⁻¹</span>, <span class="nb">ke = 0.20 h⁻¹</span>입니다(부피는 그대로 두고 청소율을 절반으로 줄이면 0.10 h⁻¹). 투여량과 부피는 1, 흡수는 완전하다고 두었습니다. 모의 자료이며 실험 자료가 아닙니다.</figcaption>
+  <figcaption class="rm-cap"><strong>그림 1 | 경구 투여 후의 노출.</strong> A, 투여량 중 투여 부위에 남은 비율, 혈장에 있는 비율, 소실된 비율(사각형 하나가 2.5%). 화살표 굵기는 그 순간의 속도를 나타내며 화살표마다 자체 최댓값을 기준으로 합니다. B, 1차 흡수⁠·⁠1차 소실을 따르는 1구획 모형의 혈장 농도 <span class="nb">C(t) = ka/(ka – ke) ·</span> <span class="nb">(exp(–ke⁠·⁠t) – exp(–ka⁠·⁠t))</span>를 기준 조건의 최고 농도에 대한 상대값으로 나타냈으며, <span class="nb">ka = 1.0 h⁻¹</span>, <span class="nb">ke = 0.20 h⁻¹</span>입니다(부피는 그대로 두고 청소율을 절반으로 줄이면 0.10 h⁻¹). 투여량과 부피는 1, 흡수는 완전하다고 두었습니다. 모의 자료이며 실험 자료가 아닙니다.</figcaption>
 </figure>
       <dl class="kv">
         <dt>접근 방법</dt>
@@ -141,7 +142,7 @@
 <figure class="rm" data-rm="transport">
   <noscript><p class="rm-fallback">이 그림은 애니메이션이라 JavaScript가 필요합니다. 아래 설명을 참고하십시오.</p></noscript>
   <div class="rm-ph" aria-hidden="true"></div>
-  <figcaption class="rm-cap"><strong>그림 3 | 수송체에서의 경쟁.</strong> A, 투여량 중 혈장에 있는 비율과 간으로 흡수된 비율, 그리고 기질이 차지하거나 저해제가 차지하거나 비어 있는 수송체 결합 부위 열 개(화살표 굵기는 흡수 속도). B, 혈장 농도. 정맥 투여 후 기질은 포화되는 수송체로 흡수되며 <span class="nb">v = Vmax · C / (Km (1 + [I]/Ki) + C)</span>, 최대 속도 <span class="nb">Vmax = 0.5 h⁻¹</span>(상대 단위), 미카엘리스 상수 <span class="nb">Km = 0.8</span>, 초기 농도는 1입니다. 농도가 일정한 저해제가 같은 자리에 경쟁적으로 결합하므로(<span class="nb">[I]/Ki = 3</span>) 기질이 쓸 수 있는 자리가 줄고, 흡수 속도는 Vmax에 기질이 차지한 자리의 비율을 곱한 값과 같습니다. 다른 소실 경로는 없습니다. 모의 자료이며 실험 자료가 아닙니다.</figcaption>
+  <figcaption class="rm-cap"><strong>그림 3 | 수송체에서의 경쟁.</strong> A, 투여량 중 혈장에 있는 비율과 간으로 흡수된 비율, 그리고 기질이 차지하거나 저해제가 차지하거나 비어 있는 수송체 결합 부위 열 개(화살표 굵기는 흡수 속도). B, 혈장 농도. 정맥 투여 후 기질은 포화되는 수송체로 흡수되며 <span class="nb">v = Vmax · C /</span> <span class="nb">(Km (1 + [I]/Ki) + C)</span>, 최대 속도 <span class="nb">Vmax = 0.5 h⁻¹</span>(상대 단위), 미카엘리스 상수 <span class="nb">Km = 0.8</span>, 초기 농도는 1입니다. 농도가 일정한 저해제가 같은 자리에 경쟁적으로 결합하므로(<span class="nb">[I]/Ki = 3</span>) 기질이 쓸 수 있는 자리가 줄고, 흡수 속도는 Vmax에 기질이 차지한 자리의 비율을 곱한 값과 같습니다. 다른 소실 경로는 없습니다. 모의 자료이며 실험 자료가 아닙니다.</figcaption>
 </figure>
       <dl class="kv">
         <dt>접근 방법</dt>

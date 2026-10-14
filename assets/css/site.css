@@ -80,7 +80,7 @@ main.pub-title, .pub-c-title, .lead, .topics h3 { text-wrap: wrap; }
 .single > section:first-child { padding-top: 0; margin-top: 0; border-top: 0; }
 .single h2 { margin-bottom: 14px; }
 .aside { position: static; }
-@media (min-width: 900px) and (min-height: 820px) { .aside { position: sticky; top: 24px; } } /* only when the whole column fits on screen */
+@media (min-width: 900px) and (min-height: 50em) { .aside { position: sticky; top: 24px; } } /* only when the whole column fits on screen */
 .aside .box { border-top: 2px solid var(--ink); padding-top: 12px; margin-bottom: 30px; font-size: .96875rem; }
 .aside h2 { font-size: 1rem; margin-bottom: 8px; }
 .aside p { margin: 0 0 .5em; }

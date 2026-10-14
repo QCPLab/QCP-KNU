@@ -403,9 +403,9 @@
   SCENES.metabolism.result = (opt) => {
     const st = metStats(MET.k1[opt]), ref = metStats(MET.k1[0]);
     return opt
-      ? tr({ en: `Enzyme inhibited: parent half-life ${nf(ref.t12, 1)} → ${U(st.t12, 1, 'h')}; metabolite peak ${nf(100 * ref.peak, 0)} → ${nf(100 * st.peak, 0)} % of the dose, at ${nf(ref.tmax, 1)} → ${U(st.tmax, 1, 'h')}.`,
+      ? tr({ en: `Enzyme inhibited: parent half-life ${nf(ref.t12, 1)} → ${U(st.t12, 1, 'h')}; metabolite peak ${nf(100 * ref.peak, 0)} → ${nf(100 * st.peak, 0)}\u00a0% of the dose, at ${nf(ref.tmax, 1)} → ${U(st.tmax, 1, 'h')}.`,
             ko: `대사효소 저해: 모약물 반감기 ${nf(ref.t12, 1)} → ${U(st.t12, 1, 'h')}, 대사체 최고량은 투여량의 ${nf(100 * ref.peak, 0)} → ${nf(100 * st.peak, 0)}%(최고 시점 ${nf(ref.tmax, 1)} → ${U(st.tmax, 1, 'h')}).` })
-      : tr({ en: `Typical metabolism: parent half-life ${U(st.t12, 1, 'h')}; the metabolite peaks at ${U(st.tmax, 1, 'h')} with ${nf(100 * st.peak, 0)} % of the dose.`,
+      : tr({ en: `Typical metabolism: parent half-life ${U(st.t12, 1, 'h')}; the metabolite peaks at ${U(st.tmax, 1, 'h')} with ${nf(100 * st.peak, 0)}\u00a0% of the dose.`,
             ko: `기준 대사: 모약물 반감기 ${U(st.t12, 1, 'h')}, 대사체는 ${U(st.tmax, 1, 'h')}에 최고(투여량의 ${nf(100 * st.peak, 0)}%).` });
   };
 
@@ -450,9 +450,9 @@
   SCENES.transport.result = (opt) => {
     const sol = tp()[opt], alone = tp()[0];
     return opt
-      ? tr({ en: `With inhibitor: AUC(0–∞) ×${nf(sol.auc / alone.auc, 1)}; the concentration falls to 50 % at ${nf(alone.t50, 1)} → ${U(sol.t50, 1, 'h')}.`,
+      ? tr({ en: `With inhibitor: AUC(0–∞) ×${nf(sol.auc / alone.auc, 1)}; the concentration falls to 50\u00a0% at ${nf(alone.t50, 1)} → ${U(sol.t50, 1, 'h')}.`,
             ko: `저해제 병용: AUC(0–∞) ×${nf(sol.auc / alone.auc, 1)}, 농도가 50%로 떨어지는 시점 ${nf(alone.t50, 1)} → ${U(sol.t50, 1, 'h')}.` })
-      : tr({ en: `Substrate alone: the concentration falls to 50 % at ${U(sol.t50, 1, 'h')}.`, ko: `단독 투여: 농도가 50%로 떨어지는 시점 ${U(sol.t50, 1, 'h')}.` });
+      : tr({ en: `Substrate alone: the concentration falls to 50\u00a0% at ${U(sol.t50, 1, 'h')}.`, ko: `단독 투여: 농도가 50%로 떨어지는 시점 ${U(sol.t50, 1, 'h')}.` });
   };
 
   /* 4 · modelling: fit, then predict */
@@ -481,7 +481,7 @@
       const pl = plotPanel(svg, L.plot, { letter: 'B', ylabel: tr({ en: 'Concentration (mg/L)', ko: '농도 (mg/L)' }), xlabel: tr(UI.tlabel), xd: [0, FIT.T], yd: [0, ymax],
         xticks: xt(W, [0, 12, 24, 36, 48], [0, 24, 48]), yticks: Array.from({ length: Math.floor(ymax) + 1 }, (_, i) => i),
         legend: [{ kind: 'dot', cls: 'dot-b', label: tr({ en: 'Measured (simulated)', ko: '모의 측정값' }) }, { kind: 'line', cls: 'c-a', label: tr({ en: 'Model', ko: '모형' }) },
-          { kind: 'dash', cls: 'c-a', label: tr({ en: 'Prediction: 100 mg every 12 h', ko: '예측: 12시간마다 100 mg' }) }] });
+          { kind: 'dash', cls: 'c-a', label: tr({ en: 'Prediction: 100 mg every 12 h', ko: '예측: 12 h마다 100 mg' }) }] });
       const edge = el('line', { class: 'rm-grid dash', x1: pl.sx(24), x2: pl.sx(24), y1: pl.top, y2: pl.y0 }, pl.dyn);
       const pts = FIT.times.map((t, i) => el('circle', { cx: pl.sx(t), cy: pl.sy(obs[i]), r: 4, class: 'dot-b', 'fill-opacity': 0 }, pl.dyn));
       const cFit = curve(pl.dyn, 'c-a'), cPred = curve(pl.dyn, 'c-a dash'), step = FIT.T / 240;
@@ -511,8 +511,8 @@
     let pk = 0; for (let t = 36; t <= 48; t += 0.05) pk = Math.max(pk, m(t));
     const tro = m(48), ka = nf(Math.exp(thF[0]), 2), cl = nf(Math.exp(thF[1]), 1), v = nf(Math.exp(thF[2]), 0);
     const tru = 'ka ' + nf(FIT.truth[0], 1) + ', CL/F ' + nf(FIT.truth[1], 1) + ', V/F ' + nf(FIT.truth[2], 0);
-    return tr({ en: `Fitted ka ${ka}\u00a0h⁻¹, CL/F ${cl}\u00a0L/h, V/F ${v}\u00a0L (values used to simulate: ${tru}). Predicted between 36 and 48\u00a0h: peak ${nf(pk, 1)}, trough ${U(tro, 1, 'mg/L')}.`,
-                ko: `적합 결과 ka ${ka}\u00a0h⁻¹, CL/F ${cl}\u00a0L/h, V/F ${v}\u00a0L (모의에 쓴 값: ${tru}). 36~48\u00a0h 예측: 최고 농도 ${nf(pk, 1)}, 최저 농도 ${U(tro, 1, 'mg/L')}.` });
+    return tr({ en: `Fitted ka ${ka}\u00a0h⁻¹, CL/F ${cl}\u00a0L/h, V/F ${v}\u00a0L (values used to simulate: ${tru}). Predicted between 36 and 48\u00a0h: peak\u00a0${nf(pk, 1)}, trough\u00a0${U(tro, 1, 'mg/L')}.`,
+                ko: `적합 결과 ka ${ka}\u00a0h⁻¹, CL/F ${cl}\u00a0L/h, V/F ${v}\u00a0L (모의에 쓴 값: ${tru}). 36~48\u00a0h 예측: 최고 농도\u00a0${nf(pk, 1)}, 최저 농도\u00a0${U(tro, 1, 'mg/L')}.` });
   };
 
   /* 5 · bioanalysis */
@@ -777,6 +777,7 @@
   figs.forEach((f) => f.__rm.mount()); // all figures are built at once, so the page height is final before anyone scrolls (jump links stay accurate)
   document.documentElement.classList.remove('rm-pending');
   document.documentElement.classList.add('rm-on');
-  window.addEventListener('beforeprint', () => figs.forEach((f) => { const g = f.__rm; if (g.mounted) { g.pause(); g.seek(g.poster()); } }));
+  window.addEventListener('beforeprint', () => figs.forEach((f) => { const g = f.__rm; if (g.mounted) { g.wasPlaying = g.playing; g.pause(); g.seek(g.poster()); } }));
+  window.addEventListener('afterprint', () => figs.forEach((f) => { const g = f.__rm; if (g.mounted && g.wasPlaying) { g.wasPlaying = false; g.play(); } }));
   window.LabMotion = { selfTest, scenes: SCENES, figs: () => figs.map((f) => f.__rm), models: { pkStats, metStats, tp, fitData, bioData } };
 })();

@@ -69,10 +69,9 @@
   .rm-tab[aria-selected="true"] { background: var(--ink); border-color: var(--ink); color: #fff; }
 }
 @media (max-width: 560px) { .rm-time { width: auto; flex: 1 0 100%; text-align: left; } }
-@media (forced-colors: active) { .rm-opt[aria-pressed="true"], .rm-tab[aria-selected="true"] { outline: 2px solid Highlight; outline-offset: -2px; } .rm-svg { forced-color-adjust: none; background: #fff; } }
-@media print { .rm-bar, .rm-opts, .rm-tabs { display: none; } .rm-panels { display: block; } .rm-panels > [data-rm-panel][data-active] { visibility: visible; } }
+@media (forced-colors: active) { .rm-opt[aria-pressed="true"], .rm-tab[aria-selected="true"] { outline: 2px solid Highlight; outline-offset: -2px; } .rm-tab[aria-selected="true"]:focus-visible, .rm-opt[aria-pressed="true"]:focus-visible { outline: 3px solid Highlight; outline-offset: 2px; } .rm-svg { forced-color-adjust: none; background: #fff; } }
+@media print { .rm-bar, .rm-opts, .rm-tabs, .rm-on .rm-needs-js { display: none; } .rm-panels { display: block; } .rm-panels > [data-rm-panel][data-active] { visibility: visible; } }
 
-.rm-cap .nb { display: inline-block; max-width: 100%; white-space: normal; } /* formulas stay in one piece but may wrap on a very narrow or widely spaced line */
 .rm-needs-js { display: none; }
 .rm-on .rm-needs-js { display: inline; }
 @media (min-width: 900px) and (max-width: 975px) { .rm-tabs { gap: 0; } .rm-tab { padding-inline: 6px; font-size: .9rem; } }
@@ -93,3 +92,5 @@
   .rm-pending .rm[data-rm="modeling"] .rm-ph { height: 410px; }
   .rm-pending .rm[data-rm="bioanalysis"] .rm-ph { height: 385px; }
 }
+@media (max-width: 340px) { .rm-tab { padding-inline: 6px; } }
+@container (max-width: 390px) { .rm-opts > span { flex: 0 0 100%; margin: 0; } }
