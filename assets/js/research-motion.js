@@ -17,7 +17,8 @@
   const seg = (u, a, b) => clamp((u - a) / (b - a), 0, 1);
   const smooth = (x) => x * x * (3 - 2 * x);
   const nf = (x, d) => x.toFixed(d);
-  const pct = (f) => Math.round(clamp(f, 0, 1) * 100) + ' %';
+  const pct = (f) => Math.round(clamp(f, 0, 1) * 100) + (KO ? '%' : '\u00a0%');
+  const U = (x, d, u) => nf(x, d) + '\u00a0' + u;
   const el = (tag, attrs, parent) => {
     const e = document.createElementNS(NS, tag);
     if (attrs) for (const k in attrs) e.setAttribute(k, attrs[k]);
@@ -184,41 +185,46 @@
   };
 
   /* ------------------------------------------------------------------ drawing blocks */
-  const P = 14, SQ = 11, COLS = 10, TW = COLS * P - (P - SQ);
   const FW = 214, GAP = 26;
+  /* wide: 10 x 4 squares in a 214 px column beside the plot; narrow: 20 x 2 squares across the full width above it */
+  const geoFor = (W) => {
+    if (W >= 560) return { cols: 10, rows: 4, P: 14, SQ: 11, TW: 137, W: FW, sw: 11, sh: 11, sp: 14 };
+    const P = clamp(Math.floor(W / 20), 10, 18);
+    return { cols: 20, rows: 2, P, SQ: P - 3, TW: 20 * P - 3, W, sw: 2 * P - 3, sh: 20, sp: 2 * P };
+  };
 
   /* a column of 'trays' of unit squares (each square = 2.5 % of the dose) joined by arrows whose width follows the flux */
-  function flowPanel(g, x, y, letter, blocks) {
+  function flowPanel(g, x, y, letter, blocks, G) {
     text(g, x, y + 14, letter, 'ink letter');
-    let cy = y + 26;
+    let cy = y + 28;
     const out = { fill: {}, sites: {}, val: {}, arrow: {}, H: 0 };
     blocks.forEach((b, i) => {
       b.top = cy;
       text(g, x, cy + 12, b.title, 'ink');
-      const gy = cy + 20;
       if (b.kind === 'fill') {
-        out.val[i] = text(g, x + TW, cy + 12, '', 'val', 'end');
-        const sq = [];
-        for (let k = 0; k < COLS * 4; k++) {
-          const sx = x + (k % COLS) * P, sy = gy + (3 - Math.floor(k / COLS)) * P;
-          el('rect', { x: sx, y: sy, width: SQ, height: SQ, class: 'sq-0' }, g);
-          sq.push(el('rect', { x: sx, y: sy, width: SQ, height: SQ, class: b.cls, 'fill-opacity': 0 }, g));
+        const gy = cy + 20, sq = [];
+        out.val[i] = text(g, x + G.TW, cy + 12, '', 'val', 'end');
+        for (let k = 0; k < G.cols * G.rows; k++) {
+          const sx = x + (k % G.cols) * G.P, sy = gy + (G.rows - 1 - Math.floor(k / G.cols)) * G.P;
+          el('rect', { x: sx, y: sy, width: G.SQ, height: G.SQ, class: 'sq-0' }, g);
+          sq.push(el('rect', { x: sx, y: sy, width: G.SQ, height: G.SQ, class: b.cls, 'fill-opacity': 0 }, g));
         }
         out.fill[i] = { sq, prev: new Array(sq.length).fill(-1) };
-        b.bottom = gy + 3 * P + SQ;
+        b.bottom = gy + (G.rows - 1) * G.P + G.SQ;
       } else {
-        const A = [], B = [];
-        for (let k = 0; k < COLS; k++) {
-          const sx = x + k * P;
-          el('rect', { x: sx + 0.5, y: gy + 0.5, width: SQ - 1, height: SQ - 1, class: 'sq-free' }, g);
-          A.push(el('rect', { x: sx, y: gy, width: SQ, height: SQ, class: 'sq-a', 'fill-opacity': 0 }, g));
-          B.push(el('rect', { x: sx, y: gy, width: SQ, height: SQ, class: 'sq-b', 'fill-opacity': 0 }, g));
+        const gy = cy + 26, A = [], B = [];
+        el('rect', { x: x - 4, y: gy - 5, width: G.TW + 8, height: G.sh + 10, class: 'membrane' }, g);
+        for (let k = 0; k < 10; k++) {
+          const sx = x + k * G.sp + (G.TW - 9 * G.sp - G.sw) / 2;
+          el('rect', { x: sx + 0.5, y: gy + 0.5, width: G.sw - 1, height: G.sh - 1, class: 'sq-free' }, g);
+          A.push(el('rect', { x: sx, y: gy, width: G.sw, height: G.sh, class: 'sq-a', 'fill-opacity': 0 }, g));
+          B.push(el('rect', { x: sx, y: gy, width: G.sw, height: G.sh, class: 'sq-b', 'fill-opacity': 0 }, g));
         }
-        out.sites[i] = { A, B, pa: new Array(COLS).fill(-1), pb: new Array(COLS).fill(-1) };
-        let kx = x, ky = gy + P + 16;
+        out.sites[i] = { A, B, pa: new Array(10).fill(-1), pb: new Array(10).fill(-1) };
+        let kx = x, ky = gy + G.sh + 22;
         b.key.forEach((it) => {
           const lab = text(g, 0, ky, it.label, 'key'), w = lab.getComputedTextLength();
-          if (kx + 14 + w > x + FW && kx > x) { kx = x; ky += 16; }
+          if (kx + 14 + w > x + G.W && kx > x) { kx = x; ky += 17; }
           if (it.cls === 'sq-free') el('rect', { x: kx + 0.5, y: ky - 8.5, width: 8, height: 8, class: 'sq-free' }, g);
           else el('rect', { x: kx, y: ky - 9, width: 9, height: 9, class: it.cls }, g);
           lab.setAttribute('x', kx + 14); lab.setAttribute('y', ky);
@@ -245,10 +251,10 @@
       }
       setText(out.val[i], pct(f));
     };
-    out.setSites = (i, a, b) => {
+    out.setSites = (i, a, b) => { // a, b: numbers of sites held by substrate / inhibitor (whole sites)
       const S = out.sites[i];
-      for (let k = 0; k < COLS; k++) {
-        const oa = Math.round(clamp(a * COLS - k, 0, 1) * 100) / 100, ob = Math.round(clamp(b * COLS - (COLS - 1 - k), 0, 1) * 100) / 100;
+      for (let k = 0; k < 10; k++) {
+        const oa = k < a ? 1 : 0, ob = k >= 10 - b ? 1 : 0;
         if (S.pa[k] !== oa) { S.pa[k] = oa; S.A[k].setAttribute('fill-opacity', oa); }
         if (S.pb[k] !== ob) { S.pb[k] = ob; S.B[k].setAttribute('fill-opacity', ob); }
       }
@@ -322,9 +328,9 @@
       const flow = flowPanel(svg, 0, 0, 'A', [
         { kind: 'fill', title: tr({ en: 'Dose site', ko: '투여 부위' }), cls: 'sq-blue', arrow: tr({ en: 'absorption', ko: '흡수' }) },
         { kind: 'fill', title: tr({ en: 'Plasma', ko: '혈장' }), cls: 'sq-a', arrow: tr({ en: 'elimination', ko: '소실' }) },
-        { kind: 'fill', title: tr({ en: 'Eliminated', ko: '소실됨' }), cls: 'sq-grey' }]);
+        { kind: 'fill', title: tr({ en: 'Eliminated', ko: '소실됨' }), cls: 'sq-grey' }], geoFor(W));
       const L = twoPanels(W, flow.H);
-      const pl = plotPanel(svg, { ...L.plot }, { letter: 'B', ylabel: tr({ en: 'Plasma concentration (relative)', ko: '혈장 농도 (상대값)' }),
+      const pl = plotPanel(svg, L.plot, { letter: 'B', ylabel: tr({ en: 'Plasma concentration (relative)', ko: '혈장 농도 (상대값)' }),
         xlabel: tr(UI.tlabel), xd: [0, PK.T], yd: [0, 1.3], xticks: xt(W, [0, 6, 12, 18, 24], [0, 12, 24]), yticks: [0, 0.5, 1],
         yfmt: (v) => nf(v, 1), legend: opt ? [{ kind: 'dash', cls: 'c-grey', label: tr({ en: 'Reference', ko: '기준' }) }, { kind: 'line', cls: 'c-a', label: tr({ en: 'Clearance halved', ko: '청소율 절반' }) }]
           : [{ kind: 'line', cls: 'c-a', label: tr({ en: 'Reference', ko: '기준' }) }] });
@@ -342,32 +348,37 @@
           cur.setAttribute('x1', pl.sx(t)); cur.setAttribute('x2', pl.sx(t));
           pt.setAttribute('cx', pl.sx(t)); pt.setAttribute('cy', pl.sy(fCur(t)));
         },
-        readout: (u) => tr({ en: 't = ', ko: 't = ' }) + nf(u * PK.T, 1) + ' h',
-        result: () => (opt
-          ? tr({ en: `Clearance halved: AUC ×${nf(st.auc / ref.auc, 1)}, half-life ${nf(ref.t12, 1)} → ${nf(st.t12, 1)} h, peak concentration ×${nf(st.cmax / ref.cmax, 2)}.`,
-                ko: `청소율 절반: AUC ×${nf(st.auc / ref.auc, 1)}, 반감기 ${nf(ref.t12, 1)} → ${nf(st.t12, 1)} h, 최고 농도 ×${nf(st.cmax / ref.cmax, 2)}.` })
-          : tr({ en: `Reference: peak at ${nf(st.tmax, 1)} h, half-life ${nf(st.t12, 1)} h.`, ko: `기준: 최고 농도 시점 ${nf(st.tmax, 1)} h, 반감기 ${nf(st.t12, 1)} h.` }))
+        readout: (u) => tr({ en: 't = ', ko: 't = ' }) + nf(u * PK.T, 1) + ' h'
       };
     }
+  };
+
+  SCENES.pk.poster = 0.35;
+  SCENES.pk.result = (opt) => {
+    const st = pkStats(PK.ke[opt]), ref = pkStats(PK.ke[0]);
+    return opt
+      ? tr({ en: `Clearance halved: AUC(0–∞) ×${nf(st.auc / ref.auc, 1)}, half-life ${nf(ref.t12, 1)} → ${U(st.t12, 1, 'h')}, peak concentration ×${nf(st.cmax / ref.cmax, 2)}.`,
+            ko: `청소율 절반: AUC(0–∞) ×${nf(st.auc / ref.auc, 1)}, 반감기 ${nf(ref.t12, 1)} → ${U(st.t12, 1, 'h')}, 최고 농도 ×${nf(st.cmax / ref.cmax, 2)}.` })
+      : tr({ en: `Reference: peak at ${U(st.tmax, 1, 'h')}, half-life ${U(st.t12, 1, 'h')}.`, ko: `기준: 최고 농도 시점 ${U(st.tmax, 1, 'h')}, 반감기 ${U(st.t12, 1, 'h')}.` });
   };
 
   /* 2 · metabolism */
   SCENES.metabolism = {
     dur: 11,
     alt: { en: 'Animation: share of the dose as parent drug, metabolite and eliminated, beside the amounts over time.', ko: '애니메이션: 투여량이 모약물·대사체·소실로 나뉘는 비율과 시간에 따른 양의 변화.' },
-    opts: [{ en: 'Typical metabolism', ko: '일반 대사' }, { en: 'Enzyme inhibited', ko: '대사효소 억제' }],
+    opts: [{ en: 'Typical metabolism', ko: '기준 대사' }, { en: 'Enzyme inhibited', ko: '대사효소 억제' }],
     build({ svg, W, opt }) {
       const k1 = MET.k1[opt], st = metStats(k1), ref = metStats(MET.k1[0]);
       const flow = flowPanel(svg, 0, 0, 'A', [
         { kind: 'fill', title: tr({ en: 'Parent drug', ko: '모약물' }), cls: 'sq-a', arrow: tr({ en: 'metabolism', ko: '대사' }) },
         { kind: 'fill', title: tr({ en: 'Metabolite', ko: '대사체' }), cls: 'sq-b', arrow: tr({ en: 'elimination', ko: '소실' }) },
-        { kind: 'fill', title: tr({ en: 'Eliminated', ko: '소실됨' }), cls: 'sq-grey' }]);
+        { kind: 'fill', title: tr({ en: 'Eliminated', ko: '소실됨' }), cls: 'sq-grey' }], geoFor(W));
       const L = twoPanels(W, flow.H);
       const legend = [{ kind: 'line', cls: 'c-a', label: tr({ en: 'Parent drug', ko: '모약물' }) }, { kind: 'line', cls: 'c-b', label: tr({ en: 'Metabolite', ko: '대사체' }) }];
-      if (opt) legend.push({ kind: 'dash', cls: 'c-grey', label: tr({ en: 'Typical metabolism', ko: '일반 대사' }) });
-      const pl = plotPanel(svg, { ...L.plot }, { letter: 'B', ylabel: tr({ en: 'Amount (% of dose, molar)', ko: '양 (투여량의 %, 몰 기준)' }),
+      if (opt) legend.push({ kind: 'dash', cls: 'c-grey', label: tr({ en: 'Typical metabolism', ko: '기준 대사' }) });
+      const pl = plotPanel(svg, L.plot, { letter: 'B', ylabel: tr({ en: 'Amount (% of dose, molar)', ko: '양 (투여량의 %, 몰 기준)' }),
         xlabel: tr(UI.tlabel), xd: [0, MET.T], yd: [0, 100], xticks: xt(W, [0, 6, 12, 18, 24], [0, 12, 24]), yticks: [0, 25, 50, 75, 100], legend });
-      const g1 = opt ? curve(pl.dyn, 'c-grey dash') : null, g2 = opt ? curve(pl.dyn, 'c-grey dash') : null;
+      const g1 = opt ? curve(pl.dyn, 'c-a ghost') : null, g2 = opt ? curve(pl.dyn, 'c-b ghost') : null;
       const cP = curve(pl.dyn, 'c-a'), cM = curve(pl.dyn, 'c-b'), cur = vline(pl.dyn, pl.y0, pl.top);
       const step = MET.T / 240, P0 = metP(MET.k1[0]), M0 = metM(MET.k1[0]), P1 = metP(k1), M1 = metM(k1);
       const sc = (f) => (t) => 100 * f(t);
@@ -382,14 +393,19 @@
           cP.setAttribute('d', pathOf(sc(P1), pl.sx, pl.sy, 0, t, step)); cM.setAttribute('d', pathOf(sc(M1), pl.sx, pl.sy, 0, t, step));
           cur.setAttribute('x1', pl.sx(t)); cur.setAttribute('x2', pl.sx(t));
         },
-        readout: (u) => 't = ' + nf(u * MET.T, 1) + ' h',
-        result: () => (opt
-          ? tr({ en: `Enzyme inhibited: parent half-life ${nf(ref.t12, 1)} → ${nf(st.t12, 1)} h; metabolite peak ${nf(100 * ref.peak, 0)} → ${nf(100 * st.peak, 0)} % of dose, at ${nf(ref.tmax, 1)} → ${nf(st.tmax, 1)} h.`,
-                ko: `대사효소 억제: 모약물 반감기 ${nf(ref.t12, 1)} → ${nf(st.t12, 1)} h, 대사체 최고량 투여량의 ${nf(100 * ref.peak, 0)} → ${nf(100 * st.peak, 0)} %(${nf(ref.tmax, 1)} → ${nf(st.tmax, 1)} h 시점).` })
-          : tr({ en: `Typical metabolism: parent half-life ${nf(st.t12, 1)} h; the metabolite peaks at ${nf(st.tmax, 1)} h with ${nf(100 * st.peak, 0)} % of the dose.`,
-                ko: `일반 대사: 모약물 반감기 ${nf(st.t12, 1)} h, 대사체는 ${nf(st.tmax, 1)} h에 투여량의 ${nf(100 * st.peak, 0)} %로 최고.` }))
+        readout: (u) => 't = ' + nf(u * MET.T, 1) + ' h'
       };
     }
+  };
+
+  SCENES.metabolism.poster = 0.35;
+  SCENES.metabolism.result = (opt) => {
+    const st = metStats(MET.k1[opt]), ref = metStats(MET.k1[0]);
+    return opt
+      ? tr({ en: `Enzyme inhibited: parent half-life ${nf(ref.t12, 1)} → ${U(st.t12, 1, 'h')}; metabolite peak ${nf(100 * ref.peak, 0)} → ${nf(100 * st.peak, 0)} % of the dose, at ${nf(ref.tmax, 1)} → ${U(st.tmax, 1, 'h')}.`,
+            ko: `대사효소 억제: 모약물 반감기 ${nf(ref.t12, 1)} → ${U(st.t12, 1, 'h')}, 대사체 최고량 투여량의 ${nf(100 * ref.peak, 0)} → ${nf(100 * st.peak, 0)}%(${nf(ref.tmax, 1)} → ${U(st.tmax, 1, 'h')} 시점).` })
+      : tr({ en: `Typical metabolism: parent half-life ${U(st.t12, 1, 'h')}; the metabolite peaks at ${U(st.tmax, 1, 'h')} with ${nf(100 * st.peak, 0)} % of the dose.`,
+            ko: `기준 대사: 모약물 반감기 ${U(st.t12, 1, 'h')}, 대사체는 ${U(st.tmax, 1, 'h')}에 투여량의 ${nf(100 * st.peak, 0)}%로 최고.` });
   };
 
   /* 3 · transporters and interactions */
@@ -403,9 +419,9 @@
         { kind: 'fill', title: tr({ en: 'Plasma (substrate)', ko: '혈장 (기질)' }), cls: 'sq-a' },
         { kind: 'sites', title: tr({ en: 'Transporter sites', ko: '수송체 결합 부위' }),
           key: [{ cls: 'sq-a', label: tr({ en: 'substrate', ko: '기질' }) }, { cls: 'sq-b', label: tr({ en: 'inhibitor', ko: '저해제' }) }, { cls: 'sq-free', label: tr({ en: 'free', ko: '빈 자리' }) }] },
-        { kind: 'fill', title: tr({ en: 'Taken up (liver)', ko: '간으로 흡수' }), cls: 'sq-blue' }]);
+        { kind: 'fill', title: tr({ en: 'Taken up (liver)', ko: '간으로 흡수' }), cls: 'sq-blue' }], geoFor(W));
       const L = twoPanels(W, flow.H);
-      const pl = plotPanel(svg, { ...L.plot }, { letter: 'B', ylabel: tr({ en: 'Plasma concentration (relative)', ko: '혈장 농도 (상대값)' }),
+      const pl = plotPanel(svg, L.plot, { letter: 'B', ylabel: tr({ en: 'Plasma concentration (relative)', ko: '혈장 농도 (상대값)' }),
         xlabel: tr(UI.tlabel), xd: [0, TP.T], yd: [0, 1], xticks: xt(W, [0, 6, 12, 18, 24], [0, 12, 24]), yticks: [0, 0.5, 1], yfmt: (v) => nf(v, 1),
         legend: opt ? [{ kind: 'dash', cls: 'c-grey', label: tr({ en: 'Substrate alone', ko: '단독 투여' }) }, { kind: 'line', cls: 'c-a', label: tr({ en: 'With inhibitor', ko: '저해제 병용' }) }]
           : [{ kind: 'line', cls: 'c-a', label: tr({ en: 'Substrate alone', ko: '단독 투여' }) }] });
@@ -415,7 +431,8 @@
         H: L.H,
         draw(u) {
           const t = u * TP.T, c = sol.C(t), th = theta(inh, c);
-          flow.setFill(0, c); flow.setFill(2, sol.U(t)); flow.setSites(1, th.s, th.i);
+          const na = Math.round(th.s * 10), nb = Math.min(10 - na, Math.round(th.i * 10));
+          flow.setFill(0, c); flow.setFill(2, sol.U(t)); flow.setSites(1, na, nb);
           const w = 1 + 5 * (th.s / thetaMax);
           flow.setArrow(0, w); flow.setArrow(1, w);
           if (cRef) cRef.setAttribute('d', pathOf(alone.C, pl.sx, pl.sy, 0, t, step));
@@ -423,13 +440,18 @@
           cur.setAttribute('x1', pl.sx(t)); cur.setAttribute('x2', pl.sx(t));
           pt.setAttribute('cx', pl.sx(t)); pt.setAttribute('cy', pl.sy(c));
         },
-        readout: (u) => 't = ' + nf(u * TP.T, 1) + ' h',
-        result: () => (opt
-          ? tr({ en: `With inhibitor: AUC ×${nf(sol.auc / alone.auc, 1)}; the concentration falls to 50 % at ${nf(sol.t50, 1)} h instead of ${nf(alone.t50, 1)} h.`,
-                ko: `저해제 병용: AUC ×${nf(sol.auc / alone.auc, 1)}, 농도가 50 %로 떨어지는 시점 ${nf(alone.t50, 1)} → ${nf(sol.t50, 1)} h.` })
-          : tr({ en: `Substrate alone: the concentration falls to 50 % at ${nf(sol.t50, 1)} h.`, ko: `단독 투여: 농도가 50 %로 떨어지는 시점 ${nf(sol.t50, 1)} h.` }))
+        readout: (u) => 't = ' + nf(u * TP.T, 1) + ' h'
       };
     }
+  };
+
+  SCENES.transport.poster = 0.3;
+  SCENES.transport.result = (opt) => {
+    const sol = tp()[opt], alone = tp()[0];
+    return opt
+      ? tr({ en: `With inhibitor: AUC(0–∞) ×${nf(sol.auc / alone.auc, 1)}; the concentration falls to 50 % at ${nf(alone.t50, 1)} → ${U(sol.t50, 1, 'h')}.`,
+            ko: `저해제 병용: AUC(0–∞) ×${nf(sol.auc / alone.auc, 1)}, 농도가 50%로 떨어지는 시점 ${nf(alone.t50, 1)} → ${U(sol.t50, 1, 'h')}.` })
+      : tr({ en: `Substrate alone: the concentration falls to 50 % at ${U(sol.t50, 1, 'h')}.`, ko: `단독 투여: 농도가 50%로 떨어지는 시점 ${U(sol.t50, 1, 'h')}.` });
   };
 
   /* 4 · modelling: fit, then predict */
@@ -441,23 +463,23 @@
       const { obs, path } = fitData();
       const thAt = (q) => { const x = clamp(q, 0, path.length - 1), i = Math.min(Math.floor(x), path.length - 2), f = x - i; return path[i].th.map((v, j) => v + (path[i + 1].th[j] - v) * f); };
       const ssqAt = (th) => FIT.times.reduce((s, t, i) => s + Math.pow(Math.log(obs[i]) - Math.log(fitConc(th, t)), 2), 0);
-      const x = 0, fl = svg;
+      const x = 0, fl = svg, tw = W >= 560 ? FW - 20 : W;
       text(fl, x, 14, 'A', 'ink letter');
       const phases = [tr({ en: '1 Measure', ko: '1 측정' }), tr({ en: '2 Fit', ko: '2 적합' }), tr({ en: '3 Predict', ko: '3 예측' })];
       const ph = []; let px = x + 24;
       phases.forEach((s, i) => { const e = text(fl, px, 14, s, 'phase'); px += e.getComputedTextLength() + 16; ph.push(e); });
       const rows = [['ka (h⁻¹)', 2], ['CL/F (L/h)', 2], ['V/F (L)', 1], [tr({ en: 'Sum of squares', ko: '잔차제곱합' }), 3]];
-      const vals = rows.map((r, i) => { text(fl, x, 62 + i * 30, r[0], 'ink'); return text(fl, x + FW - 20, 62 + i * 30, '', 'val', 'end'); });
-      el('line', { x1: x, x2: x + FW - 20, y1: 40, y2: 40, class: 'rm-grid' }, fl);
+      const vals = rows.map((r, i) => { text(fl, x, 62 + i * 30, r[0], 'ink'); return text(fl, x + tw, 62 + i * 30, '', 'val', 'end'); });
+      el('line', { x1: x, x2: x + tw, y1: 40, y2: 40, class: 'rm-grid' }, fl);
       const note = text(fl, x, 62 + rows.length * 30 + 4, '', 'key');
       const H0 = 62 + rows.length * 30 + 14;
       const L = W >= 560 ? { plot: { x: FW + GAP - 20, y: 0, w: W - FW - GAP + 20, h: 300 }, H: 300 } : { plot: { x: 0, y: H0 + 18, w: W, h: 280 }, H: H0 + 18 + 280 };
       let top = 0; const mm = fitMulti(path[path.length - 1].th);
       for (let t = 0; t <= FIT.T; t += 0.1) top = Math.max(top, mm(t));
       const ymax = Math.ceil((top * 1.08) / 0.5) * 0.5;
-      const pl = plotPanel(svg, { ...L.plot }, { letter: 'B', ylabel: tr({ en: 'Concentration (mg/L)', ko: '농도 (mg/L)' }), xlabel: tr(UI.tlabel), xd: [0, FIT.T], yd: [0, ymax],
+      const pl = plotPanel(svg, L.plot, { letter: 'B', ylabel: tr({ en: 'Concentration (mg/L)', ko: '농도 (mg/L)' }), xlabel: tr(UI.tlabel), xd: [0, FIT.T], yd: [0, ymax],
         xticks: xt(W, [0, 12, 24, 36, 48], [0, 24, 48]), yticks: Array.from({ length: Math.floor(ymax) + 1 }, (_, i) => i),
-        legend: [{ kind: 'dot', cls: 'dot-b', label: tr({ en: 'Measured (simulated)', ko: '측정값 (모의)' }) }, { kind: 'line', cls: 'c-a', label: tr({ en: 'Model', ko: '모형' }) },
+        legend: [{ kind: 'dot', cls: 'dot-b', label: tr({ en: 'Measured (simulated)', ko: '모의 측정값' }) }, { kind: 'line', cls: 'c-a', label: tr({ en: 'Model', ko: '모형' }) },
           { kind: 'dash', cls: 'c-a', label: tr({ en: 'Prediction: 100 mg every 12 h', ko: '예측: 12시간마다 100 mg' }) }] });
       const edge = el('line', { class: 'rm-grid dash', x1: pl.sx(24), x2: pl.sx(24), y1: pl.top, y2: pl.y0 }, pl.dyn);
       const pts = FIT.times.map((t, i) => el('circle', { cx: pl.sx(t), cy: pl.sy(obs[i]), r: 4, class: 'dot-b', 'fill-opacity': 0 }, pl.dyn));
@@ -476,16 +498,20 @@
           ph.forEach((e, i) => e.setAttribute('class', 'rm-t phase' + (i === active ? ' on' : '')));
           const v = [Math.exp(th[0]), Math.exp(th[1]), Math.exp(th[2]), ssqAt(th)];
           vals.forEach((e, i) => setText(e, nf(v[i], rows[i][1])));
-          setText(note, u < 0.22 ? tr({ en: 'Starting values (a guess)', ko: '초기값 (임의 추정)' }) : u < 0.7 ? tr({ en: 'Levenberg–Marquardt steps', ko: 'Levenberg–Marquardt 반복' }) : tr({ en: 'Fitted values', ko: '적합 결과' }));
+          setText(note, u < 0.22 ? tr({ en: 'Starting values (a guess)', ko: '초기 추정값' }) : u < 0.7 ? tr({ en: 'Levenberg–Marquardt steps', ko: 'Levenberg–Marquardt 반복' }) : tr({ en: 'Fitted values', ko: '적합 결과' }));
         },
-        readout: (u) => (u < 0.22 ? tr({ en: 'Measuring', ko: '측정' }) : u < 0.7 ? tr({ en: 'Fitting', ko: '적합' }) : tr({ en: 'Predicting', ko: '예측' })),
-        result: () => {
-          const m = fitMulti(thF), pk = (() => { let b = 0; for (let t = 36; t <= 48; t += 0.05) b = Math.max(b, m(t)); return b; })(), tr_ = m(48);
-          return tr({ en: `Fitted ka ${nf(Math.exp(thF[0]), 2)} h⁻¹, CL/F ${nf(Math.exp(thF[1]), 1)} L/h, V/F ${nf(Math.exp(thF[2]), 0)} L (values used to simulate: ${nf(FIT.truth[0], 1)}, ${nf(FIT.truth[1], 1)}, ${nf(FIT.truth[2], 0)}). Predicted between 36 and 48 h: peak ${nf(pk, 1)}, trough ${nf(tr_, 1)} mg/L.`,
-                     ko: `적합 결과 ka ${nf(Math.exp(thF[0]), 2)} h⁻¹, CL/F ${nf(Math.exp(thF[1]), 1)} L/h, V/F ${nf(Math.exp(thF[2]), 0)} L (모의에 쓴 값: ${nf(FIT.truth[0], 1)}, ${nf(FIT.truth[1], 1)}, ${nf(FIT.truth[2], 0)}). 36~48 h 예측: 최고 ${nf(pk, 1)}, 최저 ${nf(tr_, 1)} mg/L.` });
-        }
+        readout: (u) => (u < 0.22 ? tr({ en: 'Measuring', ko: '측정' }) : u < 0.7 ? tr({ en: 'Fitting', ko: '적합' }) : tr({ en: 'Predicting', ko: '예측' }))
       };
     }
+  };
+
+  SCENES.modeling.result = () => {
+    const thF = fitData().path.slice(-1)[0].th, m = fitMulti(thF);
+    let pk = 0; for (let t = 36; t <= 48; t += 0.05) pk = Math.max(pk, m(t));
+    const tro = m(48), ka = nf(Math.exp(thF[0]), 2), cl = nf(Math.exp(thF[1]), 1), v = nf(Math.exp(thF[2]), 0);
+    const tru = nf(FIT.truth[0], 1) + ', ' + nf(FIT.truth[1], 1) + ', ' + nf(FIT.truth[2], 0);
+    return tr({ en: `Fitted ka ${ka} h⁻¹, CL/F ${cl} L/h, V/F ${v} L (values used to simulate: ${tru}). Predicted between 36 and 48\u00a0h: peak ${nf(pk, 1)}, trough ${nf(tro, 1)} mg/L.`,
+                ko: `적합 결과 ka ${ka} h⁻¹, CL/F ${cl} L/h, V/F ${v} L (모의에 쓴 값: ${tru}). 36~48\u00a0h 예측: 최고 ${nf(pk, 1)}, 최저 ${nf(tro, 1)} mg/L.` });
   };
 
   /* 5 · bioanalysis */
@@ -502,7 +528,7 @@
         legend: [{ kind: 'line', cls: 'c-a', label: tr({ en: 'Analyte', ko: '분석물질' }) }, { kind: 'line', cls: 'c-ink', label: tr({ en: 'Internal standard (SIL-IS)', ko: '내부표준물질 (SIL-IS)' }) }] });
       const B = plotPanel(svg, boxB, { letter: 'B', ylabel: tr({ en: 'Analyte / IS peak-area ratio', ko: '분석물질/IS 피크 면적비' }), xlabel: tr({ en: 'Concentration (ng/mL)', ko: '농도 (ng/mL)' }),
         xd: [0, 60], yd: [0, 2.5], xticks: [0, 20, 40, 60], yticks: [0, 1, 2],
-        legend: [{ kind: 'dot', cls: 'dot-b', label: tr({ en: 'Calibrators', ko: '검량선 시료' }) }, { kind: 'line', cls: 'c-a', label: tr({ en: 'Weighted fit (1/x²)', ko: '가중 회귀 (1/x²)' }) }, { kind: 'dash', cls: 'c-ink', label: tr({ en: 'Sample', ko: '측정 시료' }) }] });
+        legend: [{ kind: 'dot', cls: 'dot-b', label: tr({ en: 'Calibrators', ko: '검량선 표준시료' }) }, { kind: 'line', cls: 'c-a', label: tr({ en: 'Weighted fit (1/x²)', ko: '가중 회귀 (1/x²)' }) }, { kind: 'dash', cls: 'c-ink', label: tr({ en: 'Sample', ko: '측정 시료' }) }] });
       const aI = el('path', { class: 'area-ink', d: '' }, A.dyn), aA = el('path', { class: 'area-a', d: '' }, A.dyn);
       const tI = curve(A.dyn, 'c-ink thin'), tA = curve(A.dyn, 'c-a thin'), cur = vline(A.dyn, A.y0, A.top);
       const pts = BIO.cal.map((c, i) => el('circle', { cx: B.sx(c), cy: B.sy(D.calRatio[i]), r: 4, class: 'dot-b', 'fill-opacity': 0 }, B.dyn));
@@ -530,37 +556,50 @@
           cal = clamp(seg(u, U1 + 0.02, U2 - 0.1) * BIO.cal.length, 0, BIO.cal.length);
           pts.forEach((p, i) => p.setAttribute('fill-opacity', clamp(cal - i, 0, 1).toFixed(2)));
           const f = seg(u, U2 - 0.1, U2);
-          fit.setAttribute('d', f > 0 ? pathOf((x) => D.a + D.b * x, B.sx, B.sy, 0, 55 * f, 1) : '');
+          fit.setAttribute('d', f > 0 ? pathOf((x) => D.a + D.b * x, B.sx, B.sy, 0, 50 * f, 1) : '');
           const g = seg(u, U2 + 0.02, U2 + 0.14), h = seg(u, U2 + 0.14, U2 + 0.26), xs = B.sx(D.back), ys = B.sy(D.sample);
           hl.setAttribute('x1', B.x0); hl.setAttribute('y1', ys); hl.setAttribute('y2', ys); hl.setAttribute('x2', B.x0 + (xs - B.x0) * g);
           vl.setAttribute('x1', xs); vl.setAttribute('x2', xs); vl.setAttribute('y1', ys); vl.setAttribute('y2', ys + (B.y0 - ys) * h);
           mk.setAttribute('transform', `translate(${xs} ${ys}) rotate(45)`); mk.setAttribute('x', -4.5); mk.setAttribute('y', -4.5); mk.setAttribute('opacity', g >= 1 ? 1 : 0);
         },
         readout: (u) => (u < U1 ? tr({ en: 'Retention time ', ko: '머무름 시간 ' }) + nf(BIO.Tmax * seg(u, 0.02, U1), 2) + ' min'
-          : u < U2 ? tr({ en: 'Calibrators ', ko: '검량선 시료 ' }) + Math.floor(cal + 1e-9) + '/' + BIO.cal.length
-          : u < U2 + 0.26 ? tr({ en: 'Ratio ', ko: '면적비 ' }) + nf(D.sample, 2) : tr({ en: 'Sample ', ko: '시료 ' }) + nf(D.back, 1) + ' ng/mL'),
-        result: () => tr({ en: `Peak-area ratio ${nf(D.sample, 2)} → ${nf(D.back, 1)} ng/mL (simulated sample: ${BIO.conc} ng/mL).`, ko: `피크 면적비 ${nf(D.sample, 2)} → ${nf(D.back, 1)} ng/mL (모의 시료의 설정 농도: ${BIO.conc} ng/mL).` })
+          : u < U2 ? tr({ en: 'Calibrators ', ko: '검량선 표준시료 ' }) + Math.floor(cal + 1e-9) + '/' + BIO.cal.length
+          : u < U2 + 0.26 ? tr({ en: 'Ratio ', ko: '면적비 ' }) + nf(D.sample, 2) : tr({ en: 'Sample ', ko: '시료 ' }) + nf(D.back, 1) + ' ng/mL')
       };
     }
+  };
+
+  SCENES.bioanalysis.result = () => {
+    const D = bioData();
+    return tr({ en: `Peak-area ratio ${nf(D.sample, 2)} → ${U(D.back, 1, 'ng/mL')} (concentration set for the simulated sample: ${BIO.conc}\u00a0ng/mL).`,
+                ko: `피크 면적비 ${nf(D.sample, 2)} → ${U(D.back, 1, 'ng/mL')} (모의 시료의 설정 농도: ${BIO.conc}\u00a0ng/mL).` });
   };
 
   /* ------------------------------------------------------------------ figure: svg stage, controls, timeline */
   class Fig {
     constructor(root) {
       this.root = root; this.id = root.getAttribute('data-rm'); this.sc = SCENES[this.id];
-      this.opt = 0; this.u = 0; this.playing = false; this.auto = false; this.mounted = false; this.w = 0; this.view = null; this.raf = 0; this.last = 0;
+      this.opt = 0; this.u = 0; this.playing = false; this.auto = false; this.mounted = false; this.w = 0; this.view = null; this.raf = 0; this.rz = 0; this.last = 0;
       root.__rm = this;
+    }
+    poster() { return this.sc.poster == null ? 1 : this.sc.poster; }
+    active() { const p = this.root.closest('[data-rm-panel]'); return !p || p.getAttribute('data-active') !== 'false'; }
+    canAuto() { return !this.auto && !reduced() && this.w > 0 && this.active() && !document.hidden; }
+    maybeAuto() { // a scene shown by the visitor (tab) starts when at least 45 % of it is on screen
+      if (!this.mounted || !this.canAuto()) return;
+      const r = this.stage.getBoundingClientRect(), vis = Math.min(r.bottom, window.innerHeight) - Math.max(r.top, 0);
+      if (vis >= 0.45 * r.height) { this.auto = true; this.play(); }
     }
     mount() {
       if (this.mounted || !this.sc) return;
       this.mounted = true;
-      const r = this.root, cap = $('figcaption', r), id = ++uid;
+      const r = this.root, cap = $('figcaption', r);
       this.stage = document.createElement('div'); this.stage.className = 'rm-stage';
       this.svg = el('svg', { class: 'rm-svg', role: 'img', 'aria-label': tr(this.sc.alt), focusable: 'false' });
       this.stage.appendChild(this.svg);
       const bar = document.createElement('div'); bar.className = 'rm-bar';
       this.btn = document.createElement('button'); this.btn.type = 'button'; this.btn.className = 'rm-btn';
-      this.scrub = document.createElement('input'); this.scrub.type = 'range'; this.scrub.min = 0; this.scrub.max = 1000; this.scrub.step = 1; this.scrub.value = 0;
+      this.scrub = document.createElement('input'); this.scrub.type = 'range'; this.scrub.min = 0; this.scrub.max = 1000; this.scrub.step = 20; this.scrub.value = 0;
       this.scrub.className = 'rm-scrub'; this.scrub.setAttribute('aria-label', tr(UI.time));
       this.time = document.createElement('span'); this.time.className = 'rm-time'; this.time.setAttribute('aria-hidden', 'true');
       bar.append(this.btn, this.scrub, this.time);
@@ -574,20 +613,21 @@
         });
         parts.push(o);
       }
-      this.res = document.createElement('p'); this.res.className = 'rm-result'; this.res.id = 'rm-res-' + id; this.res.setAttribute('role', 'status');
+      this.res = document.createElement('p'); this.res.className = 'rm-result'; this.res.setAttribute('role', 'status');
       parts.push(this.res);
       const frag = document.createDocumentFragment(); parts.forEach((p) => frag.appendChild(p));
       r.insertBefore(frag, cap);
-      const fb = $('.rm-fallback', r); if (fb) fb.remove();
       this.btn.addEventListener('click', () => (this.playing ? this.pause() : this.play()));
       this.scrub.addEventListener('input', () => { const v = this.scrub.value / 1000; this.pause(); this.seek(v); });
-      if (window.ResizeObserver) new ResizeObserver(() => this.layout()).observe(this.stage); else window.addEventListener('resize', () => this.layout());
+      const later = () => { cancelAnimationFrame(this.rz); this.rz = requestAnimationFrame(() => this.layout()); }; // not inside the observer callback: the svg height changes
+      if (window.ResizeObserver) new ResizeObserver(later).observe(this.stage); else window.addEventListener('resize', later);
       if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => this.layout(true));
       this.layout(true);
-      if (reduced()) this.seek(1); else this.render();
+      this.setResult();
+      if (reduced()) this.seek(this.poster()); else this.render();
       if ('IntersectionObserver' in window) {
         const io = new IntersectionObserver((es) => es.forEach((e) => {
-          if (e.isIntersecting && !this.auto && !reduced() && this.w) { this.auto = true; this.play(); io.disconnect(); }
+          if (e.isIntersecting && this.canAuto()) { this.auto = true; this.play(); io.disconnect(); }
         }), { threshold: 0.45 });
         io.observe(this.stage);
       }
@@ -598,10 +638,11 @@
       if (w < 200 || (w === this.w && !force)) return;
       this.w = w;
       while (this.svg.firstChild) this.svg.removeChild(this.svg.firstChild);
+      this.svg.setAttribute('class', 'rm-svg' + (w < 560 ? ' narrow' : ''));
       this.view = this.sc.build({ svg: this.svg, W: w, opt: this.opt });
       this.svg.setAttribute('viewBox', `0 0 ${w} ${Math.ceil(this.view.H)}`);
       this.svg.setAttribute('height', Math.ceil(this.view.H));
-      this.res.setAttribute('data-on', 'x'); this.reserveResult();
+      this.reserveResult();
       this.render();
     }
     render() {
@@ -610,25 +651,21 @@
       this.view.draw(u);
       this.scrub.value = Math.round(u * 1000);
       const ro = this.view.readout(u);
-      setText(this.time, ro); this.scrub.setAttribute('aria-valuetext', ro);
+      setText(this.time, ro);
+      if (!this.playing) this.scrub.setAttribute('aria-valuetext', ro);
       const label = this.playing ? tr(UI.pause) : u >= 1 ? tr(UI.replay) : tr(UI.play);
       if (this.btn.textContent !== label) this.btn.textContent = label;
-      this.showResult(u >= 0.9999);
     }
-    showResult(on) {
-      const r = this.res, key = on ? '1' : '';
-      if (r.getAttribute('data-on') === key) return;
-      r.setAttribute('data-on', key);
-      r.textContent = '';
-      if (!on) return;
-      const b = document.createElement('strong'); b.textContent = tr(UI.result) + ': ';
-      r.append(b, this.view.result());
-    }
-    reserveResult() { // keep the space of the final sentence free so the page does not jump when the animation ends
-      const r = this.res, was = r.getAttribute('data-on') === '1';
-      r.style.minHeight = '0'; this.showResult(false); this.showResult(true);
-      r.style.minHeight = r.offsetHeight + 'px';
-      if (!was) this.showResult(false);
+    setResult() { const t = this.sc.result(this.opt); if (this.res.textContent !== t) this.res.textContent = t; }
+    reserveResult() { // reserve the height of the longest result sentence (all scenarios), measured on a hidden copy, so nothing moves when the scenario changes
+      const r = this.res, probe = r.cloneNode(false), n = this.sc.opts ? this.sc.opts.length : 1;
+      probe.removeAttribute('role'); probe.setAttribute('aria-hidden', 'true');
+      probe.style.cssText = 'position:absolute;visibility:hidden;pointer-events:none;margin:0;min-height:0;width:' + r.clientWidth + 'px';
+      r.parentNode.insertBefore(probe, r);
+      let h = 0;
+      for (let i = 0; i < n; i++) { probe.textContent = this.sc.result(i); h = Math.max(h, probe.offsetHeight); }
+      probe.remove();
+      r.style.minHeight = h ? h + 'px' : '';
     }
     play() {
       if (!this.view) return;
@@ -639,9 +676,9 @@
         if (!this.playing) return;
         if (this.last) this.u = Math.min(1, this.u + Math.min(0.1, (now - this.last) / 1000) / this.sc.dur);
         this.last = now;
-        if (this.u >= 1) this.playing = false;
+        if (this.u >= 1) { this.playing = false; this.render(); return; }
         this.render();
-        if (this.playing) this.raf = requestAnimationFrame(tick);
+        this.raf = requestAnimationFrame(tick);
       };
       this.raf = requestAnimationFrame(tick); this.render();
     }
@@ -651,8 +688,9 @@
       if (i === this.opt) return;
       this.opt = i; this.pause();
       this.optBtns.forEach((b, k) => b.setAttribute('aria-pressed', String(k === i)));
-      this.layout(true); this.u = 0;
-      if (reduced()) this.seek(1); else this.play();
+      this.layout(true); this.u = 0; this.setResult();
+      this.auto = true; // the visitor chose this: play it now (or show the poster when motion is reduced)
+      if (reduced()) this.seek(this.poster()); else this.play();
     }
   }
   document.addEventListener('visibilitychange', () => { if (document.hidden) $$('figure.rm').forEach((f) => f.__rm && f.__rm.playing && f.__rm.pause()); });
@@ -675,10 +713,13 @@
       list.appendChild(b); return b;
     });
     host.insertBefore(list, host.firstChild);
+    const stack = document.createElement('div'); stack.className = 'rm-panels'; // all panels share one grid cell: one height, so the page does not move when the scene changes
+    panels.forEach((q) => stack.appendChild(q)); host.appendChild(stack);
     function select(i, focus) {
-      tabs.forEach((b, k) => { b.setAttribute('aria-selected', String(k === i)); b.tabIndex = k === i ? 0 : -1; panels[k].hidden = k !== i; });
+      tabs.forEach((b, k) => { b.setAttribute('aria-selected', String(k === i)); b.tabIndex = k === i ? 0 : -1; panels[k].setAttribute('data-active', String(k === i)); });
       panels.forEach((p, k) => { const f = $('figure.rm', p); if (f && f.__rm && k !== i) f.__rm.pause(); });
-      const f = $('figure.rm', panels[i]); if (f && f.__rm) { f.__rm.mount(); f.__rm.layout(true); }
+      const f = $('figure.rm', panels[i]);
+      if (f && f.__rm) { f.__rm.mount(); f.__rm.maybeAuto(); }
       if (focus) tabs[i].focus();
     }
     select(0, false);

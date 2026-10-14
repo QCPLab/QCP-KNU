@@ -3,7 +3,7 @@ phone: "033-250-6912"
 phone_intl: "+82-33-250-6912"
 address:
   en: ["College of Pharmacy, Kangwon National University", "Innovation Pharmaceutical Clinical Research Building", "1 Gangwondaehak-gil, Chuncheon-si, Gangwon-do 24341", "Republic of Korea"]
-  ko: ["(24341) 강원특별자치도 춘천시 강원대학길 1 (효자동)", "강원대학교 약학대학 혁신제약임상연구동"]
+  ko: ["(24341) 강원특별자치도 춘천시 강원대학길 1 (효자동)", "강원대학교 약학대학 혁신제약임상연구동"]
 rooms:
   - {label: {en: "Professor's office", ko: "교수실"}, value: {en: "Room 210", ko: "210호"}}
   - {label: {en: "Laboratory", ko: "실험실"}, value: {en: "Room 209", ko: "209호"}}
