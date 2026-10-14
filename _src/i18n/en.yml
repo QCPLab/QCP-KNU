@@ -26,8 +26,6 @@ hero:
 home:
   motion_title: Our research in motion
   motion_sub: "Five short simulations show the questions we work on. They run on model equations and simulated numbers, not laboratory data. Press Play or drag the time slider."
-  work_title: How we work
-  work_sub: Six steps connect a research question to the use of a medicine.
   methods_title: Interactive methods
   methods_sub: Two explainers with simulated patients and public molecule structures.
   nlme_text: 'Watch a population pharmacokinetic model being estimated, iteration by iteration: the fit to the data, the parameters and the objective function.'

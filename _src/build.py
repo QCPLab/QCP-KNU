@@ -65,7 +65,7 @@ def initials(name: str) -> str:
 
 def build() -> dict[str, str]:
     d = {p.stem: load_yaml(p) for p in (SRC / "data").glob("*.yml")}
-    site, contact, research, process = d["site"], d["contact"], d["research"], d["process"]
+    site, contact, research = d["site"], d["contact"], d["research"]
     pubs = d["publications"]["publications"]
     for p in pubs:  # uniform keys for the strict templates
         for k in ("authors", "volume", "issue", "page", "doi"):
@@ -177,7 +177,7 @@ def build() -> dict[str, str]:
             t=t, t_en=T["en"], t_ko=T["ko"], lang=lang, other_lang=other, page=page,
             affil=([site["identity"]["college"][lang], site["identity"]["university"][lang]] if lang == "en"
                    else [site["identity"]["university"][lang], site["identity"]["college"][lang]]), title=title, description=desc,
-            site=site, contact=contact, research=research, process=process, nav=site["nav"],
+            site=site, contact=contact, research=research, nav=site["nav"],
             year=site["copyright_year"], pi_re=PI_RE,
             pi={"name": pi["name_ko"] if lang == "ko" and pi.get("name_ko") else pi["name_en"],
                 "initials": pi["name_ko"][0] if lang == "ko" and pi.get("name_ko") else pi["initials"], "photo": pi.get("photo")},

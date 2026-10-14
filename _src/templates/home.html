@@ -38,16 +38,6 @@
         </ul>
       </section>
 
-      <section aria-labelledby="work-h">
-        <h2 id="work-h">{{ t.home.work_title }}</h2>
-        <p>{{ t.home.work_sub }}</p>
-        <ol class="steps">
-        {%- for s in process.steps %}
-          <li><span><strong>{{ L(s.title) }}.</strong> {{ L(s.text) }}</span></li>
-        {%- endfor %}
-        </ol>
-      </section>
-
       <section aria-labelledby="methods-h">
         <h2 id="methods-h">{{ t.home.methods_title }}</h2>
         <p>{{ t.home.methods_sub }}</p>
