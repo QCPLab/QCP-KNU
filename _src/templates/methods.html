@@ -1,55 +1,51 @@
 {% extends "base.html" %}
 {% from "_macros.html" import icon with context %}
 {% block main %}
-<section class="page-head">
-  <div class="wrap">
-    <p class="eyebrow">{{ t.nav.methods }}</p>
+<div class="wrap">
+  <div class="page-title">
     <h1>{{ t.methods.title }}</h1>
     <p class="lead">{{ t.methods.lead }}</p>
-    <p class="honesty">{{ icon('book') }}<span>{{ t.methods.honesty }}</span></p>
+    <p class="note">{{ t.methods.honesty }}</p>
     <ul class="jump">
       <li><a href="#nlme">{{ t.methods.nlme_title }}</a></li>
       <li><a href="#deep-learning">{{ t.methods.dl_title }}</a></li>
       <li><a href="#reading">{{ t.methods.reading_title }}</a></li>
     </ul>
   </div>
-</section>
 
-<section class="section tight" id="nlme" aria-labelledby="nlme-h">
-  <div class="wrap">
-    <header class="sec-head"><p class="eyebrow">{{ t.methods.nlme_eyebrow }}</p><h2 id="nlme-h">{{ t.methods.nlme_title }}</h2><p class="sec-sub">{{ t.methods.nlme_lead }}</p></header>
-    <div class="howto">
-      <ol>{% for s in t.methods.nlme_steps %}<li>{{ s }}</li>{% endfor %}</ol>
-    </div>
-    <div class="widget-slot" data-lab-widget="nlme-explorer" data-src="{{ asset('data/nlme-demo.json') }}" data-lang="{{ lang }}">
-      <noscript><p class="widget-fallback">{{ t.methods.needs_js }}</p></noscript>
-    </div>
-    <p class="fine">{{ t.methods.nlme_limits }}</p>
-  </div>
-</section>
+  <div class="single">
+    <section id="nlme" aria-labelledby="nlme-h">
+      <h2 id="nlme-h">{{ t.methods.nlme_title }}</h2>
+      <p>{{ t.methods.nlme_lead }}</p>
+      <ol class="howto">{% for s in t.methods.nlme_steps %}<li>{{ s }}</li>{% endfor %}</ol>
+      <div class="widget-slot" data-lab-widget="nlme-explorer" data-src="{{ asset('data/nlme-demo.json') }}" data-lang="{{ lang }}">
+        <noscript><p class="widget-fallback">{{ t.methods.needs_js }}</p></noscript>
+      </div>
+      <p class="fine">{{ t.methods.nlme_limits }}</p>
+    </section>
 
-<section class="section soft tight" id="deep-learning" aria-labelledby="dl-h">
-  <div class="wrap">
-    <header class="sec-head"><p class="eyebrow">{{ t.methods.dl_eyebrow }}</p><h2 id="dl-h">{{ t.methods.dl_title }}</h2><p class="sec-sub">{{ t.methods.dl_lead }}</p></header>
-    <div class="widget-slot" data-lab-widget="dl-explorer" data-mlp="{{ asset('data/dl-mlp.json') }}" data-gnn="{{ asset('data/dl-gnn.json') }}" data-lang="{{ lang }}">
-      <noscript><p class="widget-fallback">{{ t.methods.needs_js }}</p></noscript>
-    </div>
-    <p class="fine">{{ t.methods.dl_limits }}</p>
-  </div>
-</section>
+    <section id="deep-learning" aria-labelledby="dl-h">
+      <h2 id="dl-h">{{ t.methods.dl_title }}</h2>
+      <p>{{ t.methods.dl_lead }}</p>
+      <div class="widget-slot" data-lab-widget="dl-explorer" data-mlp="{{ asset('data/dl-mlp.json') }}" data-gnn="{{ asset('data/dl-gnn.json') }}" data-lang="{{ lang }}">
+        <noscript><p class="widget-fallback">{{ t.methods.needs_js }}</p></noscript>
+      </div>
+      <p class="fine">{{ t.methods.dl_limits }}</p>
+    </section>
 
-<section class="section" id="reading" aria-labelledby="reading-h">
-  <div class="wrap">
-    <header class="sec-head"><p class="eyebrow">{{ t.methods.reading_eyebrow }}</p><h2 id="reading-h">{{ t.methods.reading_title }}</h2><p class="sec-sub">{{ t.methods.reading_sub }}</p></header>
-    <ul class="reading">
-    {%- for r in refs %}
-      <li>
-        <span class="reading-topic">{{ r.topic }}</span>
-        <a class="reading-title"{% if lang == 'ko' %} lang="en"{% endif %} href="https://doi.org/{{ r.doi }}" rel="noopener" target="_blank">{{ r.title }}</a>
-        <span class="reading-meta"{% if lang == 'ko' %} lang="en"{% endif %}>{{ r.authors }} ({{ r.year }}). <em>{{ r.journal }}</em></span>
-      </li>
-    {%- endfor %}
-    </ul>
+    <section id="reading" aria-labelledby="reading-h">
+      <h2 id="reading-h">{{ t.methods.reading_title }}</h2>
+      <p>{{ t.methods.reading_sub }}</p>
+      <ul class="reading">
+      {%- for r in refs %}
+        <li>
+          <span class="reading-topic">{{ r.topic }}</span>
+          <a class="reading-title"{% if lang == 'ko' %} lang="en"{% endif %} href="https://doi.org/{{ r.doi }}" rel="noopener">{{ r.title }}</a>
+          <span class="reading-meta"{% if lang == 'ko' %} lang="en"{% endif %}>{{ r.authors }} ({{ r.year }}). <em>{{ r.journal }}</em></span>
+        </li>
+      {%- endfor %}
+      </ul>
+    </section>
   </div>
-</section>
+</div>
 {% endblock %}

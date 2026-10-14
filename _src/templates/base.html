@@ -37,23 +37,23 @@
 <a class="skip-link" href="#main">{{ t.skip }}</a>
 <header class="site-header" data-header>
   <div class="wrap bar">
-    <a class="brand" href="{{ url('home') }}" {% if page.id == 'home' %}aria-current="page"{% endif %}>
+    <a class="brand" href="{{ url('home') }}">
       <span class="brand-name">{{ L(site.identity.name) }}</span>
       <span class="brand-sub">{{ affil[0] }} · {{ affil[1] }}</span>
     </a>
-    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="primary-nav" aria-label="{{ t.nav.menu }}" data-menu>
-      <span class="when-closed">{{ icon('menu') }}</span><span class="when-open">{{ icon('close') }}</span>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="primary-nav" data-menu>
+      <span class="when-closed">{{ icon('menu') }}</span><span class="when-open">{{ icon('close') }}</span><span>{{ t.nav.menu }}</span>
     </button>
     <nav id="primary-nav" class="nav" aria-label="{{ t.nav.main }}">
       <ul>
       {%- for item in nav %}
         <li><a href="{{ url(item) }}" {% if page.id == item %}aria-current="page"{% endif %}>{{ t.nav[item] }}</a></li>
       {%- endfor %}
+      {%- if page.id != '404' %}
+        <li class="lang"><a href="{{ url(page.id, other_lang) }}" hreflang="{{ other_lang }}" lang="{{ other_lang }}" aria-label="{{ t.lang_switch.aria }}">{{ t.lang_switch.label }}</a></li>
+      {%- endif %}
       </ul>
     </nav>
-    {%- if page.id != '404' %}
-    <a class="lang-switch" href="{{ url(page.id, other_lang) }}" hreflang="{{ other_lang }}" lang="{{ other_lang }}" aria-label="{{ t.lang_switch.aria }}">{{ icon('globe') }}<span>{{ t.lang_switch.label }}</span></a>
-    {%- endif %}
   </div>
 </header>
 
@@ -63,25 +63,23 @@
 
 <footer class="site-footer">
   <div class="wrap foot-grid">
-    <div class="foot-id">
+    <div>
       <p class="foot-name">{{ L(site.identity.name) }}</p>
       <address>
         {%- for line in L(contact.address) %}{{ line }}{% if not loop.last %}<br>{% endif %}{% endfor %}
       </address>
     </div>
-    <nav class="foot-nav" aria-label="{{ t.nav.footer }}">
-      <ul>
+    <ul>
       {%- for item in nav %}<li><a href="{{ url(item) }}">{{ t.nav[item] }}</a></li>{% endfor %}
-      </ul>
-    </nav>
-    <div class="foot-contact">
-      <p><a href="mailto:{{ contact.pi_email }}">{{ icon('mail') }}{{ contact.pi_email }}</a></p>
-      <p><a href="tel:{{ contact.phone_intl|replace('-', '') }}">{{ icon('phone') }}{{ contact.phone }}</a></p>
-      <p><a href="{{ site.official_page }}" rel="noopener" target="_blank">{{ icon('external') }}{{ t.footer.official }}</a></p>
+    </ul>
+    <div>
+      <p><a href="mailto:{{ contact.pi_email }}">{{ contact.pi_email }}</a></p>
+      <p>{{ contact.phone }}</p>
+      <p><a href="{{ site.official_page }}" rel="noopener">{{ t.footer.official }}</a></p>
     </div>
   </div>
   <div class="wrap foot-base">
-    <p>© {{ year }} {{ L(site.identity.name) }}, {{ L(site.identity.university) }}. {{ t.footer.synthetic }}</p>
+    <p>© {{ year }} {{ L(site.identity.name) }}, {{ L(site.identity.university) }}</p>
   </div>
 </footer>
 <script src="{{ asset('js/site.js') }}" defer onerror="document.documentElement.classList.remove('js')"></script>

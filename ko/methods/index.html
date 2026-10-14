@@ -26,12 +26,12 @@
 <a class="skip-link" href="#main">본문으로 건너뛰기</a>
 <header class="site-header" data-header>
   <div class="wrap bar">
-    <a class="brand" href="../" >
+    <a class="brand" href="../">
       <span class="brand-name">약제학 연구실</span>
       <span class="brand-sub">강원대학교 · 약학대학</span>
     </a>
-    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="primary-nav" aria-label="메뉴" data-menu>
-      <span class="when-closed"><svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 7h16M4 12h16M4 17h16"/></svg></span><span class="when-open"><svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6L6 18"/></svg></span>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="primary-nav" data-menu>
+      <span class="when-closed"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 7h16M4 12h16M4 17h16"/></svg></span><span class="when-open"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6L6 18"/></svg></span><span>메뉴</span>
     </button>
     <nav id="primary-nav" class="nav" aria-label="주 메뉴">
       <ul>
@@ -40,120 +40,114 @@
         <li><a href="../publications/" >논문</a></li>
         <li><a href="../people/" >구성원</a></li>
         <li><a href="../contact/" >연락처</a></li>
+        <li class="lang"><a href="../../methods/" hreflang="en" lang="en" aria-label="View in English (영어로 보기)">English</a></li>
       </ul>
     </nav>
-    <a class="lang-switch" href="../../methods/" hreflang="en" lang="en" aria-label="View in English (영어로 보기)"><svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.5 2.5 3.5 5.4 3.5 8.5s-1 6-3.5 8.5c-2.5-2.5-3.5-5.4-3.5-8.5s1-6 3.5-8.5z"/></svg><span>English</span></a>
   </div>
 </header>
 
 <main id="main" tabindex="-1">
 
-<section class="page-head">
-  <div class="wrap">
-    <p class="eyebrow">방법론</p>
+<div class="wrap">
+  <div class="page-title">
     <h1>직접 체험하는 방법론</h1>
     <p class="lead">가상 환자와 공개 분자 구조로 만든 두 가지 설명 도구로, 현대 약리학에서 쓰는 방법이 어떻게 작동하는지 직접 조작해 보며 확인할 수 있습니다. 환자나 우리 실험의 결과가 아닌 교육용 예제입니다.</p>
-    <p class="honesty"><svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 4.5h9a3 3 0 0 1 3 3V20H8a3 3 0 0 1-3-3z"/><path d="M17 8h2v12h-2M8.5 9h5M8.5 12.5h5"/></svg><span>환자는 모두 가상(시뮬레이션)⁠입니다. 두 번째 딥러닝 예제의 분자는 실제 공개 구조이며, logP는 측정값이 아니라 소프트웨어가 계산한 값입니다. 계산은 사용자의 브라우저에서 이루어지며, 어떤 정보도 외부로 전송되지 않습니다.</span></p>
+    <p class="note">환자는 모두 가상(시뮬레이션)⁠입니다. 두 번째 딥러닝 예제의 분자는 실제 공개 구조이며, logP는 측정값이 아니라 소프트웨어가 계산한 값입니다. 계산은 사용자의 브라우저에서 이루어지며, 어떤 정보도 외부로 전송되지 않습니다.</p>
     <ul class="jump">
       <li><a href="#nlme">집단 약동학 모형은 어떻게 추정되는가</a></li>
       <li><a href="#deep-learning">신경망은 어떻게 계산하는가</a></li>
       <li><a href="#reading">더 읽을거리</a></li>
     </ul>
   </div>
-</section>
 
-<section class="section tight" id="nlme" aria-labelledby="nlme-h">
-  <div class="wrap">
-    <header class="sec-head"><p class="eyebrow">집단 약동학</p><h2 id="nlme-h">집단 약동학 모형은 어떻게 추정되는가</h2><p class="sec-sub">약물이 제거되는 속도는 사람마다 다릅니다. 비선형 혼합효과(NLME) 모형은 전형적인 값과 개체 간 변동을 한꺼번에 기술합니다. 추정 알고리즘은 부정확한 초깃값에서 출발해 한 단계씩 값을 개선하며, 여기서는 그 모든 단계를 직접 넘겨 볼 수 있습니다.</p></header>
-    <div class="howto">
-      <ol><li>채혈 시나리오(풍부·중간·희소)⁠를 고릅니다.</li><li>재생 버튼을 누르거나 슬라이더를 끌어 반복 단계를 이동합니다.</li><li>적합 곡선, 모수 추정치, 목적함수가 어떻게 변하는지 확인합니다.</li><li>개체를 선택해 그 개체의 자료와 개체별 적합을 비교합니다.</li></ol>
-    </div>
-    <div class="widget-slot" data-lab-widget="nlme-explorer" data-src="../../assets/data/nlme-demo.json" data-lang="ko">
-      <noscript><p class="widget-fallback">이 설명 도구를 사용하려면 JavaScript가 필요합니다. JavaScript를 켜 주십시오.</p></noscript>
-    </div>
-    <p class="fine">가상 개체 30명의 시뮬레이션 자료와 하나의 모형만 사용합니다. 추정기는 상호작용을 고려한 1차 조건부 추정법(FOCE-I)⁠을 처음부터 직접 구현한 것으로, 원리를 보여 주기 위한 것이며 검증된 상용·공개 소프트웨어를 대체하지 않습니다.</p>
-  </div>
-</section>
+  <div class="single">
+    <section id="nlme" aria-labelledby="nlme-h">
+      <h2 id="nlme-h">집단 약동학 모형은 어떻게 추정되는가</h2>
+      <p>약물이 제거되는 속도는 사람마다 다릅니다. 비선형 혼합효과(NLME) 모형은 전형적인 값과 개체 간 변동을 한꺼번에 기술합니다. 추정 알고리즘은 부정확한 초깃값에서 출발해 한 단계씩 값을 개선하며, 여기서는 그 모든 단계를 직접 넘겨 볼 수 있습니다.</p>
+      <ol class="howto"><li>채혈 시나리오(풍부·중간·희소)⁠를 고릅니다.</li><li>재생 버튼을 누르거나 슬라이더를 끌어 반복 단계를 이동합니다.</li><li>적합 곡선, 모수 추정치, 목적함수가 어떻게 변하는지 확인합니다.</li><li>개체를 선택해 그 개체의 자료와 개체별 적합을 비교합니다.</li></ol>
+      <div class="widget-slot" data-lab-widget="nlme-explorer" data-src="../../assets/data/nlme-demo.json" data-lang="ko">
+        <noscript><p class="widget-fallback">이 설명 도구를 사용하려면 JavaScript가 필요합니다. JavaScript를 켜 주십시오.</p></noscript>
+      </div>
+      <p class="fine">가상 개체 30명의 시뮬레이션 자료와 하나의 모형만 사용합니다. 추정기는 상호작용을 고려한 1차 조건부 추정법(FOCE-I)⁠을 처음부터 직접 구현한 것으로, 원리를 보여 주기 위한 것이며 검증된 상용·공개 소프트웨어를 대체하지 않습니다.</p>
+    </section>
 
-<section class="section soft tight" id="deep-learning" aria-labelledby="dl-h">
-  <div class="wrap">
-    <header class="sec-head"><p class="eyebrow">딥러닝</p><h2 id="dl-h">신경망은 어떻게 계산하는가</h2><p class="sec-sub">신경망은 가중합과 비선형 함수라는 단순한 계산의 연쇄입니다. 학습은 오차가 줄어들도록 가중치를 바꾸는 과정입니다. 순전파를 실행하고, 역전파의 기울기를 확인하고, 실제 약물 분자 위에서 메시지 전달이 일어나는 모습을 따라가 보십시오.</p></header>
-    <div class="widget-slot" data-lab-widget="dl-explorer" data-mlp="../../assets/data/dl-mlp.json" data-gnn="../../assets/data/dl-gnn.json" data-lang="ko">
-      <noscript><p class="widget-fallback">이 설명 도구를 사용하려면 JavaScript가 필요합니다. JavaScript를 켜 주십시오.</p></noscript>
-    </div>
-    <p class="fine">소형 모형을 쓴 교육용 예제입니다. 신경망은 가상 환자 자료에서 이미 알려진 공식을 학습하고, 그래프 신경망은 공개 구조 약 4,600개(RDKit에 포함된 NCI Open Database)⁠를 이용해 RDKit이 계산한 Crippen logP(측정값이 아님)⁠를 재현하도록 학습합니다. 작동 원리를 보여 줄 뿐 예측 용도로 검증된 모형이 아닙니다.</p>
-  </div>
-</section>
+    <section id="deep-learning" aria-labelledby="dl-h">
+      <h2 id="dl-h">신경망은 어떻게 계산하는가</h2>
+      <p>신경망은 가중합과 비선형 함수라는 단순한 계산의 연쇄입니다. 학습은 오차가 줄어들도록 가중치를 바꾸는 과정입니다. 순전파를 실행하고, 역전파의 기울기를 확인하고, 실제 약물 분자 위에서 메시지 전달이 일어나는 모습을 따라가 보십시오.</p>
+      <div class="widget-slot" data-lab-widget="dl-explorer" data-mlp="../../assets/data/dl-mlp.json" data-gnn="../../assets/data/dl-gnn.json" data-lang="ko">
+        <noscript><p class="widget-fallback">이 설명 도구를 사용하려면 JavaScript가 필요합니다. JavaScript를 켜 주십시오.</p></noscript>
+      </div>
+      <p class="fine">소형 모형을 쓴 교육용 예제입니다. 신경망은 가상 환자 자료에서 이미 알려진 공식을 학습하고, 그래프 신경망은 공개 구조 약 4,600개(RDKit에 포함된 NCI Open Database)⁠를 이용해 RDKit이 계산한 Crippen logP(측정값이 아님)⁠를 재현하도록 학습합니다. 작동 원리를 보여 줄 뿐 예측 용도로 검증된 모형이 아닙니다.</p>
+    </section>
 
-<section class="section" id="reading" aria-labelledby="reading-h">
-  <div class="wrap">
-    <header class="sec-head"><p class="eyebrow">더 읽을거리</p><h2 id="reading-h">더 읽을거리</h2><p class="sec-sub">위에서 다룬 방법에 대한 일반 참고문헌이며, 이 연구실의 논문이 아닙니다. 모든 DOI는 2026년 10월 13일에 Crossref로 확인했습니다.</p></header>
-    <ul class="reading">
-      <li>
-        <span class="reading-topic">비선형 혼합효과 모형(고전)</span>
-        <a class="reading-title" lang="en" href="https://doi.org/10.2307/2532087" rel="noopener" target="_blank">Nonlinear Mixed Effects Models for Repeated Measures Data</a>
-        <span class="reading-meta" lang="en">Lindstrom, Bates (1990). <em>Biometrics</em></span>
-      </li>
-      <li>
-        <span class="reading-topic">집단 모델링 입문</span>
-        <a class="reading-title" lang="en" href="https://doi.org/10.1038/psp.2013.14" rel="noopener" target="_blank">Basic Concepts in Population Modeling, Simulation, and Model‐Based Drug Development—Part 2: Introduction to Pharmacokinetic Modeling Methods</a>
-        <span class="reading-meta" lang="en">Mould, Upton (2013). <em>CPT: Pharmacometrics &amp; Systems Pharmacology</em></span>
-      </li>
-      <li>
-        <span class="reading-topic">추정법 유도(NONMEM)</span>
-        <a class="reading-title" lang="en" href="https://doi.org/10.1007/s10928-007-9060-6" rel="noopener" target="_blank">Derivation of various NONMEM estimation methods</a>
-        <span class="reading-meta" lang="en">Wang (2007). <em>Journal of Pharmacokinetics and Pharmacodynamics</em></span>
-      </li>
-      <li>
-        <span class="reading-topic">SAEM 추정</span>
-        <a class="reading-title" lang="en" href="https://doi.org/10.1016/j.csda.2004.07.002" rel="noopener" target="_blank">Maximum likelihood estimation in nonlinear mixed effects models</a>
-        <span class="reading-meta" lang="en">Kuhn, Lavielle (2005). <em>Computational Statistics &amp; Data Analysis</em></span>
-      </li>
-      <li>
-        <span class="reading-topic">PBPK 모형 구축 절차</span>
-        <a class="reading-title" lang="en" href="https://doi.org/10.1002/psp4.12134" rel="noopener" target="_blank">Applied Concepts in PBPK Modeling: How to Build a PBPK/PD Model</a>
-        <span class="reading-meta" lang="en">Kuepfer, Niederalt, Wendl, et al. (2016). <em>CPT: Pharmacometrics &amp; Systems Pharmacology</em></span>
-      </li>
-      <li>
-        <span class="reading-topic">모형 기반 신약개발 모범 사례</span>
-        <a class="reading-title" lang="en" href="https://doi.org/10.1002/psp4.12049" rel="noopener" target="_blank">Good Practices in Model‐Informed Drug Discovery and Development: Practice, Application, and Documentation</a>
-        <span class="reading-meta" lang="en">Marshall, Burghaus, et al. (2016). <em>CPT: Pharmacometrics &amp; Systems Pharmacology</em></span>
-      </li>
-      <li>
-        <span class="reading-topic">역전파</span>
-        <a class="reading-title" lang="en" href="https://doi.org/10.1038/323533a0" rel="noopener" target="_blank">Learning representations by back-propagating errors</a>
-        <span class="reading-meta" lang="en">Rumelhart, Hinton, Williams (1986). <em>Nature</em></span>
-      </li>
-      <li>
-        <span class="reading-topic">분자 그래프 신경망</span>
-        <a class="reading-title" lang="en" href="https://doi.org/10.1021/acs.jcim.9b00237" rel="noopener" target="_blank">Analyzing Learned Molecular Representations for Property Prediction</a>
-        <span class="reading-meta" lang="en">Yang, Swanson, Jin, et al. (2019). <em>Journal of Chemical Information and Modeling</em></span>
-      </li>
-    </ul>
+    <section id="reading" aria-labelledby="reading-h">
+      <h2 id="reading-h">더 읽을거리</h2>
+      <p>위에서 다룬 방법에 대한 일반 참고문헌이며, 이 연구실의 논문이 아닙니다. 모든 DOI는 2026년 10월 13일에 Crossref로 확인했습니다.</p>
+      <ul class="reading">
+        <li>
+          <span class="reading-topic">비선형 혼합효과 모형(고전)</span>
+          <a class="reading-title" lang="en" href="https://doi.org/10.2307/2532087" rel="noopener">Nonlinear Mixed Effects Models for Repeated Measures Data</a>
+          <span class="reading-meta" lang="en">Lindstrom, Bates (1990). <em>Biometrics</em></span>
+        </li>
+        <li>
+          <span class="reading-topic">집단 모델링 입문</span>
+          <a class="reading-title" lang="en" href="https://doi.org/10.1038/psp.2013.14" rel="noopener">Basic Concepts in Population Modeling, Simulation, and Model‐Based Drug Development—Part 2: Introduction to Pharmacokinetic Modeling Methods</a>
+          <span class="reading-meta" lang="en">Mould, Upton (2013). <em>CPT: Pharmacometrics &amp; Systems Pharmacology</em></span>
+        </li>
+        <li>
+          <span class="reading-topic">추정법 유도(NONMEM)</span>
+          <a class="reading-title" lang="en" href="https://doi.org/10.1007/s10928-007-9060-6" rel="noopener">Derivation of various NONMEM estimation methods</a>
+          <span class="reading-meta" lang="en">Wang (2007). <em>Journal of Pharmacokinetics and Pharmacodynamics</em></span>
+        </li>
+        <li>
+          <span class="reading-topic">SAEM 추정</span>
+          <a class="reading-title" lang="en" href="https://doi.org/10.1016/j.csda.2004.07.002" rel="noopener">Maximum likelihood estimation in nonlinear mixed effects models</a>
+          <span class="reading-meta" lang="en">Kuhn, Lavielle (2005). <em>Computational Statistics &amp; Data Analysis</em></span>
+        </li>
+        <li>
+          <span class="reading-topic">PBPK 모형 구축 절차</span>
+          <a class="reading-title" lang="en" href="https://doi.org/10.1002/psp4.12134" rel="noopener">Applied Concepts in PBPK Modeling: How to Build a PBPK/PD Model</a>
+          <span class="reading-meta" lang="en">Kuepfer, Niederalt, Wendl, et al. (2016). <em>CPT: Pharmacometrics &amp; Systems Pharmacology</em></span>
+        </li>
+        <li>
+          <span class="reading-topic">모형 기반 신약개발 모범 사례</span>
+          <a class="reading-title" lang="en" href="https://doi.org/10.1002/psp4.12049" rel="noopener">Good Practices in Model‐Informed Drug Discovery and Development: Practice, Application, and Documentation</a>
+          <span class="reading-meta" lang="en">Marshall, Burghaus, et al. (2016). <em>CPT: Pharmacometrics &amp; Systems Pharmacology</em></span>
+        </li>
+        <li>
+          <span class="reading-topic">역전파</span>
+          <a class="reading-title" lang="en" href="https://doi.org/10.1038/323533a0" rel="noopener">Learning representations by back-propagating errors</a>
+          <span class="reading-meta" lang="en">Rumelhart, Hinton, Williams (1986). <em>Nature</em></span>
+        </li>
+        <li>
+          <span class="reading-topic">분자 그래프 신경망</span>
+          <a class="reading-title" lang="en" href="https://doi.org/10.1021/acs.jcim.9b00237" rel="noopener">Analyzing Learned Molecular Representations for Property Prediction</a>
+          <span class="reading-meta" lang="en">Yang, Swanson, Jin, et al. (2019). <em>Journal of Chemical Information and Modeling</em></span>
+        </li>
+      </ul>
+    </section>
   </div>
-</section>
+</div>
 
 </main>
 
 <footer class="site-footer">
   <div class="wrap foot-grid">
-    <div class="foot-id">
+    <div>
       <p class="foot-name">약제학 연구실</p>
       <address>(24341) 강원특별자치도 춘천시 강원대학길 1 (효자동)<br>강원대학교 약학대학 혁신제약임상연구동
       </address>
     </div>
-    <nav class="foot-nav" aria-label="하단 메뉴">
-      <ul><li><a href="../research/">연구</a></li><li><a href="./">방법론</a></li><li><a href="../publications/">논문</a></li><li><a href="../people/">구성원</a></li><li><a href="../contact/">연락처</a></li>
-      </ul>
-    </nav>
-    <div class="foot-contact">
-      <p><a href="mailto:ahnsh@kangwon.ac.kr"><svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3.5" y="5.5" width="17" height="13" rx="2"/><path d="M4 7.5l8 6 8-6"/></svg>ahnsh@kangwon.ac.kr</a></p>
-      <p><a href="tel:+82332506912"><svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6.5 3.5h3l1.5 4-2 1.3a10 10 0 0 0 5.2 5.2l1.3-2 4 1.5v3a2 2 0 0 1-2.2 2A14.5 14.5 0 0 1 4.5 5.7 2 2 0 0 1 6.5 3.5z"/></svg>033-250-6912</a></p>
-      <p><a href="https://pharmacy.kangwon.ac.kr/pharmacy/lab/laboratory-of-pharmaceutical-sciences.do" rel="noopener" target="_blank"><svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 6H6.5A1.5 1.5 0 0 0 5 7.5v10A1.5 1.5 0 0 0 6.5 19h10a1.5 1.5 0 0 0 1.5-1.5V15M13 5h6v6M19 5l-8 8"/></svg>학과 페이지</a></p>
+    <ul><li><a href="../research/">연구</a></li><li><a href="./">방법론</a></li><li><a href="../publications/">논문</a></li><li><a href="../people/">구성원</a></li><li><a href="../contact/">연락처</a></li>
+    </ul>
+    <div>
+      <p><a href="mailto:ahnsh@kangwon.ac.kr">ahnsh@kangwon.ac.kr</a></p>
+      <p>033-250-6912</p>
+      <p><a href="https://pharmacy.kangwon.ac.kr/pharmacy/lab/laboratory-of-pharmaceutical-sciences.do" rel="noopener">학과 페이지</a></p>
     </div>
   </div>
   <div class="wrap foot-base">
-    <p>© 2026 약제학 연구실, 강원대학교. 그림과 설명 도구는 시뮬레이션 자료를 사용하며, 분자 예제는 공개 구조도 사용합니다.</p>
+    <p>© 2026 약제학 연구실, 강원대학교</p>
   </div>
 </footer>
 <script src="../../assets/js/site.js" defer onerror="document.documentElement.classList.remove('js')"></script>

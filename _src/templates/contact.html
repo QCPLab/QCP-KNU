@@ -1,46 +1,38 @@
 {% extends "base.html" %}
 {% from "_macros.html" import icon with context %}
 {% block main %}
-<section class="page-head">
-  <div class="wrap">
-    <p class="eyebrow">{{ t.nav.contact }}</p>
+<div class="wrap">
+  <div class="page-title">
     <h1>{{ t.contact.title }}</h1>
     <p class="lead">{{ t.contact.lead }}</p>
   </div>
-</section>
 
-<section class="section tight">
-  <div class="wrap contact-grid">
-    <div class="card contact-card" data-reveal>
-      <h2>{{ t.contact.reach }}</h2>
-      <ul class="contact-list">
-        <li>{{ icon('mail') }}<div><span class="k">{{ t.contact.email }}</span><a href="mailto:{{ contact.pi_email }}">{{ contact.pi_email }}</a></div></li>
-        <li>{{ icon('phone') }}<div><span class="k">{{ t.contact.phone }}</span><a href="tel:{{ contact.phone_intl|replace('-', '') }}">{{ contact.phone }}</a> <span class="alt">({{ contact.phone_intl }})</span></div></li>
-        <li>{{ icon('pin') }}<div><span class="k">{{ t.contact.address }}</span>
-          <address>{% for line in L(contact.address) %}{{ line }}{% if not loop.last %}<br>{% endif %}{% endfor %}</address>
-          <ul class="rooms">{% for r in contact.rooms %}<li><b>{{ L(r.label) }}</b> {{ L(r.value) }}</li>{% endfor %}</ul>
-        </div></li>
-      </ul>
-      <div class="contact-actions">
-        <a class="btn btn-primary" href="mailto:{{ contact.pi_email }}">{{ icon('mail') }}{{ t.contact.write }}</a>
-        <a class="btn btn-ghost" href="{{ contact.map_url }}" rel="noopener" target="_blank">{{ icon('pin') }}{{ t.contact.map }}</a>
-      </div>
-      <p class="fine">{{ t.contact.map_note }}</p>
-    </div>
+  <div class="single">
+    <section aria-labelledby="reach-h">
+      <h2 id="reach-h">{{ t.contact.reach }}</h2>
+      <dl class="contact-dl">
+        <dt>{{ t.contact.email }}</dt><dd><a href="mailto:{{ contact.pi_email }}">{{ contact.pi_email }}</a></dd>
+        <dt>{{ t.contact.phone }}</dt><dd>{{ contact.phone }} <span class="muted">({{ contact.phone_intl }})</span></dd>
+        <dt>{{ t.contact.address }}</dt><dd><address>{% for line in L(contact.address) %}{{ line }}{% if not loop.last %}<br>{% endif %}{% endfor %}</address></dd>
+        {%- for r in contact.rooms %}
+        <dt>{{ L(r.label) }}</dt><dd>{{ L(r.value) }}</dd>
+        {%- endfor %}
+      </dl>
+      <p style="margin-top:16px"><a href="{{ contact.map_url }}" rel="noopener" target="_blank">{{ t.contact.map }}</a> <span class="muted">· {{ t.contact.map_note }}</span></p>
+    </section>
 
-    <div class="card join-card" data-reveal>
-      <h2>{{ L(contact.join.title) }}</h2>
+    <section aria-labelledby="join-h">
+      <h2 id="join-h">{{ L(contact.join.title) }}</h2>
       <p>{{ L(contact.join.text) }}</p>
-      <ul class="checklist">{% for s in t.contact.join_list %}<li>{{ s }}</li>{% endfor %}</ul>
-      <a class="btn btn-light" href="mailto:{{ contact.pi_email }}?subject={{ t.contact.join_subject|urlencode }}">{{ icon('mail') }}{{ t.contact.inquire }}</a>
-    </div>
-  </div>
-</section>
+      <p><a href="mailto:{{ contact.pi_email }}?subject={{ t.contact.join_subject|urlencode }}">{{ t.contact.inquire }}</a></p>
+    </section>
 
-{%- if support_items %}
-<section class="section soft tight"><div class="wrap">
-  <h2>{{ t.contact.support }}</h2>
-  <ul class="support">{% for s in support_items %}<li>{{ L(s) }}</li>{% endfor %}</ul>
-</div></section>
-{%- endif %}
+    {%- if support_items %}
+    <section aria-labelledby="support-h">
+      <h2 id="support-h">{{ t.contact.support }}</h2>
+      <ul class="support">{% for s in support_items %}<li>{{ L(s) }}</li>{% endfor %}</ul>
+    </section>
+    {%- endif %}
+  </div>
+</div>
 {% endblock %}

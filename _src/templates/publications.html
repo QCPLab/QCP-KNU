@@ -1,22 +1,16 @@
 {% extends "base.html" %}
 {% from "_macros.html" import icon, pub with context %}
 {% block main %}
-<section class="page-head">
-  <div class="wrap head-split">
-    <div>
-      <p class="eyebrow">{{ t.nav.publications }}</p>
-      <h1>{{ t.pubs.title }}</h1>
-      <p class="lead">{{ t.pubs.lead.format(n=n_pubs, a=year_min, b=year_max) }}</p>
-    </div>
-    <div class="hist-card">{{ fig_hist|safe }}</div>
+<div class="wrap">
+  <div class="page-title">
+    <h1>{{ t.pubs.title }}</h1>
+    <p class="lead">{{ t.pubs.lead.format(n=n_pubs, a=year_min, b=year_max) }}</p>
   </div>
-</section>
 
-<section class="section tight">
-  <div class="wrap">
+  <div class="single">
     <form class="pub-tools" role="search" aria-label="{{ t.pubs.filter }}" data-pub-filter data-one="{{ t.pubs.n_one }}" data-many="{{ t.pubs.n_items }}">
       <label class="field grow"><span class="visually-hidden">{{ t.pubs.search_label }}</span>
-        {{ icon('search') }}<input type="search" name="q" placeholder="{{ t.pubs.search_ph }}" autocomplete="off" spellcheck="false">
+        <input type="search" name="q" placeholder="{{ t.pubs.search_ph }}" autocomplete="off" spellcheck="false">
       </label>
       <label class="field"><span class="field-label">{{ t.pubs.year }}</span>
         <select name="year">
@@ -24,7 +18,7 @@
           {%- for y in years_desc %}<option value="{{ y }}">{{ y }}</option>{% endfor %}
         </select>
       </label>
-      <button class="btn btn-ghost small" type="reset" data-reset>{{ t.pubs.reset }}</button>
+      <button class="btn" type="reset" data-reset>{{ t.pubs.reset }}</button>
       <p class="count" role="status" aria-live="polite" data-count data-tpl="{{ t.pubs.showing }}" data-none="{{ t.pubs.none }}">{{ t.pubs.showing.format(shown=n_pubs, total=n_pubs) }}</p>
     </form>
 
@@ -39,5 +33,5 @@
     <p class="empty" data-empty hidden>{{ t.pubs.none }}</p>
     <p class="fine">{{ t.pubs.note }}</p>
   </div>
-</section>
+</div>
 {% endblock %}

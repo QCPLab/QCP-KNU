@@ -22,7 +22,7 @@ from jinja2 import Environment, FileSystemLoader, StrictUndefined, pass_context,
 SRC = pathlib.Path(__file__).resolve().parent
 ROOT = SRC.parent
 sys.path.insert(0, str(SRC))
-import figures  # noqa: E402
+import figures  # noqa: E402  (favicon only)
 
 PAGES = ["home", "research", "methods", "publications", "people", "contact"]
 PATHS = {"home": "", "research": "research/", "methods": "methods/", "publications": "publications/",
@@ -49,7 +49,7 @@ TRUNCATED_AUTHORS = {"10.1002/psp4.12049", "10.1002/psp4.12134", "10.1021/acs.jc
 
 # (the tokens are assembled from pieces so that a repository-wide grep for them stays clean)
 FORBIDDEN = ["q" + "cp", r"\bTODO\b", r"\blorem ipsum\b", r"준비 중", "google" + "tagmanager", r"fonts\." + "googleapis", "AnSH" + r"\.png", "bk" + "21", r"\[PI"]
-ALLOWED_EMAIL_DOMAIN = "@kangwon.ac.kr"  # any other e-mail address in a generated page fails the build
+ALLOWED_EMAILS: set[str] = set()  # filled by build(): the contact address plus the members whose address is meant to be shown
 
 
 def load_yaml(path):
@@ -96,6 +96,9 @@ def build() -> dict[str, str]:
         m["initials"] = initials(m["name_en"])
         m["email_public"] = m["email"] if (show_mail and m.get("show_email") and m.get("email")) else None
     pi = next(m for m in members if m["role"] == "pi")
+    ALLOWED_EMAILS.clear()
+    ALLOWED_EMAILS.add(contact["pi_email"].lower())
+    ALLOWED_EMAILS.update(m["email_public"].lower() for m in members if m["email_public"])
     groups = [{"role": r, "members": [m for m in members if m["role"] == r]} for r in ("phd", "ms", "alumni")]
     groups = [g for g in groups if g["members"]]
     n_phd = sum(1 for m in members if m["role"] == "phd")
@@ -175,14 +178,11 @@ def build() -> dict[str, str]:
             site=site, contact=contact, research=research, process=process, nav=site["nav"],
             year=site["copyright_year"], pi_re=PI_RE,
             pi={"name": pi["name_ko"] if lang == "ko" and pi.get("name_ko") else pi["name_en"],
-                "initials": pi["name_ko"][0] if lang == "ko" and pi.get("name_ko") else pi["initials"]},
+                "initials": pi["name_ko"][0] if lang == "ko" and pi.get("name_ko") else pi["initials"], "photo": pi.get("photo")},
             n_pubs=len(pubs), year_min=min(counts), year_max=max(counts),
             n_students=n_phd + n_ms, n_phd=n_phd, n_ms=n_ms,
             recent=recent, area_pubs=area_pubs, bio_pubs=bio_pubs, by_year=by_year, years_desc=years_desc,
             groups=groups, refs=[{**r, "topic": r["topic"][lang]} for r in refs], support_items=support_items, news_items=news_items,
-            fig_hero=figures.hero(t), fig_hist=figures.histogram(t, counts),
-            fig_steps={s["id"]: figures.STEP_FIGS[s["id"]](t) for s in process["steps"]},
-            teaser_nlme=figures.teaser_nlme(), teaser_dl=figures.teaser_dl(),
         )
         text = env.get_template(f"{page_id}.html").render(**ctx)
         text = nobreak(text)
@@ -231,8 +231,8 @@ def guard(out: dict[str, str]) -> list[str]:
             if m:
                 problems.append(f"{path}: forbidden pattern /{pat}/ at ...{body[max(0, m.start() - 30):m.end() + 30]!r}")
         for m in re.finditer(r"[\w.+-]+@[\w-]+(?:\.[\w-]+)+", body):
-            if not m.group(0).lower().endswith(ALLOWED_EMAIL_DOMAIN):
-                problems.append(f"{path}: e-mail address outside {ALLOWED_EMAIL_DOMAIN}: {m.group(0)}")
+            if m.group(0).lower() not in ALLOWED_EMAILS:
+                problems.append(f"{path}: e-mail address not listed in the data files: {m.group(0)}")
         if "{{" in text or "{%" in text:
             problems.append(f"{path}: unrendered template syntax")
     return problems

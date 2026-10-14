@@ -13,7 +13,7 @@ A static, bilingual (English `/`, Korean `/ko/`) site for GitHub Pages. No track
 |---|---|
 | `index.html`, `research/`, `methods/`, `publications/`, `people/`, `contact/`, `404.html` | generated English pages |
 | `ko/…` | generated Korean pages |
-| `_src/` | source: `data/*.yml` (content), `i18n/{en,ko}.yml` (interface text), `templates/` (Jinja2), `figures.py`, `build.py` |
+| `_src/` | source: `data/*.yml` (content), `i18n/{en,ko}.yml` (interface text), `templates/` (Jinja2), `build.py` |
 | `assets/` | `css/`, `js/`, `fonts/pretendard/` (self-hosted, SIL OFL 1.1), `data/` (explainer data), `img/` |
 | `tools/` | `make_publications.py`, `nlme_demo.py`, `dl_demo.py` (regenerate explainer data), `qa_check.py` (QA) |
 | `docs/` | notes for the two interactive explainers and the reading list |
@@ -55,11 +55,11 @@ python tools/qa_check.py --root . --widths 320 360 390 768 1440 --axe node_modul
 ```
 
 Checks horizontal overflow, console errors, external requests (all blocked and reported), missing local files, text clipped
-inside the workflow schematics and, with `--axe`, accessibility violations (`npm i axe-core` provides the script).
+inside figure schematics (none at present) and, with `--axe`, accessibility violations (`npm i axe-core` provides the script).
 
 ## Data and honesty
 
-Figures and interactive explainers use **simulated data** (the graph-network example also uses public molecule structures and
+The interactive explainers use **simulated data** (the graph-network example also uses public molecule structures and
 RDKit-calculated logP); both are labelled on the page. Publication records were compared with Crossref (2026-10-13);
 entries that could not be verified are shown without DOI link or author line. The explainers' generators
 (`tools/nlme_demo.py`, `tools/dl_demo.py`) are seeded and log their library versions.

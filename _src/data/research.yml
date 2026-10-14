@@ -8,7 +8,6 @@ official_items:
 
 areas:
   - id: pk
-    icon: curve
     official: [1, 4]
     title: {en: "Pharmacokinetics of drug candidates and disease models", ko: "신약후보물질·질병모델 약동학"}
     text:
@@ -20,7 +19,6 @@ areas:
     tags: {en: ["In vivo PK", "Disease models", "Drug candidates"], ko: ["in vivo 약동학", "질병모델", "신약후보물질"]}
     papers: [45, 48, 58, 67]
   - id: metabolism
-    icon: molecule
     official: [2]
     title: {en: "Drug metabolism and metabolites", ko: "약물대사·대사체"}
     text:
@@ -32,7 +30,6 @@ areas:
     tags: {en: ["Metabolite profiling", "In vitro metabolism", "LC-MS/MS"], ko: ["대사체 분석", "in vitro 대사", "LC-MS/MS"]}
     papers: [47, 53, 46]
   - id: transport
-    icon: transporter
     official: [3, 5]
     title: {en: "Drug transporters and drug–drug interactions", ko: "약물수송체·약물상호작용"}
     text:
@@ -44,7 +41,6 @@ areas:
     tags: {en: ["Transporters", "Enzymes", "Interaction risk"], ko: ["수송체", "대사효소", "상호작용 위험"]}
     papers: [14, 57]
   - id: modeling
-    icon: model
     official: []
     # TODO(PI): confirm which modeling activities the lab actually performs (Q7). Titles show 4 of 69 papers on modeling/in silico; a PBPK review (#68).
     title: {en: "Quantitative modeling and prediction", ko: "정량적 모델링·예측"}

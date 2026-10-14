@@ -9,7 +9,10 @@ identity:
   approved_by_pi: false
 indexable: false          # false -> <meta name="robots" content="noindex">, no sitemap/canonical. Set true only after PI approval.
 site_url: ""              # TODO(PI): fill in when the final address is decided; used for canonical + sitemap only if indexable
-show_member_emails: false # personal e-mails never shown unless this AND the member's show_email are true (D8)
+show_member_emails: true  # the lab lists member e-mails on purpose; per member: show_email in members.yml
 official_page: "https://pharmacy.kangwon.ac.kr/pharmacy/lab/laboratory-of-pharmaceutical-sciences.do"
 copyright_year: 2026
+# Optional photo under the title on the home page: put the file in assets/img/ and set both fields (alt text is required).
+hero_image: null
+hero_image_alt: null
 nav: [research, methods, publications, people, contact]
