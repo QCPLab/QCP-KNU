@@ -1,6 +1,172 @@
-# Corrections confirmed by the lab / PI, keyed by the paper number on the old list ("no").
-# Any of: title, journal, year, authors (list of "Given Family"), volume, issue, page, doi.
+# Corrections keyed by the paper number on the old list ("no"): each value was checked against PubMed (PMID in docs/PUBLICATIONS_AUDIT.md)
+# or against the publisher / lab list as stated there. Any of: title, journal, year, authors (list of "Given Family"), volume, issue, page, doi.
 # A record listed here is shown in full with its DOI link and no longer appears in publications_todo.md.
-# Example:
-#   41: {doi: "10.18632/oncotarget.2507", authors: ["..."], volume: "5", issue: "20", page: "10180-10197"}
-overrides: {}
+overrides:
+  67:
+    authors:
+    - Sung-Hoon Ahn
+  61:
+    journal: 'Materials Science and Engineering: C'
+  57:
+    title: Recent Trends in Drug Interaction Studies based on Drug Metabolism
+    authors:
+    - Jinseok Lee
+    - Sung-Hoon Ahn
+    volume: '64'
+    issue: '1'
+    page: 8-20
+    doi: 10.17480/psk.2020.64.1.8
+  55:
+    title: Validation and Profiling of Physicochemical Properties Screening Methods for New Drug Candidate Optimization in Early Drug discovery
+  54:
+    journal: Biochimica et Biophysica Acta (BBA) - Molecular and Cell Biology of Lipids
+  42:
+    title: Pharmacokinetic Characterization of KR-67500, a Novel 11β-HSD1 Inhibitor
+    issue: '2'
+  41:
+    authors:
+    - Ju-Hee Lee
+    - Kyung Hee Jung
+    - Hyunseung Lee
+    - Mi Kwon Son
+    - Sun-Mi Yun
+    - Sung-Hoon Ahn
+    - Kyeong-Ryoon Lee
+    - Soyoung Lee
+    - Donghee Kim
+    - Sungwoo Hong
+    - Soon-Sun Hong
+    volume: '5'
+    issue: '20'
+    page: 10180-10197
+    doi: 10.18632/oncotarget.2507
+  39:
+    doi: 10.1093/chromsci/bmt050
+    issue: '5'
+  35:
+    title: Determination of a novel diacylglycerol acyltransferase 1 inhibitor, 2-[4-(4-{5-[2-phenyl-5-(trifluoromethyl) oxazole-4-carboxamido]-1H-benzo[d]imidazol-2-yl} phenyl) cyclohexyl] acetic acid (KR-69232) in rat plasma using liquid chromatography-tandem mass spectrometry and its application to a pharmacokinetic study
+    authors:
+    - Hyewon Seo
+    - Sung Heum Choi
+    - Eun-Young Kwak
+    - Zhi Zheng
+    - Hyun Jung Kwak
+    - Jin Hee Ahn
+    - Yong-Moon Lee
+    - Sung-Hoon Ahn
+    - Myung Ae Bae
+    - Jin Sook Song
+    volume: '28'
+    issue: '3'
+    page: 324-326
+    doi: 10.1002/bmc.3053
+  32:
+    authors:
+    - Kyeong-Ryoon Lee
+    - Jin Sook Song
+    - Yoon-Jee Chae
+    - Min-Sun Kim
+    - Sung-Heum Choi
+    - Dong Ju Jeon
+    - Myung Ae Bae
+    - Sung-Hoon Ahn
+  27:
+    journal: Toxicology Letters
+    year: 2013
+    authors:
+    - Myoung Joo Park
+    - Kyeong-Ryoon Lee
+    - Dae-Seop Shin
+    - Hang-Suk Chun
+    - Cheol-Hee Kim
+    - Sung-Hoon Ahn
+    - Myung Ae Bae
+    volume: '216'
+    issue: '1'
+    page: 9-15
+    doi: 10.1016/j.toxlet.2012.10.018
+  26:
+    authors:
+    - Jong-Hwa Lee
+    - Yoon-Jee Chae
+    - Kyeong-Ryoon Lee
+    - Sung-Hoon Ahn
+    - Joung-Wook Seo
+    - Qing-Ri Jin
+    - Young-Ah Woo
+    - Gye-Won Lee
+    - Soon-Chang Cho
+    - Sung-Won Kwon
+    - Dae-Hun Park
+    volume: '70'
+    page: 587-591
+    doi: 10.1016/j.jpba.2012.05.030
+  25:
+    title: Determination of a novel TAZ modulator, 2-butyl-5-methyl-6-(pyridine-3-yl)-3-[2'-(1H-tetrazole-5-yl)-biphenyl-4-ylmethyl]-3H imidazo[4,5-b]pyridine] (TM-25659) in rat plasma by liquid chromatography-tandem mass spectrometry
+    authors:
+    - Sung Heum Choi
+    - Kyeong-Ryoon Lee
+    - Jae-Chun Woo
+    - Nak Jeong Kim
+    - Dong Cheul Moon
+    - Eun Sook Hwang
+    - Sung-Hoon Ahn
+    - Myung Ae Bae
+    - Min-Sun Kim
+    volume: '63'
+    page: 47-52
+    doi: 10.1016/j.jpba.2012.01.036
+  23:
+    journal: Drug Metabolism and Pharmacokinetics
+  18:
+    authors:
+    - Min-Koo Choi
+    - Qing-Ri Jin
+    - Yeong-Lim Choi
+    - Sung-Hoon Ahn
+    - Myung-Ae Bae
+    - Im-Sook Song
+    volume: '32'
+    issue: '3'
+    page: 175-184
+    doi: 10.1002/bdd.749
+  17:
+    title: Determination of a peroxisome proliferator-activated receptor γ agonist, 1-(trans-methylimino-N-oxy)-6-(2-morpholinoethoxy-3-phenyl-1H-indene-2-carboxylic acid ethyl ester (KR-62980) in rat plasma by liquid chromatography-tandem mass spectrometry
+  13:
+    authors:
+    - Gil Nam Lee
+    - Kwang Rok Kim
+    - Sung-Hoon Ahn
+    - Myung Ae Bae
+    - Nam Sook Kang
+    volume: '20'
+    issue: '17'
+    page: 5130-5132
+    doi: 10.1016/j.bmcl.2010.07.018
+  6:
+    title: Application of a sample pooling method for the accelerated assessment of the rate of uptake of drugs by the brain in rats
+    authors:
+    - Kang-Pil Kim
+    - Sung-Hoon Ahn
+    - Jong-Hyuk Sung
+    - Tae-Sung Koo
+    - Myong-Joo Byun
+    - Dae-Duk Kim
+    - Chang-Koo Shim
+    - Suk-Jae Chung
+    volume: '58'
+    issue: '6'
+    page: 837-846
+    doi: 10.1211/jpp.58.6.0014
+  4:
+    authors:
+    - Sung-Hoon Ahn
+    - Han-Joo Maeng
+    - Tae-Sung Koo
+    - Dae-Duk Kim
+    - Chang-Koo Shim
+    - Suk-Jae Chung
+    volume: '834'
+    issue: 1-2
+    page: 128-133
+    doi: 10.1016/j.jchromb.2006.02.035
