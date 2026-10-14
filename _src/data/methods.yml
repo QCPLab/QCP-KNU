@@ -1,0 +1,46 @@
+# Laboratory methods shown at the top of the Methods page and summarised on the home page.
+# Wording is generic on purpose and limited to what the publication list documents (species: rat, mouse; matrices: plasma, serum, brain;
+# in vitro: liver microsomes, permeability, transporters). Papers are referenced by their number in publications.yml (DOI-linked only).
+# TODO(PI): confirm the routine assay panel before launch (e.g. plasma protein binding, hepatocyte stability, Caco-2/MDCK permeability,
+#   CYP inhibition) and which bioanalytical validation guidance applies; add or remove steps accordingly.
+lab:
+  - id: invivo
+    title: {en: "Animal in vivo pharmacokinetics"}
+    short: {en: "Rat and mouse studies: dosing, serial sampling, tissue distribution and excretion, and the exposure parameters that follow."}
+    text:
+      en: "Concentration–time profiles in rats and mice are a starting point of much of our work. We give a drug candidate or a marketed drug by one or more routes, collect blood at planned times and, when the question requires it, tissues, urine, bile or feces, and measure the drug and its metabolites by LC-MS/MS."
+    steps:
+      - {en: "Design the study: species and strain, dose levels, routes (for example intravenous and oral), fasted or fed state and the sampling schedule."}
+      - {en: "Dose the animals and collect blood serially; collect brain or other tissues, urine, bile and feces when distribution or excretion is the question."}
+      - {en: "Quantify the parent drug and its metabolites in each sample with a validated LC-MS/MS method."}
+      - {en: "Calculate exposure and disposition parameters (AUC, clearance, volume of distribution, half-life, bioavailability) by non-compartmental analysis, or fit compartmental models."}
+      - {en: "Compare doses, sexes, feeding states, formulations and disease models to see what changes exposure."}
+    papers: [46, 48, 21, 5, 3]
+    see: {anchor: pk, text: {en: "Animated figure: pharmacokinetics"}}
+  - id: invitro
+    title: {en: "In vitro pharmacokinetics and metabolism"}
+    short: {en: "Liver microsomes, membrane permeability, transporters and physicochemical screening that explain what the animals show."}
+    text:
+      en: "Experiments outside the animal explain what we see inside it: how quickly and by which routes a drug is metabolized, which metabolites form, how well it crosses membranes, and which enzymes and transporters it meets."
+    steps:
+      - {en: "Incubate the drug with liver microsomes or other enzyme sources, follow its disappearance and the metabolites that appear by LC-MS/MS, and identify the metabolites from their fragment ions."}
+      - {en: "Measure the kinetics of metabolism and of transport, not only a single time point."}
+      - {en: "Measure membrane permeability and brain uptake in vitro and relate them to the concentrations seen in vivo."}
+      - {en: "Test uptake and inhibition of drug transporters such as OAT1, OATP1B1 and the organic cation transporters, to judge the risk of drug–drug interactions."}
+      - {en: "Profile the physicochemical properties of candidate compounds with validated screening methods."}
+      - {en: "Read the in vitro results together with the animal data, as in our work on lobeglitazone metabolites in rat liver microsomes and their formation in vivo."}
+    papers: [47, 43, 58, 14, 55]
+    see: {anchor: metabolism, text: {en: "Animated figure: drug metabolism"}}
+  - id: lcmsms
+    title: {en: "LC-MS/MS bioanalysis"}
+    short: {en: "Developing and validating the assays that measure drugs and metabolites in plasma, serum and tissue."}
+    text:
+      en: "Every pharmacokinetic result starts with a reliable concentration. We develop and validate liquid chromatography–tandem mass spectrometry (LC-MS/MS) assays for drugs and their metabolites in plasma, serum and tissue, and apply them to study samples."
+    steps:
+      - {en: "Tune the mass spectrometer for the analyte and an internal standard and choose the ion transitions for multiple reaction monitoring."}
+      - {en: "Develop the sample preparation and the chromatographic separation so that the run is clean, sensitive and fast."}
+      - {en: "Validate the method: selectivity, linearity of the calibration curve, accuracy and precision, recovery, matrix effect and stability."}
+      - {en: "Run the study samples together with calibration standards and quality-control samples in every batch."}
+      - {en: "Hand the concentrations to the pharmacokinetic analysis. For selected analytes we have also used GC-MS or HPLC-UV."}
+    papers: [65, 56, 40, 31, 28]
+    see: {anchor: bioanalysis, text: {en: "Animated figure: LC-MS/MS"}}

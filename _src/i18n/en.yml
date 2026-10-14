@@ -4,7 +4,7 @@ meta:
   desc:
     home: Pharmacokinetics, drug metabolism and drug transport research at the College of Pharmacy, Kangwon National University.
     research: 'Research areas: pharmacokinetics of drug candidates and disease models, drug metabolism, transporters and drug–drug interactions, and quantitative modeling.'
-    methods: 'Interactive explainers built on simulated patients and public molecule structures: how a population pharmacokinetic model is fitted and how a neural network computes.'
+    methods: 'Laboratory methods (animal in vivo pharmacokinetics, in vitro pharmacokinetics and metabolism, LC-MS/MS bioanalysis) and two interactive explainers of modeling methods.'
     publications: Publications of the Laboratory of Pharmaceutical Sciences, Kangwon National University, searchable by year, title, author and journal.
     people: Principal investigator and graduate students of the Laboratory of Pharmaceutical Sciences.
     contact: Address, phone and e-mail of the Laboratory of Pharmaceutical Sciences, College of Pharmacy, Kangwon National University, Chuncheon.
@@ -24,8 +24,8 @@ home:
   motion_title: Our research in motion
   motion_sub: "Six short simulations show the questions we work on. They run on model equations and simulated numbers, not laboratory data."
   motion_hint: "Press Play or drag the time slider."
-  methods_title: Interactive methods
-  methods_sub: Two explainers with simulated patients and public molecule structures.
+  methods_title: Methods
+  methods_sub: What we do in the laboratory, and two interactive explainers of modeling methods.
   nlme_text: 'Watch a population pharmacokinetic model being estimated, iteration by iteration: the fit to the data, the parameters and the objective function.'
   dl_text: Follow a neural network and a graph neural network from input to prediction, including the backward pass.
   news_title: News
@@ -46,12 +46,14 @@ research:
   official_text: The department's laboratory page lists five research topics. The four areas above group them and add the quantitative modeling that connects them.
   official_link: View the department page
   cta_title: Methods
-  cta_text: Two interactive explainers show how population models and neural networks compute.
+  cta_text: How we run animal and in vitro pharmacokinetic studies and LC-MS/MS assays, and two interactive explainers of population models and neural networks.
   cta_btn: Open the methods page.
 methods:
-  title: Methods you can explore
-  lead: Two interactive explainers built on simulated patients and public molecule structures show how methods used in modern pharmacology work. They are teaching examples, not results from patients or from our experiments.
-  honesty: The patients are simulated. In the second deep-learning example the molecules are real public structures, and their logP is calculated by software, not measured. The calculations run in your browser; nothing is sent anywhere.
+  title: Methods
+  lead: Our laboratory combines animal and in vitro pharmacokinetic experiments, LC-MS/MS bioanalysis and quantitative modeling. The first three sections describe the experimental work that runs through our publication list; the last two are interactive explainers of modeling methods.
+  workflow: Typical workflow
+  examples: Examples from our publications
+  honesty: 'About the two interactive explainers: they are teaching examples built on simulated patients and public molecule structures, not results from patients or from our experiments. In the deep-learning example the molecules are real public structures and their logP is calculated by software, not measured. The calculations run in your browser; nothing is sent anywhere.'
   needs_js: These explainers need JavaScript. Please enable it to use them.
   nlme_title: How a population PK model is fitted
   nlme_lead: People differ in how fast they clear a drug. A nonlinear mixed-effects (NLME) model describes the typical values and the spread between individuals at once. The optimiser starts from poor guesses and improves them step by step; here you can move through every step.

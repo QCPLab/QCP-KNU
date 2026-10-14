@@ -42,6 +42,9 @@
         <h2 id="methods-h">{{ t.home.methods_title }}</h2>
         <p>{{ t.home.methods_sub }}</p>
         <ul class="plain">
+          {%- for m in lab_methods %}
+          <li><a href="{{ url('methods') }}#{{ m.id }}">{{ L(m.title) }}</a><br>{{ L(m.short) }}</li>
+          {%- endfor %}
           <li><a href="{{ url('methods') }}#nlme">{{ t.methods.nlme_title }}</a><br>{{ t.home.nlme_text }}</li>
           <li><a href="{{ url('methods') }}#deep-learning">{{ t.methods.dl_title }}</a><br>{{ t.home.dl_text }}</li>
         </ul>

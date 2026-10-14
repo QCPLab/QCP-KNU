@@ -76,6 +76,9 @@ main.pub-title, .pub-c-title, .lead, .topics h3 { text-wrap: wrap; }
 .single > section { padding-top: 36px; margin-top: 36px; border-top: 1px solid var(--line); }
 .single > section:first-child { padding-top: 0; margin-top: 0; border-top: 0; }
 .single h2 { margin-bottom: 14px; }
+.single h3.sub { margin: 22px 0 8px; font-size: 1rem; line-height: 1.4; }
+.single h3.sub + .pub-compact { margin-bottom: 4px; }
+.single h2 + .note { margin: 0 0 18px; }
 .aside { position: static; }
 @media (min-width: 900px) and (min-height: 50em) { .aside { position: sticky; top: 24px; } } /* only when the whole column fits on screen */
 .aside .box { border-top: 2px solid var(--ink); padding-top: 12px; margin-bottom: 30px; font-size: .96875rem; }

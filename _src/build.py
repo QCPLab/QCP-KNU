@@ -86,6 +86,12 @@ def build() -> dict[str, str]:
             sys.exit(f"paper #{n} needs a DOI")
     area_pubs = {a["id"]: [by_no[n] for n in a["papers"]] for a in research["areas"]}
     bio_pubs = [by_no[n] for n in research["bioanalysis"]["papers"]]
+    lab_methods = d["methods"]["lab"]
+    for m in lab_methods:
+        for n in m["papers"]:
+            if not (by_no[n]["status"] in LINKED and by_no[n].get("doi")):
+                sys.exit(f"methods paper #{n} must be DOI-linked")
+        m["pubs"] = [by_no[n] for n in m["papers"]]
     by_year: dict[int, list] = {}
     for p in sorted(pubs, key=lambda p: (-p["year"], -p["no"])):
         by_year.setdefault(p["year"], []).append(p)
@@ -181,6 +187,7 @@ def build() -> dict[str, str]:
             pi={"name": pi["name_en"], "initials": pi["initials"], "photo": pi.get("photo")},
             n_pubs=len(pubs), year_min=min(counts), year_max=max(counts),
             n_students=n_phd + n_ms, n_phd=n_phd, n_ms=n_ms,
+            lab_methods=lab_methods,
             recent=recent, area_pubs=area_pubs, bio_pubs=bio_pubs, by_year=by_year, years_desc=years_desc,
             groups=groups, refs=[{**r, "topic": r["topic"][lang]} for r in refs], support_items=support_items, news_items=news_items,
         )

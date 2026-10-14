@@ -1,12 +1,12 @@
 {% extends "base.html" %}
-{% from "_macros.html" import icon with context %}
+{% from "_macros.html" import icon, pub_compact with context %}
 {% block main %}
 <div class="wrap">
   <div class="page-title">
     <h1>{{ t.methods.title }}</h1>
     <p class="lead">{{ t.methods.lead }}</p>
-    <p class="note">{{ t.methods.honesty }}</p>
     <ul class="jump">
+      {%- for m in lab_methods %}<li><a href="#{{ m.id }}">{{ L(m.title) }}</a></li>{% endfor %}
       <li><a href="#nlme">{{ t.methods.nlme_title }}</a></li>
       <li><a href="#deep-learning">{{ t.methods.dl_title }}</a></li>
       <li><a href="#reading">{{ t.methods.reading_title }}</a></li>
@@ -14,8 +14,21 @@
   </div>
 
   <div class="single">
+    {%- for m in lab_methods %}
+    <section id="{{ m.id }}" aria-labelledby="{{ m.id }}-h">
+      <h2 id="{{ m.id }}-h">{{ L(m.title) }}</h2>
+      <p>{{ L(m.text) }}</p>
+      <h3 class="sub">{{ t.methods.workflow }}</h3>
+      <ol class="howto">{% for st in m.steps %}<li>{{ L(st) }}</li>{% endfor %}</ol>
+      <h3 class="sub">{{ t.methods.examples }}</h3>
+      <ol class="pub-compact">{% for p in m.pubs %}{{ pub_compact(p, t, pi_re) }}{% endfor %}</ol>
+      <p class="fine"><a href="{{ url('research') }}#{{ m.see.anchor }}">{{ L(m.see.text) }}</a></p>
+    </section>
+    {%- endfor %}
+
     <section id="nlme" aria-labelledby="nlme-h">
       <h2 id="nlme-h">{{ t.methods.nlme_title }}</h2>
+      <p class="note">{{ t.methods.honesty }}</p>
       <p>{{ t.methods.nlme_lead }}</p>
       <ol class="howto">{% for s in t.methods.nlme_steps %}<li>{{ s }}</li>{% endfor %}</ol>
       <div class="widget-slot" data-lab-widget="nlme-explorer" data-src="{{ asset('data/nlme-demo.json') }}" data-lang="{{ lang }}">
