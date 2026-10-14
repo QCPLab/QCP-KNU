@@ -176,8 +176,11 @@ html:not(.js) .pub-tools { display: none; }
 
 /* ------------------------------------------------------------ people / contact */
 .pi { display: grid; grid-template-columns: minmax(0, 1fr); gap: 4px; }
-.pi.has-photo { grid-template-columns: 200px minmax(0, 1fr); gap: 28px; }
-.pi img { width: 200px; height: auto; display: block; }
+.pi.has-photo { grid-template-columns: 189px minmax(0, 1fr); gap: 28px; }
+.pi img { width: 189px; max-width: 100%; height: auto; display: block; }
+.box-photo { display: grid; grid-template-columns: 76px minmax(0, 1fr); gap: 4px 14px; align-items: start; }
+.box-photo img { width: 76px; height: auto; display: block; }
+.box-photo h2, .box-photo .small { grid-column: 1 / -1; }
 .pi h2 { margin-bottom: 2px; }
 .pi .role { margin: 0 0 12px; color: var(--muted); }
 .roster { list-style: none; }

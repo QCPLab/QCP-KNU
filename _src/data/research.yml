@@ -6,6 +6,9 @@ official_items:
   - {en: "Pharmacokinetics in disease models", ko: "질병모델에서의 약동학 연구"}
   - {en: "Drug–drug interactions based on metabolism and transporters", ko: "약물대사 및 수송체 기반의 약물상호작용 연구"}
 
+# Order of the animated figures (Fig. 1-5) on the home page; each area below names its own scene.
+motion_order: [pk, metabolism, transport, modeling, bioanalysis]
+
 areas:
   - id: pk
     official: [1, 4]
@@ -15,6 +18,7 @@ areas:
       ko: "신약후보물질과 기존 의약품의 전신 노출을 건강한 동물과 질병모델에서 평가하고, 이를 좌우하는 요인을 규명합니다."
     tags: {en: ["In vivo PK", "Disease models", "Drug candidates"], ko: ["in vivo 약동학", "질병모델", "신약후보물질"]}
     papers: [45, 48, 58, 67]
+    motion: pk
   - id: metabolism
     official: [2]
     title: {en: "Drug metabolism and metabolites", ko: "약물대사·대사체"}
@@ -23,6 +27,7 @@ areas:
       ko: "약물이 어떻게 대사되고 어떤 대사체가 생기는지, 대사가 노출과 안전성에 어떤 영향을 주는지 LC-MS/MS 분석으로 뒷받침해 연구합니다."
     tags: {en: ["Metabolite profiling", "In vitro metabolism", "LC-MS/MS"], ko: ["대사체 분석", "in vitro 대사", "LC-MS/MS"]}
     papers: [47, 53, 46]
+    motion: metabolism
   - id: transport
     official: [3, 5]
     title: {en: "Drug transporters and drug–drug interactions", ko: "약물수송체·약물상호작용"}
@@ -31,6 +36,7 @@ areas:
       ko: "함께 처방되는 약물은 같은 대사효소·수송체를 두고 경쟁하는 경우가 많습니다. 효소·수송체 기반 상호작용을 분석해 효과와 이상반응의 변화를 설명합니다."
     tags: {en: ["Transporters", "Enzymes", "Interaction risk"], ko: ["수송체", "대사효소", "상호작용 위험"]}
     papers: [14, 57]
+    motion: transport
   - id: modeling
     official: []
     # TODO(PI): confirm which modeling activities the lab actually performs (Q7). Titles show 4 of 69 papers on modeling/in silico; a PBPK review (#68).
@@ -40,6 +46,7 @@ areas:
       ko: "약동학 모형, 생리학 기반(PBPK) 모형, 집단(비선형 혼합효과) 모형과 기계학습으로 자료를 해석하고, 시험하지 않은 상황의 노출을 예측합니다."
     tags: {en: ["Compartmental", "Population (NLME)", "PBPK", "Machine learning"], ko: ["구획 모형", "집단(NLME)", "PBPK", "기계학습"]}
     papers: [68, 29]
+    motion: modeling
 
 bioanalysis:
   title: {en: "Bioanalysis: the measurement behind every study", ko: "생체시료 분석: 모든 연구의 바탕이 되는 정량"}
@@ -47,3 +54,4 @@ bioanalysis:
     en: "Every pharmacokinetic result starts with a reliable concentration. We develop and validate LC-MS/MS methods to measure drugs and metabolites in biological samples such as plasma."
     ko: "모든 약동학 결과는 신뢰할 수 있는 농도 측정에서 시작합니다. 혈장 같은 생체시료 중 약물과 대사체를 정량하는 LC-MS/MS 분석법을 개발하고 검증합니다."
   papers: [65, 56, 40]
+  motion: bioanalysis

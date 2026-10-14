@@ -10,7 +10,7 @@
   <div class="single">
     <section aria-labelledby="pi-h">
       <div class="pi{% if pi.photo %} has-photo{% endif %}">
-        {%- if pi.photo %}<img src="{{ asset('img/' ~ pi.photo) }}" alt="{{ pi.name }}">{% endif %}
+        {%- if pi.photo %}<img src="{{ asset('img/' ~ pi.photo) }}" alt="{{ pi.name }}" width="189" height="253">{% endif %}
         <div>
           <h2 id="pi-h">{{ pi.name }}</h2>
           <p class="role">{{ t.people.pi_role }}, {{ L(site.identity.affiliation) }}</p>

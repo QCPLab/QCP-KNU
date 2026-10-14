@@ -19,6 +19,7 @@
 <link rel="stylesheet" href="../assets/fonts/pretendard/pretendard.css">
 <link rel="stylesheet" href="../assets/css/tokens.css">
 <link rel="stylesheet" href="../assets/css/site.css">
+<link rel="stylesheet" href="../assets/css/research-motion.css">
 </head>
 <body class="page-home lang-ko">
 <a class="skip-link" href="#main">본문으로 건너뛰기</a>
@@ -56,6 +57,38 @@
     <div class="main">
       <section>
         <p class="lead">약물의 흡수⁠·⁠분포⁠·⁠대사⁠·⁠배설, 즉 약동학(pharmacokinetics)⁠이 질병⁠·⁠약물 상호작용⁠·⁠개인차에 따라 어떻게 달라지는지 연구합니다. 동물⁠·⁠in vitro 실험, <span class="nb">LC-MS/MS</span> 분석, 정량적 모델링을 연결해 신약 개발과 의약품의 안전한 사용에 기여합니다.</p>
+      </section>
+
+      <section aria-labelledby="motion-h">
+        <h2 id="motion-h">움직임으로 보는 연구</h2>
+        <p>우리가 다루는 질문을 다섯 개의 짧은 시뮬레이션으로 보여 줍니다. 모형 방정식과 모의 수치로 계산한 것이며 실험 자료가 아닙니다. 재생을 누르거나 시간 막대를 끌어 보세요.</p>
+        <div data-rm-viewer data-label="움직임으로 보는 연구">
+          <div id="rm-panel-pk" data-rm-panel="pk" data-title="약동학">
+<figure class="rm" data-rm="pk">
+  <noscript><p class="rm-fallback">이 그림은 움직이는 그림이라 JavaScript가 필요합니다. 아래 설명을 참고하세요.</p></noscript>
+  <figcaption class="rm-cap"><strong>그림 1 | 경구 투여 후의 노출.</strong> 사각형은 투여량이 투여 부위⁠·⁠혈장⁠·⁠소실에 놓인 비율입니다(사각형 하나가 2.5 %). 곡선은 1‑구획 모형의 혈장 농도 C(t) = ka/(ka − ke) · (exp(−ke⁠·⁠t) − exp(−ka⁠·⁠t))⁠이며, 흡수 ka = 1.0 h⁻¹, 소실 ke = 0.20 h⁻¹(청소율 절반일 때 0.10 h⁻¹)⁠입니다. 기준 조건의 최고 농도를 1로 둔 상대값입니다. 모의 자료이며 실험 자료가 아닙니다.</figcaption>
+</figure></div>
+          <div id="rm-panel-metabolism" data-rm-panel="metabolism" data-title="약물대사">
+<figure class="rm" data-rm="metabolism">
+  <noscript><p class="rm-fallback">이 그림은 움직이는 그림이라 JavaScript가 필요합니다. 아래 설명을 참고하세요.</p></noscript>
+  <figcaption class="rm-cap"><strong>그림 2 | 모약물에서 대사체로.</strong> 약물이 하나의 대사체로 바뀌고(속도상수 0.36 h⁻¹, 효소 억제 시 0.09 h⁻¹) 대사체는 소실됩니다(0.18 h⁻¹). 모약물은 대사로만 제거되는 것으로 단순화했습니다. 사각형은 투여량의 비율, 화살표 굵기는 그 순간의 속도이며 양은 몰 기준 투여량 대비 %입니다. 모의 자료이며 실험 자료가 아닙니다.</figcaption>
+</figure></div>
+          <div id="rm-panel-transport" data-rm-panel="transport" data-title="수송체·약물상호작용">
+<figure class="rm" data-rm="transport">
+  <noscript><p class="rm-fallback">이 그림은 움직이는 그림이라 JavaScript가 필요합니다. 아래 설명을 참고하세요.</p></noscript>
+  <figcaption class="rm-cap"><strong>그림 3 | 수송체에서의 경쟁.</strong> 기질이 포화 가능한 수송체를 통해 간으로 흡수됩니다(v = Vmax · C / (Km (1 + [I]/Ki) + C)). 같은 자리에 결합하는 저해제(경쟁적, [I]/Ki = 3)⁠가 결합 부위 일부를 차지해 흡수를 늦춥니다. 가운데 사각형 열 개는 수송체 결합 부위이며, 흡수 속도는 Vmax에 기질이 차지한 부위의 비율을 곱한 값입니다. 모의 자료이며 실험 자료가 아닙니다.</figcaption>
+</figure></div>
+          <div id="rm-panel-modeling" data-rm-panel="modeling" data-title="모델링">
+<figure class="rm" data-rm="modeling">
+  <noscript><p class="rm-fallback">이 그림은 움직이는 그림이라 JavaScript가 필요합니다. 아래 설명을 참고하세요.</p></noscript>
+  <figcaption class="rm-cap"><strong>그림 4 | 모형 적합 후 예측.</strong> 100 mg 경구 단회 투여 후 24시간까지(점선) 모의한 농도 9개를 로그 척도 최소제곱으로 1‑구획 모형에 적합합니다. 곡선은 Levenberg–Marquardt 반복에서 채택된 단계를 차례로 보여 주며, 적합된 모형으로 측정하지 않은 12시간마다 100 mg 투여를 예측합니다. 집단 모델은 이를 여러 피험자로 확장합니다: <a href="methods/#nlme">비선형 혼합효과 설명</a>. 모의 자료이며 실험 자료가 아닙니다.</figcaption>
+</figure></div>
+          <div id="rm-panel-bioanalysis" data-rm-panel="bioanalysis" data-title="생체시료 분석">
+<figure class="rm" data-rm="bioanalysis">
+  <noscript><p class="rm-fallback">이 그림은 움직이는 그림이라 JavaScript가 필요합니다. 아래 설명을 참고하세요.</p></noscript>
+  <figcaption class="rm-cap"><strong>그림 5 | 크로마토그램에서 농도까지, <span class="nb">LC-MS/MS</span>.</strong> 분석물질과 안정동위원소 표지 내부표준물질(SIL-IS)⁠이 함께 용출되고, 두 피크의 면적을 적분해 면적비를 구한 뒤 1/x² 가중으로 적합한 검량선에서 농도를 읽습니다. 검량선 시료 6개와 혈장 시료 1개를 모의했습니다. 모의 자료이며 실험 자료가 아닙니다.</figcaption>
+</figure></div>
+        </div>
       </section>
 
       <section aria-labelledby="research-h">
@@ -147,8 +180,8 @@
     </div>
 
     <aside class="aside" aria-label="연구실 정보">
-      <div class="box">
-        <h2>지도교수</h2>
+      <div class="box box-photo">
+        <h2>지도교수</h2><img src="../assets/img/pi-ahn.jpg" alt="" width="76" height="102">
         <p><a href="people/">안성훈</a><br><span class="muted">교수</span></p>
         <p class="small">약제학 · 약동학 · 약물대사 · 약물수송</p>
       </div>
@@ -191,5 +224,6 @@
   </div>
 </footer>
 <script src="../assets/js/site.js" defer onerror="document.documentElement.classList.remove('js')"></script>
+<script src="../assets/js/research-motion.js" defer></script>
 </body>
 </html>

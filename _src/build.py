@@ -28,6 +28,8 @@ PAGES = ["home", "research", "methods", "publications", "people", "contact"]
 PATHS = {"home": "", "research": "research/", "methods": "methods/", "publications": "publications/",
          "people": "people/", "contact": "contact/", "404": "404.html"}
 PAGE_ASSETS = {"methods": {"css": ["nlme-explorer", "dl-explorer"], "js": ["nlme-explorer", "dl-explorer"]},
+               "home": {"css": ["research-motion"], "js": ["research-motion"]},
+               "research": {"css": ["research-motion"], "js": ["research-motion"]},
                "publications": {"css": [], "js": ["publications"]}}
 LINKED = {"ok", "title-variant(check)", "journal-name-differs"}
 PI_RE = re.compile(r"(sung[-\u2010-\u2015\s]?hoon\s+ahn|\bs[-\u2010-\u2015.\s]*h\.?\s*ahn)", re.I)

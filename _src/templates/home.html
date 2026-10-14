@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% from "_macros.html" import icon, pub_compact with context %}
+{% from "_macros.html" import icon, pub_compact, rm_fig with context %}
 {% block main %}
 <div class="wrap">
   <div class="page-title">
@@ -14,6 +14,16 @@
     <div class="main">
       <section>
         <p class="lead">{{ t.hero.lead }}</p>
+      </section>
+
+      <section aria-labelledby="motion-h">
+        <h2 id="motion-h">{{ t.home.motion_title }}</h2>
+        <p>{{ t.home.motion_sub }}</p>
+        <div data-rm-viewer data-label="{{ t.home.motion_title }}">
+        {%- for id in research.motion_order %}
+          <div id="rm-panel-{{ id }}" data-rm-panel="{{ id }}" data-title="{{ t.motion.scenes[id].tab }}">{{ rm_fig(id, loop.index, t) }}</div>
+        {%- endfor %}
+        </div>
       </section>
 
       <section aria-labelledby="research-h">
@@ -70,8 +80,9 @@
     </div>
 
     <aside class="aside" aria-label="{{ t.home.aside }}">
-      <div class="box">
+      <div class="box{% if pi.photo %} box-photo{% endif %}">
         <h2>{{ t.people.pi_label }}</h2>
+        {%- if pi.photo %}<img src="{{ asset('img/' ~ pi.photo) }}" alt="" width="76" height="102">{% endif %}
         <p><a href="{{ url('people') }}">{{ pi.name }}</a><br><span class="muted">{{ t.people.pi_role }}</span></p>
         <p class="small">{{ t.people.pi_fields }}</p>
       </div>

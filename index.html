@@ -19,6 +19,7 @@
 <link rel="stylesheet" href="assets/fonts/pretendard/pretendard.css">
 <link rel="stylesheet" href="assets/css/tokens.css">
 <link rel="stylesheet" href="assets/css/site.css">
+<link rel="stylesheet" href="assets/css/research-motion.css">
 </head>
 <body class="page-home lang-en">
 <a class="skip-link" href="#main">Skip to main content</a>
@@ -56,6 +57,38 @@
     <div class="main">
       <section>
         <p class="lead">We study how drugs are absorbed, distributed, metabolized and excreted, and how these processes change with disease, drug–drug interactions and individual differences. We connect animal and in vitro experiments, <span class="nb">LC-MS/MS</span> bioanalysis and quantitative modeling to drug discovery and the safe use of medicines.</p>
+      </section>
+
+      <section aria-labelledby="motion-h">
+        <h2 id="motion-h">Our research in motion</h2>
+        <p>Five short simulations show the questions we work on. They run on model equations and simulated numbers, not laboratory data. Press Play or drag the time slider.</p>
+        <div data-rm-viewer data-label="Our research in motion">
+          <div id="rm-panel-pk" data-rm-panel="pk" data-title="Pharmacokinetics">
+<figure class="rm" data-rm="pk">
+  <noscript><p class="rm-fallback">This figure is animated and needs JavaScript. The caption below describes it.</p></noscript>
+  <figcaption class="rm-cap"><strong>Fig. 1 | Exposure after an oral dose.</strong> Squares show the share of the dose at the dose site, in plasma and eliminated (one square is 2.5 %). The curve is the plasma concentration of a one-compartment model, C(t) = ka/(ka − ke) · (exp(−ke⁠·⁠t) − exp(−ka⁠·⁠t)), with absorption ka = 1.0 h⁻¹ and elimination ke = 0.20 h⁻¹ (0.10 h⁻¹ when clearance is halved), relative to the reference peak. Simulated; not laboratory data.</figcaption>
+</figure></div>
+          <div id="rm-panel-metabolism" data-rm-panel="metabolism" data-title="Metabolism">
+<figure class="rm" data-rm="metabolism">
+  <noscript><p class="rm-fallback">This figure is animated and needs JavaScript. The caption below describes it.</p></noscript>
+  <figcaption class="rm-cap"><strong>Fig. 2 | From parent drug to metabolite.</strong> The drug is converted to one metabolite (rate constant 0.36 h⁻¹; 0.09 h⁻¹ with the enzyme inhibited) and the metabolite is eliminated (0.18 h⁻¹); the parent is cleared by metabolism only. Squares show the share of the dose and arrow width follows the instantaneous rate. Amounts are molar, as % of the dose. Simulated; not laboratory data.</figcaption>
+</figure></div>
+          <div id="rm-panel-transport" data-rm-panel="transport" data-title="Transporters and interactions">
+<figure class="rm" data-rm="transport">
+  <noscript><p class="rm-fallback">This figure is animated and needs JavaScript. The caption below describes it.</p></noscript>
+  <figcaption class="rm-cap"><strong>Fig. 3 | Competition at a transporter.</strong> A substrate is taken up into the liver by a saturable transporter, v = Vmax · C / (Km (1 + [I]/Ki) + C). An inhibitor that binds the same sites (competitive, [I]/Ki = 3) occupies part of them and slows the uptake. The ten squares in the middle are transporter sites; the uptake rate is Vmax times the share held by the substrate. Simulated; not laboratory data.</figcaption>
+</figure></div>
+          <div id="rm-panel-modeling" data-rm-panel="modeling" data-title="Modeling">
+<figure class="rm" data-rm="modeling">
+  <noscript><p class="rm-fallback">This figure is animated and needs JavaScript. The caption below describes it.</p></noscript>
+  <figcaption class="rm-cap"><strong>Fig. 4 | Fitting a model, then predicting.</strong> Nine simulated concentrations after one 100 mg oral dose (up to 24 h, dotted line) are fitted to the one-compartment model by least squares on the log scale; the curve shows each accepted Levenberg–Marquardt step. The fitted model then predicts 100 mg every 12 h, which was not measured. Population models extend this to many subjects: <a href="methods/#nlme">nonlinear mixed-effects explainer</a>. Simulated; not laboratory data.</figcaption>
+</figure></div>
+          <div id="rm-panel-bioanalysis" data-rm-panel="bioanalysis" data-title="Bioanalysis">
+<figure class="rm" data-rm="bioanalysis">
+  <noscript><p class="rm-fallback">This figure is animated and needs JavaScript. The caption below describes it.</p></noscript>
+  <figcaption class="rm-cap"><strong>Fig. 5 | From chromatogram to concentration by <span class="nb">LC-MS/MS</span>.</strong> The analyte and its stable-isotope-labelled internal standard (SIL-IS) elute together; their peak areas are integrated, and the area ratio is read against a calibration curve fitted with 1/x² weighting. Six calibrators and one plasma sample were simulated. Simulated; not laboratory data.</figcaption>
+</figure></div>
+        </div>
       </section>
 
       <section aria-labelledby="research-h">
@@ -147,8 +180,8 @@
     </div>
 
     <aside class="aside" aria-label="Laboratory information">
-      <div class="box">
-        <h2>Principal investigator</h2>
+      <div class="box box-photo">
+        <h2>Principal investigator</h2><img src="assets/img/pi-ahn.jpg" alt="" width="76" height="102">
         <p><a href="people/">Sung-Hoon Ahn</a><br><span class="muted">Professor</span></p>
         <p class="small">Pharmaceutics · Pharmacokinetics · Drug metabolism · Drug transport</p>
       </div>
@@ -191,5 +224,6 @@
   </div>
 </footer>
 <script src="assets/js/site.js" defer onerror="document.documentElement.classList.remove('js')"></script>
+<script src="assets/js/research-motion.js" defer></script>
 </body>
 </html>

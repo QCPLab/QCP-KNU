@@ -24,6 +24,8 @@ lang_switch:
 hero:
   lead: We study how drugs are absorbed, distributed, metabolized and excreted, and how these processes change with disease, drug–drug interactions and individual differences. We connect animal and in vitro experiments, LC-MS/MS bioanalysis and quantitative modeling to drug discovery and the safe use of medicines.
 home:
+  motion_title: Our research in motion
+  motion_sub: "Five short simulations show the questions we work on. They run on model equations and simulated numbers, not laboratory data. Press Play or drag the time slider."
   work_title: How we work
   work_sub: Six steps connect a research question to the use of a medicine.
   methods_title: Interactive methods
@@ -124,3 +126,31 @@ nf:
   title: Page not found
   text: The page you are looking for does not exist or has moved.
   home: Back to the home page
+
+motion:
+  fig: "Fig."
+  sim: "Simulated; not laboratory data."
+  nojs: "This figure is animated and needs JavaScript. The caption below describes it."
+  scenes:
+    pk:
+      tab: "Pharmacokinetics"
+      title: "Exposure after an oral dose."
+      text: "Squares show the share of the dose at the dose site, in plasma and eliminated (one square is 2.5 %). The curve is the plasma concentration of a one-compartment model, C(t) = ka/(ka − ke) · (exp(−ke·t) − exp(−ka·t)), with absorption ka = 1.0 h⁻¹ and elimination ke = 0.20 h⁻¹ (0.10 h⁻¹ when clearance is halved), relative to the reference peak."
+    metabolism:
+      tab: "Metabolism"
+      title: "From parent drug to metabolite."
+      text: "The drug is converted to one metabolite (rate constant 0.36 h⁻¹; 0.09 h⁻¹ with the enzyme inhibited) and the metabolite is eliminated (0.18 h⁻¹); the parent is cleared by metabolism only. Squares show the share of the dose and arrow width follows the instantaneous rate. Amounts are molar, as % of the dose."
+    transport:
+      tab: "Transporters and interactions"
+      title: "Competition at a transporter."
+      text: "A substrate is taken up into the liver by a saturable transporter, v = Vmax · C / (Km (1 + [I]/Ki) + C). An inhibitor that binds the same sites (competitive, [I]/Ki = 3) occupies part of them and slows the uptake. The ten squares in the middle are transporter sites; the uptake rate is Vmax times the share held by the substrate."
+    modeling:
+      tab: "Modeling"
+      title: "Fitting a model, then predicting."
+      text: "Nine simulated concentrations after one 100 mg oral dose (up to 24 h, dotted line) are fitted to the one-compartment model by least squares on the log scale; the curve shows each accepted Levenberg–Marquardt step. The fitted model then predicts 100 mg every 12 h, which was not measured."
+      more: "Population models extend this to many subjects:"
+      more_link: "nonlinear mixed-effects explainer"
+    bioanalysis:
+      tab: "Bioanalysis"
+      title: "From chromatogram to concentration by LC-MS/MS."
+      text: "The analyte and its stable-isotope-labelled internal standard (SIL-IS) elute together; their peak areas are integrated, and the area ratio is read against a calibration curve fitted with 1/x² weighting. Six calibrators and one plasma sample were simulated."

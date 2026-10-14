@@ -1,8 +1,9 @@
 # Members shown on the People page. role: pi | phd | ms | alumni.
 # E-mail addresses are listed on purpose (the lab has always published them). To hide one, set show_email: false;
 # to hide all of them, set show_member_emails: false in site.yml. name_ko: ask each member.
+# photo: file in assets/img/ (PI only for now; the file is the 189x253 px portrait from the previous site, replace it with a larger one if available).
 members:
-  - {name_en: "Sung-Hoon Ahn", role: pi, name_ko: "안성훈", email: "ahnsh@kangwon.ac.kr", show_email: true}
+  - {name_en: "Sung-Hoon Ahn", role: pi, name_ko: "안성훈", email: "ahnsh@kangwon.ac.kr", show_email: true, photo: "pi-ahn.jpg"}
   - {name_en: "Kyung-Sun Moon", role: phd, name_ko: null, email: "moonks97@kangwon.ac.kr", show_email: true}
   - {name_en: "Jong-Min Song", role: phd, name_ko: null, email: "nayasjm@kangwon.ac.kr", show_email: true}
   - {name_en: "Ju Hyun Park", role: phd, name_ko: null, email: "blessingway@daum.net", show_email: true}
