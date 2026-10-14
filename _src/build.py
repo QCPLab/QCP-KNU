@@ -215,6 +215,7 @@ def nobreak(page: str) -> str:
         t = m.group(1)
         for rx in NOBREAK:
             t = rx.sub(lambda mm: f'<span class="nb">{mm.group(0)}</span>', t)
+        t = re.sub(r"(?<=\S)·(?=\S)", "\u2060·\u2060", t)  # "A·B": no break before or after the dot
         return ">" + t.replace(" · ", "\u00a0· ") + "<"
 
     return "".join(p if i % 2 else re.sub(r">([^<>]+)<", node, p) for i, p in enumerate(parts))

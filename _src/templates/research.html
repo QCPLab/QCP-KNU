@@ -5,21 +5,20 @@
   <div class="page-title">
     <h1>{{ t.research.title }}</h1>
     <p class="lead">{{ t.research.lead }}</p>
-    <ul class="jump" aria-label="{{ t.research.on_this_page }}">
+    <ul class="jump jump-inline" aria-label="{{ t.research.on_this_page }}">
     {%- for a in research.areas %}<li><a href="#{{ a.id }}">{{ L(a.title) }}</a></li>{% endfor %}
       <li><a href="#bioanalysis">{{ t.research.bio_nav }}</a></li>
       <li><a href="#official">{{ t.research.official_nav }}</a></li>
     </ul>
   </div>
 
-  <div class="single">
+  <div class="layout">
+  <div class="main">
   {%- for a in research.areas %}
     <section class="area" id="{{ a.id }}" aria-labelledby="{{ a.id }}-h">
       <h2 id="{{ a.id }}-h">{{ L(a.title) }}</h2>
       <p>{{ L(a.text) }}</p>
       <dl class="kv">
-        <dt>{{ t.research.questions }}</dt>
-        <dd><ul>{% for q in L(a.questions) %}<li>{{ q }}</li>{% endfor %}</ul></dd>
         <dt>{{ t.research.approaches }}</dt>
         <dd>{{ L(a.tags)|join(' · ') }}</dd>
       </dl>
@@ -48,6 +47,23 @@
       <h2 id="cta-h">{{ t.research.cta_title }}</h2>
       <p>{{ t.research.cta_text }} <a href="{{ url('methods') }}">{{ t.research.cta_btn }}</a></p>
     </section>
+  </div>
+
+  <aside class="aside" aria-label="{{ t.home.aside }}">
+    <div class="box toc">
+      <h2>{{ t.research.on_this_page }}</h2>
+      <ul class="plain">
+      {%- for a in research.areas %}<li><a href="#{{ a.id }}">{{ L(a.title) }}</a></li>{% endfor %}
+        <li><a href="#bioanalysis">{{ t.research.bio_nav }}</a></li>
+        <li><a href="#official">{{ t.research.official_nav }}</a></li>
+      </ul>
+    </div>
+    <div class="box">
+      <h2>{{ t.nav.contact }}</h2>
+      <address>{% for line in L(contact.address) %}{{ line }}{% if not loop.last %}<br>{% endif %}{% endfor %}</address>
+      <p style="margin-top:8px">{{ t.contact.phone }}: {{ contact.phone }}<br>{{ t.contact.email }}: <a href="mailto:{{ contact.pi_email }}">{{ contact.pi_email }}</a></p>
+    </div>
+  </aside>
   </div>
 </div>
 {% endblock %}

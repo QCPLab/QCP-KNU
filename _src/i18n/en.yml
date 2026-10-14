@@ -24,10 +24,10 @@ lang_switch:
 hero:
   lead: We study how drugs are absorbed, distributed, metabolized and excreted, and how these processes change with disease, drug–drug interactions and individual differences. We connect animal and in vitro experiments, LC-MS/MS bioanalysis and quantitative modeling to drug discovery and the safe use of medicines.
 home:
-  work_title: From a question to a dosing rationale
+  work_title: How we work
   work_sub: Six steps connect a research question to the use of a medicine.
-  methods_title: See how the methods work
-  methods_sub: Two explainers with simulated patients and public molecule structures. Move the sliders, step through the iterations and watch the calculation happen.
+  methods_title: Interactive methods
+  methods_sub: Two explainers with simulated patients and public molecule structures.
   nlme_text: 'Watch a population pharmacokinetic model being estimated, iteration by iteration: the fit to the data, the parameters and the objective function.'
   dl_text: Follow a neural network and a graph neural network from input to prediction, including the backward pass.
   news_title: News
@@ -40,7 +40,6 @@ research:
   title: Research
   lead: 'Our work follows a drug from the dose to the concentration in the body: how it is absorbed, metabolized, transported and eliminated, and what changes that in disease, with other drugs and between individuals.'
   on_this_page: On this page
-  questions: Typical questions
   approaches: Approaches
   selected: Selected publications
   bio_nav: Bioanalysis
@@ -48,9 +47,9 @@ research:
   official_title: Research topics listed by the College of Pharmacy
   official_text: The department's laboratory page lists five research topics. The four areas above group them and add the quantitative modeling that connects them.
   official_link: View the department page
-  cta_title: See the methods at work
-  cta_text: Interactive explainers show how population models and neural networks compute.
-  cta_btn: Explore the methods
+  cta_title: Methods
+  cta_text: Two interactive explainers show how population models and neural networks compute.
+  cta_btn: Open the methods page.
 methods:
   title: Methods you can explore
   lead: Two interactive explainers built on simulated patients and public molecule structures show how methods used in modern pharmacology work. They are teaching examples, not results from patients or from our experiments.
@@ -68,7 +67,7 @@ methods:
   dl_lead: 'A neural network is a chain of simple calculations: weighted sums followed by a non-linearity. Training changes the weights to reduce the error. Run the forward pass, inspect the gradients of the backward pass, and follow message passing across a real drug molecule.'
   dl_limits: Teaching examples with small models. The neural network learns a known formula from synthetic patients. The graph network learns to reproduce the Crippen logP that RDKit calculates (a calculated value, not a measurement) from about 4,600 public structures (NCI Open Database, as shipped with RDKit). They show the mechanics and are not validated for prediction.
   reading_title: Further reading
-  reading_sub: General references for the methods above, not publications of this laboratory. Every DOI was checked against Crossref on 2026-10-13.
+  reading_sub: General references for the methods above; they are not publications of this laboratory.
 pubs:
   title: Publications
   lead: '{n} publications from {a} to {b}. Filter by year or search by title, author or journal.'
@@ -83,7 +82,7 @@ pubs:
   n_items: '{n} papers'
   none: No publications match your search.
   doi_aria: Open DOI link for
-  note: Entries are listed as provided by the laboratory. Authors, volume and pages are shown only where they could be checked against the DOI record. The principal investigator is shown in bold.
+  note: The principal investigator is shown in bold. Records that are still being checked are listed without authors or DOI link.
 people:
   title: People
   lead: A research group of graduate students led by Professor Sung-Hoon Ahn.
@@ -113,7 +112,6 @@ contact:
   write: Write an e-mail
   inquire: Send an inquiry
   map: Open in a map
-  map_note: The map link opens OpenStreetMap in a new tab. This page itself loads nothing from other sites.
   join_list:
   - A short CV
   - Your research interests

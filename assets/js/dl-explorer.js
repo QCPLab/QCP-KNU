@@ -328,7 +328,7 @@
     const pal = (() => { const cs = getComputedStyle(el); const g = (n, fb) => hexRgb(cs.getPropertyValue(n), fb); return { accent: g('--accent', [10, 125, 119]), accent2: g('--accent-2', [6, 94, 89]), data: g('--data', [200, 89, 15]), blue: g('--blue', [40, 89, 168]), ink: g('--ink', [16, 36, 58]), soft: g('--bg-soft', [243, 246, 249]) }; })();
     const tint = (v, vmax, act) => { const a = vmax > 0 ? Math.min(1, Math.abs(v) / vmax) : 0, c = act ? pal.accent : (v >= 0 ? pal.blue : pal.data); return `rgba(${c[0]},${c[1]},${c[2]},${(0.05 + 0.32 * a).toFixed(3)})`; };
     const W = M.weights, NS_ = M.snapshots.length, FIN = NS_ - 1;
-    const st = { tab: 0, snap: FIN, wt: 70, age: 50, egfr: 90, cls: 1, fStep: 6, bStep: 3, diag: 'f', mi: 0, gStep: 0, gDim: [4, 0, 0, 0], gUser: {}, atom: 0 };
+    const st = { tab: 0, snap: FIN, wt: 70, age: 50, egfr: 90, cls: 1, fStep: 0, bStep: 0, diag: 'f', mi: 0, gStep: 0, gDim: [4, 0, 0, 0], gUser: {}, atom: 0 };
     let raf = 0, liveT = 0;
 
     const live = h('div', { class: 'dx-sr', role: 'status', 'aria-live': 'polite' });

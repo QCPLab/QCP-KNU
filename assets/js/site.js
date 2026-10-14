@@ -23,7 +23,7 @@
         if (header.classList.contains('is-open') && !header.contains(e.target)) setOpen(false);
       });
       $$('.nav a', header).forEach((a) => a.addEventListener('click', () => setOpen(false)));
-      const wide = window.matchMedia('(min-width: 880px)');
+      const wide = window.matchMedia('(min-width: 960px)');
       const onWide = (m) => { if (m.matches) setOpen(false); };
       if (wide.addEventListener) wide.addEventListener('change', onWide); else if (wide.addListener) wide.addListener(onWide);
     }
