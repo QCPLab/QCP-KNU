@@ -1,0 +1,4 @@
+# Papers added from the laboratory's own publication list (KNU_PK_Lab_Intro v10). Each record is checked against PubMed or the
+# publisher record before it is listed here (see docs/PUBLICATIONS_AUDIT.md). Merged by tools/make_publications.py.
+# Fields: no, year, title, journal, authors (list of "Given Family"), volume, issue, page, doi, note (optional, e.g. "in Korean").
+added: []
