@@ -25,7 +25,8 @@ hero:
   lead: We study how drugs are absorbed, distributed, metabolized and excreted, and how these processes change with disease, drug–drug interactions and individual differences. We connect animal and in vitro experiments, LC-MS/MS bioanalysis and quantitative modeling to drug discovery and the safe use of medicines.
 home:
   motion_title: Our research in motion
-  motion_sub: "Five short simulations show the questions we work on. They run on model equations and simulated numbers, not laboratory data. Press Play or drag the time slider."
+  motion_sub: "Five short simulations show the questions we work on. They run on model equations and simulated numbers, not laboratory data."
+  motion_hint: "Press Play or drag the time slider."
   methods_title: Interactive methods
   methods_sub: Two explainers with simulated patients and public molecule structures.
   nlme_text: 'Watch a population pharmacokinetic model being estimated, iteration by iteration: the fit to the data, the parameters and the objective function.'
@@ -133,7 +134,7 @@ motion:
     pk:
       tab: "Pharmacokinetics"
       title: "Exposure after an oral dose."
-      text: "A, share of the dose at the dose site, in plasma and eliminated (one square is 2.5 %). B, plasma concentration of a one-compartment model with first-order absorption and elimination, C(t) = ka/(ka – ke) · (exp(–ke·t) – exp(–ka·t)), relative to the reference peak; ka = 1.0 h⁻¹, ke = 0.20 h⁻¹ (0.10 h⁻¹ when clearance is halved at unchanged volume). Dose and volume are set to 1 and absorption is complete."
+      text: "A, share of the dose at the dose site, in plasma and eliminated (one square is 2.5 %); arrow width follows the instantaneous rate, each arrow on its own scale. B, plasma concentration of a one-compartment model with first-order absorption and elimination, C(t) = ka/(ka – ke) · (exp(–ke·t) – exp(–ka·t)), relative to the reference peak; ka = 1.0 h⁻¹, ke = 0.20 h⁻¹ (0.10 h⁻¹ when clearance is halved at unchanged volume). Dose and volume are set to 1 and absorption is complete."
     metabolism:
       tab: "Metabolism"
       title: "From parent drug to metabolite."
@@ -141,7 +142,7 @@ motion:
     transport:
       tab: "Transporters"
       title: "Competition at a transporter."
-      text: "A, share of the dose in plasma and taken up into the liver, and ten transporter sites that are held by the substrate, held by the inhibitor or free. B, plasma concentration. After an intravenous dose the substrate is taken up by a saturable transporter, v = Vmax · C / (Km (1 + [I]/Ki) + C), with maximal rate Vmax = 0.5 h⁻¹ (relative units), Michaelis constant Km = 0.8 and initial concentration 1. An inhibitor at constant concentration binds the same sites (competitive, [I]/Ki = 3), so fewer sites are free for the substrate; the rate equals Vmax times the share of sites held by the substrate. There is no other elimination."
+      text: "A, share of the dose in plasma and taken up into the liver, and ten transporter sites that are held by the substrate, held by the inhibitor or free (arrow width follows the uptake rate). B, plasma concentration. After an intravenous dose the substrate is taken up by a saturable transporter, v = Vmax · C / (Km (1 + [I]/Ki) + C), with maximal rate Vmax = 0.5 h⁻¹ (relative units), Michaelis constant Km = 0.8 and initial concentration 1. An inhibitor at constant concentration binds the same sites (competitive, [I]/Ki = 3), so fewer sites are free for the substrate; the rate equals Vmax times the share of sites held by the substrate. There is no other elimination."
     modeling:
       tab: "Modeling"
       title: "Fitting a model, then predicting."

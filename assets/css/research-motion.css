@@ -16,7 +16,7 @@
 .rm-curve { fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 .rm-curve.thin { stroke-width: 1.5; }
 .rm-curve.dash { stroke-dasharray: 6 4; }
-.rm-curve.ghost { stroke-opacity: .5; stroke-dasharray: 6 4; }
+.rm-curve.ghost { stroke-opacity: .7; stroke-dasharray: 6 4; }
 .c-a { stroke: var(--accent); }
 .c-b { stroke: var(--data); }
 .c-grey { stroke: #8a8a8a; }
@@ -69,5 +69,27 @@
   .rm-tab[aria-selected="true"] { background: var(--ink); border-color: var(--ink); color: #fff; }
 }
 @media (max-width: 560px) { .rm-time { width: auto; flex: 1 0 100%; text-align: left; } }
-@media (forced-colors: active) { .rm-opt[aria-pressed="true"], .rm-tab[aria-selected="true"] { outline: 2px solid Highlight; outline-offset: -2px; } }
-@media print { .rm-bar, .rm-opts, .rm-tabs { display: none; } .rm-panels { display: block; } .rm-panels > [data-rm-panel] { visibility: visible; } }
+@media (forced-colors: active) { .rm-opt[aria-pressed="true"], .rm-tab[aria-selected="true"] { outline: 2px solid Highlight; outline-offset: -2px; } .rm-svg { forced-color-adjust: none; background: #fff; } }
+@media print { .rm-bar, .rm-opts, .rm-tabs { display: none; } .rm-panels { display: block; } .rm-panels > [data-rm-panel][data-active] { visibility: visible; } }
+
+.rm-cap .nb { display: inline-block; max-width: 100%; white-space: normal; } /* formulas stay in one piece but may wrap on a very narrow or widely spaced line */
+.rm-needs-js { display: none; }
+.rm-on .rm-needs-js { display: inline; }
+@media (min-width: 900px) and (max-width: 975px) { .rm-tabs { gap: 0; } .rm-tab { padding-inline: 6px; font-size: .9rem; } }
+
+/* space reserved for a figure until research-motion.js has built it (heights measured per scene); removed again when the script is ready or after 4 s */
+.rm { container-type: inline-size; }
+.rm-ph { display: none; }
+.rm-pending .rm-ph { display: block; }
+.rm-pending .rm[data-rm="pk"] .rm-ph { height: 750px; }
+.rm-pending .rm[data-rm="metabolism"] .rm-ph { height: 760px; }
+.rm-pending .rm[data-rm="transport"] .rm-ph { height: 770px; }
+.rm-pending .rm[data-rm="modeling"] .rm-ph { height: 640px; }
+.rm-pending .rm[data-rm="bioanalysis"] .rm-ph { height: 640px; }
+@container (min-width: 560px) {
+  .rm-pending .rm[data-rm="pk"] .rm-ph { height: 470px; }
+  .rm-pending .rm[data-rm="metabolism"] .rm-ph { height: 470px; }
+  .rm-pending .rm[data-rm="transport"] .rm-ph { height: 460px; }
+  .rm-pending .rm[data-rm="modeling"] .rm-ph { height: 410px; }
+  .rm-pending .rm[data-rm="bioanalysis"] .rm-ph { height: 385px; }
+}

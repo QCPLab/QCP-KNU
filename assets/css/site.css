@@ -21,11 +21,9 @@ a:hover { color: var(--accent-2); text-decoration-thickness: 2px; }
 ul, ol { margin: 0; padding: 0; }
 address { font-style: normal; }
 ::selection { background: var(--accent-soft); }
-:focus { outline: none; }
 :focus-visible { outline: 3px solid var(--ring); outline-offset: 2px; }
 main { flex: 1 0 auto; }
-main:focus { outline: none; }
-.pub-title, .pub-c-title, .lead, .topics h3 { text-wrap: wrap; }
+main.pub-title, .pub-c-title, .lead, .topics h3 { text-wrap: wrap; }
 .wrap { width: min(100% - 2 * var(--gut), var(--wrap)); margin-inline: auto; }
 .nb { white-space: nowrap; }
 .muted, .fine { color: var(--muted); }
@@ -81,7 +79,8 @@ main:focus { outline: none; }
 .single > section { padding-top: 36px; margin-top: 36px; border-top: 1px solid var(--line); }
 .single > section:first-child { padding-top: 0; margin-top: 0; border-top: 0; }
 .single h2 { margin-bottom: 14px; }
-.aside { position: sticky; top: 24px; }
+.aside { position: static; }
+@media (min-width: 900px) and (min-height: 820px) { .aside { position: sticky; top: 24px; } } /* only when the whole column fits on screen */
 .aside .box { border-top: 2px solid var(--ink); padding-top: 12px; margin-bottom: 30px; font-size: .96875rem; }
 .aside h2 { font-size: 1rem; margin-bottom: 8px; }
 .aside p { margin: 0 0 .5em; }

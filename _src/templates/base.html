@@ -26,6 +26,9 @@
 <link rel="canonical" href="{{ abs_url(lang) }}">
 {%- endif %}
 <script>document.documentElement.classList.add('js')</script>
+{%- if 'research-motion' in page.js %}
+<script>(function(d){d.classList.add('rm-pending');setTimeout(function(){d.classList.remove('rm-pending')},4000)})(document.documentElement)</script>
+{%- endif %}
 <link rel="stylesheet" href="{{ asset('fonts/pretendard/pretendard.css') }}">
 <link rel="stylesheet" href="{{ asset('css/tokens.css') }}">
 <link rel="stylesheet" href="{{ asset('css/site.css') }}">

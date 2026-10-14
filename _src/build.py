@@ -208,7 +208,8 @@ def build() -> dict[str, str]:
 NOBREAK = [re.compile(p) for p in (
     r"LC-MS/MS", r"\(\+82-33-250-6912\)", r"\b[A-Za-z]{1,6}-\d{2,}\b", r"Gangwon-do 24341",
     r"C\(t\) = ka/\(ka – ke\) · \(exp\(–ke·t\) – exp\(–ka·t\)\)",     # formulas in the figure captions stay in one piece
-    r"v = Vmax · C / \(Km \(1 \+ \[I\]/Ki\) \+ C\)")]
+    r"v = Vmax · C / \(Km \(1 \+ \[I\]/Ki\) \+ C\)",
+    r"(?:ka|ke|Km|Vmax) = \d[\d.]*(?: h⁻¹)?", r"\[I\]/Ki = \d")]
 UNIT_RX = re.compile(r"(?<=\d) (?=(?:h⁻¹|h(?![A-Za-z])|mg(?![A-Za-z])|mg/L|ng/mL|min(?![A-Za-z])|L/h|%))")  # a number and its unit are never split by a line break
 
 
@@ -222,6 +223,7 @@ def nobreak(page: str) -> str:
         for rx in NOBREAK:
             t = rx.sub(lambda mm: f'<span class="nb">{mm.group(0)}</span>', t)
         t = UNIT_RX.sub("\u00a0", t)
+        t = re.sub(r"(?<![A-Za-z])([AB]), (?=\S)", "\\1,\u00a0", t)  # figure panel letters ("A, ...") stay with the next word
         t = re.sub(r"(?<=\S)·(?=\S)", "\u2060·\u2060", t)  # "A·B": no break before or after the dot
         return ">" + t.replace(" · ", "\u00a0· ") + "<"
 

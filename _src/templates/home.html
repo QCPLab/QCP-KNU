@@ -18,7 +18,7 @@
 
       <section aria-labelledby="motion-h">
         <h2 id="motion-h">{{ t.home.motion_title }}</h2>
-        <p>{{ t.home.motion_sub }}</p>
+        <p>{{ t.home.motion_sub }} <span class="rm-needs-js">{{ t.home.motion_hint }}</span></p>
         <div data-rm-viewer data-label="{{ t.home.motion_title }}">
         {%- for id in research.motion_order %}
           <div id="rm-panel-{{ id }}" data-rm-panel="{{ id }}" data-title="{{ t.motion.scenes[id].tab }}">{{ rm_fig(id, loop.index, t) }}</div>

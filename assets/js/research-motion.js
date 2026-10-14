@@ -274,6 +274,7 @@
       if (lx + sw + 6 + w > box.x + box.w && lx > box.x) { lx = box.x; ly += 18; }
       if (it.kind === 'dot') el('circle', { cx: lx + sw / 2, cy: ly - 4, r: 3.5, class: it.cls }, g);
       else if (it.kind === 'area') el('rect', { x: lx, y: ly - 9, width: sw, height: 9, class: it.cls }, g);
+      else if (it.kind === 'ghost') { el('line', { x1: lx, x2: lx + sw, y1: ly - 7, y2: ly - 7, class: 'rm-curve c-a ghost' }, g); el('line', { x1: lx, x2: lx + sw, y1: ly - 2, y2: ly - 2, class: 'rm-curve c-b ghost' }, g); }
       else el('line', { x1: lx, x2: lx + sw, y1: ly - 4, y2: ly - 4, class: 'rm-curve ' + it.cls + (it.kind === 'dash' ? ' dash' : '') }, g);
       lab.setAttribute('x', lx + sw + 6); lab.setAttribute('y', ly);
       lx += sw + 6 + w + 16;
@@ -366,7 +367,7 @@
   SCENES.metabolism = {
     dur: 11,
     alt: { en: 'Animation: share of the dose as parent drug, metabolite and eliminated, beside the amounts over time.', ko: '애니메이션: 투여량이 모약물·대사체·소실로 나뉘는 비율과 시간에 따른 양의 변화.' },
-    opts: [{ en: 'Typical metabolism', ko: '기준 대사' }, { en: 'Enzyme inhibited', ko: '대사효소 억제' }],
+    opts: [{ en: 'Typical metabolism', ko: '기준 대사' }, { en: 'Enzyme inhibited', ko: '대사효소 저해' }],
     build({ svg, W, opt }) {
       const k1 = MET.k1[opt], st = metStats(k1), ref = metStats(MET.k1[0]);
       const flow = flowPanel(svg, 0, 0, 'A', [
@@ -375,7 +376,7 @@
         { kind: 'fill', title: tr({ en: 'Eliminated', ko: '소실됨' }), cls: 'sq-grey' }], geoFor(W));
       const L = twoPanels(W, flow.H);
       const legend = [{ kind: 'line', cls: 'c-a', label: tr({ en: 'Parent drug', ko: '모약물' }) }, { kind: 'line', cls: 'c-b', label: tr({ en: 'Metabolite', ko: '대사체' }) }];
-      if (opt) legend.push({ kind: 'dash', cls: 'c-grey', label: tr({ en: 'Typical metabolism', ko: '기준 대사' }) });
+      if (opt) legend.push({ kind: 'ghost', label: tr({ en: 'Typical metabolism', ko: '기준 대사' }) });
       const pl = plotPanel(svg, L.plot, { letter: 'B', ylabel: tr({ en: 'Amount (% of dose, molar)', ko: '양 (투여량의 %, 몰 기준)' }),
         xlabel: tr(UI.tlabel), xd: [0, MET.T], yd: [0, 100], xticks: xt(W, [0, 6, 12, 18, 24], [0, 12, 24]), yticks: [0, 25, 50, 75, 100], legend });
       const g1 = opt ? curve(pl.dyn, 'c-a ghost') : null, g2 = opt ? curve(pl.dyn, 'c-b ghost') : null;
@@ -403,9 +404,9 @@
     const st = metStats(MET.k1[opt]), ref = metStats(MET.k1[0]);
     return opt
       ? tr({ en: `Enzyme inhibited: parent half-life ${nf(ref.t12, 1)} → ${U(st.t12, 1, 'h')}; metabolite peak ${nf(100 * ref.peak, 0)} → ${nf(100 * st.peak, 0)} % of the dose, at ${nf(ref.tmax, 1)} → ${U(st.tmax, 1, 'h')}.`,
-            ko: `대사효소 억제: 모약물 반감기 ${nf(ref.t12, 1)} → ${U(st.t12, 1, 'h')}, 대사체 최고량 투여량의 ${nf(100 * ref.peak, 0)} → ${nf(100 * st.peak, 0)}%(${nf(ref.tmax, 1)} → ${U(st.tmax, 1, 'h')} 시점).` })
+            ko: `대사효소 저해: 모약물 반감기 ${nf(ref.t12, 1)} → ${U(st.t12, 1, 'h')}, 대사체 최고량은 투여량의 ${nf(100 * ref.peak, 0)} → ${nf(100 * st.peak, 0)}%(최고 시점 ${nf(ref.tmax, 1)} → ${U(st.tmax, 1, 'h')}).` })
       : tr({ en: `Typical metabolism: parent half-life ${U(st.t12, 1, 'h')}; the metabolite peaks at ${U(st.tmax, 1, 'h')} with ${nf(100 * st.peak, 0)} % of the dose.`,
-            ko: `기준 대사: 모약물 반감기 ${U(st.t12, 1, 'h')}, 대사체는 ${U(st.tmax, 1, 'h')}에 투여량의 ${nf(100 * st.peak, 0)}%로 최고.` });
+            ko: `기준 대사: 모약물 반감기 ${U(st.t12, 1, 'h')}, 대사체는 ${U(st.tmax, 1, 'h')}에 최고(투여량의 ${nf(100 * st.peak, 0)}%).` });
   };
 
   /* 3 · transporters and interactions */
@@ -416,7 +417,7 @@
     build({ svg, W, opt }) {
       const sol = tp()[opt], alone = tp()[0], inh = TP.inh[opt];
       const flow = flowPanel(svg, 0, 0, 'A', [
-        { kind: 'fill', title: tr({ en: 'Plasma (substrate)', ko: '혈장 (기질)' }), cls: 'sq-a' },
+        { kind: 'fill', title: tr({ en: 'Plasma', ko: '혈장 (기질)' }), cls: 'sq-a' },
         { kind: 'sites', title: tr({ en: 'Transporter sites', ko: '수송체 결합 부위' }),
           key: [{ cls: 'sq-a', label: tr({ en: 'substrate', ko: '기질' }) }, { cls: 'sq-b', label: tr({ en: 'inhibitor', ko: '저해제' }) }, { cls: 'sq-free', label: tr({ en: 'free', ko: '빈 자리' }) }] },
         { kind: 'fill', title: tr({ en: 'Taken up (liver)', ko: '간으로 흡수' }), cls: 'sq-blue' }], geoFor(W));
@@ -457,12 +458,12 @@
   /* 4 · modelling: fit, then predict */
   SCENES.modeling = {
     dur: 15,
-    alt: { en: 'Animation: simulated measurements, a model curve converging on them as its parameters are fitted, then a prediction for repeated dosing.', ko: '애니메이션: 모의 측정값, 모형 매개변수를 적합하며 곡선이 측정값에 수렴하는 과정, 반복 투여 예측.' },
+    alt: { en: 'Animation: simulated measurements, a model curve converging on them as its parameters are fitted, then a prediction for repeated dosing.', ko: '애니메이션: 모의 측정값, 모형 모수를 추정하며 곡선이 측정값에 수렴하는 과정, 반복 투여 예측.' },
     opts: null,
     build({ svg, W }) {
       const { obs, path } = fitData();
-      const thAt = (q) => { const x = clamp(q, 0, path.length - 1), i = Math.min(Math.floor(x), path.length - 2), f = x - i; return path[i].th.map((v, j) => v + (path[i + 1].th[j] - v) * f); };
-      const ssqAt = (th) => FIT.times.reduce((s, t, i) => s + Math.pow(Math.log(obs[i]) - Math.log(fitConc(th, t)), 2), 0);
+      const stepAt = (q) => { const x = clamp(q, 0, path.length - 1), i = Math.min(Math.floor(x), path.length - 2); return { i, f: x - i }; };
+      const thAt = (q) => { const k = stepAt(q); return path[k.i].th.map((v, j) => v + (path[k.i + 1].th[j] - v) * k.f); };
       const x = 0, fl = svg, tw = W >= 560 ? FW - 20 : W;
       text(fl, x, 14, 'A', 'ink letter');
       const phases = [tr({ en: '1 Measure', ko: '1 측정' }), tr({ en: '2 Fit', ko: '2 적합' }), tr({ en: '3 Predict', ko: '3 예측' })];
@@ -496,7 +497,7 @@
           cPred.setAttribute('d', u > 0.7 ? pathOf(multi, pl.sx, pl.sy, 0, tp_, step) : '');
           const active = u < 0.22 ? 0 : u < 0.7 ? 1 : 2;
           ph.forEach((e, i) => e.setAttribute('class', 'rm-t phase' + (i === active ? ' on' : '')));
-          const v = [Math.exp(th[0]), Math.exp(th[1]), Math.exp(th[2]), ssqAt(th)];
+          const kk = stepAt(qIdx), v = [Math.exp(th[0]), Math.exp(th[1]), Math.exp(th[2]), path[kk.i].s + (path[kk.i + 1].s - path[kk.i].s) * kk.f];
           vals.forEach((e, i) => setText(e, nf(v[i], rows[i][1])));
           setText(note, u < 0.22 ? tr({ en: 'Starting values (a guess)', ko: '초기 추정값' }) : u < 0.7 ? tr({ en: 'Levenberg–Marquardt steps', ko: 'Levenberg–Marquardt 반복' }) : tr({ en: 'Fitted values', ko: '적합 결과' }));
         },
@@ -509,9 +510,9 @@
     const thF = fitData().path.slice(-1)[0].th, m = fitMulti(thF);
     let pk = 0; for (let t = 36; t <= 48; t += 0.05) pk = Math.max(pk, m(t));
     const tro = m(48), ka = nf(Math.exp(thF[0]), 2), cl = nf(Math.exp(thF[1]), 1), v = nf(Math.exp(thF[2]), 0);
-    const tru = nf(FIT.truth[0], 1) + ', ' + nf(FIT.truth[1], 1) + ', ' + nf(FIT.truth[2], 0);
-    return tr({ en: `Fitted ka ${ka} h⁻¹, CL/F ${cl} L/h, V/F ${v} L (values used to simulate: ${tru}). Predicted between 36 and 48\u00a0h: peak ${nf(pk, 1)}, trough ${nf(tro, 1)} mg/L.`,
-                ko: `적합 결과 ka ${ka} h⁻¹, CL/F ${cl} L/h, V/F ${v} L (모의에 쓴 값: ${tru}). 36~48\u00a0h 예측: 최고 ${nf(pk, 1)}, 최저 ${nf(tro, 1)} mg/L.` });
+    const tru = 'ka ' + nf(FIT.truth[0], 1) + ', CL/F ' + nf(FIT.truth[1], 1) + ', V/F ' + nf(FIT.truth[2], 0);
+    return tr({ en: `Fitted ka ${ka}\u00a0h⁻¹, CL/F ${cl}\u00a0L/h, V/F ${v}\u00a0L (values used to simulate: ${tru}). Predicted between 36 and 48\u00a0h: peak ${nf(pk, 1)}, trough ${U(tro, 1, 'mg/L')}.`,
+                ko: `적합 결과 ka ${ka}\u00a0h⁻¹, CL/F ${cl}\u00a0L/h, V/F ${v}\u00a0L (모의에 쓴 값: ${tru}). 36~48\u00a0h 예측: 최고 농도 ${nf(pk, 1)}, 최저 농도 ${U(tro, 1, 'mg/L')}.` });
   };
 
   /* 5 · bioanalysis */
@@ -523,10 +524,10 @@
       const D = bioData(), wide = W >= 560, hw = wide ? Math.floor((W - 30) / 2) : W, ph = wide ? 300 : 250;
       const boxA = { x: 0, y: 0, w: hw, h: ph }, boxB = wide ? { x: hw + 30, y: 0, w: W - hw - 30, h: ph } : { x: 0, y: ph + 20, w: W, h: ph };
       const H = wide ? ph : 2 * ph + 20;
-      const A = plotPanel(svg, boxA, { letter: 'A', ylabel: tr({ en: 'Intensity (% of internal standard peak)', ko: '강도 (내부표준 피크 대비 %)' }), xlabel: tr({ en: 'Retention time (min)', ko: '머무름 시간 (min)' }),
+      const A = plotPanel(svg, boxA, { letter: 'A', ylabel: tr({ en: 'Intensity (% of internal standard peak)', ko: '강도 (내부표준물질 피크 대비 %)' }), xlabel: tr({ en: 'Retention time (min)', ko: '머무름 시간 (min)' }),
         xd: [0, BIO.Tmax], yd: [0, 110], xticks: [0, 1, 2, 3], yticks: [0, 50, 100],
         legend: [{ kind: 'line', cls: 'c-a', label: tr({ en: 'Analyte', ko: '분석물질' }) }, { kind: 'line', cls: 'c-ink', label: tr({ en: 'Internal standard (SIL-IS)', ko: '내부표준물질 (SIL-IS)' }) }] });
-      const B = plotPanel(svg, boxB, { letter: 'B', ylabel: tr({ en: 'Analyte / IS peak-area ratio', ko: '분석물질/IS 피크 면적비' }), xlabel: tr({ en: 'Concentration (ng/mL)', ko: '농도 (ng/mL)' }),
+      const B = plotPanel(svg, boxB, { letter: 'B', ylabel: tr({ en: 'Analyte / IS peak-area ratio', ko: '분석물질/내부표준물질 피크 면적비' }), xlabel: tr({ en: 'Concentration (ng/mL)', ko: '농도 (ng/mL)' }),
         xd: [0, 60], yd: [0, 2.5], xticks: [0, 20, 40, 60], yticks: [0, 1, 2],
         legend: [{ kind: 'dot', cls: 'dot-b', label: tr({ en: 'Calibrators', ko: '검량선 표준시료' }) }, { kind: 'line', cls: 'c-a', label: tr({ en: 'Weighted fit (1/x²)', ko: '가중 회귀 (1/x²)' }) }, { kind: 'dash', cls: 'c-ink', label: tr({ en: 'Sample', ko: '측정 시료' }) }] });
       const aI = el('path', { class: 'area-ink', d: '' }, A.dyn), aA = el('path', { class: 'area-a', d: '' }, A.dyn);
@@ -585,11 +586,16 @@
     poster() { return this.sc.poster == null ? 1 : this.sc.poster; }
     active() { const p = this.root.closest('[data-rm-panel]'); return !p || p.getAttribute('data-active') !== 'false'; }
     canAuto() { return !this.auto && !reduced() && this.w > 0 && this.active() && !document.hidden; }
-    maybeAuto() { // a scene shown by the visitor (tab) starts when at least 45 % of it is on screen
-      if (!this.mounted || !this.canAuto()) return;
+    inView() { // at least 45 % of the figure, or half of the window when the figure is taller than that (large zoom)
       const r = this.stage.getBoundingClientRect(), vis = Math.min(r.bottom, window.innerHeight) - Math.max(r.top, 0);
-      if (vis >= 0.45 * r.height) { this.auto = true; this.play(); }
+      return vis >= Math.min(0.45 * r.height, 0.5 * window.innerHeight);
     }
+    maybeAuto() { // a scene shown by the visitor (tab) resumes where it was, or starts when it is on screen
+      if (!this.mounted) return;
+      if (this.parked) { this.parked = false; if (!this.playing && this.u < 1) this.play(); return; }
+      if (this.canAuto() && this.inView()) { this.auto = true; this.play(); }
+    }
+    park() { if (this.playing) { this.pause(); this.parked = true; } }
     mount() {
       if (this.mounted || !this.sc) return;
       this.mounted = true;
@@ -599,7 +605,7 @@
       this.stage.appendChild(this.svg);
       const bar = document.createElement('div'); bar.className = 'rm-bar';
       this.btn = document.createElement('button'); this.btn.type = 'button'; this.btn.className = 'rm-btn';
-      this.scrub = document.createElement('input'); this.scrub.type = 'range'; this.scrub.min = 0; this.scrub.max = 1000; this.scrub.step = 20; this.scrub.value = 0;
+      this.scrub = document.createElement('input'); this.scrub.type = 'range'; this.scrub.min = 0; this.scrub.max = 1000; this.scrub.step = 'any'; this.scrub.value = 0;
       this.scrub.className = 'rm-scrub'; this.scrub.setAttribute('aria-label', tr(UI.time));
       this.time = document.createElement('span'); this.time.className = 'rm-time'; this.time.setAttribute('aria-hidden', 'true');
       bar.append(this.btn, this.scrub, this.time);
@@ -617,8 +623,15 @@
       parts.push(this.res);
       const frag = document.createDocumentFragment(); parts.forEach((p) => frag.appendChild(p));
       r.insertBefore(frag, cap);
+      const ph = $('.rm-ph', r); if (ph) ph.remove();
       this.btn.addEventListener('click', () => (this.playing ? this.pause() : this.play()));
       this.scrub.addEventListener('input', () => { const v = this.scrub.value / 1000; this.pause(); this.seek(v); });
+      this.scrub.addEventListener('keydown', (e) => { // same steps in every browser: arrows 2 %, PageUp/PageDown 10 %
+        const d = { ArrowLeft: -0.02, ArrowDown: -0.02, ArrowRight: 0.02, ArrowUp: 0.02, PageDown: -0.1, PageUp: 0.1 }[e.key];
+        if (d === undefined && e.key !== 'Home' && e.key !== 'End') return;
+        e.preventDefault(); this.pause();
+        this.seek(e.key === 'Home' ? 0 : e.key === 'End' ? 1 : this.u + d);
+      });
       const later = () => { cancelAnimationFrame(this.rz); this.rz = requestAnimationFrame(() => this.layout()); }; // not inside the observer callback: the svg height changes
       if (window.ResizeObserver) new ResizeObserver(later).observe(this.stage); else window.addEventListener('resize', later);
       if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => this.layout(true));
@@ -627,8 +640,8 @@
       if (reduced()) this.seek(this.poster()); else this.render();
       if ('IntersectionObserver' in window) {
         const io = new IntersectionObserver((es) => es.forEach((e) => {
-          if (e.isIntersecting && this.canAuto()) { this.auto = true; this.play(); io.disconnect(); }
-        }), { threshold: 0.45 });
+          if (e.isIntersecting && this.canAuto() && this.inView()) { this.auto = true; this.play(); io.disconnect(); }
+        }), { threshold: [0.1, 0.25, 0.45] });
         io.observe(this.stage);
       }
     }
@@ -649,10 +662,12 @@
       if (!this.view) return;
       const u = this.u;
       this.view.draw(u);
-      this.scrub.value = Math.round(u * 1000);
+      this.scrub.value = u * 1000;
       const ro = this.view.readout(u);
       setText(this.time, ro);
-      if (!this.playing) this.scrub.setAttribute('aria-valuetext', ro);
+      const pc = Math.round(u * 100);
+      if (!this.playing || pc !== this.pc) this.scrub.setAttribute('aria-valuetext', ro); // at most once per percent while playing
+      this.pc = pc;
       const label = this.playing ? tr(UI.pause) : u >= 1 ? tr(UI.replay) : tr(UI.play);
       if (this.btn.textContent !== label) this.btn.textContent = label;
     }
@@ -685,7 +700,8 @@
     pause() { this.playing = false; cancelAnimationFrame(this.raf); this.render(); }
     seek(u) { this.u = clamp(u, 0, 1); this.render(); }
     setOpt(i) {
-      if (i === this.opt) return;
+      this.mount();
+      if (!this.optBtns || !this.optBtns[i] || i === this.opt) return;
       this.opt = i; this.pause();
       this.optBtns.forEach((b, k) => b.setAttribute('aria-pressed', String(k === i)));
       this.layout(true); this.u = 0; this.setResult();
@@ -717,7 +733,7 @@
     panels.forEach((q) => stack.appendChild(q)); host.appendChild(stack);
     function select(i, focus) {
       tabs.forEach((b, k) => { b.setAttribute('aria-selected', String(k === i)); b.tabIndex = k === i ? 0 : -1; panels[k].setAttribute('data-active', String(k === i)); });
-      panels.forEach((p, k) => { const f = $('figure.rm', p); if (f && f.__rm && k !== i) f.__rm.pause(); });
+      panels.forEach((p, k) => { const f = $('figure.rm', p); if (f && f.__rm && k !== i) f.__rm.park(); });
       const f = $('figure.rm', panels[i]);
       if (f && f.__rm) { f.__rm.mount(); f.__rm.maybeAuto(); }
       if (focus) tabs[i].focus();
@@ -758,9 +774,9 @@
   const figs = $$('figure.rm[data-rm]').filter((f) => SCENES[f.getAttribute('data-rm')]);
   figs.forEach((f) => new Fig(f));
   $$('[data-rm-viewer]').forEach(viewer);
-  if ('IntersectionObserver' in window) {
-    const near = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.__rm.mount(); near.unobserve(e.target); } }), { rootMargin: '900px 0px' });
-    figs.forEach((f) => near.observe(f));
-  } else figs.forEach((f) => f.__rm.mount());
+  figs.forEach((f) => f.__rm.mount()); // all figures are built at once, so the page height is final before anyone scrolls (jump links stay accurate)
+  document.documentElement.classList.remove('rm-pending');
+  document.documentElement.classList.add('rm-on');
+  window.addEventListener('beforeprint', () => figs.forEach((f) => { const g = f.__rm; if (g.mounted) { g.pause(); g.seek(g.poster()); } }));
   window.LabMotion = { selfTest, scenes: SCENES, figs: () => figs.map((f) => f.__rm), models: { pkStats, metStats, tp, fitData, bioData } };
 })();

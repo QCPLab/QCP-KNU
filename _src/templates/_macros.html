@@ -32,6 +32,7 @@
 {%- set s = t.motion.scenes[id] %}
 <figure class="rm" data-rm="{{ id }}">
   <noscript><p class="rm-fallback">{{ t.motion.nojs }}</p></noscript>
+  <div class="rm-ph" aria-hidden="true"></div>
   <figcaption class="rm-cap"><strong>{{ t.motion.fig }} {{ n }} | {{ s.title }}</strong> {{ s.text }}{% if s.get('more') %} {{ s.more }} <a href="{{ url('methods') }}#nlme">{{ s.more_link }}</a>.{% endif %} {{ t.motion.sim }}</figcaption>
 </figure>
 {%- endmacro %}

@@ -16,6 +16,7 @@
 <link rel="alternate" hreflang="ko" href="ko/">
 <link rel="alternate" hreflang="x-default" href="./">
 <script>document.documentElement.classList.add('js')</script>
+<script>(function(d){d.classList.add('rm-pending');setTimeout(function(){d.classList.remove('rm-pending')},4000)})(document.documentElement)</script>
 <link rel="stylesheet" href="assets/fonts/pretendard/pretendard.css">
 <link rel="stylesheet" href="assets/css/tokens.css">
 <link rel="stylesheet" href="assets/css/site.css">
@@ -61,32 +62,37 @@
 
       <section aria-labelledby="motion-h">
         <h2 id="motion-h">Our research in motion</h2>
-        <p>Five short simulations show the questions we work on. They run on model equations and simulated numbers, not laboratory data. Press Play or drag the time slider.</p>
+        <p>Five short simulations show the questions we work on. They run on model equations and simulated numbers, not laboratory data. <span class="rm-needs-js">Press Play or drag the time slider.</span></p>
         <div data-rm-viewer data-label="Our research in motion">
           <div id="rm-panel-pk" data-rm-panel="pk" data-title="Pharmacokinetics">
 <figure class="rm" data-rm="pk">
   <noscript><p class="rm-fallback">This figure is animated and needs JavaScript. The caption below describes it.</p></noscript>
-  <figcaption class="rm-cap"><strong>Fig. 1 | Exposure after an oral dose.</strong> A, share of the dose at the dose site, in plasma and eliminated (one square is 2.5 %). B, plasma concentration of a one-compartment model with first-order absorption and elimination, <span class="nb">C(t) = ka/(ka – ke) · (exp(–ke⁠·⁠t) – exp(–ka⁠·⁠t))</span>, relative to the reference peak; ka = 1.0 h⁻¹, ke = 0.20 h⁻¹ (0.10 h⁻¹ when clearance is halved at unchanged volume). Dose and volume are set to 1 and absorption is complete. Simulated; not laboratory data.</figcaption>
+  <div class="rm-ph" aria-hidden="true"></div>
+  <figcaption class="rm-cap"><strong>Fig. 1 | Exposure after an oral dose.</strong> A, share of the dose at the dose site, in plasma and eliminated (one square is 2.5 %); arrow width follows the instantaneous rate, each arrow on its own scale. B, plasma concentration of a one-compartment model with first-order absorption and elimination, <span class="nb">C(t) = ka/(ka – ke) · (exp(–ke⁠·⁠t) – exp(–ka⁠·⁠t))</span>, relative to the reference peak; <span class="nb">ka = 1.0 h⁻¹</span>, <span class="nb">ke = 0.20 h⁻¹</span> (0.10 h⁻¹ when clearance is halved at unchanged volume). Dose and volume are set to 1 and absorption is complete. Simulated; not laboratory data.</figcaption>
 </figure></div>
           <div id="rm-panel-metabolism" data-rm-panel="metabolism" data-title="Metabolism">
 <figure class="rm" data-rm="metabolism">
   <noscript><p class="rm-fallback">This figure is animated and needs JavaScript. The caption below describes it.</p></noscript>
-  <figcaption class="rm-cap"><strong>Fig. 2 | From parent drug to metabolite.</strong> A, share of the dose as parent drug, metabolite and eliminated; arrow width follows the instantaneous rate, each arrow on its own scale. B, amounts over time. An intravenous dose is converted one-to-one (molar) into a single metabolite (rate constant 0.36 h⁻¹; 0.09 h⁻¹ with the enzyme inhibited), and the metabolite is eliminated (0.18 h⁻¹). The parent is cleared by metabolism only. Simulated; not laboratory data.</figcaption>
+  <div class="rm-ph" aria-hidden="true"></div>
+  <figcaption class="rm-cap"><strong>Fig. 2 | From parent drug to metabolite.</strong> A, share of the dose as parent drug, metabolite and eliminated; arrow width follows the instantaneous rate, each arrow on its own scale. B, amounts over time. An intravenous dose is converted one-to-one (molar) into a single metabolite (rate constant 0.36 h⁻¹; 0.09 h⁻¹ with the enzyme inhibited), and the metabolite is eliminated (0.18 h⁻¹). The parent is cleared by metabolism only. Simulated; not laboratory data.</figcaption>
 </figure></div>
           <div id="rm-panel-transport" data-rm-panel="transport" data-title="Transporters">
 <figure class="rm" data-rm="transport">
   <noscript><p class="rm-fallback">This figure is animated and needs JavaScript. The caption below describes it.</p></noscript>
-  <figcaption class="rm-cap"><strong>Fig. 3 | Competition at a transporter.</strong> A, share of the dose in plasma and taken up into the liver, and ten transporter sites that are held by the substrate, held by the inhibitor or free. B, plasma concentration. After an intravenous dose the substrate is taken up by a saturable transporter, <span class="nb">v = Vmax · C / (Km (1 + [I]/Ki) + C)</span>, with maximal rate Vmax = 0.5 h⁻¹ (relative units), Michaelis constant Km = 0.8 and initial concentration 1. An inhibitor at constant concentration binds the same sites (competitive, [I]/Ki = 3), so fewer sites are free for the substrate; the rate equals Vmax times the share of sites held by the substrate. There is no other elimination. Simulated; not laboratory data.</figcaption>
+  <div class="rm-ph" aria-hidden="true"></div>
+  <figcaption class="rm-cap"><strong>Fig. 3 | Competition at a transporter.</strong> A, share of the dose in plasma and taken up into the liver, and ten transporter sites that are held by the substrate, held by the inhibitor or free (arrow width follows the uptake rate). B, plasma concentration. After an intravenous dose the substrate is taken up by a saturable transporter, <span class="nb">v = Vmax · C / (Km (1 + [I]/Ki) + C)</span>, with maximal rate <span class="nb">Vmax = 0.5 h⁻¹</span> (relative units), Michaelis constant <span class="nb">Km = 0.8</span> and initial concentration 1. An inhibitor at constant concentration binds the same sites (competitive, <span class="nb">[I]/Ki = 3</span>), so fewer sites are free for the substrate; the rate equals Vmax times the share of sites held by the substrate. There is no other elimination. Simulated; not laboratory data.</figcaption>
 </figure></div>
           <div id="rm-panel-modeling" data-rm-panel="modeling" data-title="Modeling">
 <figure class="rm" data-rm="modeling">
   <noscript><p class="rm-fallback">This figure is animated and needs JavaScript. The caption below describes it.</p></noscript>
-  <figcaption class="rm-cap"><strong>Fig. 4 | Fitting a model, then predicting.</strong> A, parameters and sum of squares of the model. B, nine concentrations after one 100 mg oral dose, measured up to 24 h (dotted vertical line; simulated with 8 % log-normal error), are fitted to the one-compartment model by least squares on the log scale. The curve moves through the accepted Levenberg–Marquardt steps (positions between steps are interpolated). The fitted model then predicts 100 mg every 12 h, adding the doses linearly; this regimen was not measured. Population models extend this to many subjects: <a href="methods/#nlme">nonlinear mixed-effects explainer</a>. Simulated; not laboratory data.</figcaption>
+  <div class="rm-ph" aria-hidden="true"></div>
+  <figcaption class="rm-cap"><strong>Fig. 4 | Fitting a model, then predicting.</strong> A, parameters and sum of squares of the model. B, nine concentrations after one 100 mg oral dose, measured up to 24 h (dotted vertical line; simulated with 8 % log-normal error), are fitted to the one-compartment model by least squares on the log scale. The curve moves through the accepted Levenberg–Marquardt steps (positions between steps are interpolated). The fitted model then predicts 100 mg every 12 h, adding the doses linearly; this regimen was not measured. Population models extend this to many subjects: <a href="methods/#nlme">nonlinear mixed-effects explainer</a>. Simulated; not laboratory data.</figcaption>
 </figure></div>
           <div id="rm-panel-bioanalysis" data-rm-panel="bioanalysis" data-title="Bioanalysis">
 <figure class="rm" data-rm="bioanalysis">
   <noscript><p class="rm-fallback">This figure is animated and needs JavaScript. The caption below describes it.</p></noscript>
-  <figcaption class="rm-cap"><strong>Fig. 5 | From chromatogram to concentration by <span class="nb">LC-MS/MS</span>.</strong> A, chromatogram of the analyte and its stable-isotope-labelled internal standard (SIL-IS), which elute together; the peak areas are integrated. B, the area ratio is read against a calibration curve fitted with 1/x² weighting. The calibrator ratios were generated from a straight line with 3 % error, not from chromatograms; matrix effects and recovery are not modelled. Simulated; not laboratory data.</figcaption>
+  <div class="rm-ph" aria-hidden="true"></div>
+  <figcaption class="rm-cap"><strong>Fig. 5 | From chromatogram to concentration by <span class="nb">LC-MS/MS</span>.</strong> A, chromatogram of the analyte and its stable-isotope-labelled internal standard (SIL-IS), which elute together; the peak areas are integrated. B, the area ratio is read against a calibration curve fitted with 1/x² weighting. The calibrator ratios were generated from a straight line with 3 % error, not from chromatograms; matrix effects and recovery are not modelled. Simulated; not laboratory data.</figcaption>
 </figure></div>
         </div>
       </section>
