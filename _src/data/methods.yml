@@ -1,8 +1,7 @@
 # Laboratory methods shown at the top of the Methods page and summarised on the home page.
 # Wording is generic on purpose and limited to what the publication list documents (species: rat, mouse; matrices: plasma, serum, brain;
 # in vitro: liver microsomes, permeability, transporters). Papers are referenced by their number in publications.yml (DOI-linked only).
-# TODO(PI): confirm the routine assay panel before launch (e.g. plasma protein binding, hepatocyte stability, Caco-2/MDCK permeability,
-#   CYP inhibition) and which bioanalytical validation guidance applies; add or remove steps accordingly.
+# Experimental methods confirmed by the lab on 2026-10-15; extend the steps if the routine assay panel grows (e.g. plasma protein binding, hepatocyte stability, permeability cell lines).
 lab:
   - id: invivo
     title: {en: "Animal in vivo pharmacokinetics"}

@@ -5,10 +5,10 @@ identity:
   university:  {en: "Kangwon National University"}
   college:     {en: "College of Pharmacy"}
   tagline:     {en: "Pharmacokinetics · Drug metabolism · Drug transport"}
-  # TODO(PI): name not yet approved by the PI (options: official name / "Ahn Lab" / PI's choice)
-  approved_by_pi: false
-indexable: false          # false -> <meta name="robots" content="noindex">, no sitemap/canonical. Set true only after PI approval.
-site_url: ""              # TODO(PI): fill in when the final address is decided; used for canonical + sitemap only if indexable
+  # Name, text, photo and member list were approved by the PI; reported by the lab on 2026-10-15 (the builder did not see the approval itself).
+  approved_by_pi: true
+indexable: true           # false -> <meta name="robots" content="noindex">, no sitemap/canonical. True only with identity.approved_by_pi and site_url.
+site_url: "https://qcplab.github.io/QCP-KNU/"   # address kept as is (HANDOFF Q11); used for canonical links and sitemap.xml
 show_member_emails: true  # the lab lists member e-mails on purpose; per member: show_email in members.yml
 official_page: "https://pharmacy.kangwon.ac.kr/pharmacy/lab/laboratory-of-pharmaceutical-sciences.do"
 copyright_year: 2026
