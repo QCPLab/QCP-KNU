@@ -6,7 +6,7 @@ address:
 rooms:
   - {label: {en: "Professor's office"}, value: {en: "Room 210"}}
   - {label: {en: "Laboratory"}, value: {en: "Room 209"}}
-map_url: "https://www.openstreetmap.org/search?query=Kangwon%20National%20University%20College%20of%20Pharmacy"
+map_url: "https://www.kangwon.ac.kr/campusmap/index.do?campus=1&bldng=404B"  # official campus map, building 404B
 join:
   # TODO(PI): wording needs PI approval (Q10)
   title: {en: "Join us"}
