@@ -514,7 +514,7 @@
       : tr({ en: `Substrate alone: the concentration falls to 50 % at ${U(sol.t50, 1, 'h')}.` });
   };
 
-  /* ================================================================== 4 · modelling: fit, objective landscape with the optimiser path, prediction */
+  /* ================================================================== 4 · modeling: fit, objective landscape with the optimizer path, prediction */
   const LAND = { lcl: [Math.log(2), Math.log(12)], lv: [Math.log(15), Math.log(80)], n: 36 };
   let landCache = null;
   const landscape = () => {
@@ -553,7 +553,7 @@
   };
   SCENES.modeling = {
     dur: 16, poster: 1, name: { en: 'model fitting' },
-    alt: { en: 'Animation: simulated measurements with a model curve moving towards them, the sum-of-squares landscape over clearance and volume with the optimiser path, a table of the parameters, then a prediction for repeated dosing.' },
+    alt: { en: 'Animation: simulated measurements with a model curve moving towards them, the sum-of-squares landscape over clearance and volume with the optimizer path, a table of the parameters, then a prediction for repeated dosing.' },
     opts: null,
     build({ svg, W }) {
       const wide = W >= 560, { obs, path } = fitData(), L = landscape(), fin = path[path.length - 1];
@@ -574,7 +574,7 @@
       const cFit = curve(pa.dyn, 'c-a'), cPred = curve(pa.dyn, 'c-a dash'), step = FIT.T / 240;
       // B: landscape
       const pbp = plotPanel(svg, bB, { letter: 'B', ylabel: tr({ en: 'V/F (L)' }), xlabel: tr({ en: 'CL/F (L/h)' }), xd: [2, 12], yd: [15, 80], xlog: true, ylog: true,
-        xticks: [2, 4, 8], yticks: [20, 40, 80], legend: [{ kind: 'thin', cls: 'c-grey', label: tr({ en: 'Sum-of-squares contours' }) }, { kind: 'line', cls: 'c-a', label: tr({ en: 'Optimiser path' }) }, { kind: 'dot', cls: 'dot-hollow', label: tr({ en: 'Simulated truth' }) }] });
+        xticks: [2, 4, 8], yticks: [20, 40, 80], legend: [{ kind: 'thin', cls: 'c-grey', label: tr({ en: 'Sum-of-squares contours' }) }, { kind: 'line', cls: 'c-a', label: tr({ en: 'Optimizer path' }) }, { kind: 'dot', cls: 'dot-hollow', label: tr({ en: 'Simulated truth' }) }] });
       [1.5, 3, 8, 25, 80].forEach((m) => el('path', { class: 'rm-curve thin c-grey', d: contourPath(L, L.zmin * m, pbp.sx, pbp.sy) }, pbp.dyn));
       el('circle', { cx: pbp.sx(FIT.truth[1]), cy: pbp.sy(FIT.truth[2]), r: 4.5, class: 'dot-hollow' }, pbp.dyn);
       const cp = el('path', { class: 'rm-curve c-a', d: '' }, pbp.dyn), stepDots = path.map((p) => el('circle', { cx: pbp.sx(Math.exp(p.th[1])), cy: pbp.sy(Math.exp(p.th[2])), r: 2.5, class: 'dot-a', opacity: 0 }, pbp.dyn)), cur = dot(pbp.dyn, 'dot-a', 5);
@@ -617,7 +617,7 @@
     return tr({ en: `Fitted ka ${ka} h⁻¹, CL/F ${cl} L/h, V/F ${v} L (values used to simulate: ${tru}). Predicted between 36 and 48 h: peak\u00a0${U(pk, 1, 'mg/L')}, trough\u00a0${U(tro, 1, 'mg/L')}.` });
   };
 
-  /* ================================================================== 5 · population modelling (NLME): the replay of a FOCE-I run on 30 simulated subjects */
+  /* ================================================================== 5 · population modeling (NLME): the replay of a FOCE-I run on 30 simulated subjects */
   const NL = { data: null, loading: null, error: null };
   const NL_URL = SCRIPT_SRC ? new URL('../data/nlme-demo.json', SCRIPT_SRC).href : 'assets/data/nlme-demo.json';
   const nlLoad = () => {
@@ -643,7 +643,7 @@
   };
   SCENES.nlme = {
     dur: 17, poster: 1, defaultOpt: 1, name: { en: 'population model estimation' }, cond: { en: 'Sampling design' }, load: nlLoad, ready: () => !!NL.data, failed: () => !!NL.error,
-    alt: { en: 'Animation: a population PK model estimated on 30 simulated subjects. Individual and population curves move towards the data as the optimiser iterates, with the objective function, the parameter estimates and the individual deviations shown beside them.' },
+    alt: { en: 'Animation: a population PK model estimated on 30 simulated subjects. Individual and population curves move towards the data as the optimizer iterates, with the objective function, the parameter estimates and the individual deviations shown beside them.' },
     opts: [{ en: 'Rich: 10 samples' }, { en: 'Moderate: 5 samples' }, { en: 'Sparse: 3 samples' }],
     build({ svg, W, opt }) {
       const wide = W >= 560, S = nlState(opt), F = S.F, n = S.n, nSub = S.D.subjects.length, tg = []; for (let t = 0; t <= 24.001; t += 0.5) tg.push(t);
@@ -962,7 +962,7 @@
     // pk: closed form vs RK4 of the ODEs  dA1/dt = -ka A1, dA2/dt = ka A1 - ke A2
     PK.ke.forEach((ke) => { const y = rk4((t, v) => [-PK.ka * v[0], PK.ka * v[0] - ke * v[1]], [1, 0], 0, 24, 2400);
       chk('pk closed form = ODE (ke=' + ke + ')', Math.abs(y[1] - (PK.ka / (PK.ka - ke)) * (Math.exp(-ke * 24) - Math.exp(-PK.ka * 24))) < 1e-8); });
-    chk('pk tmax maximises C', (() => { const s = pkStats(0.2), f = pkConc(0.2); return f(s.tmax) >= f(s.tmax - 0.01) && f(s.tmax) >= f(s.tmax + 0.01); })());
+    chk('pk tmax maximizes C', (() => { const s = pkStats(0.2), f = pkConc(0.2); return f(s.tmax) >= f(s.tmax - 0.01) && f(s.tmax) >= f(s.tmax + 0.01); })());
     chk('pk AUC = 1/ke (numeric)', (() => { const f = pkConc(0.1); let a = 0; for (let t = 0; t < 400; t += 0.01) a += 0.01 * (f(t) + f(t + 0.01)) / 2; return Math.abs(a - 10) < 1e-3; })());
     chk('pk eliminated share = AUC(0-t)/AUC(0-inf) (numeric)', PK.ke.every((ke) => { const f = pkConc(ke); let a = 0; for (let i = 0; i < 10000; i++) { const t = i * 0.001; a += 0.001 * (f(t) + f(t + 0.001)) / 2; }
       const dep = Math.exp(-PK.ka * 10), cen = (PK.ka / (PK.ka - ke)) * (Math.exp(-ke * 10) - Math.exp(-PK.ka * 10)); return Math.abs((1 - dep - cen) - a / (1 / ke)) < 1e-6; }));
@@ -975,7 +975,7 @@
     chk('transport: AUC ratio line = numeric ratios', TP.inh.every((x, i) => Math.abs(aucRatio(x) - tp()[i].auc / tp()[0].auc) < 1e-4));
     chk('transport: inhibitor raises AUC and t50', tp()[2].auc > tp()[0].auc && tp()[2].t50 > tp()[0].t50);
     chk('transport: occupancies sum <= 1 and rate = Vmax x theta_S', (() => { const q = theta(3, 1), c = 0.7, v = (TP.vmax * c) / (TP.km * 4 + c); return q.s + q.i <= 1 && Math.abs(v - TP.vmax * theta(3, c).s) < 1e-12; })());
-    // modelling
+    // modeling
     const F = fitData(), last = F.path[F.path.length - 1];
     chk('fit: sum of squares decreases monotonically', F.path.every((p, i) => i === 0 || p.s < F.path[i - 1].s));
     chk('fit: ends below start and near the truth (<15 %)', last.s < F.path[0].s && last.th.every((v, j) => Math.abs(Math.exp(v) / FIT.truth[j] - 1) < 0.15), last.th.map(Math.exp));

@@ -26,7 +26,7 @@
 
     {%- for g in groups %}
     <section aria-labelledby="g-{{ g.role }}">
-      <h2 class="group-h" id="g-{{ g.role }}">{{ t.people.roles[g.role] }}<small>{{ g.members|length }}</small></h2>
+      <h2 class="group-h" id="g-{{ g.role }}">{{ t.people.roles[g.role] }} <small>{{ g.members|length }}</small></h2>
       <ul class="roster">
       {%- for m in g.members %}
         <li><span class="n">{{ m.name_en }}</span>

@@ -4,7 +4,7 @@ meta:
   desc:
     home: Pharmacokinetics, drug metabolism and drug transport research at the College of Pharmacy, Kangwon National University.
     research: 'Research areas: pharmacokinetics of drug candidates and disease models, drug metabolism, transporters and drug–drug interactions, and quantitative modeling.'
-    methods: 'Laboratory methods (animal in vivo pharmacokinetics, in vitro pharmacokinetics and metabolism, LC-MS/MS bioanalysis) and two interactive explainers of modeling methods.'
+    methods: 'Laboratory methods (animal in vivo and in vitro pharmacokinetics, metabolism, LC-MS/MS bioanalysis) and two interactive explainers of modeling methods.'
     publications: Publications of the Laboratory of Pharmaceutical Sciences, Kangwon National University, searchable by year, title, author and journal.
     people: Principal investigator and graduate students of the Laboratory of Pharmaceutical Sciences.
     contact: Address, phone and e-mail of the Laboratory of Pharmaceutical Sciences, College of Pharmacy, Kangwon National University, Chuncheon.
@@ -56,16 +56,16 @@ methods:
   honesty: 'About the two interactive explainers: they are teaching examples built on simulated patients and public molecule structures, not results from patients or from our experiments. In the deep-learning example the molecules are real public structures and their logP is calculated by software, not measured. The calculations run in your browser; nothing is sent anywhere.'
   needs_js: These explainers need JavaScript. Please enable it to use them.
   nlme_title: How a population PK model is fitted
-  nlme_lead: People differ in how fast they clear a drug. A nonlinear mixed-effects (NLME) model describes the typical values and the spread between individuals at once. The optimiser starts from poor guesses and improves them step by step; here you can move through every step.
+  nlme_lead: People differ in how fast they clear a drug. A nonlinear mixed-effects (NLME) model describes the typical values and the spread between individuals at once. The optimizer starts from poor guesses and improves them step by step; here you can move through every step.
   nlme_steps:
   - 'Choose a sampling scenario: rich, moderate or sparse.'
-  - Press play, or drag the slider through the optimiser's iterations.
+  - Press play, or drag the slider through the optimizer's iterations.
   - Watch the fitted curves, the parameter estimates and the objective function change.
   - Select a subject to compare its data with its individual fit.
   nlme_limits: Simulated data from 30 virtual subjects and a single model. The estimator is a from-scratch implementation of first-order conditional estimation with interaction (FOCE-I). It illustrates the idea and is not a substitute for validated software.
   dl_title: How a neural network computes
   dl_lead: 'A neural network is a chain of simple calculations: weighted sums followed by a non-linearity. Training changes the weights to reduce the error. Run the forward pass, inspect the gradients of the backward pass, and follow message passing across a real drug molecule.'
-  dl_limits: Teaching examples with small models. The neural network learns a known formula from synthetic patients. The graph network learns to reproduce the Crippen logP that RDKit calculates (a calculated value, not a measurement) from about 4,600 public structures (NCI Open Database, as shipped with RDKit). They show the mechanics and are not validated for prediction.
+  dl_limits: Teaching examples with small models. The neural network learns a known formula from synthetic patients. The graph network learns to reproduce the Crippen logP that RDKit calculates (a calculated value, not a measurement) from a set of about 4,600 public structures (about 3,200 of them used for training) (NCI Open Database, as shipped with RDKit). They show the mechanics and are not validated for prediction.
   reading_title: Further reading
   reading_sub: General references for the methods above; they are not publications of this laboratory.
 pubs:
@@ -82,7 +82,7 @@ pubs:
   n_items: '{n} papers'
   none: No publications match your search.
   doi_aria: Open DOI link for
-  note: The principal investigator is shown in bold. Records that are still being checked are listed without authors or DOI link.
+  note: The principal investigator is shown in bold. Two older records are listed without an author line because the publisher record does not give a complete author list.
 people:
   title: People
   lead: A research group of graduate students led by Professor Sung-Hoon Ahn.
@@ -145,7 +145,7 @@ motion:
     modeling:
       tab: "Model fitting"
       title: "Fitting a model, then predicting."
-      text: "A, nine concentrations after one 100 mg oral dose, measured up to 24 h (dotted vertical line; simulated with 8 % log-normal error), are fitted to the one-compartment model by least squares on the log scale; the fitted model then predicts 100 mg every 12 h, adding the doses linearly, a regimen that was not measured. B, sum of squares over CL/F and V/F, minimised over ka at each point (contours at 1.5, 3, 8, 25 and 80 times the minimum), with the Levenberg–Marquardt path projected onto this plane (dots mark accepted steps; positions between steps are interpolated) and the values used to simulate the data (open circle). C, parameters and sum of squares at the current step."
+      text: "A, nine concentrations after one 100 mg oral dose, measured up to 24 h (dotted vertical line; simulated with 8 % log-normal error), are fitted to the one-compartment model by least squares on the log scale; the fitted model then predicts 100 mg every 12 h, adding the doses linearly, a regimen that was not measured. B, sum of squares over CL/F and V/F, minimized over ka at each point (contours at 1.5, 3, 8, 25 and 80 times the minimum), with the Levenberg–Marquardt path projected onto this plane (dots mark accepted steps; positions between steps are interpolated) and the values used to simulate the data (open circle). C, parameters and sum of squares at the current step."
       more: "Population models extend this to many subjects:"
       more_link: "nonlinear mixed-effects explainer"
     nlme:
@@ -157,4 +157,4 @@ motion:
     bioanalysis:
       tab: "Bioanalysis"
       title: "From chromatogram to concentration by LC-MS/MS."
-      text: "A, the instrument chain; the detector box darkens with the signal. B, chromatogram of the analyte and its stable-isotope-labelled internal standard (SIL-IS), which elute together; the peak areas are integrated. C, the area ratio is read against a calibration curve fitted with 1/x² weighting. The calibrator ratios were generated from a straight line with 3 % error, not from chromatograms; matrix effects and recovery are not modelled."
+      text: "A, the instrument chain; the detector box darkens with the signal. B, chromatogram of the analyte and its stable-isotope-labeled internal standard (SIL-IS), which elute together; the peak areas are integrated. C, the area ratio is read against a calibration curve fitted with 1/x² weighting. The calibrator ratios were generated from a straight line with 3 % error, not from chromatograms; matrix effects and recovery are not modeled."

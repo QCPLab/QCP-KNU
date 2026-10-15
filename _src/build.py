@@ -175,7 +175,7 @@ def build() -> dict[str, str]:
         page = {"id": page_id, "dir": pdir, "alt": page_id != "404", "css": extra["css"], "js": extra["js"]}
         name = site["identity"]["name"][lang]
         if page_id == "home":
-            title = f'{name} | {site["identity"]["affiliation"][lang]}'
+            title = f'{name} | {site["identity"]["university"][lang]}'
             desc = t["meta"]["desc"]["home"]
         elif page_id == "404":
             title, desc = f'{t["nf"]["title"]} | {name}', t["nf"]["text"]
