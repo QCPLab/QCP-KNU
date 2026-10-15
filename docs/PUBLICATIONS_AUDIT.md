@@ -14,13 +14,13 @@ author or a new record was then checked again by a second verifier that was told
 * #27: the old list pointed to a conference-abstract DOI; the full paper with the identical title (PMID 23137660) lists Sung-Hoon Ahn and is now shown. Change it back if the abstract was meant.
 * Author-name slips fixed: Taeho Kwak (#69), Dae-Duk Kim (#45), Sung-Hoon Ahn (#33), Jeong-Won Seo and Kwang-Il Kwon (#15). Initials expanded to full names for #32. #50 and #51 keep initials (PubMed has initials only).
 * 3 papers added: #70 (thioridazine UHPLC-MS/MS), #72 (VOC umbrella review), #73 (heavy metal umbrella review). Titles agree letter for letter with PubMed and with the lab list.
-* On hold: #71, the Yakhak Hoeji review on PAHs (title as on the lab list; Consensus gives the same title with first author Jong-Min Song). KCI, doi.org and Crossref could not be reached from the build environment and the journal is not in PubMed, so volume, pages, DOI and authors are unconfirmed.
+* #71, the Yakhak Hoeji review on PAHs, was added from its KCI record (ART003349868, shown by the lab on 2026-10-15): title as on the lab list, 70(3):203-213, DOI 10.17480/psk.2026.70.3.203, authors Jong-Min Song, Kyung-Sun Moon, Sung-Hoon Ahn (all Kangwon National University), marked "in Korean".
 * Five papers from 2015 onward are not on the lab list but are kept (#57, #55, #45, #43, #42); the lab list covers 2015-2026 only, so the 2002-2014 papers could not be compared with it.
 
 ## Limits
 
 * The second route was limited: Scite needs a paid plan, the Consensus quota ran out during the run, direct fetches of doi.org, Crossref and publisher sites failed (no DNS), and web search ran out of budget late in the run. Records checked late (#3, #72, #73) therefore rest on PubMed alone for volume, pages and DOI; #27 was corroborated for the full paper only. PubMed is the National Library of Medicine record, but it is one source. "no independent route reachable" below means exactly that, not that anything contradicted the record.
-* Korean-language journals (Yakhak Hoeji) are not in PubMed; their records rest on the publisher page and Consensus as read through web search.
+* Korean-language journals (Yakhak Hoeji) are not in PubMed; their records rest on the publisher page, Consensus (as read through web search) and, for #71, the KCI page.
 * Capitalisation is shown as in the source record (Wiley and PubMed use title case; Elsevier uses sentence case), so the list mixes both.
 
 ## Per record
@@ -31,7 +31,7 @@ verdict: exact / cosmetic (capitalisation, punctuation, Greek-letter spelling) /
 |---|---|---|---|---|
 | 73 | doi-found | PMID 41564770 | no independent route reachable | Added |
 | 72 | doi-found | PMID 41819200 | no independent route reachable | Added |
-| 71 | not-in-pubmed | not in PubMed (publisher record / Consensus) | no independent route reachable | On hold: KCI record could not be reached; volume, pages, DOI and authors unconfirmed |
+| 71 | not-in-pubmed | KCI record ART003349868 (read from the lab's screenshot) | confirmed by the KCI page | Added, marked "in Korean" |
 | 70 | doi-found | PMID 41392592 | confirmed | Added |
 | 69 | exact | PMID 41223703 | confirmed | Author name capitalisation fixed (Taeho Kwak) |
 | 68 | exact | PMID 40522805 | not rechecked (exact match) | None |

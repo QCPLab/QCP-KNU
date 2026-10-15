@@ -49,6 +49,20 @@ publications:
   page: '124196'
   doi: 10.1016/j.envres.2026.124196
   status: ok
+- 'no': 71
+  year: 2026
+  title: Integrating Pharmacokinetics into Human Exposure and Risk Assessment of Polycyclic Aromatic Hydrocarbons
+  journal: Yakhak Hoeji
+  authors:
+  - Jong-Min Song
+  - Kyung-Sun Moon
+  - Sung-Hoon Ahn
+  volume: '70'
+  issue: '3'
+  page: 203-213
+  doi: 10.17480/psk.2026.70.3.203
+  note: in Korean
+  status: ok
 - 'no': 70
   year: 2026
   title: Simultaneous Determination of Thioridazine and Its Metabolites by UHPLC-MS/MS With Application to a Pharmacokinetic Study in Rats
