@@ -3,9 +3,9 @@
 Website of the Laboratory of Pharmaceutical Sciences, College of Pharmacy, Kangwon National University.
 A static, English-only site for GitHub Pages. No tracking, no external requests at runtime.
 
-> Status: draft for review by the principal investigator. Every generated page is marked `noindex` until the lab
-> name, text and members are approved (`_src/data/site.yml` → `indexable`; the builder refuses `indexable: true`
-> while `approved_by_pi` is false or any `TODO(PI)` marker is left in the data files).
+> Status: live and indexable (approved by the PI, reported by the lab on 2026-10-15). `_src/data/site.yml` → `indexable` switches the
+> `noindex` meta tag, canonical links and `sitemap.xml`; the builder refuses `indexable: true` while `approved_by_pi` is false, `site_url`
+> is empty or any `TODO(PI)` marker is left in the data files. `demo/`, `legacy/` and the 404 page stay `noindex`.
 
 ## Structure
 

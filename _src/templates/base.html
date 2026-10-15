@@ -8,7 +8,7 @@
 {%- endif %}
 <title>{{ title }}</title>
 <meta name="description" content="{{ description }}">
-{%- if not site.indexable %}
+{%- if not site.indexable or page.id == '404' %}
 <meta name="robots" content="noindex">
 {%- endif %}
 <meta name="theme-color" content="#ffffff">

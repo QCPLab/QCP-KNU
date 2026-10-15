@@ -4,14 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Methods | Laboratory of Pharmaceutical Sciences</title>
-<meta name="description" content="Laboratory methods (animal in vivo pharmacokinetics, in vitro pharmacokinetics and metabolism, LC-MS/MS bioanalysis) and two interactive explainers of modeling methods.">
-<meta name="robots" content="noindex">
+<meta name="description" content="Laboratory methods (animal in vivo and in vitro pharmacokinetics, metabolism, LC-MS/MS bioanalysis) and two interactive explainers of modeling methods.">
 <meta name="theme-color" content="#ffffff">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Methods | Laboratory of Pharmaceutical Sciences">
-<meta property="og:description" content="Laboratory methods (animal in vivo pharmacokinetics, in vitro pharmacokinetics and metabolism, LC-MS/MS bioanalysis) and two interactive explainers of modeling methods.">
+<meta property="og:description" content="Laboratory methods (animal in vivo and in vitro pharmacokinetics, metabolism, LC-MS/MS bioanalysis) and two interactive explainers of modeling methods.">
 <meta property="og:locale" content="en_US">
 <link rel="icon" type="image/svg+xml" href="../assets/img/favicon.svg">
+<link rel="canonical" href="https://qcplab.github.io/QCP-KNU/methods/">
 <script>document.documentElement.classList.add('js')</script>
 <link rel="preload" href="../assets/fonts/pretendard/PretendardVariable.subset.91.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="../assets/fonts/pretendard/pretendard.css">
@@ -100,7 +100,7 @@
       <h2 id="invitro-h">In vitro pharmacokinetics and metabolism</h2>
       <p>Experiments outside the animal explain what we see inside it: how quickly and by which routes a drug is metabolized, which metabolites form, how well it crosses membranes, and which enzymes and transporters it meets.</p>
       <h3 class="sub">Typical workflow</h3>
-      <ol class="howto"><li>Incubate the drug with liver microsomes or other enzyme sources, follow its disappearance and the metabolites that appear by <span class="nb">LC-MS/MS</span>, and identify the metabolites from their fragment ions.</li><li>Measure the kinetics of metabolism and of transport, not only a single time point.</li><li>Measure membrane permeability and brain uptake in vitro and relate them to the concentrations seen in vivo.</li><li>Test uptake and inhibition of drug transporters such as OAT1, OATP1B1 and the organic cation transporters, to judge the risk of drug–drug interactions.</li><li>Profile the physicochemical properties of candidate compounds with validated screening methods.</li><li>Read the in vitro results together with the animal data, as in our work on lobeglitazone metabolites in rat liver microsomes and their formation in vivo.</li></ol>
+      <ol class="howto"><li>Incubate the drug with liver microsomes or other enzyme sources, follow its disappearance and the metabolites that appear by <span class="nb">LC-MS/MS</span>, and identify the metabolites from their fragment ions.</li><li>Measure the kinetics of metabolism and of transport, not only a single time point.</li><li>Measure membrane permeability in vitro and relate it to the brain uptake and concentrations seen in vivo.</li><li>Test uptake and inhibition of drug transporters such as OAT1, OATP1B1 and the organic cation transporters, to judge the risk of drug–drug interactions.</li><li>Profile the physicochemical properties of candidate compounds with validated screening methods.</li><li>Read the in vitro results together with the animal data, as in our work on lobeglitazone metabolites in rat liver microsomes and their formation in vivo.</li></ol>
       <h3 class="sub">Examples from our publications</h3>
       <ol class="pub-compact"><li class="pub-c">
   <span class="pub-c-year">2015</span>
@@ -178,8 +178,8 @@
     <section id="nlme" aria-labelledby="nlme-h">
       <h2 id="nlme-h">How a population PK model is fitted</h2>
       <p class="note">About the two interactive explainers: they are teaching examples built on simulated patients and public molecule structures, not results from patients or from our experiments. In the deep-learning example the molecules are real public structures and their logP is calculated by software, not measured. The calculations run in your browser; nothing is sent anywhere.</p>
-      <p>People differ in how fast they clear a drug. A nonlinear mixed-effects (NLME) model describes the typical values and the spread between individuals at once. The optimiser starts from poor guesses and improves them step by step; here you can move through every step.</p>
-      <ol class="howto"><li>Choose a sampling scenario: rich, moderate or sparse.</li><li>Press play, or drag the slider through the optimiser&#39;s iterations.</li><li>Watch the fitted curves, the parameter estimates and the objective function change.</li><li>Select a subject to compare its data with its individual fit.</li></ol>
+      <p>People differ in how fast they clear a drug. A nonlinear mixed-effects (NLME) model describes the typical values and the spread between individuals at once. The optimizer starts from poor guesses and improves them step by step; here you can move through every step.</p>
+      <ol class="howto"><li>Choose a sampling scenario: rich, moderate or sparse.</li><li>Press play, or drag the slider through the optimizer&#39;s iterations.</li><li>Watch the fitted curves, the parameter estimates and the objective function change.</li><li>Select a subject to compare its data with its individual fit.</li></ol>
       <div class="widget-slot" data-lab-widget="nlme-explorer" data-src="../assets/data/nlme-demo.json" data-lang="en">
         <noscript><p class="widget-fallback">These explainers need JavaScript. Please enable it to use them.</p></noscript>
       </div>
@@ -192,7 +192,7 @@
       <div class="widget-slot" data-lab-widget="dl-explorer" data-mlp="../assets/data/dl-mlp.json" data-gnn="../assets/data/dl-gnn.json" data-lang="en">
         <noscript><p class="widget-fallback">These explainers need JavaScript. Please enable it to use them.</p></noscript>
       </div>
-      <p class="fine">Teaching examples with small models. The neural network learns a known formula from synthetic patients. The graph network learns to reproduce the Crippen logP that RDKit calculates (a calculated value, not a measurement) from about 4,600 public structures (NCI Open Database, as shipped with RDKit). They show the mechanics and are not validated for prediction.</p>
+      <p class="fine">Teaching examples with small models. The neural network learns a known formula from synthetic patients. The graph network learns to reproduce the Crippen logP that RDKit calculates (a calculated value, not a measurement) from a set of about 4,600 public structures (about 3,200 of them used for training) (NCI Open Database, as shipped with RDKit). They show the mechanics and are not validated for prediction.</p>
     </section>
 
     <section id="reading" aria-labelledby="reading-h">

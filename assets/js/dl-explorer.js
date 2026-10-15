@@ -24,7 +24,7 @@
       snapH: 'Training snapshot', snapVal: 'Epoch {0} (snapshot {1} of {2})',
       snapNote: 'Epoch 0 = random starting weights; the last snapshot is the end of training. The whole page uses the weights of the chosen snapshot.',
       pNet: 'Network output', pTrue: 'True function (typical value)', pRatio: 'Network ÷ true',
-      pNote: 'Apparent clearance of a synthetic population. “True” is the formula that generated the data, without noise. The 2,000 training patients were mostly 45–100 kg and their eGFR falls with age; far outside that range (for example 30 kg, 20 y, eGFR 20) the network is extrapolating and can be far from the true function.',
+      pNote: 'Apparent clearance of a synthetic population. “True” is the formula that generated the data, without noise. The 2,000 virtual patients (1,400 of them used for training) were mostly 45–100 kg and their eGFR falls with age; far outside that range (for example 30 kg, 20 y, eGFR 20) the network is extrapolating and can be far from the true function.',
       netH: 'Network 5 → 8 → 6 → 1',
       legF: 'Edge width = |weight|. Blue solid = positive, red-brown dashed = negative. Node size = |value| (relative within a layer).',
       legB: 'Edge width = |gradient ∂L/∂w| for this patient (relative within a layer). Blue solid = positive, red-brown dashed = negative.',
@@ -51,15 +51,15 @@
       xEpoch: 'epoch (log scale)', yMse: 'MSE of ln CL', xObs: 'observed CL (L/h)', yPred: 'predicted CL (L/h)', xWt: 'body weight (kg)', yCl: 'CL (L/h)',
       lgTrain: 'training', lgVal: 'validation', lgNet: 'network', lgTruth: 'true function', lgObs: 'test patient', lgId: 'identity',
       clipped: '{0} points lie outside the plotted range.',
-      mol: 'Molecule', steps: ['Atom features', 'Round 1', 'Round 2', 'Readout'], stepsAria: 'Message-passing step', colour: 'Colour atoms by',
+      mol: 'Molecule', steps: ['Atom features', 'Round 1', 'Round 2', 'Readout'], stepsAria: 'Message-passing step', color: 'Color atoms by',
       nsum: 'norm ‖h‖', contrib: 'GNN atom contribution c', refContrib: 'RDKit Crippen atom contribution (reference)',
       molAlt: '{0}: {1} heavy atoms drawn as a graph. Step: {2}. Selected atom {3} ({4}).',
-      molHint: 'Arrow keys move between atoms; Enter or Space replays the message flow. Colours are relative within the molecule.',
+      molHint: 'Arrow keys move between atoms; Enter or Space replays the message flow. Colors are relative within the molecule.',
       replay: 'Replay message flow', atomH: 'Atom {0} · {1}', atomInfo: 'degree {0}, {1}, {2}',
       aromatic: 'aromatic', aliphatic: 'non-aromatic', inRing: 'in ring', noRing: 'not in ring',
-      lede2: 'A drug molecule is a graph. Each atom starts with 8 numbers. In each of two rounds an atom adds the vectors of its bonded neighbours to its own, multiplies by a weight matrix, adds a bias and applies ReLU. The final atom vectors are averaged and turned into a logP per heavy atom; multiplied by the number of heavy atoms, this is the model’s estimate of RDKit’s Crippen logP — a calculated value, not a measurement.',
+      lede2: 'A drug molecule is a graph. Each atom starts with 8 numbers. In each of two rounds an atom adds the vectors of its bonded neighbors to its own, multiplies by a weight matrix, adds a bias and applies ReLU. The final atom vectors are averaged and turned into a logP per heavy atom; multiplied by the number of heavy atoms, this is the model’s estimate of RDKit’s Crippen logP — a calculated value, not a measurement.',
       dFeat: 'Features x of this atom (8 numbers)',
-      dOwn: 'Own vector', dNb: 'Neighbour {0} ({1})', dSum: 'Sum: own + neighbours', dZ: 'z = W·sum + b', dH: 'h = ReLU(z)',
+      dOwn: 'Own vector', dNb: 'Neighbor {0} ({1})', dSum: 'Sum: own + neighbors', dZ: 'z = W·sum + b', dH: 'h = ReLU(z)',
       dContribH: 'Contribution of this atom to the predicted logP', dHead: 'Head weights w', dProd: 'w · h per dimension', dC: 'c = Σ(w·h) + b = {0}',
       dRef: 'RDKit Crippen contribution of this atom (reference): {0}. The network was trained only on whole-molecule logP, so single-atom values need not agree with the reference.', dW: 'Weight matrix W and bias b of this round',
       rdH: 'Readout', rdPool: 'Mean of the {0} final atom vectors', rdW: 'Head weights w', rdProd: 'w · pooled', rdS: 's = Σ(w·pooled) + b = {0}  (logP per heavy atom)',
@@ -72,12 +72,12 @@
       trH: 'Training of the GNN', trAlt: 'Training and validation RMSE of logP against epoch.', xEp: 'epoch', yRmse: 'RMSE (logP)',
       howH: 'How it is computed',
       how: ['Atom features x (8 numbers): one-hot element (C, N, O, other), aromatic (0/1), heavy-atom degree ÷ 4, formal charge, in ring (0/1).',
-        'Message passing, rounds k = 1, 2:  m = h(v) + Σ h(u) over the bonded neighbours u;  z = Wₖ·m + bₖ;  h′(v) = ReLU(z) = max(0, z). Round 1 starts from h = x; each round has its own weights; hidden size 8.',
+        'Message passing, rounds k = 1, 2:  m = h(v) + Σ h(u) over the bonded neighbors u;  z = Wₖ·m + bₖ;  h′(v) = ReLU(z) = max(0, z). Round 1 starts from h = x; each round has its own weights; hidden size 8.',
         'Readout: p = mean of h over all n heavy atoms;  s = w·p + b;  predicted logP = n × s. Equivalently every atom contributes c = w·h + b and the contributions add up to the prediction.',
         'Training happened once, offline, in plain NumPy (Adam, squared error against RDKit’s Crippen logP). The page only repeats the forward calculation from the stored weights and checks it against the NumPy numbers.'],
       adme: 'In the literature, graph networks of this kind are trained on thousands of measured compounds to predict ADME and toxicity properties (for example Yang et al., 2019, J Chem Inf Model); the model here is far smaller and learns only a calculated logP.',
       aboutH: 'About this example',
-      what: 'What you see', whatTxt: 'Left to right, top to bottom: one virtual patient is passed through the network (forward pass), the error is passed back (backward pass), and the snapshot slider replays training. In the second tab a molecule is a graph; atoms exchange numbers with their neighbours, and the averaged result, scaled by the number of heavy atoms, is one logP value.',
+      what: 'What you see', whatTxt: 'Left to right, top to bottom: one virtual patient is passed through the network (forward pass), the error is passed back (backward pass), and the snapshot slider replays training. In the second tab a molecule is a graph; atoms exchange numbers with their neighbors, and the averaged result, scaled by the number of heavy atoms, is one logP value.',
       lim: 'Limitations', limTxt: 'Both models are small teaching examples. The MLP learns a formula that we wrote ourselves from simulated patients; its accuracy says nothing about real clearance, which depends on many other factors. The GNN imitates RDKit’s Crippen logP, a value calculated from atom-type contributions, on a few thousand structures from a public set; it is not a measured property and was not tested on other chemical series. Neither model should be used for prediction. R² and RMSE are for held-out data only (split by patient or by molecule).',
       selfOk: 'Self-test: browser calculation matches the NumPy reference (largest difference {0}, tolerance 1e-5; gradients also match finite differences).',
       selfBad: 'Self-test FAILED: browser and NumPy numbers differ by {0} (tolerance 1e-5).',
@@ -533,7 +533,7 @@
     const dBox = h('div'), exG = explainer();
     const cardMol = h('section', { class: 'dx-card dx-wide' }, [
       h('div', { class: 'dx-ctrls' }, [h('div', { class: 'dx-fld' }, [h('label', { for: molSel.id, text: T('mol') }), molSel]),
-        h('div', { class: 'dx-fld' }, [h('label', { for: colSel.id, text: T('colour') }), colSel])]),
+        h('div', { class: 'dx-fld' }, [h('label', { for: colSel.id, text: T('color') }), colSel])]),
       h('div', { class: 'dx-stepper', role: 'group', 'aria-label': T('stepsAria') }, [h('div', { class: 'dx-btns' }, [gBack, ...stepBtns, gNext])]),
       h('div', { class: 'dx-split' }, [
         h('div', null, [h('div', { class: 'dx-figure' }, molSvg), legBox, h('p', { class: 'dx-note', text: T('molHint') }), replay, molDesc]),
@@ -595,7 +595,7 @@
       paintMol(); detail();
       if (user && !same) flow(false);
     }
-    // value shown for atom v at the current step and colour dimension
+    // value shown for atom v at the current step and color dimension
     function atomVal(v) {
       const S = st.gStep, d = st.gDim[S];
       if (S === 3) return d === 0 ? fwd.contrib[v] : mol.ref_contrib[v];
@@ -627,7 +627,7 @@
       molSvg.setAttribute('aria-label', molDesc.textContent); molSvg.setAttribute('aria-describedby', molDesc.id);
       drawArrows();
     }
-    function drawArrows() { // static arrows neighbour -> selected atom (steps 1-2); also the fall-back under reduced motion
+    function drawArrows() { // static arrows neighbor -> selected atom (steps 1-2); also the fall-back under reduced motion
       const gf = molSvg.querySelector('.dx-flowl'); if (!gf) return; gf.replaceChildren();
       if (st.gStep < 1 || st.gStep > 2) return;
       const c = adom[st.atom];
@@ -702,7 +702,7 @@
       const S = st.gStep;
       stepBtns.forEach((b, i) => { b.setAttribute('aria-current', i === S ? 'step' : 'false'); b.classList.toggle('dx-on', i === S); });
       gBack.setAttribute('aria-disabled', String(S === 0)); gNext.setAttribute('aria-disabled', String(S === 3));
-      if (S >= 1 && S <= 2 && !st.gUser[st.mi + '-' + S]) { // default colour: the hidden dimension that varies most across the atoms (never an all-zero one)
+      if (S >= 1 && S <= 2 && !st.gUser[st.mi + '-' + S]) { // default color: the hidden dimension that varies most across the atoms (never an all-zero one)
         let best = 0, bs = -1;
         for (let k = 0; k < 8; k++) { let lo = Infinity, hi = -Infinity; for (const r of fwd.h[S]) { lo = Math.min(lo, r[k]); hi = Math.max(hi, r[k]); } if (hi - lo > bs + 1e-12) { bs = hi - lo; best = k; } }
         st.gDim[S] = best;

@@ -52,6 +52,7 @@ TRUNCATED_AUTHORS = {"10.1002/psp4.12049", "10.1002/psp4.12134", "10.1021/acs.jc
 # (the tokens are assembled from pieces so that a repository-wide grep for them stays clean)
 FORBIDDEN = ["q" + "cp", r"\bTODO\b", r"\blorem ipsum\b", "google" + "tagmanager", r"fonts\." + "googleapis", "AnSH" + r"\.png", "bk" + "21", r"\[PI"]
 ALLOWED_EMAILS: set[str] = set()  # filled by build(): the contact address plus the members whose address is meant to be shown
+ALLOWED_URLS: list[str] = []  # filled by build(): the site address itself (the repository name is part of it and may not be changed)
 
 
 def load_yaml(path):
@@ -99,6 +100,7 @@ def build() -> dict[str, str]:
     counts = {y: len(v) for y, v in by_year.items()}
     recent = sorted(pubs, key=lambda p: (-p["year"], -p["no"]))[:5]
 
+    ALLOWED_URLS[:] = [site["site_url"].rstrip("/")] if site["site_url"] else []
     show_mail = bool(site["show_member_emails"])
     for m in members:
         m["initials"] = initials(m["name_en"])
@@ -117,6 +119,8 @@ def build() -> dict[str, str]:
         open_items = [p.name for p in (SRC / "data").glob("*.yml") if "TODO(PI)" in p.read_text(encoding="utf-8")]
         if not site["identity"]["approved_by_pi"] or open_items:
             sys.exit(f"launch gate: indexable=true needs identity.approved_by_pi=true and no TODO(PI) markers (open: {open_items})")
+        if not str(site["site_url"]).startswith("https://"):
+            sys.exit("launch gate: indexable=true needs site_url (https://...) for canonical links and the sitemap")
 
     refs_raw = json.loads((SRC / "data" / "refs_verified.json").read_text(encoding="utf-8"))
     by_doi = {v["doi"]: v for v in refs_raw.values()}
@@ -171,7 +175,7 @@ def build() -> dict[str, str]:
         page = {"id": page_id, "dir": pdir, "alt": page_id != "404", "css": extra["css"], "js": extra["js"]}
         name = site["identity"]["name"][lang]
         if page_id == "home":
-            title = f'{name} | {site["identity"]["affiliation"][lang]}'
+            title = f'{name} | {site["identity"]["university"][lang]}'
             desc = t["meta"]["desc"]["home"]
         elif page_id == "404":
             title, desc = f'{t["nf"]["title"]} | {name}', t["nf"]["text"]
@@ -240,6 +244,8 @@ def guard(out: dict[str, str]) -> list[str]:
         if not path.endswith((".html", ".xml")):
             continue
         body = re.sub(r"<(script|style)[^>]*>.*?</\1>", "", text, flags=re.S)  # inline helper scripts are ours
+        for u in ALLOWED_URLS:
+            body = body.replace(u, "")  # the canonical address contains the repository name
         for pat in FORBIDDEN:
             m = re.search(pat, body, re.I)
             if m:
